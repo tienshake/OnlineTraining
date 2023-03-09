@@ -1,5 +1,5 @@
 import express from "express";
-import initWebRoutes from "./routes/users";
+import initWebRoutes from "./routes";
 import logger from "morgan"
 import cookieParser from "cookie-parser"
 import connectDB from "./config/connectDB"
