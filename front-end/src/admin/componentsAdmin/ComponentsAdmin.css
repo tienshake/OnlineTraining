@@ -1,0 +1,22 @@
+/* Card User */
+.group_btn_interact {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+    justify-content: center
+}
+.group_btn_contact {
+    display: flex
+}
+.group_btn_contact li:first-child {
+    border-top-left-radius: 5px; 
+    border-bottom-left-radius: 5px; 
+}
+.group_btn_contact li:last-child {
+    border-top-right-radius: 5px; 
+    border-bottom-right-radius: 5px; 
+    background: #FC5A69
+}
