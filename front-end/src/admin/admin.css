@@ -6,7 +6,6 @@
 }
 .layout_admin {
     display: flex;
-    /* background: pink; */
     width: 96.5%;
     margin: auto;
     padding-top: 22.55px;
@@ -14,7 +13,6 @@
 }
 .wrapp_menu_dashboard {
     width:  27%;
-    /* background: red */
 }
 .menu_dashboard {
     width: 16.5%;
@@ -66,7 +64,6 @@
 /* group_btn_contact */
 .group_btn_contact {
     gap: 1px;
-    /* background: blue */
 }
 .group_btn_contact li {
     width: 35%;
@@ -99,13 +96,11 @@
 }
 .wrapp_teacherInfo .content-right {
     width: 32%;
-    /* background: red */
 }
 .wrapp_teacherInfo .content-right div {
     padding: 10px
 }
 .achievement {
-    /* background: pink; */
     padding: 20px
 }
 .achievement li {
@@ -135,4 +130,42 @@
 .achievement li .content {
     margin-left: 15px;
     width: 87%
+}
+.box_reviews_user {
+    margin-top: 20px;
+    border: 1px solid #EEEEEE;
+}
+.box_reviews_user .decritions {
+    margin-top: 10px;
+    width: 80%
+}
+.box_reviews_user ul {
+    margin-bottom: 30px;
+}
+.box_reviews_user img {
+    border-radius: 50%;
+}
+.wrapp_allCoursesOf_teacher {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+.card_coursesOf_teacher .left_content {
+    width: 65%;
+    padding: 10px
+}
+.card_coursesOf_teacher .right_content {
+    width: 38%;
+    text-align: center
+}
+.card_coursesOf_teacher .right_content button {
+    width: 74%;
+    height: 49px;
+    background: #926BE6;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 5px
 }

@@ -20,3 +20,13 @@
     border-bottom-right-radius: 5px; 
     background: #FC5A69
 }
+
+/* EvaluateStar  */
+.group_evaluate_star {
+    margin-top: 5px;
+    display: flex;
+    gap: 2px;
+}
+.group_evaluate_star li {
+    color: #FFC107;
+}
