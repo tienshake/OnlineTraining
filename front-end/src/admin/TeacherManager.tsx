@@ -4,6 +4,7 @@ import Paper from '@mui/material/Paper';
 import CardUser from './componentsAdmin/CardUser';
 import HeaderDashboard from './componentsAdmin/HeaderDashboard';
 import ButtonGroupSelect from './componentsAdmin/ButtonGroupSelect';
+import ShowModalForm from './componentsAdmin/ShowModalForm';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -25,14 +26,16 @@ export default function TeacherManager() {
         <div style={{ marginTop: '50px', display: 'flex', justifyContent: 'space-between' }}>
           <h1>Courses</h1>
 
-          <div style={{ display: 'flex' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+            <ShowModalForm/>
+
             <ButtonGroupSelect />
             <ButtonGroupSelect />
           </div>
         </div>
 
         <p style={{ background: '#EEEEEE', width: '100%', height: '1px', marginTop: '15px  ' }}></p>
-        
+
         <div className='wrap_bodyContent_admin'>
           <CardUser decription="" />
           <CardUser decription="" />
