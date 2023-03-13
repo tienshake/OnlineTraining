@@ -1,7 +1,8 @@
-import userRouter from "./user"
+import userRouter from "./user";
 
 const initWebRoutes = (app) => {
-  return app.use("/", userRouter);
+  app.use("/user", userRouter);
+  // return app.use("/", userRouter);
 };
 
 export default initWebRoutes;

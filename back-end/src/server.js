@@ -1,10 +1,8 @@
 import express from "express";
 import initWebRoutes from "./routes";
-import logger from "morgan"
-import cookieParser from "cookie-parser"
-import connectDB from "./config/connectDB"
-// var cookieParser = require("cookie-parser");
-// var connectDB = require("./config/connectDB");
+import logger from "morgan";
+import cookieParser from "cookie-parser";
+import connectDB from "./config/connectDB";
 
 var cors = require("cors");
 require("dotenv").config();
@@ -30,4 +28,3 @@ const port = process.env.PORT || 2001;
 app.listen(port, () => {
   console.log("backend nodeJS is running on the port: " + port);
 });
-
