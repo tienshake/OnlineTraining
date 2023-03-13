@@ -30,3 +30,67 @@
 .group_evaluate_star li {
     color: #FFC107;
 }
+
+/* Modal Show */
+.modal_show {
+    top: 40%;
+    left: 56%;
+    width: 30%;
+    padding: 30px;
+    border-radius: 10px
+}
+
+/* GroupBtn Save Cancel */
+.GroupBtn_Save-Cancel Button {
+    background: #000
+}
+
+.GroupBtn_Save-Cancel Button:hover {
+    background: #3d3b3b
+}
+
+/* responsive */
+@media only screen and (max-width: 1000px) {
+    .menu_dashboard {
+        display: none;
+    }
+    .wrapp_menu_dashboard {
+        display: none;
+    }
+    .layout_admin {
+        width: 100%;
+    }
+    .wrapp_teacherInfo {
+        width: 100%;
+    }
+    .wrap_content_admin {
+        margin-left: 0px;
+        padding: 20px;
+    }
+    .wrapp_teacherInfo .content-left {
+        width: 100%;
+    }
+    .wrapp_teacherInfo .content-right {
+        width: 100%;
+    }
+
+    /* Modal Show */
+    .modal_show {
+        top: 40%;
+        left: 50%;
+        width: 76%;
+    }
+    
+}
+
+@media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+   
+}
+
+/* Mobile */
+@media only screen and (max-width: 400px) {
+    /* Modal Show */
+    .modal_show {
+        width: 82%;
+    }
+}

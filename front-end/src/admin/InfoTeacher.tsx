@@ -6,9 +6,10 @@ import CardUser from './componentsAdmin/CardUser';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import './admin.css';
-import { AiOutlineClockCircle, AiOutlineShoppingCart } from 'react-icons/ai';
-import { MdOutlinePlayLesson } from 'react-icons/md';
 import EvaluateStar from './componentsAdmin/EvaluateStar';
+import QuantityLessons from './componentsAdmin/QuantityLessons';
+import NumberTime from './componentsAdmin/NumberTime';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 
 export default function InfoTeacher() {
   // const theme = useTheme();
@@ -45,16 +46,11 @@ export default function InfoTeacher() {
 
                         <EvaluateStar />
 
-
-                        <ul style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                          <p style={{ marginTop: '7px' }}> <MdOutlinePlayLesson /></p>
-                          <p>5 Lessons</p>
-                        </ul>
-
-                        <ul style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                          <p style={{ marginTop: '7px' }}> <AiOutlineClockCircle /></p>
-                          <p>15 Days</p>
-                        </ul>
+                        {/* Quantity Lessons */}
+                        <QuantityLessons/>
+                        
+                        {/* Time Number */}
+                        <NumberTime />
                       </div>
 
                       <div className='right_content'>

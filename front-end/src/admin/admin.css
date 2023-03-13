@@ -169,3 +169,47 @@
     border-radius: 5px;
     margin-top: 5px
 }
+
+/* Info Courses */
+.wrapp_coursesInfo {
+    display: flex;
+    width: 99%;
+    gap: 20px;
+    flex-wrap: wrap
+}
+.wrapp_coursesInfo .content-left {
+    width: 65%;
+}
+.wrapp_coursesInfo .content-left img {
+    width: 100%;
+    margin-bottom: 30px
+}
+.wrapp_coursesInfo .content-right {
+    width: 32%;
+}
+.wrapp_coursesInfo .content-right div {
+    padding: 10px
+}
+
+/* responsive */
+@media only screen and (max-width: 46.1875em) {
+    
+}
+@media only screen and (max-width: 843px) {
+    .wrap_bodyContent_admin {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media only screen and (max-width: 610px) {
+    .wrap_bodyContent_admin {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+
+@media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+   
+}
+
+@media only screen and (max-width: 63.9375em) {
+}
