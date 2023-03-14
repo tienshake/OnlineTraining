@@ -7,10 +7,9 @@ const authAdmin = async (req, res, next) => {
   if (!token) {
     return res.status(401).json({ message: "Access denied" });
   }
-
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    if (decoded.role !== "admin") {
+    if (decoded.role_id !== 1) {
       return res.status(401).json({ message: "Access denied" });
     }
     if (decoded.id) {
