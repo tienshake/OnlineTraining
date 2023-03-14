@@ -5,7 +5,7 @@ require("dotenv").config();
 const authAdmin = async (req, res, next) => {
   const token = req.header("auth-token");
   if (!token) {
-    return res.status(401).json({ message: "Access denied" });
+    return res.status(401).json({ message: "Invalid token" });
   }
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -22,7 +22,8 @@ const authAdmin = async (req, res, next) => {
       }
     }
   } catch (err) {
-    return res.status(400).json({ message: "Invalid token" });
+    console.log(err);
+    return res.status(500).json({ message: "Invalid token" });
   }
 };
 

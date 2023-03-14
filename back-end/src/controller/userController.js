@@ -155,16 +155,21 @@ const login = async (req, res) => {
           userData.token = accessToken;
           userData.refreshToken = refreshToken;
         } else {
-          userData.message = `Wrong password`;
+          return res.status(400).json({ message: "Wrong password" });
         }
         return res
           .status(200)
           .json({ user: userData, code: 0, message: "Login completed" });
       } else {
-        userData.message = `User's not found`;
+        return res.status(400).json({ message: "User's not found" });
       }
     } else {
-      userData.message = `Your's email isn't exist in your system. Please try other email`;
+      return res
+        .status(400)
+        .json({
+          message:
+            "Your's email isn't exist in your system. Please try other email",
+        });
     }
   } catch (error) {
     console.error(error);
