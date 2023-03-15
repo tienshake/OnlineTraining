@@ -107,9 +107,8 @@ const deleteUser = async (req, res) => {
 const register = async (req, res) => {
   const { name, email, password, role_id = 1 } = req.body;
   try {
-    const userExists = await db.User.findOne({ where: { email } });
-
-    if (userExists) {
+    let isExist = await checkUserEmail(email);
+    if (isExist) {
       return res.status(400).json({ message: "Email already exists" });
     }
 
@@ -147,7 +146,7 @@ const login = async (req, res) => {
         const check = await bcrypt.compareSync(password, user.password);
         if (check) {
           delete user.password;
-          userData.user = {
+          userData = {
             ...user,
           };
           const accessToken = await generateToken.generateAccessToken(user);
@@ -164,12 +163,10 @@ const login = async (req, res) => {
         return res.status(400).json({ message: "User's not found" });
       }
     } else {
-      return res
-        .status(400)
-        .json({
-          message:
-            "Your's email isn't exist in your system. Please try other email",
-        });
+      return res.status(400).json({
+        message:
+          "Your's email isn't exist in your system. Please try other email",
+      });
     }
   } catch (error) {
     console.error(error);

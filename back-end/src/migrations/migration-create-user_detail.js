@@ -19,7 +19,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       about_me: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT("long"),
       },
       avatar: {
         type: Sequelize.BLOB("long"),
