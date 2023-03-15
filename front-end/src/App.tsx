@@ -1,4 +1,3 @@
-import React from 'react';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -26,9 +25,6 @@ function App() {
           <Route path="/admin/courses" element={<CoursesManager />} />
           <Route path="/admin/courses-info" element={<InfoCourses />} />
           <Route path="/admin/add-teacher" element={<AddTeacher />} />
-
-
-
         </Routes>
       </Router>
     </div>

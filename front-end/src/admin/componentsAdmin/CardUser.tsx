@@ -20,7 +20,8 @@ const Img = styled('img')({
 });
 
 interface MyCardUserProps {
-  decription: String
+  decription: String;
+  name: String
 }
 
 export default function CardUser(props: MyCardUserProps) {
@@ -62,7 +63,7 @@ export default function CardUser(props: MyCardUserProps) {
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography gutterBottom variant="subtitle1" component="div">
-                  Robert Hammer
+                  {props.name}
                 </Typography>
 
                 <Typography variant="body2" gutterBottom>
