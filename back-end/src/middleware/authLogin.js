@@ -3,7 +3,12 @@ import db from "../models";
 require("dotenv").config();
 
 const authLogin = async (req, res, next) => {
-  const token = req.header("auth-token");
+  let token = null;
+  const authHeader = req.headers["authorization"];
+  if (authHeader && authHeader.startsWith("Bearer ")) {
+    token = authHeader.split(" ")[1];
+  }
+
   try {
     if (token) {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
