@@ -2,7 +2,7 @@ import axios from "axios";
 import { getUserToken } from "../utils/userToken";
 
 const axiosClient = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: "http://localhost:8080/",
 });
 
 axiosClient.interceptors.request.use(
@@ -10,7 +10,6 @@ axiosClient.interceptors.request.use(
     const token = getUserToken();
     if (token) {
       config.headers.Authorization = token;
-      console.log("axios", token);
     }
     return config;
   },

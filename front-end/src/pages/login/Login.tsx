@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import axiosClient from "../../api/axiosClient";
-
+import userServices from "../../services/user";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,15 +23,12 @@ const Login = () => {
   };
 
   const getUser = async (id: string) => {
-    try {
-      const response = await axiosClient.get(
-        `http://localhost:8080/user/get?id=${id}`
-      );
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-      return false;
-    }
+    const user = await userServices.getUserApi(id);
+    console.log(
+      "console.log(process.env.REACT_APP_API_URL);",
+      process.env.REACT_APP_API_URL
+    );
+    console.log("user: ", user);
   };
 
   return (
@@ -42,8 +38,6 @@ const Login = () => {
       <input type="password" onChange={(e) => setPassword(e.target.value)} />
       <button onClick={() => login(email, password)}>Login</button>
       <button onClick={() => getUser("ALL")}>Get user</button>
-
-      <>{console.log("re-render")}</>
     </div>
   );
 };
