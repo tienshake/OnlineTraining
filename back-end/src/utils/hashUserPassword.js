@@ -1,3 +1,5 @@
+import bcrypt from "bcryptjs";
+const salt = bcrypt.genSaltSync(10);
 const hashUserPassword = (password) => {
   return new Promise(async (resolve, reject) => {
     try {
