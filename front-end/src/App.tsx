@@ -16,46 +16,43 @@ function App() {
   const isLogged = true;
   return (
     <GlobalStyle>
-      <div className="App">
-        <Router>
-          <Routes>
-            <Route path="/" element={<Home />}></Route>
-            {publicRoute?.map((route: RouteType, i: number) => {
-              const Component = route.component;
-              return (
-                <Route
-                  key={i}
-                  path={route.patch}
-                  element={
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          {publicRoute?.map((route: RouteType, i: number) => {
+            const Component = route.component;
+            return (
+              <Route
+                key={i}
+                path={route.patch}
+                element={
+                  <DefaultLayout>
+                    <Component />
+                  </DefaultLayout>
+                }
+              />
+            );
+          })}
+          {privateRoute?.map((route: RouteType, i: number) => {
+            const Component = route.component;
+            return (
+              <Route
+                key={i}
+                path={route.patch}
+                element={
+                  isLogged ? (
                     <DefaultLayout>
                       <Component />
                     </DefaultLayout>
-                  }
-                />
-              );
-            })}
-            {privateRoute?.map((route: RouteType, i: number) => {
-              const Component = route.component;
-              return (
-                <Route
-                  key={i}
-                  path={route.patch}
-                  element={
-                    isLogged ? (
-                      <DefaultLayout>
-                        <Component />
-                      </DefaultLayout>
-                    ) : (
-                      <Navigate to="/login" />
-                    )
-                  }
-                />
-              );
-            })}
-            <>{console.log("re-render")}</>
-          </Routes>
-        </Router>
-      </div>
+                  ) : (
+                    <Navigate to="/login" />
+                  )
+                }
+              />
+            );
+          })}
+        </Routes>
+      </Router>
     </GlobalStyle>
   );
 }
