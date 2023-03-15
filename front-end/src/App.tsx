@@ -13,7 +13,7 @@ import DefaultLayout from "./layout/DefaultLayout";
 import Home from "./pages/Home";
 
 function App() {
-  const isLogged = false;
+  const isLogged = true;
   return (
     <GlobalStyle>
       <div className="App">
