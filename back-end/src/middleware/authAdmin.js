@@ -15,7 +15,8 @@ const authAdmin = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    if (decoded.role_id !== 1) {
+    const role = await db.Role.findByPk(+decoded.role_id);
+    if (role.role_name !== "admin") {
       return res.status(401).json({ message: "You are not admin" });
     }
     if (decoded.id) {

@@ -6,6 +6,12 @@ import authLogin from "../middleware/authLogin";
 const router = express.Router();
 
 router.post("/create", authAdmin, authLogin, userController.createUser);
+router.post(
+  "/create-detail",
+  authAdmin,
+  authLogin,
+  userController.createUserDetail
+);
 router.get("/get", authAdmin, authLogin, userController.getUser);
 router.put("/edit/:id", authAdmin, authLogin, userController.editUser);
 router.delete("/delete/:id", authAdmin, authLogin, userController.deleteUser);

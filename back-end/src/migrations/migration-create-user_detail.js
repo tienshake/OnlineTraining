@@ -13,7 +13,7 @@ module.exports = {
         allowNull: false,
       },
       phone_number: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       address: {
         type: Sequelize.STRING,
@@ -28,6 +28,12 @@ module.exports = {
         type: Sequelize.STRING,
       },
       education: {
+        type: Sequelize.STRING,
+      },
+      age: {
+        type: Sequelize.INTEGER,
+      },
+      gender: {
         type: Sequelize.STRING,
       },
       createdAt: {
