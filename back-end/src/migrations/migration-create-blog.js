@@ -12,10 +12,10 @@ module.exports = {
         type: Sequelize.STRING,
       },
       content_html: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT("long"),
       },
       content_markdown: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT("long"),
       },
       user_id: {
         type: Sequelize.INTEGER,

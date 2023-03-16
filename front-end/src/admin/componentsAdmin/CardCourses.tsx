@@ -11,6 +11,8 @@ export default function CardCourses() {
       <Link to='/admin/courses-info'>
         <img style={{ width: '100%' }} src='https://www.pixelwibes.com/template/e-learn/html/dist/assets/images/video-img/video1.jpg' alt='' />
 
+        <h4>Đây là bài 1</h4>
+
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', padding: '8px'}}>
           <div>
             <QuantityLessons/>

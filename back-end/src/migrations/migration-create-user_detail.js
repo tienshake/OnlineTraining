@@ -13,13 +13,13 @@ module.exports = {
         allowNull: false,
       },
       phone_number: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       address: {
         type: Sequelize.STRING,
       },
       about_me: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT("long"),
       },
       avatar: {
         type: Sequelize.BLOB("long"),
@@ -28,6 +28,12 @@ module.exports = {
         type: Sequelize.STRING,
       },
       education: {
+        type: Sequelize.STRING,
+      },
+      age: {
+        type: Sequelize.INTEGER,
+      },
+      gender: {
         type: Sequelize.STRING,
       },
       createdAt: {

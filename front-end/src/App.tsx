@@ -1,37 +1,66 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-} from 'react-router-dom';
-import DoashBoard from './admin/DoashBoard';
-import StudentManager from './admin/StudentManager';
-import TeacherManager from './admin/TeacherManager';
-import CoursesManager from './admin/CoursesManager';
-import InfoTeacher from './admin/InfoTeacher';
-import InfoCourses from './admin/InfoCourses';
-import AddTeacher from './admin/AddTeacher';
+  Navigate,
+} from "react-router-dom";
+import GlobalStyle from "./layout/GlobalStyle";
+import { publicRoute, privateRoute } from "./routers";
+import { RouteType } from "./types";
+import DefaultLayout from "./layout/DefaultLayout";
+import Home from "./pages/Home";
 
 function App() {
+  const isLogged = true;
   return (
-    <div className="App">
+    <GlobalStyle>
       <Router>
         <Routes>
-          {/* Admin */}
-          <Route path="/admin" element={<DoashBoard />} />
-          <Route path="/admin/student" element={<StudentManager />} />
-          <Route path="/admin/teacher" element={<TeacherManager />} />
-          <Route path="/admin/teacher-info" element={<InfoTeacher />} />
-          <Route path="/admin/courses" element={<CoursesManager />} />
-          <Route path="/admin/courses-info" element={<InfoCourses />} />
-          <Route path="/admin/add-teacher" element={<AddTeacher />} />
-
-
-
+          {publicRoute?.map((route: RouteType, i: number) => {
+            const Component = route.component;
+            return (
+              <Route
+                key={i}
+                path={route.patch}
+                element={
+                  <DefaultLayout>
+                    <Component />
+                  </DefaultLayout>
+                }
+              />
+            );
+          })}
+          {privateRoute?.map((route: RouteType, i: number) => {
+            const Component = route.component;
+            const adminPath = route.patch.split("/")[1];
+            console.log(adminPath);
+            return (
+              <Route
+                key={i}
+                path={route.patch}
+                element={
+                  isLogged ? (
+                    <>
+                      {adminPath === "admin" ? (
+                        <Component />
+                      ) : (
+                        <DefaultLayout>
+                          <Component />
+                        </DefaultLayout>
+                      )}
+                    </>
+                  ) : (
+                    <Navigate to="/login" />
+                  )
+                }
+              />
+            );
+          })}
         </Routes>
       </Router>
-    </div>
+    </GlobalStyle>
   );
 }
 

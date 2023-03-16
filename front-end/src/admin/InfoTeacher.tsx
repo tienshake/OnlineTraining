@@ -24,7 +24,7 @@ export default function InfoTeacher() {
         <HeaderDashboard />
         <div className='wrapp_teacherInfo'>
           <div className='content-left'>
-            <CardUser decription="The purpose of lorem ipsum is to create a natural looking block of text (sentence, paragraph, page, etc.) that doesn't distract from the layout. A practice not without controversy, laying out pages with meaningless filler text can be very useful when the focus is meant to be on design, not content." />
+            <CardUser name="ss" decription="The purpose of lorem ipsum is to create a natural looking block of text (sentence, paragraph, page, etc.) that doesn't distract from the layout. A practice not without controversy, laying out pages with meaningless filler text can be very useful when the focus is meant to be on design, not content." />
 
             <h3 style={{ marginTop: '50px' }}>Robert Hammer Courses</h3>
 

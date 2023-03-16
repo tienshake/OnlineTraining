@@ -4,16 +4,19 @@
     list-style: none;
     text-decoration: none
 }
+
 .layout_admin {
     display: flex;
     width: 96.5%;
     margin: auto;
     padding-top: 22.55px;
-    justify-conten: center
+    justify-content: center;
 }
+
 .wrapp_menu_dashboard {
-    width:  27%;
+    width: 27%;
 }
+
 .menu_dashboard {
     width: 16.5%;
     background: #000;
@@ -22,25 +25,30 @@
     padding: 22px 22px 0 22px;
     position: fixed
 }
+
 .wrap_content_admin {
     width: 100%;
     margin-left: 30px
 }
+
 .group_logo-name_admin {
     display: flex;
     width: 100%;
 }
+
 .group_logo-name_admin .logo {
     width: 58px;
     height: 58px;
     background: #fff;
     border-radius: 50%;
 }
+
 .group_logo-name_admin .name {
     padding: 12px;
     font-weight: 700;
     font-size: 23px
 }
+
 .list_nemu_dashboard li {
     padding: 13px 0px 10px 0px;
     font-weight: 400;
@@ -51,9 +59,11 @@
     gap: 15px;
     align-items: center
 }
+
 .list_nemu_dashboard li:hover {
     color: #8c32d2
 }
+
 .wrap_bodyContent_admin {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -65,6 +75,7 @@
 .group_btn_contact {
     gap: 1px;
 }
+
 .group_btn_contact li {
     width: 35%;
     color: #fff;
@@ -91,26 +102,33 @@
     gap: 20px;
     flex-wrap: wrap
 }
+
 .wrapp_teacherInfo .content-left {
     width: 65%;
 }
+
 .wrapp_teacherInfo .content-right {
     width: 32%;
 }
+
 .wrapp_teacherInfo .content-right div {
     padding: 10px
 }
+
 .achievement {
     padding: 20px
 }
+
 .achievement li {
     display: flex;
     flex-wrap: wrap;
     margin-top: 40px;
 }
+
 .achievement li:first-child {
     margin-top: 15px;
 }
+
 .achievement li .icon {
     width: 40px;
     padding: 10px;
@@ -121,44 +139,55 @@
     color: #fff;
     background: #FFAA8A;
 }
+
 .achievement li:first-child .icon {
     background: #A0D9B4;
 }
+
 .achievement li:last-child .icon {
     background: #A883BA;
 }
+
 .achievement li .content {
     margin-left: 15px;
     width: 87%
 }
+
 .box_reviews_user {
     margin-top: 20px;
     border: 1px solid #EEEEEE;
 }
+
 .box_reviews_user .decritions {
     margin-top: 10px;
     width: 80%
 }
+
 .box_reviews_user ul {
     margin-bottom: 30px;
 }
+
 .box_reviews_user img {
     border-radius: 50%;
 }
+
 .wrapp_allCoursesOf_teacher {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 30px;
     margin-top: 30px;
 }
+
 .card_coursesOf_teacher .left_content {
     width: 65%;
     padding: 10px
 }
+
 .card_coursesOf_teacher .right_content {
     width: 38%;
     text-align: center
 }
+
 .card_coursesOf_teacher .right_content button {
     width: 74%;
     height: 49px;
@@ -177,29 +206,33 @@
     gap: 20px;
     flex-wrap: wrap
 }
+
 .wrapp_coursesInfo .content-left {
     width: 65%;
 }
+
 .wrapp_coursesInfo .content-left img {
     width: 100%;
     margin-bottom: 30px
 }
+
 .wrapp_coursesInfo .content-right {
     width: 32%;
 }
+
 .wrapp_coursesInfo .content-right div {
     padding: 10px
 }
 
 /* responsive */
-@media only screen and (max-width: 46.1875em) {
-    
-}
+@media only screen and (max-width: 46.1875em) {}
+
 @media only screen and (max-width: 843px) {
     .wrap_bodyContent_admin {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
 @media only screen and (max-width: 610px) {
     .wrap_bodyContent_admin {
         grid-template-columns: repeat(1, 1fr);
@@ -207,9 +240,6 @@
 }
 
 
-@media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {
-   
-}
+@media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {}
 
-@media only screen and (max-width: 63.9375em) {
-}
+@media only screen and (max-width: 63.9375em) {}
