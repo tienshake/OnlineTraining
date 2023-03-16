@@ -49,6 +49,17 @@ export const getDataUser: any = createAsyncThunk(
     } catch (error: any) {
       return rejectWithValue(error.response.data);
     }
+
+    // const data = await userServices.getUserApi("ALL");
+    // if (data.response.status === 500) {
+    //   return rejectWithValue(data.response.data);
+    // }
+
+    // if (data.response.data) {
+    //   return data;
+    // }
+
+    // return data;
   }
 );
 
@@ -72,6 +83,7 @@ const userTeacherSlice = createSlice({
     [getDataUser.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.dataUserTeacher = action.payload;
+      console.log(action, "action");
     },
   },
 });
