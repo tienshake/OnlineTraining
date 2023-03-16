@@ -54,14 +54,18 @@ export default function TeacherManager() {
         <p style={{ background: '#EEEEEE', width: '100%', height: '1px', marginTop: '15px  ' }}></p>
 
         <div className='wrap_bodyContent_admin'>
-          {
-            isLoading ? <Loading/> : error ? <AlertError messageError={messageError} /> : <>
+        {
+            isLoading ? <Loading /> : <>
               {
-                user ? <>{user.map((data: any) => (
-                  <div key={data.id}>
-                    <CardUser name={data.name} decription="" />
-                  </div>
-                ))}</> : null
+                error ? <AlertError messageError={messageError} /> : <>
+                  {
+                    dataUserStore && user ? <>{user.map((data: any) => (
+                      <div key={data.id}>
+                        <CardUser name={data.name} decription="" />
+                      </div>
+                    ))}</> : null
+                  }
+                </>
               }
             </>
           }
