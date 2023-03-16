@@ -18,7 +18,6 @@ function App() {
     <GlobalStyle>
       <Router>
         <Routes>
-          <Route path="/" element={<Home />}></Route>
           {publicRoute?.map((route: RouteType, i: number) => {
             const Component = route.component;
             return (
@@ -35,15 +34,23 @@ function App() {
           })}
           {privateRoute?.map((route: RouteType, i: number) => {
             const Component = route.component;
+            const adminPath = route.patch.split("/")[1];
+            console.log(adminPath);
             return (
               <Route
                 key={i}
                 path={route.patch}
                 element={
                   isLogged ? (
-                    <DefaultLayout>
-                      <Component />
-                    </DefaultLayout>
+                    <>
+                      {adminPath === "admin" ? (
+                        <Component />
+                      ) : (
+                        <DefaultLayout>
+                          <Component />
+                        </DefaultLayout>
+                      )}
+                    </>
                   ) : (
                     <Navigate to="/login" />
                   )

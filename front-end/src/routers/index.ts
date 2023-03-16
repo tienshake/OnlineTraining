@@ -8,8 +8,13 @@ import CoursesManager from "../admin/CoursesManager";
 import InfoTeacher from "../admin/InfoTeacher";
 import InfoCourses from "../admin/InfoCourses";
 import AddTeacher from "../admin/AddTeacher";
+import Home from "../pages/Home";
 
 const publicRoute: RouteType[] = [
+  {
+    component: Home,
+    patch: "/",
+  },
   {
     component: Login,
     patch: "/login",
