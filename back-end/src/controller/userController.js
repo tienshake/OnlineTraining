@@ -38,51 +38,6 @@ const createUser = async (req, res) => {
   }
 };
 
-const createUserDetail = async (req, res) => {
-  const {
-    phone_number,
-    address,
-    about_me,
-    avatar,
-    experience,
-    education,
-    user_id,
-  } = req.body;
-
-  try {
-    if (!user_id) {
-      res.status(400).json({ message: "Missing id params" });
-    } else {
-      const user_detail = await db.User_detail.findOne({
-        user_id,
-      });
-      if (user_detail) {
-        return res.status(400).json({ message: "User already exists" });
-      }
-      const check = await db.User_detail.create({
-        user_id,
-        phone_number,
-        address,
-        about_me,
-        avatar,
-        experience,
-        education,
-      });
-      if (check) {
-        res.status(200).json({
-          code: 0,
-          message: "Create user detail completed",
-        });
-      } else {
-        res.status(400).json({ message: "Create user detail failed" });
-      }
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error" });
-  }
-};
-
 const editUser = async (req, res) => {
   const { id } = req.params;
   const {
@@ -279,5 +234,4 @@ export default {
   deleteUser,
   register,
   login,
-  createUserDetail,
 };
