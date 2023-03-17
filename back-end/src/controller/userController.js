@@ -57,26 +57,21 @@ const editUser = async (req, res) => {
     // Update user
     await db.User.update({ name }, { where: { id }, transaction: t });
 
-    // Update user_detail
-    const [userDetail, created] = await db.User_detail.findOrCreate({
-      where: { user_id: id },
-      defaults: {
-        user_id: id,
-        phone_number,
-        address,
-        about_me,
-        avatar,
-        experience,
-        education,
-        age,
-        gender,
-      },
-      transaction: t,
-    });
-
-    if (!created) {
-      await userDetail.update(
-        {
+    if (
+      phone_number ||
+      address ||
+      about_me ||
+      avatar ||
+      experience ||
+      education ||
+      age ||
+      gender
+    ) {
+      // Update user_detail
+      const [userDetail, created] = await db.User_detail.findOrCreate({
+        where: { user_id: id },
+        defaults: {
+          user_id: id,
           phone_number,
           address,
           about_me,
@@ -86,8 +81,24 @@ const editUser = async (req, res) => {
           age,
           gender,
         },
-        { transaction: t }
-      );
+        transaction: t,
+      });
+
+      if (!created) {
+        await userDetail.update(
+          {
+            phone_number,
+            address,
+            about_me,
+            avatar,
+            experience,
+            education,
+            age,
+            gender,
+          },
+          { transaction: t }
+        );
+      }
     }
 
     // Commit transaction
