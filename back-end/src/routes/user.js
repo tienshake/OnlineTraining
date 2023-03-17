@@ -1,14 +1,33 @@
 import userController from "../controller/userController";
 import express from "express";
-import authAdmin from "../middleware/authAdmin";
-import authLogin from "../middleware/authLogin";
+import middleware from "../middleware";
 
 const router = express.Router();
 
-router.post("/create", authAdmin, authLogin, userController.createUser);
-router.get("/get", authAdmin, authLogin, userController.getUser);
-router.put("/edit/:id", authAdmin, authLogin, userController.editUser);
-router.delete("/delete/:id", authAdmin, authLogin, userController.deleteUser);
+router.post(
+  "/create",
+  middleware.authAdmin,
+  middleware.authUser,
+  userController.createUser
+);
+router.get(
+  "/get",
+  middleware.authAdmin,
+  middleware.authUser,
+  userController.getUser
+);
+router.put(
+  "/edit/:id",
+  middleware.authAdmin,
+  middleware.authUser,
+  userController.editUser
+);
+router.delete(
+  "/delete/:id",
+  middleware.authAdmin,
+  middleware.authUser,
+  userController.deleteUser
+);
 router.post("/register", userController.register);
 router.post("/login", userController.login);
 

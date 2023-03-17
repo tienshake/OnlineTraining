@@ -189,6 +189,7 @@ const login = async (req, res) => {
   const { email, password } = req.body;
   try {
     let userData = {};
+    // Check email
     let isExist = await checkUserEmail(email);
     if (isExist) {
       const user = await db.User.findOne({
@@ -196,6 +197,7 @@ const login = async (req, res) => {
         raw: true,
       });
       if (user) {
+        // Compare password
         const check = await bcrypt.compareSync(password, user.password);
         if (check) {
           delete user.password;
