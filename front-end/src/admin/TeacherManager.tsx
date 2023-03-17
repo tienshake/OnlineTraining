@@ -3,9 +3,9 @@ import CardUser from './componentsAdmin/CardUser';
 import HeaderDashboard from './componentsAdmin/HeaderDashboard';
 import ButtonGroupSelect from './componentsAdmin/ButtonGroupSelect';
 import ShowModalForm from './componentsAdmin/ShowModalForm';
-import type { RootState } from './store/store'
+import type { RootState } from '../redux/store/store'
 import { useSelector, useDispatch } from 'react-redux'
-import { getDataUser } from './store/features/userTeacher/userTeacherSlice';
+import { getDataUser } from '../redux/features/userTeacher/userTeacherSlice';
 import { useEffect } from 'react';
 import AlertError from './componentsAdmin/AlertError';
 import Loading from './componentsAdmin/Loading';
