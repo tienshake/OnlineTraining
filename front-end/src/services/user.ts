@@ -5,6 +5,13 @@ const userServices: any = {
     const response = await axiosClient.get(`user/get?id=${id}`);
     return response;
   },
+
+  postUserApi: async (id: string) => {
+    const response = await axiosClient.get(`user/get?id=${id}`);
+    return response;
+  },
 };
 
+
 export default userServices;
+

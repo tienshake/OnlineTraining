@@ -14,7 +14,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useState } from 'react';
 import { TypeObjectInput, TypeError, ErrorSubmit } from '../../types/index';
 import './ComponentsAdmin.css';
-
+import CloseTab from './IconGroupAction/CloseTab';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -66,9 +66,9 @@ export default function ShowModalForm() {
     const optionValues = options.map((option) => option.value);
     if (optionValues.includes(valueInput)) {
       setSelectedOption(valueInput);
-    } else {
+    } /* else {
       console.error(`Invalid valueInput ${valueInput} selected`);
-    }
+    } */
 
     setInputs(state => ({ ...state, [nameInput]: valueInput })) // 
   };
@@ -83,7 +83,7 @@ export default function ShowModalForm() {
 
     /* validate name */
     if (inputs.name === undefined || inputs.name === '') {
-      errorSubmit.name = "Bạn vui lòng nhập name của mình !";
+      errorSubmit.name = "Please enter your name!";
       setErrors(errorSubmit);
       check = false;
     } else {
@@ -93,15 +93,14 @@ export default function ShowModalForm() {
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const checkEmail = emailRegex.test(`${inputs.email}`);
-    console.log(checkEmail, "ok")
 
     /* validate email */
     if (inputs.email === undefined || inputs.email === '') {
-      errorSubmit.email = "Bạn vui lòng nhập email của mình !";
+      errorSubmit.email = "Please enter your email!";
       setErrors(errorSubmit);
       check = false;
     } else if (!checkEmail) {
-      errorSubmit.email = "Email không đúng định dạng !";
+      errorSubmit.email = "Email is not in the correct format!";
       setErrors(errorSubmit);
       check = false;
     } else {
@@ -111,7 +110,7 @@ export default function ShowModalForm() {
 
     /* validate password */
     if (inputs.password === undefined || inputs.password === '') {
-      errorSubmit.password = "Bạn vui lòng nhập mật khẩu!";
+      errorSubmit.password = "Please enter your password!";
       setErrors(errorSubmit);
       check = false;
     } else {
@@ -121,7 +120,7 @@ export default function ShowModalForm() {
 
     /* validate role */
     if (inputs.role === undefined || inputs.role === "") {
-      errorSubmit.role = "Bạn vui lòng nhập role!";
+      errorSubmit.role = "Please enter the role!";
       setErrors(errorSubmit);
       check = false;
     } else {
@@ -131,11 +130,11 @@ export default function ShowModalForm() {
 
     /* validate comfirm password */
     if (inputs.confirmPass === undefined || inputs.confirmPass === '') {
-      errorSubmit.confirmPass = "Vui lòng nhập lại mật khẩu !";
+      errorSubmit.confirmPass = "Please enter your confirm password!";
       setErrors(errorSubmit);
       check = false;
     } else if (inputs.confirmPass !== inputs.password) {
-      alert("Mật khẩu không khớp nhau!");
+      alert("Passwords do not match!");
       check = false;
     } else {
       setErrors(errorSubmit);
@@ -144,14 +143,11 @@ export default function ShowModalForm() {
 
     /* submit  */
     if (check) {
-      alert('đăng nhập Ok!')
+      alert('Logged in successfully!')
     } else {
-      alert('đăng nhập thất bại !')
+      alert('Login failed !')
     }
   }
-
-
-
 
   return (
     <div>
@@ -164,9 +160,11 @@ export default function ShowModalForm() {
         aria-describedby="keep-mounted-modal-description"
       >
         <Box className="modal_show" sx={style}>
-          <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
-            Nhập Thông tin User
+          <Typography id="keep-mounted-modal-title" variant="h6" component="h2" style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <p>User Information</p>
+            <CloseTab handleClose={handleClose}/>
           </Typography>
+
 
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
             <FormControl fullWidth sx={{ m: 1 }} variant="standard">
@@ -261,6 +259,6 @@ export default function ShowModalForm() {
           </form>
         </Box>
       </Modal>
-    </div>
+    </div >
   );
 }

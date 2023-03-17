@@ -40,6 +40,18 @@ export const getDataUser: any = createAsyncThunk(
   }
 );
 
+export const addDataUser: any = createAsyncThunk(
+  "userTeacher/addDataUser",
+  async (params, { rejectWithValue }) => {
+    // try {
+    //   const { data } = await userServices.postUserApi("ALL");
+    //   return data;
+    // } catch (error: any) {
+    //   return rejectWithValue(error.response.data);
+    // }
+  }
+);
+
 const userTeacherSlice = createSlice({
   name: "userTeacher",
   initialState: initialState,
@@ -60,7 +72,12 @@ const userTeacherSlice = createSlice({
     [getDataUser.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.dataUserTeacher = action.payload;
-      console.log(action, "action");
+    },
+
+    [addDataUser.fulfilled]: (state, action) => {
+      // state.isLoading = false;
+      // state.dataUserTeacher = action.payload;
+      // console.log(action, "action");
     },
   },
 });
