@@ -28,6 +28,12 @@ router.delete(
   middleware.authUser,
   userController.deleteUser
 );
+router.get(
+  "/search",
+  middleware.authAdmin,
+  middleware.authUser,
+  userController.searchUser
+);
 router.post("/register", userController.register);
 router.post("/login", userController.login);
 

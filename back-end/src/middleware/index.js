@@ -36,14 +36,14 @@ const authUser = async (req, res, next) => {
   }
 };
 
-const authAdmin = async (req, res, next) => {
+const authRole = (role_name) => async (req, res, next) => {
   try {
     const decoded = await verifyToken(
       req.headers["authorization"].split(" ")[1]
     );
     const role = await db.Role.findByPk(+decoded.role_id);
-    if (role.role_name !== "admin") {
-      throw new Error("You are not admin");
+    if (role.role_name !== role_name) {
+      throw new Error(`You are not ${role_name}`);
     }
     req.user = decoded;
     next();
@@ -53,4 +53,25 @@ const authAdmin = async (req, res, next) => {
   }
 };
 
-export default { authUser, authAdmin };
+const authAdminOrTeacher = async (req, res, next) => {
+  try {
+    const decoded = await verifyToken(
+      req.headers["authorization"].split(" ")[1]
+    );
+    const role = await db.Role.findByPk(+decoded.role_id);
+    if (role.role_name !== "admin" && role.role_name !== "teacher") {
+      throw new Error("You are not authorized to access this resource");
+    }
+    req.user = decoded;
+    next();
+  } catch (err) {
+    console.log(err);
+    return res.status(401).json({ message: err.message });
+  }
+};
+
+// Use authRole
+const authAdmin = authRole("admin");
+const authTeacher = authRole("teacher");
+
+export default { authUser, authAdmin, authTeacher, authAdminOrTeacher };

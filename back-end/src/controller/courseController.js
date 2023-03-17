@@ -31,11 +31,15 @@ const createCourse = async (req, res) => {
 };
 
 const getCourse = async (req, res) => {
-  const { id } = req.query;
+  const { page = 1, limit = 10, id } = req.query;
   try {
     let course = null;
     if (id === "ALL") {
-      course = await db.Course.findAll({
+      let offset = (page - 1) * limit;
+      course = await db.Course.findAndCountAll({
+        order: [["updatedAt", "DESC"]],
+        limit: +limit,
+        offset: +offset,
         raw: true,
       });
     } else {
@@ -73,13 +77,13 @@ const editCourse = async (req, res) => {
 
   const t = await sequelize.transaction();
   try {
-    // Update user
+    // Update Course
     await db.Course.update(
       { title, description, price, category_id },
       { where: { id }, transaction: t }
     );
 
-    // Update user_detail
+    // Update Course_detail
     if (
       total_chapter ||
       total_lectures ||
@@ -127,9 +131,30 @@ const editCourse = async (req, res) => {
     res.status(500).send({ message: "Update failed" });
   }
 };
+const deleteCourse = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const course = await db.Course.findByPk(id);
+    if (!course) {
+      return res.status(404).json({
+        message: "Course not found",
+      });
+    } else {
+      await course.destroy();
+      return res.status(200).json({
+        code: 0,
+        message: "Delete Course completed",
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
 
 export default {
   createCourse,
   getCourse,
   editCourse,
+  deleteCourse,
 };

@@ -10,5 +10,23 @@ router.post(
   middleware.authAdmin,
   categoryController.createCategory
 );
+router.get(
+  "/get",
+  middleware.authUser,
+  middleware.authAdmin,
+  categoryController.getCategory
+);
+router.put(
+  "/edit/:id",
+  middleware.authUser,
+  middleware.authAdmin,
+  categoryController.editCategory
+);
+router.delete(
+  "/delete/:id",
+  middleware.authUser,
+  middleware.authAdmin,
+  categoryController.deleteCategory
+);
 
 export default router;

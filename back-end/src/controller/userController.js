@@ -4,6 +4,7 @@ import checkUserEmail from "../utils/checkUserEmail";
 import generateToken from "../utils/generateToken";
 import bcrypt from "bcryptjs";
 import { sequelize } from "../models";
+const { Op } = require("sequelize");
 
 const createUser = async (req, res) => {
   const { name, email, password, role_id = 1 } = req.body;
@@ -114,14 +115,18 @@ const editUser = async (req, res) => {
 };
 
 const getUser = async (req, res) => {
-  const { id } = req.query;
+  const { page = 1, limit = 10, id } = req.query;
   try {
     let user = null;
     if (id === "ALL") {
-      user = await db.User.findAll({
+      let offset = (page - 1) * limit;
+      user = await db.User.findAndCountAll({
         attributes: {
           exclude: ["password"],
         },
+        order: [["updatedAt", "DESC"]],
+        limit: +limit,
+        offset: +offset,
         raw: true,
       });
     } else {
@@ -240,6 +245,25 @@ const login = async (req, res) => {
   }
 };
 
+const searchUser = async (req, res) => {
+  const { term } = req.query;
+  try {
+    const results = await db.User.findAll({
+      where: {
+        [Op.or]: [
+          { name: { [Op.like]: `%${term}%` } },
+          // { description: { [Op.like]: `%${term}%` } },
+        ],
+      },
+    });
+
+    res.status(200).json({ code: 0, message: "Search completed", results });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal server error");
+  }
+};
+
 export default {
   getUser,
   createUser,
@@ -247,4 +271,5 @@ export default {
   deleteUser,
   register,
   login,
+  searchUser,
 };
