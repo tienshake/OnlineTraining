@@ -1,10 +1,32 @@
 import axiosClient from "../api/axiosClient";
 
-const userServices:any = {
+interface dataUserTeacher {
+  name?: String,
+  email?: String,
+  password?: String,
+  role_id?: Number,
+}
+
+const userServices: any = {
   getUserApi: async (id: string) => {
     const response = await axiosClient.get(`user/get?id=${id}`);
     return response;
   },
+  
+  postCreateUserApi: async (dataUser: dataUserTeacher) => {
+    const { name, email, password, role_id } = dataUser;
+
+    const response = await axiosClient.post(`user/create`, {
+      name: name,
+      email: email,
+      password: password,
+      role_id: role_id,
+    });
+
+    return response;
+  },
 };
 
+
 export default userServices;
+

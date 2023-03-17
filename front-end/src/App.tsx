@@ -10,7 +10,6 @@ import GlobalStyle from "./layout/GlobalStyle";
 import { publicRoute, privateRoute } from "./routers";
 import { RouteType } from "./types";
 import DefaultLayout from "./layout/DefaultLayout";
-import Home from "./pages/Home";
 
 function App() {
   const isLogged = true;

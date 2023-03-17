@@ -173,7 +173,7 @@
 
 .wrapp_allCoursesOf_teacher {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 30px;
     margin-top: 30px;
 }
@@ -230,6 +230,9 @@
 @media only screen and (max-width: 843px) {
     .wrap_bodyContent_admin {
         grid-template-columns: repeat(2, 1fr);
+    }
+    .wrapp_allCoursesOf_teacher {
+        grid-template-columns: repeat(1, 1fr);
     }
 }
 
