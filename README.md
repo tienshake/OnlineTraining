@@ -1,14 +1,15 @@
 # OnlineTraining
 
-### **NodeJS version: v18.14.0**
-### **NPM version: 9.3.1**
-### **MySQL version: 8.0.32**
+**NodeJS version: v18.14.0**
+**NPM version: 9.3.1**
+**MySQL version: 8.0.32**
 
 ### how to use the project:
 
 ### With front-end
 
 ### 1. `git clone project`
+### 2. `cd ./front-end`
 ### 3. `npm install`
 ### 4. `npm start`
 
