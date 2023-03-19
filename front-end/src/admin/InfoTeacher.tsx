@@ -10,13 +10,35 @@ import EvaluateStar from './componentsAdmin/EvaluateStar';
 import QuantityLessons from './componentsAdmin/QuantityLessons';
 import NumberTime from './componentsAdmin/NumberTime';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store/store';
+import Loading from './componentsAdmin/Loading';
+import AlertError from './componentsAdmin/AlertError';
+import {  getDataDetailUser } from '../redux/features/userTeacher/userTeacherSlice';
 
 export default function InfoTeacher() {
-  // const theme = useTheme();
 
   const data = [
     '1', '2', '3', '4'
   ];
+
+  // Lấy param id sản phẩm
+  const location = useLocation();
+  const pathId = location.pathname.split("/")[3]; /* cat id  params*/
+  const dataUserStore = useSelector((state: RootState) => state.userTeachers.dataUserTeacher);
+  const userStore = useSelector((state: RootState) => state.userTeachers);
+  const { isLoading, error, messageError } = userStore;
+  const { user } = dataUserStore;
+
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    dispatch(getDataDetailUser(pathId))
+  }, [dispatch, pathId]);
 
   return (
     <div>
@@ -24,7 +46,20 @@ export default function InfoTeacher() {
         <HeaderDashboard />
         <div className='wrapp_teacherInfo'>
           <div className='content-left'>
-            <CardUser name="ss" decription="The purpose of lorem ipsum is to create a natural looking block of text (sentence, paragraph, page, etc.) that doesn't distract from the layout. A practice not without controversy, laying out pages with meaningless filler text can be very useful when the focus is meant to be on design, not content." />
+            {
+              isLoading ? <Loading /> : <>
+                {
+                  error ? <AlertError messageError={messageError} /> : <>
+                    {
+                      user && dataUserStore ? <CardUser id={user.id} name={user.name} decription="" /> : null
+                    }
+                  </>
+                }
+              </>
+            }
+
+
+            {/* <CardUser id={1} name="ss" decription="The purpose of lorem ipsum is to create a natural looking block of text (sentence, paragraph, page, etc.) that doesn't distract from the layout. A practice not without controversy, laying out pages with meaningless filler text can be very useful when the focus is meant to be on design, not content." /> */}
 
             <h3 style={{ marginTop: '50px' }}>Robert Hammer Courses</h3>
 
@@ -47,8 +82,8 @@ export default function InfoTeacher() {
                         <EvaluateStar />
 
                         {/* Quantity Lessons */}
-                        <QuantityLessons/>
-                        
+                        <QuantityLessons />
+
                         {/* Time Number */}
                         <NumberTime />
                       </div>
@@ -98,7 +133,7 @@ export default function InfoTeacher() {
             <p>Robert Best Skill</p>
             <img style={{ width: '100%' }} src='https://lh3.googleusercontent.com/ygi-leOc-e1VJwRHrOePjSeg7hIAdzbiuSSvPvQ94GRSsrJZaXt4lqgWQtVyF1ozXNwstjp_mW9-m0F_L3oXvoMcxH7RKbS5DGqFZevP' alt='' />
             <p>Reviews</p>
-            {
+            {/* {
               data.map((index) => (
                 <>
                   <div key={index}>
@@ -118,7 +153,7 @@ export default function InfoTeacher() {
                   </div>
                 </>
               ))
-            }
+            } */}
           </div>
         </div>
 

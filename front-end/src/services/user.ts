@@ -9,10 +9,22 @@ interface dataUserTeacher {
 
 const userServices: any = {
   getUserApi: async (id: string) => {
-    const response = await axiosClient.get(`user/get?id=${id}`);
+    const response = await axiosClient.get(`user/get?id=${id}&limit=${9}`);
     return response;
   },
-  
+
+  deleteUserApi: async (id: String) => {
+    const response = await axiosClient.delete(`user/delete/${id}`);
+
+    return response;
+  },
+
+  getUserDetailApi: async (id: String) => {
+    const response = await axiosClient.get(`user/get?id=${id}`);
+
+    return response;
+  },
+
   postCreateUserApi: async (dataUser: dataUserTeacher) => {
     const { name, email, password, role_id } = dataUser;
 

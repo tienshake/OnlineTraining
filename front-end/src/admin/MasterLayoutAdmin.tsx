@@ -19,7 +19,12 @@ export default function MasterLayoutAdmin({ children }: MasterLayoutAdminProps) 
                     <div className='menu_dashboard' style={{ background: '', color: '#fff' }}>
                         <ul className='group_logo-name_admin'>
                             <li><p className='logo'></p></li>
-                            <li><p className='name'>Admin</p></li>
+
+                            <li>
+                                <Link style={{ color: '#fff' }} to='/addd'>
+                                    <p className='name'>Admin</p>
+                                </Link>
+                            </li>
                         </ul>
 
 

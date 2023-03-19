@@ -1,16 +1,17 @@
-import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import ButtonBase from '@mui/material/ButtonBase';
-import { BsFillMicFill } from 'react-icons/bs';
-import { ImVideoCamera } from 'react-icons/im';
-import { RiUser3Fill } from 'react-icons/ri';
+import { AiFillDelete } from 'react-icons/ai';
+import { FaEdit } from 'react-icons/fa';
 import { FaUserFriends } from 'react-icons/fa';
 import { AiFillStar } from 'react-icons/ai';
-import './ComponentsAdmin.css';
 import { Link } from 'react-router-dom';
+import userServices from '../../services/user';
+import ModelAccess from './ModelAccess';
+import { useState } from 'react';
+import './ComponentsAdmin.css';
 
 const Img = styled('img')({
   margin: 'auto',
@@ -21,12 +22,31 @@ const Img = styled('img')({
 
 interface MyCardUserProps {
   decription: String;
-  name: String
+  name: String,
+  id: any
 }
 
+
 export default function CardUser(props: MyCardUserProps) {
+  /* handle show alert access and delete user */
+  const [open, setOpen] = useState(false);
+
+  const handleOpenModalAccess = () => {
+    setOpen(true);
+  };
+
+  const handleCloseModalAccess = () => {
+    setOpen(false);
+  };
+
+  const handleDeleteAndClose = () => {
+    userServices.deleteUserApi(props.id);
+    setOpen(false);
+    alert("Xoá thành công!")
+  }
+
   return (
-    <Link to="/admin/teacher-info">
+    <Link to={`/admin/teacher-info/${props.id}`}>
       <Paper
         sx={{
           pt: 2,
@@ -53,7 +73,7 @@ export default function CardUser(props: MyCardUserProps) {
                 <p>55k</p>
               </li>
               <li>
-                <p style={{ color: '#FFAA8A' }}><ImVideoCamera /></p>
+                <p style={{ color: '#FFAA8A' }}><FaEdit /></p>
                 <p>55k</p>
               </li>
             </ul>
@@ -77,17 +97,17 @@ export default function CardUser(props: MyCardUserProps) {
                 <p style={{ background: 'rgb(209, 207, 207)', height: '1px', width: '100%', marginTop: '20px' }}></p>
 
                 <ul className="group_btn_contact">
-                  <li><BsFillMicFill /></li>
-                  <li><ImVideoCamera /></li>
-                  <li><RiUser3Fill /></li>
+                  {
+                    open ? <>
+                      <ModelAccess handleDeleteAndClose={handleDeleteAndClose} openModal={open} handleCloseModalAccess={handleCloseModalAccess} nameUser={props.name} />
+                    </>
+                      :
+                      null
+                  }
+                  <li /* onClick={hande} */><FaEdit /></li>
+                  <li onClick={handleOpenModalAccess} ><AiFillDelete /></li>
                 </ul>
               </Grid>
-
-              {/* <ul className="group_btn_contact" style={{ display: 'flex' }}>
-              <li><BsFillMicFill /></li>
-              <li><ImVideoCamera /></li>
-              <li><RiUser3Fill /></li>
-            </ul> */}
             </Grid>
           </Grid>
         </Grid>

@@ -7,30 +7,34 @@ interface userTeacherState {
   isLoading: Boolean;
   error: Boolean;
   messageError: any;
+
+  /*  */
+  errorAddUserTeacher: Boolean,
+  messageErrorAddTeacher: Boolean,
+  messageSuccessAddTeacher: any,
 }
 
 /* State */
 const initialState: userTeacherState = {
   dataUserTeacher: [],
+
+  /* get All */
   isLoading: false,
   error: false,
   messageError: null,
+
+  /* get By Add */
+
+
+  /* add ALL */
+  errorAddUserTeacher: false,
+  messageErrorAddTeacher: false,
+  messageSuccessAddTeacher: null,
 };
 
 /* Actions */
-export const getDataUser: any = createAsyncThunk(
-  "userTeacher/getDataUser",
-  async (params, { rejectWithValue }) => {
-    // try {
-    //   const { data } = await axios({
-    //     method: "get",
-    //     url: "http://localhost:8080/user/get?id=ALL",
-    //     headers: {
-    //       Authorization:
-    //         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwicm9sZV9pZCI6MSwiZW1haWwiOiJ0aWVubkBnbWFpbC5jb20iLCJpYXQiOjE2Nzg5MDkxMjEsImV4cCI6MTY4MTUwMTEyMX0.P1WCkrn_4N0pr99_02crlcXmG7SQQnQgseY5F9z1TCY",
-    //       "Content-Type": "application/json",
-    //     },
-    //   });
+export const getDataUser: any = createAsyncThunk("userTeacher/getDataUser",
+  async (params: String, { rejectWithValue }) => {
     try {
       const { data } = await userServices.getUserApi("ALL");
       return data;
@@ -40,15 +44,30 @@ export const getDataUser: any = createAsyncThunk(
   }
 );
 
-export const addDataUser: any = createAsyncThunk(
-  "userTeacher/addDataUser",
-  async (params, { rejectWithValue }) => {
-    // try {
-    //   const { data } = await userServices.postUserApi("ALL");
-    //   return data;
-    // } catch (error: any) {
-    //   return rejectWithValue(error.response.data);
-    // }
+export const addDataUser: any = createAsyncThunk("userTeacher/addDataUser",
+  async (params: any, { rejectWithValue }) => {
+
+    if (params.name === "AxiosError") {
+      return rejectWithValue(params.response.data);
+    } else {
+      return params;
+    }
+
+    // console.log(params.response.data.message, "params");
+    // console.log(params.name, "AxiosError");
+    // return rejectWithValue(params.response.data);
+  }
+);
+
+export const getDataDetailUser: any = createAsyncThunk("userTeacher/getDetailDataUser",
+  async (params: String, { rejectWithValue }) => {
+    try {
+      const { data } = await userServices.getUserDetailApi(params);
+
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data);
+    }
   }
 );
 
@@ -67,17 +86,40 @@ const userTeacherSlice = createSlice({
     [getDataUser.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = true;
+
+      // if (action.payload.message) {
       state.messageError = action.payload.message;
+      // } 
     },
     [getDataUser.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.dataUserTeacher = action.payload;
+      return {
+        ...state,
+        // isLoading = false;
+        // dataUserTeacher = action.payload;
+        isLoading: false,
+        dataUserTeacher: action.payload,
+      }
     },
 
+    /*  */
+    [addDataUser.rejected]: (state, action) => {
+      state.errorAddUserTeacher = true;
+      state.messageErrorAddTeacher = action.payload;
+    },
     [addDataUser.fulfilled]: (state, action) => {
-      // state.isLoading = false;
-      // state.dataUserTeacher = action.payload;
-      // console.log(action, "action");
+      state.errorAddUserTeacher = false;
+      state.messageSuccessAddTeacher = action.payload;
+    },
+
+    /*  */
+    [getDataDetailUser.fulfilled]: (state, action) => {
+      return {
+        ...state,
+        // isLoading = false;
+        // dataUserTeacher = action.payload;
+        isLoading: false,
+        dataUserTeacher: action.payload,
+      }
     },
   },
 });

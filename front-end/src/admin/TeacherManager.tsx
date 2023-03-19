@@ -23,8 +23,9 @@ export default function TeacherManager() {
   const dataUserStore = useSelector((state: RootState) => state.userTeachers.dataUserTeacher);
   const userStore = useSelector((state: RootState) => state.userTeachers);
 
+
+
   const dispatch = useDispatch();
-  
   const { user } = dataUserStore;
   const { isLoading, error, messageError } = userStore;
 
@@ -60,9 +61,9 @@ export default function TeacherManager() {
               {
                 error ? <AlertError messageError={messageError} /> : <>
                   {
-                    dataUserStore && user ? <>{user.map((data: any) => (
+                    dataUserStore && user?.rows? <>{user?.rows.map((data: any) => (
                       <div key={data.id}>
-                        <CardUser name={data.name} decription="" />
+                        <CardUser id={data.id} name={data.name} decription="ss" />
                       </div>
                     ))}</> : null
                   }

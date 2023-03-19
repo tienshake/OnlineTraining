@@ -16,6 +16,13 @@ import { TypeObjectInput, TypeError, ErrorSubmit } from '../../types/index';
 import './ComponentsAdmin.css';
 import CloseTab from './IconGroupAction/CloseTab';
 import userServices from '../../services/user';
+import { useDispatch } from 'react-redux';
+import { addDataUser, getDataUser } from '../../redux/features/userTeacher/userTeacherSlice';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store/store';
+import AlertError from './AlertError';
+import AlertSuccess from './AlertSuccess';
+import { useStore } from 'react-redux';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -39,10 +46,17 @@ export default function ShowModalForm() {
     event.preventDefault();
   };
 
+  /* get store */
+  const userStore = useSelector((state: any) => state.userTeachers);
+  const { messageErrorAddTeacher, errorAddUserTeacher, messageSuccessAddTeacher } = userStore;
+
+
 
   /* VALIDATE FORM AND SUBMIT */
   const [inputs, setInputs] = useState<TypeObjectInput>({});
   const [errors, setErrors] = useState<TypeError>({});
+
+  const dispatch = useDispatch();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const nameInput = e.target.name;
@@ -74,86 +88,95 @@ export default function ShowModalForm() {
     setInputs(state => ({ ...state, [nameInput]: valueInput })) // 
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     let errorSubmit: ErrorSubmit = {
 
     };
 
-    let check = false;
+    let checkName = false;
+    let checkEmail = false;
+    let checkPass = false;
+    let checkConfirmPass = false;
+    let checkRole = false;
 
     /* validate name */
     if (inputs.name === undefined || inputs.name === '') {
       errorSubmit.name = "Please enter your name!";
       setErrors(errorSubmit);
-      check = false;
+      checkName = false;
     } else {
       setErrors(errorSubmit);
-      check = true;
+      checkName = true;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const checkEmail = emailRegex.test(`${inputs.email}`);
+    const checkEmailFormat = emailRegex.test(`${inputs.email}`);
 
     /* validate email */
     if (inputs.email === undefined || inputs.email === '') {
       errorSubmit.email = "Please enter your email!";
       setErrors(errorSubmit);
-      check = false;
-    } else if (!checkEmail) {
+      checkEmail = false;
+    } else if (!checkEmailFormat) {
       errorSubmit.email = "Email is not in the correct format!";
       setErrors(errorSubmit);
-      check = false;
+      checkEmail = false;
     } else {
       setErrors(errorSubmit);
-      check = true;
+      checkEmail = true;
     }
 
     /* validate password */
     if (inputs.password === undefined || inputs.password === '') {
       errorSubmit.password = "Please enter your password!";
       setErrors(errorSubmit);
-      check = false;
+      checkPass = false;
     } else {
       setErrors(errorSubmit);
-      check = true;
+      checkPass = true;
+    }
+
+
+    /* validate comfirm password */
+    if (inputs.confirmPass === undefined || inputs.confirmPass === '') {
+      errorSubmit.confirmPass = "Please enter your confirm password!";
+      setErrors(errorSubmit);
+      checkConfirmPass = false;
+    } else if (inputs.confirmPass !== inputs.password) {
+      alert("Passwords do not match!");
+      checkConfirmPass = false;
+    } else {
+      setErrors(errorSubmit);
+      checkConfirmPass = true;
     }
 
     /* validate role */
     if (inputs.role === undefined || inputs.role === "") {
       errorSubmit.role = "Please enter the role!";
       setErrors(errorSubmit);
-      check = false;
+      checkRole = false;
     } else {
       setErrors(errorSubmit);
-      check = true;
-    }
-
-    /* validate comfirm password */
-    if (inputs.confirmPass === undefined || inputs.confirmPass === '') {
-      errorSubmit.confirmPass = "Please enter your confirm password!";
-      setErrors(errorSubmit);
-      check = false;
-    } else if (inputs.confirmPass !== inputs.password) {
-      alert("Passwords do not match!");
-      check = false;
-    } else {
-      setErrors(errorSubmit);
-      check = true;
+      checkRole = true;
     }
 
     /* submit  */
-    if (check) {
-      alert('Logged in successfully!');
+    if (checkName && checkEmail && checkPass && checkConfirmPass && checkRole) {
+      try {
+        const { data } = await userServices.postCreateUserApi({
+          name: inputs.name,
+          email: inputs.email,
+          password: inputs.password,
+          role_id: inputs.role,
+        });
 
-      userServices.postCreateUserApi({
-        name: inputs.name,
-        email: inputs.email,
-        password: inputs.password,
-        role_id: inputs.role,
-      });
+        dispatch(addDataUser(data))
+      } catch (error: any) {
+        dispatch(addDataUser(error))
+      }
 
-
+      dispatch(getDataUser())
     } else {
       alert('Login failed !')
     }
@@ -170,11 +193,20 @@ export default function ShowModalForm() {
         aria-describedby="keep-mounted-modal-description"
       >
         <Box className="modal_show" sx={style}>
-          <Typography id="keep-mounted-modal-title" variant="h6" component="h2" style={{ display: 'flex', justifyContent: 'space-between' }}>
+          {/* message error */}
+          {
+            errorAddUserTeacher && messageErrorAddTeacher ? <AlertError messageError={messageErrorAddTeacher.message} /> : null
+          }
+
+          {/* message success */}
+          {
+            !errorAddUserTeacher && messageSuccessAddTeacher ? <AlertSuccess messageSuccess={messageSuccessAddTeacher.message} /> : null 
+          }
+
+          <Typography id="keep-mounted-modal-title" variant="h6" component="h2" style={{ padding: '7px', display: 'flex', justifyContent: 'space-between' }}>
             <p>User Information</p>
             <CloseTab handleClose={handleClose} />
           </Typography>
-
 
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
             <FormControl fullWidth sx={{ m: 1 }} variant="standard">

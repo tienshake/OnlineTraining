@@ -47,7 +47,7 @@ const privateRoute: RouteType[] = [
   },
   {
     component: InfoTeacher,
-    patch: "/admin/teacher-info",
+    patch: "/admin/teacher-info/:userId",
   },
 ];
 
