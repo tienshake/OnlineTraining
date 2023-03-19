@@ -25,7 +25,13 @@ router.put(
 router.delete(
   "/delete/:id",
   middleware.authUser,
-  courseController.deleteCourse,
-  middleware.authAdminOrTeacher
+  middleware.authAdminOrTeacher,
+  courseController.deleteCourse
+);
+router.get(
+  "/search",
+  middleware.authAdmin,
+  middleware.authUser,
+  courseController.searchCourse
 );
 export default router;

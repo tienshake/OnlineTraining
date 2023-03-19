@@ -7,13 +7,13 @@ import TeacherManager from "../admin/TeacherManager";
 import CoursesManager from "../admin/CoursesManager";
 import InfoTeacher from "../admin/InfoTeacher";
 import InfoCourses from "../admin/InfoCourses";
-import AddTeacher from "../admin/AddTeacher";
+import Category from "../admin/pages/category";
 import Home from "../pages/Home";
 
 const publicRoute: RouteType[] = [
   {
     component: Home,
-    patch: "/",
+    patch: "/home",
   },
   {
     component: Login,
@@ -51,8 +51,8 @@ const privateRoute: RouteType[] = [
     patch: "/admin/teacher-info",
   },
   {
-    component: AddTeacher,
-    patch: "/admin/add-teacher",
+    component: Category,
+    patch: "/admin/category",
   },
 ];
 

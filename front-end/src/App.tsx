@@ -1,4 +1,3 @@
-import React from "react";
 import "./App.css";
 import {
   BrowserRouter as Router,
@@ -10,7 +9,6 @@ import GlobalStyle from "./layout/GlobalStyle";
 import { publicRoute, privateRoute } from "./routers";
 import { RouteType } from "./types";
 import DefaultLayout from "./layout/DefaultLayout";
-import Home from "./pages/Home";
 
 function App() {
   const isLogged = true;
@@ -18,6 +16,7 @@ function App() {
     <GlobalStyle>
       <Router>
         <Routes>
+          <Route path="/" element={<Navigate to="/home" />} />
           {publicRoute?.map((route: RouteType, i: number) => {
             const Component = route.component;
             return (

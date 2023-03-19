@@ -7,7 +7,7 @@ const getUserToken = (): string | null => {
 };
 
 const removeUserToken = () => {
-  localStorage.removeItem("user-token");
+  localStorage.removeItem("token");
 };
 
 export { getUserToken, removeUserToken };

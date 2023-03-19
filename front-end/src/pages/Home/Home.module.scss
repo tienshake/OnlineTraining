@@ -1,0 +1,66 @@
+// .container {
+//   display: grid;
+//   grid-template-columns: repeat(3, 1fr);
+//   grid-template-areas:
+//     "header header header"
+//     "sidebar content content"
+//     "sidebar content content"
+//     "footer footer footer";
+//   height: 100vh;
+//   grid-template-rows: 100px 300px 200px 100px;
+
+//   column-gap: 10px;
+//   row-gap: 10px;
+// }
+// .header,
+// .content,
+// .footer,
+// .sidebar {
+//   background-color: gold;
+//   border: 1px solid grey;
+// }
+
+// .item {
+//   background-color: rgb(179, 116, 116);
+//   border: 5px solid red;
+// }
+
+// .header {
+//   grid-area: header;
+// }
+
+// .content {
+//   display: grid;
+//   grid-area: content;
+//   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+//   gap: 20px;
+//   padding: 20px;
+// }
+
+// .sidebar {
+//   grid-area: sidebar;
+// }
+// .footer {
+//   grid-area: footer;
+// }
+
+// @media (max-width: 900px) {
+//   .content {
+//     grid-template-columns: repeat(2, 1fr);
+//   }
+// }
+
+// @media (max-width: 500px) {
+//   .content {
+//     grid-template-columns: repeat(1, 1fr);
+//   }
+
+//     .container {
+//       grid-template-areas:
+//         "header header header"
+//         "content content content"
+//         "content content content"
+//         "sidebar sidebar sidebar"
+//         "footer footer footer footer";
+//     }
+// }

@@ -1,26 +1,26 @@
 "use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("Course_contents", {
+    await queryInterface.createTable("Notifications", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      title: {
-        type: Sequelize.STRING,
-      },
       course_id: {
         type: Sequelize.INTEGER,
       },
-      video: {
+      user_id: {
+        type: Sequelize.INTEGER,
+      },
+      notification_title: {
         type: Sequelize.STRING,
       },
-      document: {
-        type: Sequelize.BLOB("long"),
+      notification_content: {
+        type: Sequelize.STRING,
       },
-      exercise: {
+      notification_type: {
         type: Sequelize.STRING,
       },
       createdAt: {
@@ -34,6 +34,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("Course_contents");
+    await queryInterface.dropTable("Notifications");
   },
 };

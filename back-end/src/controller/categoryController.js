@@ -38,7 +38,7 @@ const getCategory = async (req, res) => {
       res.status(200).json({
         code: 0,
         message: "Get Category completed",
-        category,
+        data: category,
       });
     }
   } catch (error) {

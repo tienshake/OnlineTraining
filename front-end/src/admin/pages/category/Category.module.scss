@@ -1,0 +1,15 @@
+.item {
+  padding: 10px 0;
+  align-items: center;
+  width: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  svg {
+    cursor: pointer;
+    &:hover {
+      color: red;
+    }
+  }
+  border-bottom: 1px solid #b8b5b5;
+}
