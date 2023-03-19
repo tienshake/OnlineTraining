@@ -124,10 +124,27 @@ const getUser = async (req, res) => {
         attributes: {
           exclude: ["password"],
         },
+        include: [
+          {
+            model: db.User_detail,
+            attributes: [
+              "about_me",
+              "avatar",
+              // "phone_number",
+              // "address",
+              // "experience",
+              // "education",
+              // "age",
+              // "gender",
+            ],
+            as: "user_details",
+          },
+        ],
         order: [["updatedAt", "DESC"]],
         limit: +limit,
         offset: +offset,
         raw: true,
+        nest: true,
       });
     } else {
       user = await db.User.findByPk(id);
@@ -139,7 +156,7 @@ const getUser = async (req, res) => {
       res.status(200).json({
         code: 0,
         message: "Get user completed",
-        user,
+        data: user,
       });
     }
   } catch (error) {
@@ -246,18 +263,24 @@ const login = async (req, res) => {
 };
 
 const searchUser = async (req, res) => {
-  const { term } = req.query;
+  const { search } = req.query;
   try {
-    const results = await db.User.findAll({
-      where: {
-        [Op.or]: [
-          { name: { [Op.like]: `%${term}%` } },
-          // { description: { [Op.like]: `%${term}%` } },
-        ],
-      },
-    });
+    if (!search) {
+      res.status(400).send("Missing params");
+    } else {
+      const results = await db.User.findAll({
+        where: {
+          [Op.or]: [
+            { name: { [Op.like]: `%${search}%` } },
+            { email: { [Op.like]: `%${search}%` } },
+          ],
+        },
+      });
 
-    res.status(200).json({ code: 0, message: "Search completed", results });
+      res
+        .status(200)
+        .json({ code: 0, message: "Search completed", data: results });
+    }
   } catch (error) {
     console.log(error);
     res.status(500).send("Internal server error");

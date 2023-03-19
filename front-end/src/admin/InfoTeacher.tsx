@@ -21,17 +21,19 @@ import {  getDataDetailUser } from '../redux/features/userTeacher/userTeacherSli
 
 export default function InfoTeacher() {
 
-  const data = [
+  const data2 = [
     '1', '2', '3', '4'
   ];
 
   // Lấy param id sản phẩm
   const location = useLocation();
   const pathId = location.pathname.split("/")[3]; /* cat id  params*/
+
   const dataUserStore = useSelector((state: RootState) => state.userTeachers.dataUserTeacher);
   const userStore = useSelector((state: RootState) => state.userTeachers);
   const { isLoading, error, messageError } = userStore;
-  const { user } = dataUserStore;
+  const { data } = dataUserStore;
+
 
   const dispatch = useDispatch();
 
@@ -43,7 +45,6 @@ export default function InfoTeacher() {
   return (
     <div>
       <MasterLayoutAdmin>
-        <HeaderDashboard />
         <div className='wrapp_teacherInfo'>
           <div className='content-left'>
             {
@@ -51,7 +52,7 @@ export default function InfoTeacher() {
                 {
                   error ? <AlertError messageError={messageError} /> : <>
                     {
-                      user && dataUserStore ? <CardUser id={user.id} name={user.name} decription="" /> : null
+                      data && dataUserStore ? <CardUser id={data.id} name={data.name} decription="" /> : null
                     }
                   </>
                 }
@@ -65,7 +66,7 @@ export default function InfoTeacher() {
 
             <div className='wrapp_allCoursesOf_teacher'>
               {
-                data.map((index) => (
+                data2.map((index) => (
                   <div key={index}>
                     <Card className='card_coursesOf_teacher' sx={{ display: 'flex', gap: '10px' }}>
                       <CardMedia

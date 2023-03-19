@@ -23,11 +23,11 @@ export default function TeacherManager() {
   const dataUserStore = useSelector((state: RootState) => state.userTeachers.dataUserTeacher);
   const userStore = useSelector((state: RootState) => state.userTeachers);
 
-
-
   const dispatch = useDispatch();
-  const { user } = dataUserStore;
+  const { data } = dataUserStore;
   const { isLoading, error, messageError } = userStore;
+
+
 
   useEffect(() => {
     // const actionResult = dispatch(getDataUser());
@@ -40,8 +40,6 @@ export default function TeacherManager() {
   return (
     <div>
       <MasterLayoutAdmin>
-        <HeaderDashboard />
-
         <div style={{ marginTop: '50px', display: 'flex', justifyContent: 'space-between' }}>
           <h1>Courses</h1>
 
@@ -61,7 +59,7 @@ export default function TeacherManager() {
               {
                 error ? <AlertError messageError={messageError} /> : <>
                   {
-                    dataUserStore && user?.rows? <>{user?.rows.map((data: any) => (
+                    dataUserStore && data?.rows? <>{data?.rows.map((data: any) => (
                       <div key={data.id}>
                         <CardUser id={data.id} name={data.name} decription="ss" />
                       </div>

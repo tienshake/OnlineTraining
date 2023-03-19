@@ -2,8 +2,11 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Rating extends Model {
-
     static associate(models) {
+      Rating.belongsTo(models.User, {
+        foreignKey: "user_id",
+        as: "users",
+      });
     }
   }
   Rating.init(
@@ -12,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       course_id: DataTypes.INTEGER,
       parent_id: DataTypes.INTEGER,
       rating_value: DataTypes.INTEGER,
-      comment: DataTypes.STRING
+      comment: DataTypes.STRING,
     },
     {
       sequelize,

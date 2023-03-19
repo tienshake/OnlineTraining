@@ -15,9 +15,9 @@ module.exports = (sequelize, DataTypes) => {
     {
       course_id: DataTypes.INTEGER,
       user_id: DataTypes.INTEGER,
-      nofitication_title: DataTypes.STRING,
-      nofitication_content: DataTypes.STRING,
-      nofitication_type: DataTypes.STRING,
+      notification_title: DataTypes.STRING,
+      notification_content: DataTypes.STRING,
+      notification_type: DataTypes.STRING,
     },
     {
       sequelize,

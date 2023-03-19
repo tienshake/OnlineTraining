@@ -18,7 +18,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       document: {
-        type: Sequelize.STRING,
+        type: Sequelize.BLOB("long"),
       },
       exercise: {
         type: Sequelize.STRING,
