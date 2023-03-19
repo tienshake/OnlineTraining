@@ -1,0 +1,17 @@
+.container {
+  font-size: 1.6rem;
+  font-weight: 500;
+  border-color: #b4a7f5;
+  color: var(--text-color-second);
+  border-radius: 50px;
+  border: solid 2px;
+  padding: 10px 15px;
+  min-width: 150px;
+  text-transform: capitalize;
+
+  &:hover {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--white);
+  }
+}

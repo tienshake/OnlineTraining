@@ -8,17 +8,17 @@ import categoryServices from "../../../services/category";
 import checkDataApi from "../../../utils/checkDataApi";
 import { confirmAlert } from "react-confirm-alert";
 import AddIcon from "@mui/icons-material/Add";
-import { RootState } from "../../../redux/store/store";
-import { useSelector } from "react-redux";
+// import { RootState } from "../../../redux/store/store";
+// import { useSelector } from "react-redux";
 
 const Category = () => {
   const [listCategory, setListCategory] = useState<CategoryType[]>([]);
   const [valueCategory, setValueCategory] = useState<string>("");
-  const dataUserStore = useSelector(
-    (state: RootState) => state.useSearch.dataSearch
-  );
+  // const dataUserStore = useSelector(
+  //   (state: RootState) => state.useSearch.dataSearch
+  // );
 
-  const dataSearch = dataUserStore;
+  // const dataSearch = dataUserStore;
   const fetchCategory = async () => {
     const dataCategory = await categoryServices.getCategoryApi();
     const result = checkDataApi(dataCategory);

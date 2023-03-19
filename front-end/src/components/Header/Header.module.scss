@@ -1,8 +1,7 @@
 .container {
-  min-height: var(--default-layout-header-height);
+  height: var(--default-layout-header-height);
   padding: 0 20px;
   background-color: var(--white);
-
   position: fixed;
   top: 0;
   width: 100%;
@@ -15,10 +14,11 @@
   max-width: var(--default-layout-width);
   margin: auto;
   padding: 0 12px;
+  height: 100%;
 }
 
 .logoItem {
-  width: 150px;
+  width: 120px;
   img {
     width: 100%;
   }

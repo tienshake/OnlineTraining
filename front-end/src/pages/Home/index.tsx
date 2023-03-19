@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Home.module.scss";
 
 const Home = () => {
-  const arr = new Array(100).fill(0);
+  const arr = new Array(50).fill(0);
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -13,7 +13,6 @@ const Home = () => {
           </div>
         ))}
       </div>
-      <footer className={styles.footer}>tao la footer</footer>
     </div>
   );
 };
