@@ -1,4 +1,3 @@
-import React from "react";
 import "./App.css";
 import {
   BrowserRouter as Router,
@@ -17,6 +16,7 @@ function App() {
     <GlobalStyle>
       <Router>
         <Routes>
+          <Route path="/" element={<Navigate to="/home" />} />
           {publicRoute?.map((route: RouteType, i: number) => {
             const Component = route.component;
             return (

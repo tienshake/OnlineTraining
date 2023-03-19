@@ -13,11 +13,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Course_content.init(
     {
-      title:      DataTypes.STRING,
-      course_id:  DataTypes.INTEGER,
-      video:      DataTypes.STRING,
-      document:   DataTypes.STRING,
-      exercise:   DataTypes.STRING
+      title: DataTypes.STRING,
+      course_id: DataTypes.INTEGER,
+      video: DataTypes.STRING,
+      document: DataTypes.STRING,
+      exercise: DataTypes.STRING,
     },
     {
       sequelize,

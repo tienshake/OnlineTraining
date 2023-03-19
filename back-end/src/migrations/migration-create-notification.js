@@ -14,13 +14,13 @@ module.exports = {
       user_id: {
         type: Sequelize.INTEGER,
       },
-      nofitication_title: {
+      notification_title: {
         type: Sequelize.STRING,
       },
-      nofitication_content: {
+      notification_content: {
         type: Sequelize.STRING,
       },
-      nofitication_type: {
+      notification_type: {
         type: Sequelize.STRING,
       },
       createdAt: {

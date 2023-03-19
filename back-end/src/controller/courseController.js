@@ -1,5 +1,6 @@
 import db from "../models";
 import { sequelize } from "../models";
+const { Op } = require("sequelize");
 
 const createCourse = async (req, res) => {
   const { title, description, price, user_id, category_id } = req.body;
@@ -51,7 +52,7 @@ const getCourse = async (req, res) => {
       res.status(200).json({
         code: 0,
         message: "Get Course completed",
-        course,
+        data: course,
       });
     }
   } catch (error) {
@@ -152,9 +153,35 @@ const deleteCourse = async (req, res) => {
   }
 };
 
+const searchCourse = async (req, res) => {
+  const { search } = req.query;
+  try {
+    if (!search) {
+      res.status(400).send("Missing params");
+    } else {
+      const results = await db.Course.findAll({
+        where: {
+          [Op.or]: [
+            { title: { [Op.like]: `%${search}%` } },
+            { description: { [Op.like]: `%${search}%` } },
+          ],
+        },
+      });
+
+      res
+        .status(200)
+        .json({ code: 0, message: "Search completed", data: results });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal server error");
+  }
+};
+
 export default {
   createCourse,
   getCourse,
   editCourse,
   deleteCourse,
+  searchCourse,
 };
