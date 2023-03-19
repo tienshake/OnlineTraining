@@ -19,7 +19,6 @@ const Category = () => {
   );
 
   const dataSearch = dataUserStore;
-  console.log("dataSearch", dataSearch);
   const fetchCategory = async () => {
     const dataCategory = await categoryServices.getCategoryApi();
     const result = checkDataApi(dataCategory);

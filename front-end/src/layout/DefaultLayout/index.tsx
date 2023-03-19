@@ -1,4 +1,5 @@
 import React from "react";
+import Header from "../../components/Header";
 
 type Props = {
   children: React.ReactNode;
@@ -7,7 +8,7 @@ type Props = {
 const DefaultLayout = ({ children }: Props) => {
   return (
     <div>
-      đassdad
+      <Header />
       {children}
       sdsadsadsads
     </div>

@@ -1,10 +1,13 @@
-import './ComponentsAdmin.css';
-import { useDispatch } from 'react-redux';
-import { addDataUser, getDataUser } from '../../redux/features/userTeacher/userTeacherSlice';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store/store';
-import AlertSuccess from './AlertSuccess';
-import { useStore } from 'react-redux';
+import "./ComponentsAdmin.css";
+import { useDispatch } from "react-redux";
+import {
+  addDataUser,
+  getDataUser,
+} from "../../redux/features/userTeacher/userTeacherSlice";
+import { useSelector } from "react-redux";
+// import { RootState } from '../../redux/store/store';
+import AlertSuccess from "./AlertSuccess";
+// import { useStore } from "react-redux";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
@@ -23,7 +26,7 @@ import { TypeObjectInput, TypeError, ErrorSubmit } from "../../types/index";
 import "./ComponentsAdmin.css";
 import CloseTab from "./IconGroupAction/CloseTab";
 import userServices from "../../services/user";
-import AlertError from './AlertError';
+import AlertError from "./AlertError";
 
 const style = {
   position: "absolute" as "absolute",
@@ -51,9 +54,11 @@ export default function ShowModalForm() {
 
   /* get store */
   const userStore = useSelector((state: any) => state.userTeachers);
-  const { messageErrorAddTeacher, errorAddUserTeacher, messageSuccessAddTeacher } = userStore;
-
-
+  const {
+    messageErrorAddTeacher,
+    errorAddUserTeacher,
+    messageSuccessAddTeacher,
+  } = userStore;
 
   /* VALIDATE FORM AND SUBMIT */
   const [inputs, setInputs] = useState<TypeObjectInput>({});
@@ -138,9 +143,8 @@ export default function ShowModalForm() {
       checkPass = true;
     }
 
-
     /* validate comfirm password */
-    if (inputs.confirmPass === undefined || inputs.confirmPass === '') {
+    if (inputs.confirmPass === undefined || inputs.confirmPass === "") {
       errorSubmit.confirmPass = "Please enter your confirm password!";
       setErrors(errorSubmit);
       checkConfirmPass = false;
@@ -172,12 +176,12 @@ export default function ShowModalForm() {
           role_id: inputs.role,
         });
 
-        dispatch(addDataUser(data))
+        dispatch(addDataUser(data));
       } catch (error: any) {
-        dispatch(addDataUser(error))
+        dispatch(addDataUser(error));
       }
 
-      dispatch(getDataUser())
+      dispatch(getDataUser());
     } else {
       alert("Login failed !");
     }
@@ -195,21 +199,33 @@ export default function ShowModalForm() {
       >
         <Box className="modal_show" sx={style}>
           {/* message error */}
-          {
-            errorAddUserTeacher && messageErrorAddTeacher ? <AlertError messageError={messageErrorAddTeacher.message} /> : null
-          }
+          {errorAddUserTeacher && messageErrorAddTeacher ? (
+            <AlertError messageError={messageErrorAddTeacher.message} />
+          ) : null}
 
           {/* message success */}
-          {
-            !errorAddUserTeacher && messageSuccessAddTeacher ? <AlertSuccess messageSuccess={messageSuccessAddTeacher.message} /> : null 
-          }
+          {!errorAddUserTeacher && messageSuccessAddTeacher ? (
+            <AlertSuccess messageSuccess={messageSuccessAddTeacher.message} />
+          ) : null}
 
-          <Typography id="keep-mounted-modal-title" variant="h6" component="h2" style={{ padding: '7px', display: 'flex', justifyContent: 'space-between' }}>
+          <Typography
+            id="keep-mounted-modal-title"
+            variant="h6"
+            component="h2"
+            style={{
+              padding: "7px",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
             <p>User Information</p>
             <CloseTab handleClose={handleClose} />
           </Typography>
 
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
+          <form
+            onSubmit={handleSubmit}
+            style={{ display: "flex", flexDirection: "column" }}
+          >
             <FormControl fullWidth sx={{ m: 1 }} variant="standard">
               <InputLabel htmlFor="">Name</InputLabel>
               <Input

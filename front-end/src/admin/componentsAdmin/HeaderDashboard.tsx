@@ -1,4 +1,4 @@
-import { Box, Grid, Button, Stack } from "@mui/material";
+import { Box, Grid, Button, Stack, Typography } from "@mui/material";
 import { AiFillBell } from "react-icons/ai";
 import { BsFillInfoSquareFill } from "react-icons/bs";
 import SearchIcon from "@mui/icons-material/Search";
@@ -13,24 +13,31 @@ export default function HeaderDashboard() {
   const categoryTitle = pathParts[pathParts.length - 1];
 
   const [textSearch, setTextSearch] = useState<string>("");
+  const [errMessSearch, setErrMessSearch] = useState<string>("");
 
   const dispatch = useDispatch();
 
   const handleChangeInputSearch = (e: any) => {
     setTextSearch(e.target.value);
+    if (e.target.value) {
+      setErrMessSearch("");
+    }
   };
 
   const handleClickSearch = () => {
-    console.log(categoryTitle);
     if (textSearch) {
       dispatch(
         getDataSearch({
           text: textSearch,
           path: categoryTitle,
         })
-      );
+      ).then((res: any) => {
+        if (res.payload && res.payload.data && res.payload.data.length === 0) {
+          setErrMessSearch("Not found");
+        }
+      });
     } else {
-      console.log("No text search");
+      setErrMessSearch("You have not entered information");
     }
   };
 
@@ -57,6 +64,9 @@ export default function HeaderDashboard() {
                 <SearchIcon />
               </Button>
             </Stack>
+            <Typography style={{ color: "red", fontSize: "12px" }} padding={1}>
+              {errMessSearch}
+            </Typography>
           </Grid>
 
           <Grid m={"auto"} mr={0} item xs={6} md={6}>

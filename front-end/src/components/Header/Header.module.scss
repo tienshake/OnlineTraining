@@ -1,0 +1,79 @@
+.container {
+  min-height: var(--default-layout-header-height);
+  padding: 0 20px;
+  background-color: var(--white);
+
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+.list {
+  display: flex;
+  justify-content: space-between;
+  max-width: var(--default-layout-width);
+  margin: auto;
+  padding: 0 12px;
+}
+
+.logoItem {
+  width: 150px;
+  img {
+    width: 100%;
+  }
+}
+
+.inputItem {
+  display: flex;
+  align-items: center;
+  :global(.MuiOutlinedInput-root) {
+    border-radius: 50px;
+  }
+  :global(.Mui-focused) {
+    fieldset {
+      border-color: var(--primary) !important;
+    }
+  }
+  input {
+    width: 20vw;
+    font-size: 1.6rem;
+    padding: 10px 15px;
+  }
+}
+
+.listItem {
+  align-items: center;
+  display: flex;
+  gap: 30px;
+  div {
+    font-weight: 500;
+    cursor: pointer;
+    &:hover {
+      color: var(--primary);
+    }
+  }
+}
+
+.controlItem {
+  align-items: center;
+  display: flex;
+  gap: 20px;
+  button {
+    font-size: 1.6rem;
+    font-weight: 500;
+    border-color: #b4a7f5;
+    color: var(--text-color-second);
+    border-radius: 50px;
+    border: solid 2px;
+    padding: 10px 15px;
+    min-width: 150px;
+    text-transform: capitalize;
+
+    &:hover {
+      background-color: var(--primary);
+      border-color: var(--primary);
+      color: var(--white);
+    }
+  }
+}

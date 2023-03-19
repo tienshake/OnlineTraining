@@ -2,13 +2,10 @@ import React from "react";
 import styles from "./Home.module.scss";
 
 const Home = () => {
-  const arr = new Array(6).fill(0);
+  const arr = new Array(100).fill(0);
   return (
     <div className={styles.container}>
-      <header className={styles.header}>tao la header</header>
-      <div className={styles.sidebar}>tao la side bar</div>
       <div className={styles.content}>
-        {" "}
         {arr.map((item, index) => (
           <div key={index} className={styles.item}>
             {index + 1}
