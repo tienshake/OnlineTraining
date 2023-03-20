@@ -32,6 +32,22 @@ body {
   background-color: rgb(230, 219, 219);
 }
 
+:global(.MuiTypography-root) {
+  font-size: 1.6rem;
+  line-height: 1.5;
+  text-rendering: optimizeSpeed;
+  color: var(--text-color);
+  font-family: "Inter", sans-serif;
+}
+
+:global(.MuiButtonBase-root) {
+  font-size: 1.6rem;
+  line-height: 1.5;
+  text-rendering: optimizeSpeed;
+  color: var(--text-color);
+  font-family: "Inter", sans-serif;
+}
+
 // input,
 // [tabindex] {
 //   outline: none;
