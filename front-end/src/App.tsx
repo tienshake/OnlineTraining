@@ -1,4 +1,3 @@
-import React from "react";
 import "./App.css";
 import {
   BrowserRouter as Router,
@@ -17,6 +16,7 @@ function App() {
     <GlobalStyle>
       <Router>
         <Routes>
+          {/* <Route path="/" element={<Navigate to="/home" />} /> */}
           {publicRoute?.map((route: RouteType, i: number) => {
             const Component = route.component;
             return (
@@ -24,17 +24,22 @@ function App() {
                 key={i}
                 path={route.patch}
                 element={
-                  <DefaultLayout>
-                    <Component />
-                  </DefaultLayout>
+                  <>
+                    {route.defaultLayout ? (
+                      <DefaultLayout>
+                        <Component />
+                      </DefaultLayout>
+                    ) : (
+                      <Component />
+                    )}
+                  </>
                 }
               />
             );
           })}
           {privateRoute?.map((route: RouteType, i: number) => {
             const Component = route.component;
-            const adminPath = route.patch.split("/")[1];
-            console.log(adminPath);
+            // const adminPath = route.patch.split("/")[1];
             return (
               <Route
                 key={i}
@@ -42,12 +47,12 @@ function App() {
                 element={
                   isLogged ? (
                     <>
-                      {adminPath === "admin" ? (
-                        <Component />
-                      ) : (
+                      {route.defaultLayout ? (
                         <DefaultLayout>
                           <Component />
                         </DefaultLayout>
+                      ) : (
+                        <Component />
                       )}
                     </>
                   ) : (
@@ -57,6 +62,15 @@ function App() {
               />
             );
           })}
+
+          <Route
+            path="*"
+            element={
+              <DefaultLayout>
+                <div>Not Found Page</div>
+              </DefaultLayout>
+            }
+          />
         </Routes>
       </Router>
     </GlobalStyle>

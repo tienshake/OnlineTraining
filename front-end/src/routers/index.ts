@@ -7,12 +7,15 @@ import TeacherManager from "../admin/TeacherManager";
 import CoursesManager from "../admin/CoursesManager";
 import InfoTeacher from "../admin/InfoTeacher";
 import InfoCourses from "../admin/InfoCourses";
+import Category from "../admin/pages/category";
 import Home from "../pages/Home";
+import CreateCourse from "../pages/Teacher/CreateCourse";
 
 const publicRoute: RouteType[] = [
   {
     component: Home,
     patch: "/",
+    defaultLayout: true,
   },
   {
     component: Login,
@@ -25,6 +28,11 @@ const publicRoute: RouteType[] = [
 ];
 
 const privateRoute: RouteType[] = [
+  {
+    component: CreateCourse,
+    patch: "teacher/create-course",
+    defaultLayout: true,
+  },
   {
     component: DoashBoard,
     patch: "/admin",
@@ -47,7 +55,11 @@ const privateRoute: RouteType[] = [
   },
   {
     component: InfoTeacher,
-    patch: "/admin/teacher-info",
+    patch: "/admin/teacher-info/:userId",
+  },
+  {
+    component: Category,
+    patch: "/admin/category",
   },
 ];
 

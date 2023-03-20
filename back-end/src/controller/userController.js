@@ -4,6 +4,7 @@ import checkUserEmail from "../utils/checkUserEmail";
 import generateToken from "../utils/generateToken";
 import bcrypt from "bcryptjs";
 import { sequelize } from "../models";
+const { Op } = require("sequelize");
 
 const createUser = async (req, res) => {
   const { name, email, password, role_id = 1 } = req.body;
@@ -57,26 +58,21 @@ const editUser = async (req, res) => {
     // Update user
     await db.User.update({ name }, { where: { id }, transaction: t });
 
-    // Update user_detail
-    const [userDetail, created] = await db.User_detail.findOrCreate({
-      where: { user_id: id },
-      defaults: {
-        user_id: id,
-        phone_number,
-        address,
-        about_me,
-        avatar,
-        experience,
-        education,
-        age,
-        gender,
-      },
-      transaction: t,
-    });
-
-    if (!created) {
-      await userDetail.update(
-        {
+    if (
+      phone_number ||
+      address ||
+      about_me ||
+      avatar ||
+      experience ||
+      education ||
+      age ||
+      gender
+    ) {
+      // Update user_detail
+      const [userDetail, created] = await db.User_detail.findOrCreate({
+        where: { user_id: id },
+        defaults: {
+          user_id: id,
           phone_number,
           address,
           about_me,
@@ -86,8 +82,24 @@ const editUser = async (req, res) => {
           age,
           gender,
         },
-        { transaction: t }
-      );
+        transaction: t,
+      });
+
+      if (!created) {
+        await userDetail.update(
+          {
+            phone_number,
+            address,
+            about_me,
+            avatar,
+            experience,
+            education,
+            age,
+            gender,
+          },
+          { transaction: t }
+        );
+      }
     }
 
     // Commit transaction
@@ -103,17 +115,60 @@ const editUser = async (req, res) => {
 };
 
 const getUser = async (req, res) => {
-  const { id } = req.query;
+  const { page = 1, limit = 10, id } = req.query;
+  console.log("id", id);
   try {
     let user = null;
     if (id === "ALL") {
-      user = await db.User.findAll({
+      let offset = (page - 1) * limit;
+      user = await db.User.findAndCountAll({
         attributes: {
           exclude: ["password"],
         },
+        include: [
+          {
+            model: db.User_detail,
+            attributes: [
+              "about_me",
+              "avatar",
+              // "phone_number",
+              // "address",
+              // "experience",
+              // "education",
+              // "age",
+              // "gender",
+            ],
+            as: "user_details",
+          },
+        ],
+        order: [["updatedAt", "DESC"]],
+        limit: +limit,
+        offset: +offset,
         raw: true,
+        nest: true,
       });
     } else {
+      // user = await db.User.findOne({
+      //   where: id,
+      //   include: [
+      //     {
+      //       model: db.User_detail,
+      //       attributes: [
+      //         "about_me",
+      //         "avatar",
+      //         "phone_number",
+      //         "address",
+      //         "experience",
+      //         "education",
+      //         "age",
+      //         "gender",
+      //       ],
+      //       as: "user_details",
+      //     },
+      //   ],
+      //   raw: true,
+      //   nest: true,
+      // });
       user = await db.User.findByPk(id);
     }
     if (!user) {
@@ -123,7 +178,7 @@ const getUser = async (req, res) => {
       res.status(200).json({
         code: 0,
         message: "Get user completed",
-        user,
+        data: user,
       });
     }
   } catch (error) {
@@ -229,6 +284,31 @@ const login = async (req, res) => {
   }
 };
 
+const searchUser = async (req, res) => {
+  const { search } = req.query;
+  try {
+    if (!search) {
+      res.status(400).send("Missing params");
+    } else {
+      const results = await db.User.findAll({
+        where: {
+          [Op.or]: [
+            { name: { [Op.like]: `%${search}%` } },
+            { email: { [Op.like]: `%${search}%` } },
+          ],
+        },
+      });
+
+      res
+        .status(200)
+        .json({ code: 0, message: "Search completed", data: results });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal server error");
+  }
+};
+
 export default {
   getUser,
   createUser,
@@ -236,4 +316,5 @@ export default {
   deleteUser,
   register,
   login,
+  searchUser,
 };

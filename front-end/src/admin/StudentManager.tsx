@@ -1,4 +1,3 @@
-import React from 'react'
 import MasterLayoutAdmin from './MasterLayoutAdmin'
 
 export default function Student() {

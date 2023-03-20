@@ -1,0 +1,58 @@
+.body {
+    width: 100%;
+    display: flex;
+    background-color: #fff;
+
+    .left {
+        padding: 100px;
+        align-items: center;
+        background-color: azure;
+        width: 50%;
+        height: 800px;
+        h2{
+            display: block;
+            margin-block-start: 0.83em;
+            margin-block-end: 0.83em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            line-height: 1.2;
+            font-weight: 500;  
+            text-align: center; 
+        }
+        p {
+            text-align: center;
+        }
+
+        img {
+            
+        }
+    }
+
+    .right {
+        padding: 100px;
+        width: 50%;
+        text-align: justify;
+        
+        .dream {
+           a {
+            float: right;
+           }
+        }
+
+        img {
+            width: 200px;
+            
+        }
+        h2 {
+            font-weight: 500;
+            font-size: 30px;
+        }
+        form input {
+            border: 1px solid #ced4da;
+            width: 100%;
+            border-radius: 5px;
+            padding: 15px;
+
+        }
+    }
+}
