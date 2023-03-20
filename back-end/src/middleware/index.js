@@ -24,7 +24,7 @@ const authUser = async (req, res, next) => {
 
   try {
     const decoded = await verifyToken(token);
-    const user = await db.User.findByPk(decoded.id);
+    const user = await db.User.findByPk(+decoded.id);
     if (!user) {
       throw new Error("User not found");
     }

@@ -116,7 +116,6 @@ const editUser = async (req, res) => {
 
 const getUser = async (req, res) => {
   const { page = 1, limit = 10, id } = req.query;
-  console.log("id", id);
   try {
     let user = null;
     if (id === "ALL") {
@@ -148,28 +147,26 @@ const getUser = async (req, res) => {
         nest: true,
       });
     } else {
-      // user = await db.User.findOne({
-      //   where: id,
-      //   include: [
-      //     {
-      //       model: db.User_detail,
-      //       attributes: [
-      //         "about_me",
-      //         "avatar",
-      //         "phone_number",
-      //         "address",
-      //         "experience",
-      //         "education",
-      //         "age",
-      //         "gender",
-      //       ],
-      //       as: "user_details",
-      //     },
-      //   ],
-      //   raw: true,
-      //   nest: true,
-      // });
-      user = await db.User.findByPk(id);
+      user = await db.User.findByPk(id, {
+        include: [
+          {
+            model: db.User_detail,
+            attributes: [
+              "about_me",
+              "avatar",
+              "phone_number",
+              "address",
+              "experience",
+              "education",
+              "age",
+              "gender",
+            ],
+            as: "user_details",
+          },
+        ],
+        raw: true,
+        nest: true,
+      });
     }
     if (!user) {
       res.status(404).json({ message: "User not found" });
