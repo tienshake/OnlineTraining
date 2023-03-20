@@ -36,8 +36,8 @@ const Header = () => {
             ))}
         </li>
         <li className={styles.controlItem}>
-          <Button variant="outlined" title="Login" path="/login" />
-          <Button variant="outlined" title="Register" path="/register" />
+          <Button variant="outlined" title="Login" path="/login" circle />
+          <Button variant="outlined" title="Register" path="/register" circle />
         </li>
       </ul>
     </div>

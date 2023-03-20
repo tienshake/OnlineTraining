@@ -8,6 +8,11 @@
   --black: #000;
   --text-color: #333;
   --text-color-second: #392c7d;
+  --color-button-save: #159f46;
+  --color-button-back: #263238;
+  --color-button-next: #1d9cfd;
+
+  --global-layout-background: #fafafa;
   //default layout
   --default-layout-header-height: 70px;
   --default-layout-width: 1320px;
@@ -29,24 +34,24 @@ body {
   line-height: 1.5;
   text-rendering: optimizeSpeed;
   color: var(--text-color);
-  background-color: rgb(230, 219, 219);
+  background-color: var(--global-layout-background);
 }
 
-:global(.MuiTypography-root) {
-  font-size: 1.6rem;
-  line-height: 1.5;
-  text-rendering: optimizeSpeed;
-  color: var(--text-color);
-  font-family: "Inter", sans-serif;
-}
+// :global(.MuiTypography-root) {
+//   font-size: 1.6rem;
+//   line-height: 1.5;
+//   text-rendering: optimizeSpeed;
+//   color: var(--text-color);
+//   font-family: "Inter", sans-serif;
+// }
 
-:global(.MuiButtonBase-root) {
-  font-size: 1.6rem;
-  line-height: 1.5;
-  text-rendering: optimizeSpeed;
-  color: var(--text-color);
-  font-family: "Inter", sans-serif;
-}
+// :global(.MuiButtonBase-root) {
+//   font-size: 1.6rem;
+//   line-height: 1.5;
+//   text-rendering: optimizeSpeed;
+//   color: var(--text-color);
+//   font-family: "Inter", sans-serif;
+// }
 
 // input,
 // [tabindex] {

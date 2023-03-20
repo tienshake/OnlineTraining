@@ -1,15 +1,65 @@
+.container,
+.buttonSave,
+.buttonBack {
+  font-weight: 500 !important;
+  color: var(--text-color-second) !important;
+  border: solid 2px #b4a7f5 !important;
+  padding: 5px 20px;
+  text-transform: capitalize !important;
+}
+
 .container {
   font-size: 1.6rem !important;
-  font-weight: 500 !important;
   border-color: #b4a7f5 !important;
-  color: var(--text-color-second) !important;
-  border: solid 2px !important;
-  padding: 5px 20px !important;
-  text-transform: capitalize !important;
 
   &:hover {
     background-color: var(--primary) !important;
     border-color: var(--primary) !important;
     color: var(--white) !important;
+  }
+}
+
+.buttonNext,
+.buttonSave,
+.buttonBack {
+  width: 170px;
+  font-weight: 600 !important;
+  font-size: 1.4rem !important;
+  color: var(--white) !important;
+  padding: 10px 13px !important;
+
+  &:hover {
+    background-color: var(--white) !important;
+    color: var(--color-button-save) !important;
+  }
+}
+
+.buttonSave {
+  background-color: var(--color-button-save) !important;
+  border-color: var(--color-button-save) !important;
+
+  &:hover {
+    border-color: var(--color-button-save) !important;
+    color: var(--color-button-save) !important;
+  }
+}
+
+.buttonBack {
+  background-color: var(--color-button-back) !important;
+  border-color: var(--color-button-back) !important;
+
+  &:hover {
+    border-color: var(--color-button-back) !important;
+    color: var(--color-button-back) !important;
+  }
+}
+
+.buttonNext {
+  background-color: var(--color-button-next) !important;
+  border-color: var(--color-button-next) !important;
+
+  &:hover {
+    border-color: var(--color-button-next) !important;
+    color: var(--color-button-next) !important;
   }
 }

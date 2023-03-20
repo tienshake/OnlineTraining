@@ -7,7 +7,6 @@ const Register = () => {
       <input type="name" />
       <input type="email" />
       <input type="password" />
-      <>{console.log("re-render")}</>
     </div>
   );
 };

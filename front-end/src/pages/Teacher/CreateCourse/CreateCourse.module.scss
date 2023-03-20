@@ -1,0 +1,80 @@
+.container {
+  // height: 500px;
+  padding-bottom: 60px;
+}
+.title {
+  font-size: 3.2rem;
+  font-weight: 600;
+}
+
+.headerControl {
+  padding: 60px 0;
+}
+
+.footerControl {
+  padding: 30px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // padding: 0 30px;
+  background-color: var(--white);
+  width: 100%;
+  height: 500px;
+  border-radius: 10px;
+  border: 1px solid #e9ecef;
+}
+
+.progressContainer {
+  padding: 30px;
+  height: 50px;
+  border-bottom: 1px solid #c7c7c740;
+}
+
+.contentForm {
+  flex: 1;
+}
+
+.progressbar {
+  display: flex;
+  gap: 30px;
+}
+
+.progressItem {
+  display: flex;
+  flex-direction: column;
+  width: 170px;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+.progressActive,
+.progress {
+  background-color: var(--color-button-save);
+  height: 5px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.progressActive {
+  background-color: #e8ebee;
+}
+
+.progressTitle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.icon,
+.iconPanorama {
+  font-size: 1.6rem;
+}
+.icon {
+  color: var(--color-button-save);
+}
+
+.iconPanorama {
+  color: var(--text-color);
+}
