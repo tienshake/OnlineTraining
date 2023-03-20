@@ -9,11 +9,13 @@ import InfoTeacher from "../admin/InfoTeacher";
 import InfoCourses from "../admin/InfoCourses";
 import Category from "../admin/pages/category";
 import Home from "../pages/Home";
+import CreateCourse from "../pages/Teacher/CreateCourse";
 
 const publicRoute: RouteType[] = [
   {
     component: Home,
     patch: "/home",
+    defaultLayout: true,
   },
   {
     component: Login,
@@ -26,6 +28,11 @@ const publicRoute: RouteType[] = [
 ];
 
 const privateRoute: RouteType[] = [
+  {
+    component: CreateCourse,
+    patch: "/create-course",
+    defaultLayout: true,
+  },
   {
     component: DoashBoard,
     patch: "/admin",

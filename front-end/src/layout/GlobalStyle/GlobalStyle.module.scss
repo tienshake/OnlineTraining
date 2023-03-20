@@ -32,13 +32,12 @@ body {
   background-color: rgb(230, 219, 219);
 }
 
-// button,
-// input,
-// [tabindex] {
-//   outline: none;
-//   border: none;
-// }
-// a[href] {
-//   color: var(--text-color);
-//   text-decoration: none;
-// }
+input,
+[tabindex] {
+  outline: none;
+  border: none;
+}
+a[href] {
+  color: var(--text-color);
+  text-decoration: none;
+}

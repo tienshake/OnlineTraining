@@ -3,17 +3,16 @@ import { TextField } from "@mui/material";
 import styles from "./Header.module.scss";
 import Button from "../Button";
 import { Link } from "react-router-dom";
+import { IMG_URL, navList } from "../../constants/constants";
+import { HOME_PATCH } from "../../constants/patch";
 
 const Header = () => {
   return (
     <div className={styles.container}>
       <ul className={styles.list}>
         <li className={styles.logoItem}>
-          <Link to={"/home"}>
-            <img
-              src="https://tudienwiki.com/wp-content/uploads/2017/07/lien-minh-huyen-thoai.png"
-              alt="logo"
-            />
+          <Link to={HOME_PATCH}>
+            <img src={IMG_URL} alt="logo" />
           </Link>
         </li>
         <li className={styles.inputItem}>
@@ -26,10 +25,12 @@ const Header = () => {
           />
         </li>
         <li className={styles.listItem}>
-          <div>Course</div>
-          <div>Blog</div>
-          <div>My Course</div>
-          <div>Create Course</div>
+          {navList &&
+            navList?.map((item, i) => (
+              <Link key={i} to={item.patch}>
+                {item.title}
+              </Link>
+            ))}
         </li>
         <li className={styles.controlItem}>
           <Button variant="outlined" title="Login" path="/login" />

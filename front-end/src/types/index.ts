@@ -2,6 +2,7 @@
 export interface RouteType {
   component: any;
   patch: string;
+  defaultLayout?: boolean;
 }
 
 // language
@@ -41,4 +42,10 @@ export interface ErrorSubmit {
 export interface CategoryType {
   id: number;
   name_category: string;
+}
+
+//Header nav
+export interface NavType {
+  title: string;
+  patch: string;
 }

@@ -10,16 +10,16 @@ interface ButtonPropsType {
 }
 
 const Button = (props: ButtonProps & ButtonPropsType) => {
-  const { variant, title, onClick, path } = props;
+  const { variant, title, onClick = () => null, path } = props;
+
   return (
     <Link to={path ? path : ""}>
       <ButtonMUI
-        onClick={onClick}
+        onClick={() => onClick()}
         className={styles.container}
         variant={variant}
       >
         {title}
-        {/* {path ? <Link to={path}>{title}</Link> : <>{title}</>} */}
       </ButtonMUI>
     </Link>
   );
