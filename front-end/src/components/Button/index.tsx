@@ -7,14 +7,16 @@ interface ButtonPropsType {
   title?: string;
   onClick?: () => void;
   path?: string;
+  circle?: boolean;
 }
 
 const Button = (props: ButtonProps & ButtonPropsType) => {
-  const { variant, title, onClick = () => null, path } = props;
+  const { variant, title, onClick = () => null, path, circle = true } = props;
 
   return (
     <Link to={path ? path : ""}>
       <ButtonMUI
+        style={{ borderRadius: circle ? "50px" : "" }}
         onClick={() => onClick()}
         className={styles.container}
         variant={variant}

@@ -20,10 +20,10 @@ export const navList: NavType[] = [
   },
   {
     title: "My Course",
-    patch: "/my-course",
+    patch: "/teacher/my-course",
   },
   {
     title: "Create course",
-    patch: "/create-course",
+    patch: "/teacher/create-course",
   },
 ];

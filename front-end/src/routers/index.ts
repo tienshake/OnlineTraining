@@ -14,7 +14,7 @@ import CreateCourse from "../pages/Teacher/CreateCourse";
 const publicRoute: RouteType[] = [
   {
     component: Home,
-    patch: "/home",
+    patch: "/",
     defaultLayout: true,
   },
   {
@@ -30,7 +30,7 @@ const publicRoute: RouteType[] = [
 const privateRoute: RouteType[] = [
   {
     component: CreateCourse,
-    patch: "/create-course",
+    patch: "teacher/create-course",
     defaultLayout: true,
   },
   {

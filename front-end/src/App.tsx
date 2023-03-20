@@ -16,7 +16,7 @@ function App() {
     <GlobalStyle>
       <Router>
         <Routes>
-          <Route path="/" element={<Navigate to="/home" />} />
+          {/* <Route path="/" element={<Navigate to="/home" />} /> */}
           {publicRoute?.map((route: RouteType, i: number) => {
             const Component = route.component;
             return (
@@ -62,6 +62,15 @@ function App() {
               />
             );
           })}
+
+          <Route
+            path="*"
+            element={
+              <DefaultLayout>
+                <div>Not Found Page</div>
+              </DefaultLayout>
+            }
+          />
         </Routes>
       </Router>
     </GlobalStyle>

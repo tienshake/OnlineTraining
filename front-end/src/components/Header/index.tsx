@@ -2,16 +2,15 @@ import React from "react";
 import { TextField } from "@mui/material";
 import styles from "./Header.module.scss";
 import Button from "../Button";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { IMG_URL, navList } from "../../constants/constants";
-import { HOME_PATCH } from "../../constants/patch";
 
 const Header = () => {
   return (
     <div className={styles.container}>
       <ul className={styles.list}>
         <li className={styles.logoItem}>
-          <Link to={HOME_PATCH}>
+          <Link to="/">
             <img src={IMG_URL} alt="logo" />
           </Link>
         </li>
@@ -27,9 +26,13 @@ const Header = () => {
         <li className={styles.listItem}>
           {navList &&
             navList?.map((item, i) => (
-              <Link key={i} to={item.patch}>
+              <NavLink
+                key={i}
+                to={item.patch}
+                className={({ isActive }) => (isActive ? styles.active : "")}
+              >
                 {item.title}
-              </Link>
+              </NavLink>
             ))}
         </li>
         <li className={styles.controlItem}>
