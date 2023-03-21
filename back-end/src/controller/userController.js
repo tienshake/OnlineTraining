@@ -105,7 +105,7 @@ const editUser = async (req, res) => {
     // Commit transaction
     await t.commit();
 
-    res.status(200).send({ message: "Update successfully" });
+    res.status(200).send({ code: 0, message: "Update successfully" });
   } catch (error) {
     // Rollback transaction if there is any error
     console.log(error);
@@ -171,7 +171,7 @@ const getUser = async (req, res) => {
     if (!user) {
       res.status(404).json({ message: "User not found" });
     } else {
-      if (user.dataValues) delete user.dataValues.password;
+      if (user) delete user.password;
       res.status(200).json({
         code: 0,
         message: "Get user completed",
