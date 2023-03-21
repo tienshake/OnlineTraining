@@ -8,41 +8,54 @@ import PanoramaFishEyeIcon from "@mui/icons-material/PanoramaFishEye";
 import clsx from "clsx";
 import Information from "./components/Information";
 import Course from "./components/Course";
-
-const progressArr = [
-  { id: "info", title: "Basic information", status: "pending" },
-  { id: "course", title: "Basic information", status: "start" },
-  { id: "cur", title: "Basic information", status: "start" },
-  { id: "set", title: "Basic information", status: "start" },
-];
+import Curriculum from "./components/Curriculum";
+import Setting from "./components/Setting";
+import {
+  INFO,
+  COURSE,
+  CURRICULUM,
+  SETTING,
+  PROGRESS_ARR,
+  START,
+  PENDING,
+  ACTIVE,
+} from "../../../constants/constants";
 
 function CreateCourse() {
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [component, setComponent] = React.useState(<Information />);
 
-  const handleNextClick = () => {
-    // switch (key) {
-    //   case "info":
-    //     setComponent(Information)
-    //     break;
-    //     case "course":
-    //       setComponent(Course)
-    //       break;
-    //   default:
-    //     break;
-    // }
+  const switchComponent = (id: string) => {
+    switch (id) {
+      case INFO:
+        setComponent(<Information />);
+        break;
+      case COURSE:
+        setComponent(<Course />);
+        break;
+      case CURRICULUM:
+        setComponent(<Curriculum />);
+        break;
+      case SETTING:
+        setComponent(<Setting />);
+        break;
+      default:
+        break;
+    }
+  };
 
+  const handleNextClick = () => {
     // Increase index
     const nextIndex = activeIndex + 1;
-    const updatedProgressArr = [...progressArr];
+    const updatedProgressArr = [...PROGRESS_ARR];
 
-    if (nextIndex >= progressArr.length) {
-      return;
-    }
+    if (nextIndex >= PROGRESS_ARR.length) return;
 
-    // Change status in object of progressArr
-    updatedProgressArr[activeIndex].status = "active";
-    updatedProgressArr[nextIndex].status = "pending";
+    //switchComponent with click
+    switchComponent(PROGRESS_ARR[activeIndex + 1]?.id);
+    // Change status in object of PROGRESS_ARR
+    updatedProgressArr[activeIndex].status = ACTIVE;
+    updatedProgressArr[nextIndex].status = PENDING;
 
     setActiveIndex(nextIndex);
   };
@@ -50,14 +63,15 @@ function CreateCourse() {
   const handleBackClick = () => {
     // decrease index
     const prevIndex = activeIndex - 1;
-    const updatedProgressArr = [...progressArr];
-    if (prevIndex < 0) {
-      return;
-    }
+    const updatedProgressArr = [...PROGRESS_ARR];
 
-    // Change status in object of progressArr
-    updatedProgressArr[activeIndex].status = "start";
-    updatedProgressArr[prevIndex].status = "pending";
+    if (prevIndex < 0) return;
+
+    //switchComponent with click
+    switchComponent(PROGRESS_ARR[activeIndex - 1]?.id);
+    // Change status in object of PROGRESS_ARR
+    updatedProgressArr[activeIndex].status = START;
+    updatedProgressArr[prevIndex].status = PENDING;
 
     setActiveIndex(prevIndex);
   };
@@ -78,8 +92,8 @@ function CreateCourse() {
       <Box className={styles.content}>
         <Box className={styles.progressContainer}>
           <ul className={styles.progressbar}>
-            {progressArr &&
-              progressArr?.map((item) => (
+            {PROGRESS_ARR &&
+              PROGRESS_ARR.map((item) => (
                 <li className={styles.progressItem} key={item.id}>
                   <span
                     className={clsx(
