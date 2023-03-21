@@ -1,0 +1,28 @@
+
+.body {
+    color: #22100D;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+
+    h1 {
+        color: blue;
+    }
+    
+    .left {
+        width: 50%;
+        height: 100%;
+        float: left;
+     
+    }
+    .right {
+        float: left;
+        form {
+            input {
+                width: 100%;
+            }
+           
+        }
+    }}
