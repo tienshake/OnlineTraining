@@ -6,15 +6,62 @@ import TripOriginIcon from "@mui/icons-material/TripOrigin";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import PanoramaFishEyeIcon from "@mui/icons-material/PanoramaFishEye";
 import clsx from "clsx";
+import Information from "./components/Information";
+import Course from "./components/Course";
 
 const progressArr = [
-  { id: "info", title: "Basic information", status: "active" },
-  { id: "course", title: "Basic information", status: "pending" },
+  { id: "info", title: "Basic information", status: "pending" },
+  { id: "course", title: "Basic information", status: "start" },
   { id: "cur", title: "Basic information", status: "start" },
   { id: "set", title: "Basic information", status: "start" },
 ];
 
 function CreateCourse() {
+  const [activeIndex, setActiveIndex] = React.useState(0);
+  const [component, setComponent] = React.useState(<Information />);
+
+  const handleNextClick = () => {
+    // switch (key) {
+    //   case "info":
+    //     setComponent(Information)
+    //     break;
+    //     case "course":
+    //       setComponent(Course)
+    //       break;
+    //   default:
+    //     break;
+    // }
+
+    // Increase index
+    const nextIndex = activeIndex + 1;
+    const updatedProgressArr = [...progressArr];
+
+    if (nextIndex >= progressArr.length) {
+      return;
+    }
+
+    // Change status in object of progressArr
+    updatedProgressArr[activeIndex].status = "active";
+    updatedProgressArr[nextIndex].status = "pending";
+
+    setActiveIndex(nextIndex);
+  };
+
+  const handleBackClick = () => {
+    // decrease index
+    const prevIndex = activeIndex - 1;
+    const updatedProgressArr = [...progressArr];
+    if (prevIndex < 0) {
+      return;
+    }
+
+    // Change status in object of progressArr
+    updatedProgressArr[activeIndex].status = "start";
+    updatedProgressArr[prevIndex].status = "pending";
+
+    setActiveIndex(prevIndex);
+  };
+
   return (
     <Box className={styles.container}>
       <Stack
@@ -55,15 +102,15 @@ function CreateCourse() {
               ))}
           </ul>
         </Box>
-        <Box className={styles.contentForm}></Box>
+        <Box className={styles.contentForm}>{component}</Box>
         <Stack
           direction="row"
           gap={2}
           justifyContent="space-between"
           className={styles.footerControl}
         >
-          <ButtonBack title="Back" />
-          <ButtonNext title="Continue" />
+          <ButtonBack title="Back" onClick={handleBackClick} />
+          <ButtonNext title="Continue" onClick={handleNextClick} />
         </Stack>
       </Box>
     </Box>
