@@ -3,7 +3,9 @@ import axios from "axios";
 import userServices from "../../services/user";
 import style from "./Login.module.scss"
 import logologin from "../../assets/images/login-img.png"
-import dream from "../../assets/images/dream.png"
+import dream from "../../assets/images/so-do.jpg"
+import icon1 from "../../assets/images/net-icon-01.png"
+import icon2 from "../../assets/images/net-icon-02.png"
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -40,7 +42,7 @@ const Login = () => {
       <div className={style.left}>
         <img src={logologin} alt="" />
         <h2>Welcome to <br />
-        DreamsLMS Courses
+          DreamsLMS Courses
         </h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
       </div>
@@ -54,16 +56,25 @@ const Login = () => {
           <label htmlFor="">Email</label>
           <input type="text" placeholder="Enter your email address" />
           <label htmlFor="">Password</label>
-          <input type="text" placeholder="Enter you password"/>
-          <label htmlFor="">Forgot Password ?</label>
-          <input type="text" />
+          <input type="text" placeholder="Enter you password" />
+          <label className={style.forgot} htmlFor="">Forgot Password ?</label>
           <a href="Forgot Password?"></a>
-          <div>
-          <input type="checkbox" />
-          <label htmlFor="">Remember</label>
+          <label className={style.checkbox} htmlFor="">
+            <input type="checkbox" />
+           <span>Remember</span>
+          </label>
+
           <button>Sign in</button>
-          </div>
+
         </form>
+        <div className={style.botteam}>
+          <a href="">Or sign in with</a>
+          <div className={style.icon}>
+            <a href=""><img src={icon1} alt="" /> Sign in using Google</a>
+            <a href=""><img src={icon2} alt="" />  in usin Facebook</a>
+
+          </div>
+        </div>
       </div>
     </div>
   );
