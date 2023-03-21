@@ -9,9 +9,9 @@ import { FaUserFriends } from 'react-icons/fa';
 import { AiFillStar } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import userServices from '../../services/user';
-import ModelAccess from './ModelAccess';
+import ModelAccess from './Modal/ModelAccess';
 import { useState } from 'react';
-import './ComponentsAdmin.css';
+import '../componentsAdmin/ComponentsAdmin.css';
 
 const Img = styled('img')({
   margin: 'auto',
@@ -29,19 +29,19 @@ interface MyCardUserProps {
 
 export default function CardUser(props: MyCardUserProps) {
   /* handle show alert access and delete user */
-  const [open, setOpen] = useState(false);
+  const [openAccessDelete, setOpenAccessDelete] = useState(false);
 
   const handleOpenModalAccess = () => {
-    setOpen(true);
+    setOpenAccessDelete(true);
   };
 
   const handleCloseModalAccess = () => {
-    setOpen(false);
+    setOpenAccessDelete(false);
   };
 
   const handleDeleteAndClose = () => {
     userServices.deleteUserApi(props.id);
-    setOpen(false);
+    setOpenAccessDelete(false);
     alert("Xoá thành công!")
   }
 
@@ -98,8 +98,8 @@ export default function CardUser(props: MyCardUserProps) {
 
                 <ul className="group_btn_contact">
                   {
-                    open ? <>
-                      <ModelAccess handleDeleteAndClose={handleDeleteAndClose} openModal={open} handleCloseModalAccess={handleCloseModalAccess} nameUser={props.name} />
+                    openAccessDelete ? <>
+                      <ModelAccess handleDeleteAndClose={handleDeleteAndClose} openModal={openAccessDelete} handleCloseModalAccess={handleCloseModalAccess} nameUser={props.name} />
                     </>
                       :
                       null

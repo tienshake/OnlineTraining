@@ -145,8 +145,8 @@ export default function InfoTeacher() {
               alt=""
             />
             <p>Reviews</p>
-            {/* {
-              data.map((index) => (
+            {
+              data2.map((index) => (
                 <>
                   <div key={index}>
                     <div className='box_reviews_user'>
@@ -165,7 +165,7 @@ export default function InfoTeacher() {
                   </div>
                 </>
               ))
-            } */}
+            }
           </div>
         </div>
       </MasterLayoutAdmin>

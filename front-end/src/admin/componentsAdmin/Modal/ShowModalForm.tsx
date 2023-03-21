@@ -1,12 +1,11 @@
-import "./ComponentsAdmin.css";
 import { useDispatch } from "react-redux";
 import {
   addDataUser,
   getDataUser,
-} from "../../redux/features/userTeacher/userTeacherSlice";
+} from "../../../redux/features/userTeacher/userTeacherSlice";
 import { useSelector } from "react-redux";
 // import { RootState } from '../../redux/store/store';
-import AlertSuccess from "./AlertSuccess";
+import AlertSuccess from "../AlertSuccess";
 // import { useStore } from "react-redux";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -22,11 +21,11 @@ import Select from "@mui/material/Select";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useState } from "react";
-import { TypeObjectInput, TypeError, ErrorSubmit } from "../../types/index";
-import "./ComponentsAdmin.css";
-import CloseTab from "./IconGroupAction/CloseTab";
-import userServices from "../../services/user";
-import AlertError from "./AlertError";
+import { TypeObjectInput, TypeError, ErrorSubmit } from "../../../types/index";
+import CloseTab from "../IconGroupAction/CloseTab";
+import userServices from "../../../services/user";
+import AlertError from "../AlertError";
+import '../../componentsAdmin/ComponentsAdmin.css';
 
 const style = {
   position: "absolute" as "absolute",
