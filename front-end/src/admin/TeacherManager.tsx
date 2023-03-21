@@ -2,7 +2,7 @@ import MasterLayoutAdmin from "./MasterLayoutAdmin";
 import CardUser from "./componentsAdmin/CardUser";
 // import HeaderDashboard from './componentsAdmin/HeaderDashboard';
 import ButtonGroupSelect from "./componentsAdmin/ButtonGroupSelect";
-import ShowModalForm from "./componentsAdmin/ShowModalForm";
+import ShowModalForm from "./componentsAdmin/Modal/ShowModalForm";
 import type { RootState } from "../redux/store/store";
 import { useSelector, useDispatch } from "react-redux";
 import { getDataUser } from "../redux/features/userTeacher/userTeacherSlice";

@@ -2,7 +2,10 @@
     padding: 0;
     margin: 0;
     list-style: none;
-    text-decoration: none
+    text-decoration: none;
+    font-family: "Inter", sans-serif;
+    /* font-size: 1.6rem; */
+    line-height: 1.5;
 }
 
 .layout_admin {
@@ -223,6 +226,94 @@
 .wrapp_coursesInfo .content-right div {
     padding: 10px
 }
+
+/* profile Admin */
+.wrapp_profile_admin {
+    background: #fff;
+    width: 100%;
+    border: 1px solid #dbd6d6;
+    border-radius: 8px;
+    margin-bottom: 20px
+}
+.wrapp_profile_admin .title_profile {
+    padding: 22px;
+}
+.box_header_profile {
+    width: 100%;
+    border: 2px solid #eeeeee;
+    border-left: none;
+    border-right: none;
+    display: flex;
+}
+.box_header_profile li {
+    padding: 22px
+}
+.box_header_profile .group_avatar {
+    width: 65%;
+    display: flex;
+}
+.group_avatar img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.group_avatar p {
+    padding: 15px
+}
+.box_header_profile .btn_update {
+    width: 35%;
+    margin: auto;
+}
+.box_header_profile button {
+    width: 110px;
+    height: 40px;
+    border: 1px solid #159F46;
+    border-radius: 5px;
+    background: #fff;
+    color: #159F46;
+    font-weight: 500;
+    font-size: 18px;
+    cursor: pointer;
+}
+.box_header_profile button:hover {
+    color: #fff;
+    background: #159F46;
+}
+.wrapp_profile_admin .body_profile {
+    padding: 22px
+}
+.wrapp_profile_admin .body_profile .ifo_detail_profile {
+    display: flex;
+    justify-content: space-between
+}
+.body_profile .ifo_detail_profile li {
+    width: 48%;
+}
+.ifo_detail_profile li input {
+    margin-top: 5px;
+    padding: 10px;
+    width: 90%;
+    border: 1px solid #dbd6d6;
+    border-radius: 5px;
+    font-size: 15px;
+    margin-bottom: 20px
+}
+.ifo_detail_profile li input:focus {
+    outline: none;
+}
+.ifo_detail_profile li textarea {
+    margin-top: 5px;
+    padding: 10px;
+    width: 90%;
+    border: 1px solid #dbd6d6;
+    border-radius: 5px;
+    font-size: 15px;
+    margin-bottom: 20px
+}
+.ifo_detail_profile li textarea:focus {
+    outline: none;
+}
+
 
 /* responsive */
 @media only screen and (max-width: 46.1875em) {}
