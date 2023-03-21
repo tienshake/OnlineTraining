@@ -27,3 +27,18 @@ export const navList: NavType[] = [
     patch: "/teacher/create-course",
   },
 ];
+
+export const INFO = "info";
+export const COURSE = "course";
+export const CURRICULUM = "curriculum";
+export const SETTING = "setting";
+export const PENDING = "pending";
+export const START = "start";
+export const ACTIVE = "active";
+
+export const PROGRESS_ARR = [
+  { id: INFO, title: "Basic information", status: PENDING },
+  { id: COURSE, title: "Course Media", status: START },
+  { id: CURRICULUM, title: "Curriculum", status: START },
+  { id: SETTING, title: "Settings", status: START },
+];
