@@ -1,0 +1,56 @@
+.container {
+  align-items: center;
+  color: #1f1f1f;
+  display: flex;
+  background-image: url(../../assets/images/error-bg1.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+}
+
+.mainWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  min-height: unset;
+  padding-top: 50px;
+}
+
+.errorBox {
+  margin: 0 auto;
+  max-width: 570px;
+  padding: 20px 0;
+  text-align: center;
+  width: 100%;
+}
+.errorLogo {
+  margin-bottom: 50px;
+}
+.imgFluid {
+  max-width: 100%;
+  height: auto;
+}
+.h3 {
+  color: #fa5560;
+  font-weight: 600;
+  font-size: 36px;
+  margin-top: 20px;
+}
+
+.p {
+  margin-bottom: 30px;
+  color: #343a40;
+  font-size: 14px;
+}
+
+.bnt {
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  min-width: 158px;
+  padding: 9px 15px;
+  background: #ff5364;
+  color: var(--white) !important;
+}

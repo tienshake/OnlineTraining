@@ -9,6 +9,7 @@ import GlobalStyle from "./layout/GlobalStyle";
 import { publicRoute, privateRoute } from "./routers";
 import { RouteType } from "./types";
 import DefaultLayout from "./layout/DefaultLayout";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const isLogged = true;
@@ -69,7 +70,7 @@ function App() {
             path="*"
             element={
               <DefaultLayout>
-                <div>Not Found Page</div>
+                <NotFound />
               </DefaultLayout>
             }
           />
