@@ -14,6 +14,9 @@ module.exports = {
       description: {
         type: Sequelize.TEXT("long"),
       },
+      descriptionMarkdown: {
+        type: Sequelize.TEXT("long"),
+      },
       price: {
         type: Sequelize.INTEGER,
       },

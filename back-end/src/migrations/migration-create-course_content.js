@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       video: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT("long"),
       },
       document: {
         type: Sequelize.BLOB("long"),
