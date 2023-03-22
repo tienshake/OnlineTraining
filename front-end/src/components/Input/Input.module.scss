@@ -1,0 +1,28 @@
+.Input {
+  width: 100%;
+
+  :global(.MuiOutlinedInput-root) {
+    fieldset {
+      border-color: var(--border-input);
+    }
+    &:hover {
+      fieldset {
+        border-color: var(--border-input) !important;
+      }
+    }
+  }
+  :global(.Mui-focused) {
+    fieldset {
+      border-color: var(--border-input) !important;
+    }
+  }
+  input {
+    padding: 10px 15px;
+    font-size: 1.4rem;
+    &::placeholder {
+      font-size: 1.4rem;
+      color: var(--text-color) !important;
+      font-weight: 500 !important;
+    }
+  }
+}

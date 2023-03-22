@@ -1,5 +1,6 @@
 .container {
   // height: 500px;
+  --padding: 30px;
   padding-bottom: 60px;
 }
 .title {
@@ -29,13 +30,14 @@
 }
 
 .progressContainer {
-  padding: 30px;
+  padding: var(--padding);
   height: 50px;
   border-bottom: 1px solid #c7c7c740;
 }
 
 .contentForm {
   flex: 1;
+  padding: var(--padding);
 }
 
 .progressbar {

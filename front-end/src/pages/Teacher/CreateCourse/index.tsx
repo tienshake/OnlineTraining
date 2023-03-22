@@ -6,10 +6,10 @@ import TripOriginIcon from "@mui/icons-material/TripOrigin";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import PanoramaFishEyeIcon from "@mui/icons-material/PanoramaFishEye";
 import clsx from "clsx";
-import Information from "./components/Information";
-import Course from "./components/Course";
-import Curriculum from "./components/Curriculum";
-import Setting from "./components/Setting";
+import Information from "../components/Information";
+import Course from "../components/Course";
+import Curriculum from "../components/Curriculum";
+import Setting from "../components/Setting";
 import {
   INFO,
   COURSE,

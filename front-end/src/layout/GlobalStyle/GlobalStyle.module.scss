@@ -11,7 +11,8 @@
   --color-button-save: #159f46;
   --color-button-back: #263238;
   --color-button-next: #1d9cfd;
-
+  --border-input: #e9ecef;
+  --placeholder: #070707;
   --global-layout-background: #fafafa;
   //default layout
   --default-layout-header-height: 70px;
@@ -38,22 +39,6 @@ body {
   color: var(--text-color);
   background-color: var(--global-layout-background);
 }
-
-// :global(.MuiTypography-root) {
-//   font-size: 1.6rem;
-//   line-height: 1.5;
-//   text-rendering: optimizeSpeed;
-//   color: var(--text-color);
-//   font-family: "Inter", sans-serif;
-// }
-
-// :global(.MuiButtonBase-root) {
-//   font-size: 1.6rem;
-//   line-height: 1.5;
-//   text-rendering: optimizeSpeed;
-//   color: var(--text-color);
-//   font-family: "Inter", sans-serif;
-// }
 
 // input,
 // [tabindex] {

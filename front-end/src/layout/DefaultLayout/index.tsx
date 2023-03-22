@@ -5,13 +5,17 @@ import styles from "./DefaultLayout.module.scss";
 
 type Props = {
   children: React.ReactNode;
+  onlyHome?: boolean;
 };
 
-const DefaultLayout = ({ children }: Props) => {
+const DefaultLayout = ({ children, onlyHome = false }: Props) => {
+  const styleHome = onlyHome ? { maxWidth: "100%" } : {};
   return (
     <>
       <Header />
-      <div className={styles.content}>{children}</div>
+      <div className={styles.content} style={styleHome}>
+        {children}
+      </div>
       <Footer />
     </>
   );

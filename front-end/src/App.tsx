@@ -26,7 +26,9 @@ function App() {
                 element={
                   <>
                     {route.defaultLayout ? (
-                      <DefaultLayout>
+                      <DefaultLayout
+                        onlyHome={route.patch === "/" ? true : false}
+                      >
                         <Component />
                       </DefaultLayout>
                     ) : (
