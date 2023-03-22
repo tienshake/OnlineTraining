@@ -1,30 +1,21 @@
 .selectInput {
   width: 100%;
-  :global(.MuiOutlinedInput-root) {
-    fieldset {
-      border-color: var(--border-input);
-    }
-    &:hover {
-      fieldset {
-        border-color: var(--border-input) !important;
-      }
-    }
+  input {
+    height: 100%;
   }
-  :global(.Mui-focused) {
+  fieldset {
+    border-color: var(--border-input) !important;
+  }
+  &:hover {
     fieldset {
       border-color: var(--border-input) !important;
     }
   }
-  input {
+  :global(.MuiSelect-select) {
     padding: 10px 15px;
     font-size: 1.4rem;
-    &::placeholder {
-      font-size: 1.4rem;
-      color: var(--text-color) !important;
-      font-weight: 500 !important;
-    }
-  }
-  :global(.MuiMenuItem-root) {
-    font-size: 1.4rem !important;
+    display: flex;
+    align-items: center;
+    color: var(--text-color) !important;
   }
 }

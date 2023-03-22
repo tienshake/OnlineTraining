@@ -4,15 +4,15 @@ import styles from "./Input.module.scss";
 import clsx from "clsx";
 
 interface InputProps {
-  onChange?: () => void;
+  onChange?: any;
   className?: string;
 }
 
 const Input = (props: InputProps & TextFieldProps) => {
-  const { onChange, className } = props;
+  const { onChange, className, ...rest } = props;
   return (
     <TextField
-      {...props}
+      {...rest}
       onChange={onChange}
       className={clsx(styles.Input, className)}
     />

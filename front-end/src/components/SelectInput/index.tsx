@@ -8,27 +8,32 @@ interface arrSelect {
   title: string;
 }
 
-interface SelectPropsType {
-  onChange?: any;
+interface SelectInputProps {
+  onChange: (select: number | undefined) => void;
   className?: string;
   arrSelect: arrSelect[];
 }
 
-const SelectInput = (props: SelectPropsType & SelectProps) => {
-  const { onChange, className, arrSelect } = props;
+const SelectInput = (props: SelectInputProps) => {
+  const { onChange, className, arrSelect, ...rest } = props;
   const [select, setSelect] = React.useState(
     arrSelect.length > 0 ? arrSelect[0].title : ""
   );
 
   const handleOnchange = (e: any) => {
+    const selectedId = arrSelect.find(
+      (item) => item.title === e.target.value
+    )?.id;
     setSelect(e.target.value);
-    onChange(e.target.value);
+    if (onChange) {
+      onChange(selectedId);
+    }
   };
 
   return (
     <Select
+      {...rest}
       className={clsx(styles.selectInput, className)}
-      {...props}
       onChange={handleOnchange}
       value={select}
     >

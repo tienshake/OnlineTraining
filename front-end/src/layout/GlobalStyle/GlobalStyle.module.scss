@@ -49,3 +49,7 @@ a[href] {
   color: var(--text-color);
   text-decoration: none;
 }
+
+:global(.MuiButtonBase-root) {
+  font-size: 1.4rem !important;
+}
