@@ -42,9 +42,8 @@ const Curriculum = () => {
                 gap: "10px",
               }}
             >
-              <MenuIcon style={{ cursor: "pointer" }} />
+              <Box className={styles.index}>{index + 1}</Box>
               <Input
-                value={index}
                 style={{ width: "50%" }}
                 onClick={(e) => e.stopPropagation()}
                 placeholder="Add title Section"
