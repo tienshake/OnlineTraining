@@ -1,7 +1,7 @@
 import { RouteType } from "../types";
 import Login from "../pages/login/Login";
 import Register from "../pages/register";
-import DoashBoard from "../admin/DoashBoard";
+import Profile from "../admin/Profile";
 import StudentManager from "../admin/StudentManager";
 import TeacherManager from "../admin/TeacherManager";
 import CoursesManager from "../admin/CoursesManager";
@@ -34,7 +34,7 @@ const privateRoute: RouteType[] = [
     defaultLayout: true,
   },
   {
-    component: DoashBoard,
+    component: Profile,
     patch: "/admin",
   },
   {

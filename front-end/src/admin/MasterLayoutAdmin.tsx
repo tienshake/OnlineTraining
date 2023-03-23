@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AiTwotoneHome } from "react-icons/ai";
 import { RiUser2Fill } from "react-icons/ri";
@@ -11,16 +11,23 @@ interface MasterLayoutAdminProps {
   children: React.ReactNode;
 }
 
+
 export default function MasterLayoutAdmin({ children }: MasterLayoutAdminProps) {
-    return (
-        <>
-            <div className='layout_admin'>
-                <div className='wrapp_menu_dashboard'>
-                    <div className='menu_dashboard' style={{ background: '', color: '#fff' }}>
-                        <ul className='group_logo-name_admin'>
-                            <li><p className='logo'></p></li>
-                            <li><p className='name'>Admin</p></li>
-                        </ul>
+  useEffect(() => {
+
+  });
+
+  return (
+    <>
+      <div className='layout_admin'>
+        <div className='wrapp_menu_dashboard'>
+          <div className='menu_dashboard' style={{ background: '', color: '#fff' }}>
+            <ul className='group_logo-name_admin'>
+              <li><p className='logo'></p></li>
+              <Link to="/admin/1">
+                <li><p className='name'>Admin</p></li>
+              </Link>
+            </ul>
 
             <ul
               className="list_nemu_dashboard"
@@ -29,7 +36,7 @@ export default function MasterLayoutAdmin({ children }: MasterLayoutAdminProps) 
               <Link to="/admin">
                 <li>
                   <AiTwotoneHome />
-                  <p>Dashboard</p>
+                  <p>Profile</p>
                 </li>
               </Link>
 

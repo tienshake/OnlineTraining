@@ -9,7 +9,7 @@ interface dataUserTeacher {
 
 const userServices: any = {
   getUserApi: async (id: string) => {
-    const response = await axiosClient.get(`user/get?id=${id}&limit=${9}`);
+    const response = await axiosClient.get(`user/get?id=${id}&limit=${20}`);
     return response;
   },
 

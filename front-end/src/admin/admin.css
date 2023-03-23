@@ -4,7 +4,7 @@
     list-style: none;
     text-decoration: none;
     font-family: "Inter", sans-serif;
-    /* font-size: 1.6rem; */
+    font-size: 1.5rem;
     line-height: 1.5;
 }
 
@@ -15,6 +15,14 @@
     padding-top: 22.55px;
     justify-content: center;
 }
+
+.layout_admin .MuiTypography-root {
+    font-size: 1.4rem;
+    line-height: 1.5;
+    /* text-rendering: optimizeSpeed; */
+    /* color: var(--text-color); */
+    /* font-family: "Inter", sans-serif; */
+ }
 
 .wrapp_menu_dashboard {
     width: 27%;
@@ -296,7 +304,9 @@
     border: 1px solid #dbd6d6;
     border-radius: 5px;
     font-size: 15px;
-    margin-bottom: 20px
+}
+.ifo_detail_profile li .title_input {
+    margin-top: 10px;
 }
 .ifo_detail_profile li input:focus {
     outline: none;
@@ -312,6 +322,23 @@
 }
 .ifo_detail_profile li textarea:focus {
     outline: none;
+}
+.btn_submit_profile {
+    margin-top: 20px;
+    padding: 8px;
+    background: #ff6128;
+    color: #fff;
+    border: none;
+    width: 17%;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+}
+.title_profile h2 {
+    color: #392C7D;
+}
+.body_profile h2 {
+    color: #392C7D;
 }
 
 

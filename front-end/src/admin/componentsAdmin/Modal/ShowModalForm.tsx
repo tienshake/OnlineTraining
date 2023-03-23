@@ -231,7 +231,7 @@ export default function ShowModalForm() {
                 // id=""
                 name="name"
                 onChange={handleInputChange}
-                // startAdornment={<InputAdornment position="start">$</InputAdornment>}
+              // startAdornment={<InputAdornment position="start">$</InputAdornment>}
               />
               {errors.name === "" || errors.name === undefined ? null : (
                 <p
@@ -288,7 +288,7 @@ export default function ShowModalForm() {
                 }
               />
               {errors.password === "" ||
-              errors.password === undefined ? null : (
+                errors.password === undefined ? null : (
                 <p
                   style={{
                     color: "#D93025",
@@ -322,7 +322,7 @@ export default function ShowModalForm() {
                 }
               />
               {errors.confirmPass === "" ||
-              errors.confirmPass === undefined ? null : (
+                errors.confirmPass === undefined ? null : (
                 <p
                   style={{
                     color: "#D93025",
@@ -378,6 +378,7 @@ export default function ShowModalForm() {
               <Button type="submit" variant="contained">
                 Save
               </Button>
+
               <Button onClick={handleClose} variant="contained">
                 Cancel
               </Button>
