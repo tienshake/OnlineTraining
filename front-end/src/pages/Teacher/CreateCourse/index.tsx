@@ -23,7 +23,7 @@ import {
 
 function CreateCourse() {
   const [activeIndex, setActiveIndex] = React.useState(0);
-  const [component, setComponent] = React.useState(<Information />);
+  const [component, setComponent] = React.useState(<Curriculum />);
 
   const switchComponent = (id: string) => {
     switch (id) {

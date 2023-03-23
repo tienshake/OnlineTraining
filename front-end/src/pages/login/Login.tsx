@@ -75,14 +75,14 @@ const Login = () => {
           <button>Sign in</button>
         </form>
         <div className={style.botteam}>
-          <a href="">Or sign in with</a>
+          <Link to="/">Or sign in with</Link>
           <div className={style.icon}>
-            <a href="">
+            <Link to="">
               <img src={icon1} alt="" /> Sign in using Google
-            </a>
-            <a href="">
+            </Link>
+            <Link to="">
               <img src={icon2} alt="" /> in usin Facebook
-            </a>
+            </Link>
           </div>
         </div>
       </div>

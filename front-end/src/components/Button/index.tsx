@@ -44,7 +44,9 @@ const ButtonBack = (props: ButtonProps & ButtonPropsType) => {
 };
 
 const ButtonNext = (props: ButtonProps & ButtonPropsType) => {
-  return <Button {...props} className={styles.buttonNext} />;
+  return (
+    <Button {...props} className={clsx(styles.buttonNext, props.className)} />
+  );
 };
 
 export { ButtonSave, ButtonBack, ButtonNext };

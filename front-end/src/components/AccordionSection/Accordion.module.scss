@@ -1,0 +1,17 @@
+.accordion {
+  width: 100%;
+  :global(.MuiAccordionSummary-content) {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .icon {
+    &:hover {
+      color: var(--primary);
+    }
+  }
+}
+.btn {
+  height: 37px !important;
+  font-size: 1.4rem !important;
+}

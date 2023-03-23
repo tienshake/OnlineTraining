@@ -1,0 +1,83 @@
+.container {
+}
+
+.section {
+  margin-bottom: 30px;
+  background: rgba(227, 227, 227, 0.41);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.sectionHeader {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: space-between;
+  padding-bottom: 20px;
+}
+
+.sectionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  :global(.MuiTypography-root) {
+    font-size: 1.4rem;
+  }
+  :global(.MuiSvgIcon-root) {
+    font-size: 2.2rem;
+  }
+}
+
+.btn {
+  height: 37px !important;
+  font-size: 1.4rem !important;
+}
+
+.iconEdit,
+.iconDelete {
+  padding: 6px;
+  background-color: var(--white);
+  border-radius: 10px;
+  cursor: pointer;
+  &:hover {
+    color: var(--primary);
+  }
+}
+
+.iconEdit {
+  z-index: 100;
+  position: absolute;
+  bottom: 15px;
+  right: 80px;
+}
+
+.iconDelete {
+  z-index: 100;
+  position: absolute;
+  bottom: 15px;
+  right: 40px;
+}
+
+.accordion {
+  width: 100%;
+  :global(.MuiAccordionSummary-content) {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.parent {
+  position: relative;
+}
+
+// .control {
+//   position: absolute;
+//   top: 0;
+//   left: 100%;
+// }
