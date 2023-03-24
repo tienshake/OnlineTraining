@@ -9,7 +9,8 @@ type Props = {
 };
 
 const DefaultLayout = ({ children, onlyHome = false }: Props) => {
-  const styleHome = onlyHome ? { maxWidth: "100%" } : {};
+  const styleHome = onlyHome ? { maxWidth: "100%", background:'#fff' } : {};
+
   return (
     <>
       <Header />

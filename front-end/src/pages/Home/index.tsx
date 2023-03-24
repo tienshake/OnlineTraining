@@ -1,15 +1,18 @@
 import styles from "./Home.module.scss";
+import './Home.css'
+import { Container } from "@mui/system";
 
 const Home = () => {
   const arr = new Array(50).fill(0);
   return (
     <div className={styles.container}>
-      {arr.map((item, index) => (
-        <div key={index} className={styles.item}>
-          {index + 1}
-          Note that the development build is not optimized. To create a
-        </div>
-      ))}
+      <div className="wrapp_header_home">
+        <img src="https://dreamslms.dreamguystech.com/html/assets/img/banner.png" alt="" />
+
+        {/* <Container > */}
+          <div className="box_content_header">sssssssssssssssssssssss</div>
+        {/* </Container> */}
+      </div>
     </div>
   );
 };

@@ -37,6 +37,26 @@ const userServices: any = {
 
     return response;
   },
+
+  editUserApi: async (dataUserDetail: any, id: any) => {
+    console.log(dataUserDetail, "---", id)
+    const { name, age, gender, Phone, Address, Education, Experience, About_Me } = dataUserDetail;
+
+    const response = await axiosClient.put(`user/edit/${id}`, {
+      name: name,
+      age: age,
+      gender: gender,
+      phone_number: Phone,
+      address: Address,
+      education: Education,
+      experience: Experience,
+      about_me: About_Me,
+    });
+
+    console.log(response, "ád")
+
+    return response;
+  },
 };
 
 

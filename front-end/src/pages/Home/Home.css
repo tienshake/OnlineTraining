@@ -1,0 +1,22 @@
+.wrapp_header_home {
+    position: relative;
+}
+.wrapp_header_home .box_content_header {
+    position: absolute;
+    background: pink;
+    max-width: 1000px;
+    width: 80%;
+    position: absolute;
+    background: blue;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    /* transform: translateY(-50%); */
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    margin-top: 0px;
+    height: 200px
+}

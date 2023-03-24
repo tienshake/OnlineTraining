@@ -12,24 +12,32 @@ interface userTeacherState {
   errorAddUserTeacher: Boolean,
   messageErrorAddTeacher: Boolean,
   messageSuccessAddTeacher: any,
+
+  /*  */
+  errorEditUserTeacher: Boolean,
+  messageErrorEditTeacher: Boolean,
+  messageSuccessEditTeacher: any,
 }
 
 /* State */
 const initialState: userTeacherState = {
   dataUserTeacher: [],
 
-  /* get All */
+  /* get All User */
   isLoading: false,
   error: false,
   messageError: null,
 
-  /* get By Add */
 
-
-  /* add ALL */
+  /* add ALL user */
   errorAddUserTeacher: false,
   messageErrorAddTeacher: false,
   messageSuccessAddTeacher: null,
+
+  /* edit User */
+  errorEditUserTeacher: false,
+  messageErrorEditTeacher: false,
+  messageSuccessEditTeacher: null,
 };
 
 /* Actions */
@@ -52,10 +60,6 @@ export const addDataUser: any = createAsyncThunk("userTeacher/addDataUser",
     } else {
       return params;
     }
-
-    // console.log(params.response.data.message, "params");
-    // console.log(params.name, "AxiosError");
-    // return rejectWithValue(params.response.data);
   }
 );
 
@@ -70,6 +74,20 @@ export const getDataDetailUser: any = createAsyncThunk("userTeacher/getDetailDat
     }
   }
 );
+
+export const editUserById: any = createAsyncThunk("userTeacher/editlUserById",
+  async (params: any, { rejectWithValue }) => {
+    try {
+      const response = await userServices.editUserApi(params);
+
+      return response.data;
+    } catch (error: any) {
+      console.log(error, "cay")
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 
 const userTeacherSlice = createSlice({
   name: "userTeacher",
@@ -101,7 +119,7 @@ const userTeacherSlice = createSlice({
       }
     },
 
-    /*  */
+    /* Add User  */
     [addDataUser.rejected]: (state, action) => {
       state.errorAddUserTeacher = true;
       state.messageErrorAddTeacher = action.payload;
@@ -115,11 +133,24 @@ const userTeacherSlice = createSlice({
     [getDataDetailUser.fulfilled]: (state, action) => {
       return {
         ...state,
-        // isLoading = false;
-        // dataUserTeacher = action.payload;
         isLoading: false,
         dataUserTeacher: action.payload,
       }
+    },
+
+    /*  */
+    [editUserById.rejected]: (state, action) => {
+      state.errorEditUserTeacher = false;
+      state.messageSuccessEditTeacher = action.payload;
+    },
+    [editUserById.fulfilled]: (state, action) => {
+      state.messageSuccessEditTeacher = action.payload;
+      state.errorEditUserTeacher = false;
+    },
+    [editUserById.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.messageSuccessEditTeacher = action.payload;
+      state.errorEditUserTeacher = false;
     },
   },
 });
