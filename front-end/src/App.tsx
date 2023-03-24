@@ -17,7 +17,7 @@ function App() {
     <GlobalStyle>
       <Router>
         <Routes>
-          <Route path="/" element={<Navigate to="teacher/create-course" />} />
+          {/* <Route path="/" element={<Navigate to="teacher/create-course" />} /> */}
           {publicRoute?.map((route: RouteType, i: number) => {
             const Component = route.component;
             return (

@@ -3,11 +3,9 @@
 }
 .wrapp_header_home .box_content_header {
     position: absolute;
-    background: pink;
-    max-width: 1000px;
+    /* max-width: 1000px; */
     width: 80%;
     position: absolute;
-    background: blue;
     margin: auto;
     left: 0;
     right: 0;
@@ -16,7 +14,36 @@
     /* transform: translateY(-50%); */
     display: flex;
     /* justify-content: center; */
-    align-items: center;
+    /* align-items: center; */
     margin-top: 0px;
-    height: 200px
+    height: 500px;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 130px;
+}
+.box_content_header .right_content h1 {
+    font-size: 45px;
+    color: #22100D;
+    line-height: initial;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.box_content_header .right_content p {
+    font-size: 20px;
+    color: #685F78;
+}
+.box_content_header .right_content ul {
+    display: flex;
+    margin-top: 80px;
+    gap: 30px
+}
+.right_content ul li b {
+    font-size: 45px;
+}
+.star_icon {
+    color: #FFB800;
+    font-size: 20px
+}
+.right_content ul li:first-child {
+    
 }
