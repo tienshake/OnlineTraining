@@ -35,6 +35,10 @@ const style = {
   boxShadow: 24,
 };
 
+const stylefont = {
+  fontSize: '15px'
+}
+
 export default function ShowModalForm() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -212,12 +216,12 @@ export default function ShowModalForm() {
             variant="h6"
             component="h2"
             style={{
-              padding: "7px",
+              paddingLeft: "10px",
               display: "flex",
               justifyContent: "space-between",
             }}
           >
-            <p>User Information</p>
+            <b>User Information</b>
             <CloseTab handleClose={handleClose} />
           </Typography>
 
@@ -226,12 +230,13 @@ export default function ShowModalForm() {
             style={{ display: "flex", flexDirection: "column" }}
           >
             <FormControl fullWidth sx={{ m: 1 }} variant="standard">
-              <InputLabel htmlFor="">Name</InputLabel>
+              <InputLabel style={stylefont} htmlFor="">Name</InputLabel>
               <Input
+                style={stylefont}
                 // id=""
                 name="name"
                 onChange={handleInputChange}
-                // startAdornment={<InputAdornment position="start">$</InputAdornment>}
+              // startAdornment={<InputAdornment position="start">$</InputAdornment>}
               />
               {errors.name === "" || errors.name === undefined ? null : (
                 <p
@@ -248,8 +253,9 @@ export default function ShowModalForm() {
             </FormControl>
 
             <FormControl fullWidth sx={{ m: 1 }} variant="standard">
-              <InputLabel htmlFor="">Email</InputLabel>
+              <InputLabel style={stylefont} htmlFor="">Email</InputLabel>
               <Input
+              style={stylefont}
                 // id=""
                 name="email"
                 onChange={handleInputChange}
@@ -269,9 +275,10 @@ export default function ShowModalForm() {
             </FormControl>
 
             <FormControl sx={{ m: 1, width: "100%" }} variant="standard">
-              <InputLabel htmlFor="">Password</InputLabel>
+              <InputLabel style={stylefont} htmlFor="">Password</InputLabel>
               <Input
                 // id=""
+                style={stylefont}
                 name="password"
                 onChange={handleInputChange}
                 type={showPassword ? "text" : "password"}
@@ -288,7 +295,7 @@ export default function ShowModalForm() {
                 }
               />
               {errors.password === "" ||
-              errors.password === undefined ? null : (
+                errors.password === undefined ? null : (
                 <p
                   style={{
                     color: "#D93025",
@@ -303,8 +310,9 @@ export default function ShowModalForm() {
             </FormControl>
 
             <FormControl sx={{ m: 1, width: "100%", mb: 5 }} variant="standard">
-              <InputLabel htmlFor="">Confirm Password</InputLabel>
+              <InputLabel style={stylefont} htmlFor="">Confirm Password</InputLabel>
               <Input
+              style={stylefont}
                 name="confirmPass"
                 onChange={handleInputChange}
                 // id=""
@@ -322,7 +330,7 @@ export default function ShowModalForm() {
                 }
               />
               {errors.confirmPass === "" ||
-              errors.confirmPass === undefined ? null : (
+                errors.confirmPass === undefined ? null : (
                 <p
                   style={{
                     color: "#D93025",
@@ -337,8 +345,9 @@ export default function ShowModalForm() {
             </FormControl>
 
             <FormControl sx={{ m: 1, width: "100%", mt: 0 }} size="small">
-              <InputLabel id="demo-select-small">Role</InputLabel>
+              <InputLabel style={{ fontSize: '15px' }} id="demo-select-small">Role</InputLabel>
               <Select
+                style={{ fontSize: '15px' }}
                 labelId="demo-select-small"
                 id="demo-select-small"
                 value={selectedOption}

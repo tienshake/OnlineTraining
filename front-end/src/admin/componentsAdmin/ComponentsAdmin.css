@@ -1,4 +1,13 @@
 /* Card User */
+* {
+    font-size: 16px;
+    font-family: "Inter", sans-serif;
+}
+.class_compress_basic {
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+}
+/* Card User */
 .group_btn_interact {
     display: flex;
     gap: 10px;

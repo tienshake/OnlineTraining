@@ -82,11 +82,13 @@ export default function CardUser(props: MyCardUserProps) {
           <Grid item xs={11} sm container>
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
-                <Typography gutterBottom variant="subtitle1" component="div">
-                  {props.name}
+                <Typography className='class_compress_basic' gutterBottom variant="subtitle1" component="div">
+                  <b>
+                    {props.name}
+                  </b>
                 </Typography>
 
-                <Typography variant="body2" gutterBottom>
+                <Typography style={{ fontSize:'13px' }} className='class_compress_basic' variant="body2" gutterBottom>
                   ENVIRONMENTAL ENGINEERING
                 </Typography>
 
