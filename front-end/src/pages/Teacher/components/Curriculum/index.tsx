@@ -1,29 +1,46 @@
 import React from "react";
 import styles from "./Curriculum.module.scss";
-import { Box, Stack } from "@mui/material";
-import Button, { ButtonNext } from "../../../../components/Button";
+import { Box } from "@mui/material";
+import { ButtonNext } from "../../../../components/Button";
 //material
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
-import Input from "../../../../components/Input";
+// import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 // import { confirmAlert } from "react-confirm-alert";
-import MenuIcon from "@mui/icons-material/Menu";
+import AccordionSection from "../../../../components/AccordionSection";
+// import ControlPointIcon from "@mui/icons-material/ControlPoint";
+
+const items: any = [
+  { id: 0, valueInput: "valu1", linkVideo: "youtbe", save: false },
+  { id: 1, valueInput: "valu2", linkVideo: "youtbe", save: false },
+  { id: 2, valueInput: "valu3", linkVideo: "youtbe", save: false },
+];
 
 const Curriculum = () => {
-  const [accordionList, setAccordionList] = React.useState<any>([]);
-
-  React.useEffect(() => {
-    handleAddAccordion();
-  }, []);
+  const [accordionList, setAccordionList] = React.useState<any>(items);
+  const [inputValues, setInputValues] = React.useState<any>({});
 
   const handleDeleteAccordion = (targetId: number) => {
     setAccordionList(
       accordionList.filter((accordion: any) => accordion.id !== targetId)
     );
+
+    setInputValues((prevValues: any) => {
+      const values = { ...prevValues };
+      delete values[targetId];
+      return values;
+    });
+  };
+
+  const handleGetAllValues = () => {
+    const valuesArr = Object.values(inputValues);
+    console.log(valuesArr);
+  };
+
+  const onInputChange = (id: number, value: string, link: string) => {
+    setInputValues((prevValues: any) => ({
+      ...prevValues,
+      [id]: { id, titleSection: value },
+    }));
   };
 
   const handleAddAccordion = () => {
@@ -31,48 +48,26 @@ const Curriculum = () => {
 
     const newAccordion = {
       id: index,
+      save: false,
       component: (
-        <Accordion className={styles.accordion}>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Box
-              style={{
-                width: "100%",
-                display: "flex",
-                alignItems: "center",
-                gap: "10px",
-              }}
-            >
-              <Box className={styles.index}>{index + 1}</Box>
-              <Input
-                style={{ width: "50%" }}
-                onClick={(e) => e.stopPropagation()}
-                placeholder="Add title Section"
-              />
-            </Box>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Stack gap={2} direction={"row"}>
-              <Input
-                style={{ width: "30%" }}
-                onClick={(e) => e.stopPropagation()}
-                placeholder="Title course content"
-              />
-              {/* <Button title="Add title" className={styles.btn} /> */}
-              <Button title="Add link video" className={styles.btn} />
-            </Stack>
-          </AccordionDetails>
-        </Accordion>
+        <AccordionSection index={index} onInputChange={onInputChange} />
       ),
     };
 
     setAccordionList([...accordionList, newAccordion]);
   };
 
+  console.log("inputValues", inputValues);
   return (
     <Box className={styles.container}>
       <Box className={styles.section}>
         <Box className={styles.sectionHeader}>
           <p>My Lecture</p>
+          <ButtonNext
+            onClick={handleGetAllValues}
+            title="get All"
+            className={styles.btn}
+          />
           <ButtonNext
             onClick={handleAddAccordion}
             title="Add Lecture"
@@ -82,12 +77,15 @@ const Curriculum = () => {
         <Box className={styles.sectionContent}>
           {accordionList.map((accordion: any) => (
             <div key={accordion.id} className={styles.parent}>
-              <DriveFileRenameOutlineIcon className={styles.iconEdit} />
               <DeleteOutlineIcon
                 onClick={() => handleDeleteAccordion(accordion.id)}
                 className={styles.iconDelete}
               />
-              {accordion.component}
+              <AccordionSection
+                index={accordion.id}
+                onInputChange={onInputChange}
+                value={accordion.valueInput}
+              />
             </div>
           ))}
         </Box>

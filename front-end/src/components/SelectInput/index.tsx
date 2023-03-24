@@ -12,6 +12,7 @@ interface SelectInputProps {
   onChange: (select: number | undefined) => void;
   className?: string;
   arrSelect: arrSelect[];
+  value?: number;
 }
 
 const SelectInput = (props: SelectInputProps) => {
@@ -35,7 +36,11 @@ const SelectInput = (props: SelectInputProps) => {
       {...rest}
       className={clsx(styles.selectInput, className)}
       onChange={handleOnchange}
-      value={select}
+      value={
+        props.value
+          ? arrSelect.find((option) => option.id === props.value)?.title
+          : select
+      }
     >
       {arrSelect?.map((item, i) => (
         <MenuItem key={i} value={item.title}>

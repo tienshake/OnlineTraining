@@ -20,21 +20,61 @@ import {
   PENDING,
   ACTIVE,
 } from "../../../constants/constants";
+import CurriculumClone from "../components/Section";
+import CourseForm from "../components/CourseForm";
+
+interface courseDescriptionsType {
+  html?: any;
+  text?: string;
+}
+
+interface avatarType {
+  previewImg: any;
+  thumbnail: any;
+  fileName: any;
+}
+
+export interface CreateCourseType {
+  courseTitle?: string;
+  courseCategory?: string;
+  courseDescriptions?: courseDescriptionsType;
+  avatar?: avatarType;
+}
 
 function CreateCourse() {
+  const [formValues, setFormValues] = React.useState<CreateCourseType>({
+    courseTitle: "",
+    courseCategory: "",
+    courseDescriptions: {
+      html: "",
+      text: "",
+    },
+    avatar: {
+      previewImg: "",
+      thumbnail: "",
+      fileName: "",
+    },
+  });
+
   const [activeIndex, setActiveIndex] = React.useState(0);
-  const [component, setComponent] = React.useState(<Information />);
+  const [component, setComponent] = React.useState<any>();
+
+  // console.log("formValues", formValues);
 
   const switchComponent = (id: string) => {
     switch (id) {
       case INFO:
-        setComponent(<Information />);
+        setComponent(
+          <Information setFormValues={setFormValues} formValues={formValues} />
+        );
         break;
       case COURSE:
-        setComponent(<Course />);
+        setComponent(
+          <Course setFormValues={setFormValues} formValues={formValues} />
+        );
         break;
       case CURRICULUM:
-        setComponent(<Curriculum />);
+        setComponent(<CourseForm />);
         break;
       case SETTING:
         setComponent(<Setting />);
@@ -116,7 +156,16 @@ function CreateCourse() {
               ))}
           </ul>
         </Box>
-        <Box className={styles.contentForm}>{component}</Box>
+        <Box className={styles.contentForm}>
+          {component ? (
+            React.cloneElement(component, { setFormValues, formValues })
+          ) : (
+            <Information
+              setFormValues={setFormValues}
+              formValues={formValues}
+            />
+          )}
+        </Box>
         <Stack
           direction="row"
           gap={2}

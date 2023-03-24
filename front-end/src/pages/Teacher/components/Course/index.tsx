@@ -10,7 +10,7 @@ interface ImgType {
   fileName?: string;
 }
 
-const Course = () => {
+const Course = ({ setFormValues, formValues }: any) => {
   const [image, setImage] = React.useState<ImgType>();
 
   const handleOnchangeImg = async (e: any) => {
@@ -25,6 +25,14 @@ const Course = () => {
         thumbnail: b64,
         fileName: file.name,
       });
+      setFormValues((prevValues: any) => ({
+        ...prevValues,
+        avatar: {
+          previewImg: objectUrl,
+          thumbnail: b64,
+          fileName: file.name,
+        },
+      }));
     }
   };
 
@@ -32,9 +40,11 @@ const Course = () => {
     <Box className={styles.container}>
       <h4>Courses Media</h4>
       <Stack paddingBottom={3} gap={3}>
-        <label>Course cover image</label>
+        <label>Course cover formValues.avatar</label>
         <Box className={styles.addContain}>
-          {image?.fileName ? image?.fileName : "No File Selected"}
+          {formValues.avatar?.fileName
+            ? formValues.avatar?.fileName
+            : "No File Selected"}
           <label className={styles.relativeFileUpload}>
             Upload File
             <input type="file" hidden onChange={(e) => handleOnchangeImg(e)} />
@@ -42,10 +52,10 @@ const Course = () => {
         </Box>
         <Box className={styles.imgContain}>
           <div className={styles.imgBox}>
-            {image?.previewImg ? (
+            {formValues.avatar?.previewImg ? (
               <img
                 className={styles.image}
-                src={image?.previewImg}
+                src={formValues.avatar?.previewImg}
                 alt="Thumbnail"
               />
             ) : (

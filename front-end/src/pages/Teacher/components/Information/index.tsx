@@ -5,16 +5,28 @@ import Input from "../../../../components/Input";
 import SelectInput from "../../../../components/SelectInput";
 import Editor from "../../../../components/Editor";
 
-const Information = () => {
-  const [courseTitle, setCourseTitle] = React.useState("");
-
+const Information = ({ setFormValues, formValues }: any) => {
   const handleSelectChange = (selectedValue: number | undefined) => {
-    console.log(selectedValue);
     // do something with selected value
+    setFormValues((prevValues: any) => ({
+      ...prevValues,
+      courseCategory: selectedValue,
+    }));
   };
 
   const handleOnchangeMarkdown = (data: any) => {
-    console.log(data);
+    setFormValues((prevValues: any) => ({
+      ...prevValues,
+      courseDescriptions: data,
+    }));
+  };
+
+  const handleOnchangeInput = (e: any) => {
+    const { name, value } = e.target;
+    setFormValues((prevValues: any) => ({
+      ...prevValues,
+      [name]: value,
+    }));
   };
 
   return (
@@ -25,12 +37,15 @@ const Information = () => {
         <Input
           variant="outlined"
           placeholder="Course Title"
-          onChange={(e: any) => setCourseTitle(e.target.value)}
+          onChange={handleOnchangeInput}
+          name="courseTitle"
+          value={formValues.courseTitle}
         />
       </Stack>
       <Stack paddingBottom={3} gap={1}>
         <label>Course Category</label>
         <SelectInput
+          value={formValues.courseCategory}
           arrSelect={[
             { id: 1, title: "Option 1" },
             { id: 2, title: "Option 2" },
@@ -41,7 +56,10 @@ const Information = () => {
       </Stack>
       <Stack paddingBottom={3} gap={1}>
         <label>Description</label>
-        <Editor handleOnChange={handleOnchangeMarkdown} />
+        <Editor
+          handleOnChange={handleOnchangeMarkdown}
+          value={formValues.courseDescriptions}
+        />
         {/* <Input placeholder="Courses Level" /> */}
       </Stack>
     </Box>

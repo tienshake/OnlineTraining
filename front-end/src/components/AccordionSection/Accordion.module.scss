@@ -15,3 +15,68 @@
   height: 37px !important;
   font-size: 1.4rem !important;
 }
+.accordion {
+  width: 100%;
+  :global(.MuiAccordionSummary-content) {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .index {
+    background-color: var(--primary);
+    height: 20px;
+    width: 20px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-radius: 50%;
+    color: var(--white);
+    font-weight: 600;
+  }
+}
+
+.accordionDetails {
+  position: relative;
+}
+
+.iconEdit {
+  padding: 6px;
+  background-color: var(--white);
+  border-radius: 10px;
+  cursor: pointer;
+  &:hover {
+    color: var(--primary);
+  }
+
+  z-index: 100;
+  position: absolute;
+  bottom: 15px;
+  right: 80px;
+}
+
+.iconDelete {
+  padding: 5px;
+  background-color: var(--white);
+  border-radius: 10px;
+  cursor: pointer;
+  border: dashed var(--primary);
+  &:hover {
+    color: var(--primary);
+  }
+}
+
+.iconSave {
+  padding: 6px;
+  background-color: var(--white);
+  border-radius: 10px;
+  cursor: pointer;
+  &:hover {
+    color: var(--primary);
+  }
+  position: absolute;
+  z-index: 100;
+  position: absolute;
+  bottom: 15px;
+  right: 120px;
+}
