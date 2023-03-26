@@ -22,3 +22,38 @@
 .card_basic-intro ul {
     width: 50%;
 }
+
+
+/* coursesCate */
+.coursesCate {
+    background: #fff;
+    width: 90%;
+    height: 270px;
+    margin: auto;
+    border-radius: 10px;
+    border: 1px solid #e9ecef; 
+    text-aligt: center;
+    display:flex;
+    justify-content: center;
+    cursor:pointer
+}
+.coursesCate .content_box {
+    margin-top: 25px;
+}
+.coursesCate .content_box img {
+    width: 100px;
+    height: 100px;
+}
+.coursesCate .content_box h1 {
+    text-align: center;
+    max-width: 100px;
+    margin-top: 20px;
+}
+.coursesCate .content_box p {
+    margin-top: 20px;
+}
+
+.coursesCate:hover {
+    background: #413655;
+    color: #fff 
+}

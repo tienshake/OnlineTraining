@@ -22,7 +22,7 @@ import { getDataDetailUser } from "../redux/features/userTeacher/userTeacherSlic
 export default function InfoTeacher() {
   const data2 = ["1", "2", "3", "4"];
 
-  // Lấy param id sản phẩm
+  // get param id product
   const location = useLocation();
   const pathId = location.pathname.split("/")[3]; /* cat id  params*/
 
