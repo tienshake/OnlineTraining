@@ -87,36 +87,6 @@
     /* min-height: 700px */
 }
 /*  */
-.box_favourite_course {
-    width: 80%;
-    margin: auto;
-    padding-top: 140px;
-}
-.wrapp_body_home .box_favourite_course ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between
-}
-.box_favourite_course ul li:first-child {
-    width: 65%;
-    /* background: pink */
-}
-.wrapp_body_home .box_favourite_course ul li:last-child {
-    width: 20%;
-    /* background: blue; */
-}
-.box_favourite_course ul li p:first-child {
-    color: #F66962;
-    font-weight: 600;
-    font-size: 18px;
-    margin-bottom: 10px
-}
-.box_favourite_course ul li p:last-child {
-    font-weight: 700;
-    font-size: 35px;
-    margin-bottom: 10px
-}
-/*  */
 .wrapp_body_home .box_carosel_topCate {
     width: 82%;
     margin: auto;
@@ -124,7 +94,29 @@
 
 }
 /*  */
-/* .wrapp_body_home .box_featured_courses {
-    background-image: url("https://dreamslms.dreamguystech.com/html/assets/img/banner.png");
+.wrapp_cardProduts-content {
+    display: flex;
+    width: 80%;
+    margin: auto;
+    margin-top: 60px;
+    display: grid;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    padding-bottom: 80px;
+}
+.wrapp_cardProduts-content div {
+    background: #fff;
+    border-radius: 10px;
     height: 500px;
-} */
+    cursor: pointer;
+    padding: 25px
+}
+.wrapp_cardProduts-content div img {
+    border-radius: 10px;
+    width: 100%;
+}
+.wrapp_cardProduts-content div:hover {
+    background: #413655;
+    color: #fff;
+}

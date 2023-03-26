@@ -1,14 +1,20 @@
 import "./CardBasicIntroduce.css";
 
-export default function CoursesCate() {
+interface MyCoursesCateProps {
+    imageItem: String,
+    titleItem: String,
+    contentItem: String
+}
+
+export default function CoursesCate(props: MyCoursesCateProps) {
     return (
         <div className="coursesCate">
             <div className="content_box">
-                 <img src="https://dreamslms.dreamguystech.com/html/assets/img/categories-icon.png" alt="" />
-                 <h1>Angular  Development</h1>
-                 <p>40 Instructors</p>
+                <img src={`${props.imageItem}`} alt="" />
+                <h1>{props.titleItem}</h1>
+                <p>{props.contentItem}</p>
             </div>
-           
+
         </div>
     )
 }

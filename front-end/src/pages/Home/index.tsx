@@ -6,6 +6,7 @@ import "../../../node_modules/slick-carousel/slick/slick.css";
 import "../../../node_modules/slick-carousel/slick/slick-theme.css";
 import './Home.css';
 import CoursesCate from '../../components/Card/CoursesCate';
+import BoxSection from '../../components/BoxSection';
 
 
 
@@ -33,6 +34,37 @@ const Home = () => {
       content: "Online Students",
     }
   ];
+
+  /*  */
+  const data2 = [
+    {
+      imageItem: "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon.png",
+      titleItem: "Angular Development",
+      contentItem: "40 Instructors",
+
+    },
+    {
+      imageItem: "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-02.png",
+      titleItem: "NodeJs Development",
+      contentItem: "50 Instructors",
+    },
+    {
+      imageItem: "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-04.png",
+      titleItem: "Python Development",
+      contentItem: "50 Instructors",
+    },
+    {
+      imageItem: "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-03.png",
+      titleItem: "SWift Development",
+      contentItem: "23 Instructors",
+    },
+    {
+      imageItem: "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-01.png",
+      titleItem: "Docker Development",
+      contentItem: "45 Instructors",
+    },
+  ];
+
 
   /*  */
   var settings = {
@@ -70,16 +102,6 @@ const Home = () => {
     ]
   };
 
-  const data = [
-    { src: "https://mamuka.rest/upload/resize_cache/iblock/572/700_9999_1/572fa86f2285617fe047a6d55c310916.jpg" },
-    { src: "https://mamuka.rest/upload/resize_cache/iblock/85d/700_9999_1/85dbc36067a19873a842761cc5f3a8d7.jpg" },
-    { src: "https://mamuka.rest/upload/resize_cache/iblock/dcc/700_9999_1/dcc4459f90e0ee7a9c4a462faf6c0c4b.jpg" },
-    { src: "https://mamuka.rest/upload/resize_cache/iblock/572/700_9999_1/572fa86f2285617fe047a6d55c310916.jpg" },
-    { src: "https://mamuka.rest/upload/resize_cache/iblock/572/700_9999_1/572fa86f2285617fe047a6d55c310916.jpg" },
-    { src: "https://mamuka.rest/upload/resize_cache/iblock/572/700_9999_1/572fa86f2285617fe047a6d55c310916.jpg" },
-    { src: "https://mamuka.rest/upload/resize_cache/iblock/572/700_9999_1/572fa86f2285617fe047a6d55c310916.jpg" },
-  ]
-
   return (
     <div className={styles.container}>
       <div className="wrapp_header_home">
@@ -116,35 +138,51 @@ const Home = () => {
 
 
       <div className='wrapp_body_home'>
-        <div className='box_favourite_course'>
-          <ul>
-            <li>
-              <p>Favourite Course</p>
-              <p>Top Category</p>
-            </li>
-
-            <li>
-              buutpn
-            </li>
-          </ul>
-
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan bibendum <br /> gravida maecenas augue elementum et neque. Suspendisse imperdiet.</p>
-        </div>
+        {/*  */}
+        <BoxSection />
 
         {/*  */}
         <div className='box_carosel_topCate'>
           <Slider  {...settings}>
-            {data.map((data, index) => (
-              <div key={index} style={{ width: "100%", margin: 'auto'}} /* src={data.src} */>
-                <CoursesCate />
+            {data2.map((data, index) => (
+              <div key={index} style={{ width: "100%", margin: 'auto' }} /* src={data.src} */>
+                <CoursesCate imageItem={data.imageItem} titleItem={data.titleItem} contentItem={data.contentItem} />
               </div>
             ))}
           </Slider>
         </div>
 
         {/*  */}
-        <div className='box_featured_courses'>
-          c
+        <div style={{ backgroundImage: 'url("https://dreamslms.dreamguystech.com/html/assets/img/banner.png")', marginTop: '90px', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }} className='box_featured_courses'>
+          <BoxSection />
+
+          <div className='wrapp_cardProduts-content'>
+            <div><img src='https://dreamslms.dreamguystech.com/html/assets/img/course/course-01.jpg' alt='' /></div>
+
+            <div>
+              <img src='https://dreamslms.dreamguystech.com/html/assets/img/course/course-06.jpg' alt='' />
+            </div>
+
+            <div>
+              <img src='https://dreamslms.dreamguystech.com/html/assets/img/course/course-05.jpg' alt='' />
+            </div>
+
+            <div>
+              <img src='https://dreamslms.dreamguystech.com/html/assets/img/course/course-03.jpg' alt='' />
+            </div>
+
+            <div>
+              <img src='https://dreamslms.dreamguystech.com/html/assets/img/course/course-02.jpg' alt='' />
+            </div>
+
+            <div>
+              <img src='https://dreamslms.dreamguystech.com/html/assets/img/course/course-02.jpg' alt='' />
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <BoxSection />
         </div>
       </div>
     </div>

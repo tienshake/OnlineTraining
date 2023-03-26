@@ -1,0 +1,31 @@
+/* section header */
+/*  */
+.box_favourite_course {
+    width: 80%;
+    margin: auto;
+    padding-top: 140px;
+}
+.box_favourite_course ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between
+}
+.box_favourite_course ul li:first-child {
+    width: 65%;
+    /* background: pink */
+}
+.box_favourite_course ul li:last-child {
+    width: 20%;
+    /* background: blue; */
+}
+.box_favourite_course ul li p:first-child {
+    color: #F66962;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 10px
+}
+.box_favourite_course ul li p:last-child {
+    font-weight: 700;
+    font-size: 35px;
+    margin-bottom: 10px
+}
