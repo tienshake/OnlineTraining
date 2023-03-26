@@ -8,7 +8,6 @@ import PanoramaFishEyeIcon from "@mui/icons-material/PanoramaFishEye";
 import clsx from "clsx";
 import Information from "../components/Information";
 import Course from "../components/Course";
-import Curriculum from "../components/Curriculum";
 import Setting from "../components/Setting";
 import {
   INFO,
@@ -20,26 +19,9 @@ import {
   PENDING,
   ACTIVE,
 } from "../../../constants/constants";
-import CurriculumClone from "../components/Section";
 import CourseForm from "../components/CourseForm";
-
-interface courseDescriptionsType {
-  html?: any;
-  text?: string;
-}
-
-interface avatarType {
-  previewImg: any;
-  thumbnail: any;
-  fileName: any;
-}
-
-export interface CreateCourseType {
-  courseTitle?: string;
-  courseCategory?: string;
-  courseDescriptions?: courseDescriptionsType;
-  avatar?: avatarType;
-}
+import { CreateCourseType } from "../../../types";
+// import Complete from "../components/Complete";
 
 function CreateCourse() {
   const [formValues, setFormValues] = React.useState<CreateCourseType>({
@@ -54,12 +36,16 @@ function CreateCourse() {
       thumbnail: "",
       fileName: "",
     },
+    sectionCourse: [{ title: "", lectures: [] }],
+    price: 0,
+    promotion_price: 0,
   });
 
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [component, setComponent] = React.useState<any>();
+  // const [isComplete, setIsComplete] = React.useState<boolean>(false);
 
-  // console.log("formValues", formValues);
+  console.log(formValues);
 
   const switchComponent = (id: string) => {
     switch (id) {
@@ -74,10 +60,14 @@ function CreateCourse() {
         );
         break;
       case CURRICULUM:
-        setComponent(<CourseForm />);
+        setComponent(
+          <CourseForm setFormValues={setFormValues} formValues={formValues} />
+        );
         break;
       case SETTING:
-        setComponent(<Setting />);
+        setComponent(
+          <Setting setFormValues={setFormValues} formValues={formValues} />
+        );
         break;
       default:
         break;
@@ -88,6 +78,16 @@ function CreateCourse() {
     // Increase index
     const nextIndex = activeIndex + 1;
     const updatedProgressArr = [...PROGRESS_ARR];
+
+    // if (PROGRESS_ARR[activeIndex].id === SETTING) {
+    //   setIsComplete(true);
+    //   PROGRESS_ARR[3].status = ACTIVE;
+    //   setComponent(<Complete />);
+    // }
+
+    // if (PROGRESS_ARR[nextIndex].id === SETTING) {
+    //   setIsComplete(true);
+    // }
 
     if (nextIndex >= PROGRESS_ARR.length) return;
 
@@ -104,6 +104,10 @@ function CreateCourse() {
     // decrease index
     const prevIndex = activeIndex - 1;
     const updatedProgressArr = [...PROGRESS_ARR];
+
+    // if (PROGRESS_ARR[prevIndex].id === CURRICULUM) {
+    //   setIsComplete(false);
+    // }
 
     if (prevIndex < 0) return;
 
@@ -126,7 +130,7 @@ function CreateCourse() {
         <h1 className={styles.title}>Add New Course</h1>
         <Stack direction="row" gap={2}>
           <ButtonBack title="Back To Course" />
-          <ButtonSave title="Save" />
+          <ButtonSave title="Add Course" />
         </Stack>
       </Stack>
       <Box className={styles.content}>
@@ -166,6 +170,7 @@ function CreateCourse() {
             />
           )}
         </Box>
+
         <Stack
           direction="row"
           gap={2}

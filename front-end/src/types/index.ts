@@ -49,3 +49,43 @@ export interface NavType {
   title: string;
   patch: string;
 }
+
+//Create course
+
+export interface courseDescriptionsType {
+  html?: any;
+  text?: string;
+}
+
+export interface avatarType {
+  previewImg: any;
+  thumbnail: any;
+  fileName: any;
+}
+
+export interface CreateCourseType {
+  courseTitle?: string;
+  courseCategory?: string;
+  courseDescriptions?: courseDescriptionsType;
+  avatar?: avatarType;
+  price?: number;
+  promotion_price?: number;
+  sectionCourse?: SectionType[];
+}
+
+export interface SectionType {
+  title: string;
+  lectures: {
+    name: string;
+    videoLink: string;
+  }[];
+}
+
+// export interface SectionProps {
+//   sectionIndex: number;
+//   section: SectionType;
+//   setSection: React.Dispatch<React.SetStateAction<SectionType[]>>;
+//   removeSection: (sectionIndex: number) => void;
+//   register: ReturnType<typeof useForm>["register"];
+//   watch: ReturnType<typeof useForm>["watch"];
+// }

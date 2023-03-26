@@ -1,0 +1,44 @@
+.form {
+  margin-bottom: 30px;
+  background: rgba(227, 227, 227, 0.41) !important;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btnAdd,
+.btnSave {
+  padding: 6px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background-color 0.3s ease-out;
+}
+
+.btnAdd {
+  background-color: var(--color-button-next);
+  border: 2px solid var(--color-button-next);
+  color: var(--white);
+  &:hover {
+    background-color: var(--white);
+    color: var(--color-button-next);
+  }
+}
+
+.btnSave {
+  background-color: var(--color-button-save);
+  border: 2px solid var(--color-button-save);
+  color: var(--white);
+  &:hover {
+    background-color: var(--white);
+    color: var(--color-button-save);
+  }
+}

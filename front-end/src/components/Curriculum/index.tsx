@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./Curriculum.module.scss";
 import { Box } from "@mui/material";
-import { ButtonNext } from "../../../../components/Button";
+import { ButtonNext } from "../Button";
 //material
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 // import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 // import { confirmAlert } from "react-confirm-alert";
-import AccordionSection from "../../../../components/AccordionSection";
+import AccordionSection from "../AccordionSection";
 // import ControlPointIcon from "@mui/icons-material/ControlPoint";
 
 const items: any = [
