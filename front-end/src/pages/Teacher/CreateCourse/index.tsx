@@ -14,14 +14,17 @@ import {
   COURSE,
   CURRICULUM,
   SETTING,
-  PROGRESS_ARR,
+  PROGRESS,
   START,
   PENDING,
   ACTIVE,
+  CODE_SUCCESS,
 } from "../../../constants/constants";
 import CourseForm from "../components/CourseForm";
-import { CreateCourseType } from "../../../types";
-// import Complete from "../components/Complete";
+import { APIType, CreateCourseType } from "../../../types";
+import { toast } from "react-toastify";
+import courseServices from "../../../services/course";
+import Complete from "../components/Complete";
 
 function CreateCourse() {
   const [formValues, setFormValues] = React.useState<CreateCourseType>({
@@ -41,12 +44,22 @@ function CreateCourse() {
     promotion_price: 0,
   });
 
+  const [PROGRESS_ARR, setPROGRESS_ARR] = React.useState(PROGRESS);
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [component, setComponent] = React.useState<any>();
-  // const [isComplete, setIsComplete] = React.useState<boolean>(false);
+  const [isComplete, setIsComplete] = React.useState<boolean>(false);
 
-  console.log(formValues);
+  React.useEffect(() => {
+    // reset arr when component didmount
+    setPROGRESS_ARR([
+      { id: INFO, title: "Basic information", status: PENDING },
+      { id: COURSE, title: "Course Media", status: START },
+      { id: CURRICULUM, title: "Curriculum", status: START },
+      { id: SETTING, title: "Settings", status: START },
+    ]);
+  }, []);
 
+  // Switch component with id when click
   const switchComponent = (id: string) => {
     switch (id) {
       case INFO:
@@ -79,16 +92,6 @@ function CreateCourse() {
     const nextIndex = activeIndex + 1;
     const updatedProgressArr = [...PROGRESS_ARR];
 
-    // if (PROGRESS_ARR[activeIndex].id === SETTING) {
-    //   setIsComplete(true);
-    //   PROGRESS_ARR[3].status = ACTIVE;
-    //   setComponent(<Complete />);
-    // }
-
-    // if (PROGRESS_ARR[nextIndex].id === SETTING) {
-    //   setIsComplete(true);
-    // }
-
     if (nextIndex >= PROGRESS_ARR.length) return;
 
     //switchComponent with click
@@ -105,10 +108,6 @@ function CreateCourse() {
     const prevIndex = activeIndex - 1;
     const updatedProgressArr = [...PROGRESS_ARR];
 
-    // if (PROGRESS_ARR[prevIndex].id === CURRICULUM) {
-    //   setIsComplete(false);
-    // }
-
     if (prevIndex < 0) return;
 
     //switchComponent with click
@@ -118,6 +117,64 @@ function CreateCourse() {
     updatedProgressArr[prevIndex].status = PENDING;
 
     setActiveIndex(prevIndex);
+  };
+
+  const handleCreateCourseApi = async () => {
+    let title = formValues.courseTitle;
+    let thumbnail = "";
+    let description = formValues.courseDescriptions?.text;
+    let descriptionMarkdown = formValues.courseDescriptions?.html;
+    let price = formValues.price;
+    let promotion_price = formValues.promotion_price;
+    let user_id = 7;
+    let category_id = formValues.courseCategory;
+    let sections = null;
+    // console.log("formValues", formValues);
+
+    if (formValues) {
+      if (formValues.avatar && formValues.avatar.thumbnail) {
+        thumbnail = formValues.avatar.thumbnail;
+      }
+      if (formValues.sectionCourse && formValues.sectionCourse.length > 0) {
+        sections = formValues.sectionCourse;
+      }
+    }
+    //Check exist params
+    if (
+      !title ||
+      !thumbnail ||
+      !description ||
+      !descriptionMarkdown ||
+      !price ||
+      !sections ||
+      !price ||
+      !promotion_price ||
+      !user_id
+    ) {
+      toast.error("Please fill all required fields");
+      return;
+    }
+    //isComplete save call api
+    if (!isComplete) {
+      const result: APIType = await courseServices.createCategoryApi({
+        title,
+        thumbnail,
+        description,
+        descriptionMarkdown,
+        price,
+        promotion_price,
+        user_id,
+        category_id,
+        sections,
+      });
+      if (result && result.data?.code === CODE_SUCCESS) {
+        setIsComplete(true);
+        setComponent(<Complete />);
+        toast.success("🦄 Wow so easy!");
+      }
+    } else {
+      toast.warning("🦄 You was add course!");
+    }
   };
 
   return (
@@ -130,7 +187,7 @@ function CreateCourse() {
         <h1 className={styles.title}>Add New Course</h1>
         <Stack direction="row" gap={2}>
           <ButtonBack title="Back To Course" />
-          <ButtonSave title="Add Course" />
+          <ButtonSave title="Add Course" onClick={handleCreateCourseApi} />
         </Stack>
       </Stack>
       <Box className={styles.content}>
@@ -170,16 +227,17 @@ function CreateCourse() {
             />
           )}
         </Box>
-
-        <Stack
-          direction="row"
-          gap={2}
-          justifyContent="space-between"
-          className={styles.footerControl}
-        >
-          <ButtonBack title="Back" onClick={handleBackClick} />
-          <ButtonNext title="Continue" onClick={handleNextClick} />
-        </Stack>
+        {!isComplete && (
+          <Stack
+            direction="row"
+            gap={2}
+            justifyContent="space-between"
+            className={styles.footerControl}
+          >
+            <ButtonBack title="Back" onClick={handleBackClick} />
+            <ButtonNext title="Continue" onClick={handleNextClick} />
+          </Stack>
+        )}
       </Box>
     </Box>
   );

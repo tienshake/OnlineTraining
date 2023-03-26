@@ -5,6 +5,17 @@ export interface RouteType {
   defaultLayout?: boolean;
 }
 
+//API type
+export type APIRequestType = {
+  data?: any;
+  message?: string;
+  code?: number;
+};
+
+export type APIType = {
+  data?: APIRequestType;
+};
+
 // language
 export type LanguageState = {
   language: string;
@@ -64,8 +75,9 @@ export interface avatarType {
 }
 
 export interface CreateCourseType {
+  [key: string]: any;
   courseTitle?: string;
-  courseCategory?: string;
+  courseCategory?: number | string | undefined;
   courseDescriptions?: courseDescriptionsType;
   avatar?: avatarType;
   price?: number;

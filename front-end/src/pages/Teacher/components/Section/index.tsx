@@ -109,32 +109,28 @@ const Section = ({
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Box
           style={{
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
+            width: "30%",
           }}
         >
-          <div>
-            <Input
-              onClick={(e) => e.stopPropagation()}
-              type="text"
-              placeholder="Section title"
-              defaultValue={section.title}
-              onChange={(e: any) => {
-                const value = e.target.value;
-                setSection((prevState) => {
-                  const sections = [...prevState];
-                  sections[sectionIndex].title = value;
-                  return sections;
-                });
-              }}
-            />
-            <DeleteOutlineIcon
-              onClick={() => removeSection(sectionIndex)}
-              className={styles.iconDelete}
-            />
-          </div>
+          <Input
+            // style={{ width: "100%" }}
+            onClick={(e) => e.stopPropagation()}
+            type="text"
+            placeholder="Section title"
+            defaultValue={section.title}
+            onChange={(e: any) => {
+              const value = e.target.value;
+              setSection((prevState) => {
+                const sections = [...prevState];
+                sections[sectionIndex].title = value;
+                return sections;
+              });
+            }}
+          />
+          <DeleteOutlineIcon
+            onClick={() => removeSection(sectionIndex)}
+            className={styles.iconDelete}
+          />
         </Box>
       </AccordionSummary>
       <AccordionDetails className={styles.accordionDetails}>

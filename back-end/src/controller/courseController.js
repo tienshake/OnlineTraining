@@ -2,28 +2,145 @@ import db from "../models";
 import { sequelize } from "../models";
 const { Op } = require("sequelize");
 
-const createCourse = async (req, res) => {
-  const { title, description, price, user_id, category_id } = req.body;
+// const createCourse = async (req, res) => {
+//   const {
+//     //Course
+//     title,
+//     description,
+//     price,
+//     user_id,
+//     category_id,
+//     thumbnail,
+//     promotion_price,
+//     //Course section
+//     title_section,
+//     //Lecture
+//     title_lecture,
+//     video,
+//   } = req.body;
 
+//   try {
+//     if (!title || !description || !price || !user_id || !category_id) {
+//       res.status(400).json({ message: "Missing params" });
+//     } else {
+//       const course = await db.Course.create({
+//         title,
+//         description,
+//         price,
+//         user_id,
+//         category_id,
+//         promotion_price,
+//         thumbnail,
+//       });
+//       if (course) {
+//         const course_section = await db.Course_section.create({
+//           title: title_section,
+//           course_id: course.id,
+//         });
+//         if (course_section) {
+//           const lecture = await db.Lecture.create({
+//             course_section_id: course_section.id,
+//             title: title_lecture,
+//             video,
+//           });
+
+//           if (lecture) {
+//             res.status(200).json({
+//               data: {
+//                 course,
+//                 course_section,
+//                 lecture,
+//               },
+//               code: 0,
+//               message: "Create course completed",
+//             });
+//           } else {
+//             res.status(400).json({ message: "Create Lecture failed" });
+//           }
+//         } else {
+//           res.status(400).json({ message: "Create course_section failed" });
+//         }
+//       } else {
+//         res.status(400).json({ message: "Create course failed" });
+//       }
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: "Server error" });
+//   }
+// };
+
+const createCourse = async (req, res) => {
   try {
-    if (!title || !description || !price || !user_id || !category_id) {
+    const {
+      title,
+      description,
+      descriptionMarkdown,
+      price,
+      user_id,
+      category_id,
+      thumbnail,
+      promotion_price,
+      sections,
+    } = req.body;
+    if (
+      !title ||
+      !description ||
+      !price ||
+      !user_id ||
+      !category_id ||
+      !sections ||
+      !descriptionMarkdown
+    ) {
       res.status(400).json({ message: "Missing params" });
     } else {
-      const category = await db.Course.create({
+      const course = await db.Course.create({
         title,
         description,
+        descriptionMarkdown,
         price,
         user_id,
         category_id,
+        thumbnail,
+        promotion_price,
       });
-      if (category) {
-        res.status(200).json({
-          code: 0,
-          message: "Create course completed",
-        });
-      } else {
+      if (!course) {
         res.status(400).json({ message: "Create course failed" });
       }
+      if (sections && sections.length > 0) {
+        for (const section of sections) {
+          const { title: sectionTitle, lectures } = section;
+
+          const courseSection = await db.Course_section.create({
+            course_id: course.id,
+            title: sectionTitle,
+          });
+          if (!courseSection) {
+            res.status(400).json({ message: "Create courseSection failed" });
+          }
+
+          if (lectures && lectures.length > 0) {
+            for (const lecture of lectures) {
+              const { name, videoLink } = lecture;
+
+              const lecture_data = await db.Lecture.create({
+                course_section_id: courseSection.id,
+                title: name,
+                video: videoLink,
+              });
+              if (!lecture_data) {
+                res.status(400).json({ message: "Create lecture_data failed" });
+              }
+            }
+          }
+        }
+      }
+
+      res.status(200).json({
+        data: course,
+        code: 0,
+        message: "Create course completed",
+      });
     }
   } catch (error) {
     console.error(error);

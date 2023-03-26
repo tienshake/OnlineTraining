@@ -14,16 +14,16 @@ export const navList: NavType[] = [
     title: "Course",
     patch: "/course",
   },
-  {
-    title: "Blog",
-    patch: "/blog",
-  },
+  // {
+  //   title: "Blog",
+  //   patch: "/blog",
+  // },
   {
     title: "My Course",
     patch: "/teacher/my-course",
   },
   {
-    title: "Create course",
+    title: "Create",
     patch: "/teacher/create-course",
   },
 ];
@@ -36,7 +36,7 @@ export const PENDING = "pending";
 export const START = "start";
 export const ACTIVE = "active";
 
-export const PROGRESS_ARR = [
+export const PROGRESS = [
   { id: INFO, title: "Basic information", status: PENDING },
   { id: COURSE, title: "Course Media", status: START },
   { id: CURRICULUM, title: "Curriculum", status: START },
