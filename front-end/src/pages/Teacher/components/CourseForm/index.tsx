@@ -2,20 +2,14 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaPlusCircle } from "react-icons/fa";
 import Section from "../Section";
-// import ControlPointIcon from "@mui/icons-material/ControlPoint";
+import styles from "./CourseForm.module.scss";
+import { SectionType } from "../../../../types";
+import { toast } from "react-toastify";
 
-export interface SectionType {
-  title: string;
-  lectures: {
-    name: string;
-    videoLink: string;
-  }[];
-}
-
-function CourseForm() {
-  const [sections, setSections] = useState<SectionType[]>([
-    { title: "", lectures: [] },
-  ]);
+function CourseForm({ formValues, setFormValues }: any) {
+  const [sections, setSections] = useState<SectionType[]>(
+    formValues.sectionCourse
+  );
 
   const { register, watch, handleSubmit, setValue } = useForm();
 
@@ -36,7 +30,11 @@ function CourseForm() {
   }
 
   function onSubmit(data: any) {
-    console.log(JSON.parse(data.sections));
+    setFormValues((prevValues: any) => ({
+      ...prevValues,
+      sectionCourse: JSON.parse(data.sections),
+    }));
+    toast.success("🦄 Wow so easy!");
   }
 
   React.useEffect(() => {
@@ -44,7 +42,7 @@ function CourseForm() {
   }, [setValue, sections]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       {sections &&
         sections?.map((section: SectionType, sectionIndex: number) => (
           <Section
@@ -57,12 +55,16 @@ function CourseForm() {
             watch={watch}
           />
         ))}
-      <button type="button" onClick={addSection}>
-        <FaPlusCircle />
-        Add Section
-      </button>
+      <div className={styles.control}>
+        <button type="button" onClick={addSection} className={styles.btnAdd}>
+          <FaPlusCircle />
+          Add Section
+        </button>
+        <button type="submit" className={styles.btnSave}>
+          Save
+        </button>
+      </div>
       {/* <ControlPointIcon type="button" onClick={addSection} /> */}
-      <button type="submit">Save</button>
       <input {...register("sections")} type="hidden" name="sections" />
     </form>
   );

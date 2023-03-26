@@ -1,6 +1,5 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { SectionType } from "../CourseForm";
 import styles from "./Section.module.scss";
 
 //material
@@ -13,14 +12,7 @@ import Button from "../../../../components/Button";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import Input from "../../../../components/Input";
 import YouTube from "react-youtube";
-// import * as Yup from "yup";
-// import { toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
-
-// const lectureSchema = Yup.object().shape({
-//   name: Yup.string().required("Lecture name is required"),
-//   videoLink: Yup.string().required("Video link is required"),
-// });
+import { SectionType } from "../../../../types";
 
 const opts = {
   height: "200",
@@ -32,7 +24,7 @@ const opts = {
   },
 };
 
-interface SectionProps {
+export interface SectionProps {
   sectionIndex: number;
   section: SectionType;
   setSection: React.Dispatch<React.SetStateAction<SectionType[]>>;
@@ -49,6 +41,8 @@ const Section = ({
   register,
   watch,
 }: SectionProps) => {
+  const [videoPlayer, setVideoPlayer] = React.useState<any>();
+
   function addLecture() {
     setSection((prevState) => {
       const sections = [...prevState];
@@ -56,6 +50,7 @@ const Section = ({
         name: "",
         videoLink: "",
       };
+
       sections[sectionIndex] = {
         ...sections[sectionIndex],
         lectures: [...sections[sectionIndex].lectures, newLecture],
@@ -100,6 +95,8 @@ const Section = ({
 
   const onReady = (e: any) => {
     e.target.pauseVideo();
+    setVideoPlayer(e.target);
+    console.log(videoPlayer && videoPlayer.getDuration());
   };
 
   return (
@@ -160,7 +157,6 @@ const Section = ({
                 onLectureNameChange(event, lectureIndex)
               }
             />
-
             <Input
               style={{ width: "20%" }}
               onClick={(e) => e.stopPropagation()}
