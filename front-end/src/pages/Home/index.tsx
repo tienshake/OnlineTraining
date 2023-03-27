@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import "../../../node_modules/slick-carousel/slick/slick.css";
 import "../../../node_modules/slick-carousel/slick/slick-theme.css";
 import './Home.css';
-import CoursesCate from '../../components/Card/CoursesCate';
+import CardCoursesCate from '../../components/Card/CardCoursesCate';
 import BoxSection from '../../components/BoxSection';
 
 
@@ -190,7 +190,7 @@ const Home = () => {
           <Slider  {...settings}>
             {data2.map((data, index) => (
               <div key={index} style={{ width: "100%", margin: 'auto' }} /* src={data.src} */>
-                <CoursesCate imageItem={data.imageItem} titleItem={data.titleItem} contentItem={data.contentItem} />
+                <CardCoursesCate imageItem={data.imageItem} titleItem={data.titleItem} contentItem={data.contentItem} />
               </div>
             ))}
           </Slider>
@@ -227,6 +227,48 @@ const Home = () => {
 
         <div>
           <BoxSection />
+        </div>
+
+        {/*  */}
+        <div className="master_skill_content">
+          <div className="left-content">
+            <ul className="wrap_box">
+              <li>
+                <CardBasicIntroduce
+                  imgItem="https://dreamslms.dreamguystech.com/html/assets/img/icon/icon-1.svg"
+                  titleItem=""
+                  contentItem="Keep up with in the latest in cloud"
+                />
+              </li>
+
+              <li>
+                <CardBasicIntroduce
+                  imgItem="https://dreamslms.dreamguystech.com/html/assets/img/icon/icon-1.svg"
+                  titleItem=""
+                  contentItem="Keep up with in the latest in cloud"
+                />
+              </li>
+
+              <li>
+                <CardBasicIntroduce
+                  imgItem="https://dreamslms.dreamguystech.com/html/assets/img/icon/icon-1.svg"
+                  titleItem=""
+                  contentItem="Keep up with in the latest in cloud"
+                />
+              </li>
+
+              <li>
+                <CardBasicIntroduce
+                  imgItem="https://dreamslms.dreamguystech.com/html/assets/img/icon/icon-1.svg"
+                  titleItem=""
+                  contentItem="Keep up with in the latest in cloud"
+                />
+              </li>
+            </ul>
+          </div>
+          <div className="right-content">
+            <img src="https://dreamslms.dreamguystech.com/html/assets/img/join.png" />
+          </div>
         </div>
       </div>
     </div>

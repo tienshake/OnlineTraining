@@ -6,7 +6,7 @@ interface MyCoursesCateProps {
     contentItem: String
 }
 
-export default function CoursesCate(props: MyCoursesCateProps) {
+export default function CardCoursesCate(props: MyCoursesCateProps) {
     return (
         <div className="coursesCate">
             <div className="content_box">

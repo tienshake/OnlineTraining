@@ -100,15 +100,14 @@
     margin: auto;
     margin-top: 60px;
     display: grid;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 25px;
     padding-bottom: 80px;
 }
 .wrapp_cardProduts-content div {
     background: #fff;
     border-radius: 10px;
-    height: 500px;
+    min-height: 300px;
     cursor: pointer;
     padding: 25px
 }
@@ -119,4 +118,33 @@
 .wrapp_cardProduts-content div:hover {
     background: #413655;
     color: #fff;
+}
+/* master skill content */
+.wrapp_body_home .master_skill_content {
+    display: flex;
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+    justify-content: space-between;
+}
+.wrapp_body_home .master_skill_content .left-content {
+    width: 60%;
+}
+.left-content .wrap_box {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-top: 40px;
+}
+.left-content .wrap_box li {
+    width: 82.5%;
+    max-height: 70px;
+    margin-bottom: 50px;
+}
+.wrapp_body_home .master_skill_content .right-content {
+    width: 40%;
+}
+.master_skill_content .right-content img {
+    width: 98%;
 }

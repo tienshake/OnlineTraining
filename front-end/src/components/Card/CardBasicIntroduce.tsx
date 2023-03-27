@@ -9,7 +9,7 @@ interface MyCardBasicIntroduceProps {
 export default function CardBasicIntroduce(props:MyCardBasicIntroduceProps) {
     return (
         <div className='card_basic-intro'>
-            <p>
+            <p className="content-left">
                 <img src={`${props.imgItem}`} alt="" />
             </p>
 

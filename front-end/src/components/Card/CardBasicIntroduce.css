@@ -9,16 +9,15 @@
     cursor: pointer;
     padding: 25px;
     display: flex;
+    gap: 15px;
 }
 .card_basic-intro:hover {
     transform: translateY(-5px);
 }
-.card_basic-intro p {
-    width: 50%;
+.card_basic-intro .content-left {
+    width: 40%;
 }
-.card_basic-intro h1 {
-    font-size: 20px
-}
+
 .card_basic-intro ul {
     width: 50%;
 }
