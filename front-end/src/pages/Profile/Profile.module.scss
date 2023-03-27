@@ -1,0 +1,114 @@
+.container {
+  display: flex;
+  padding-top: 60px;
+  gap: 30px;
+}
+
+.contentLeft {
+  flex: 1;
+}
+.contentRight {
+  flex: 3;
+  background: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+}
+
+.info {
+  border-radius: 10px;
+  background-color: var(--white);
+  overflow: hidden;
+  border: 1px solid #e9ecef;
+  margin-bottom: 30px;
+}
+
+.infoHeader {
+  background-color: #1562bf;
+  position: relative;
+  height: 120px;
+  h5 {
+    position: absolute;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 3px 10px;
+    color: #000000;
+    font-size: 14px;
+    right: 20px;
+    top: 20px;
+    margin: 0;
+  }
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -60%;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+  -ms-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+  border: 5px solid #ffffff;
+}
+
+.infoContent {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px;
+  padding-top: 70px;
+}
+
+.infoName {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.menu {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 15px;
+  border: 1px solid #e9ecef;
+}
+
+.menuHeader {
+  color: #392c7d;
+  font-weight: 600;
+  padding: 5px 0px 20px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.listMenu {
+}
+
+.listItem {
+  cursor: pointer;
+  padding: 20px;
+  border-bottom: 1px solid #e9ecef;
+  font-weight: 500;
+  font-size: 1.6rem;
+  position: relative;
+  transition: opacity 0.5s ease;
+  &:hover {
+    background: rgba(255, 222, 218, 0.25);
+    &:before {
+      content: "";
+      position: absolute;
+      background: #ff5364;
+      width: 2px;
+      height: 40px;
+      left: 9px;
+      top: 11px;
+      transition: all 0.5s ease;
+      -moz-transition: all 0.5s ease;
+      -o-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+      -webkit-transition: all 0.5s ease;
+      opacity: 1;
+      transition-delay: 0.5s;
+    }
+  }
+}

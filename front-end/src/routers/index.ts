@@ -10,6 +10,7 @@ import InfoCourses from "../admin/InfoCourses";
 import Category from "../admin/pages/category";
 import Home from "../pages/Home";
 import CreateCourse from "../pages/Teacher/CreateCourse";
+import Profile from "../pages/Profile";
 
 const publicRoute: RouteType[] = [
   {
@@ -28,6 +29,11 @@ const publicRoute: RouteType[] = [
 ];
 
 const privateRoute: RouteType[] = [
+  {
+    component: Profile,
+    patch: "/profile",
+    defaultLayout: true,
+  },
   {
     component: CreateCourse,
     patch: "teacher/create-course",

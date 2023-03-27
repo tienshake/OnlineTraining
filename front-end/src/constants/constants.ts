@@ -14,13 +14,13 @@ export const navList: NavType[] = [
     title: "Course",
     patch: "/course",
   },
-  // {
-  //   title: "Blog",
-  //   patch: "/blog",
-  // },
   {
-    title: "My Course",
-    patch: "/teacher/my-course",
+    title: "Blog",
+    patch: "/blog",
+  },
+  {
+    title: "Profile",
+    patch: "/profile",
   },
   {
     title: "Create",
