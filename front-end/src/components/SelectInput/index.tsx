@@ -36,6 +36,7 @@ const SelectInput = (props: SelectInputProps) => {
       {...rest}
       className={clsx(styles.selectInput, className)}
       onChange={handleOnchange}
+      MenuProps={{ disableScrollLock: true }}
       value={
         props.value
           ? arrSelect.find((option) => option.id === props.value)?.title

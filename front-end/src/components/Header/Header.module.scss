@@ -4,8 +4,14 @@
   position: fixed;
   top: 0;
   width: 100%;
+  min-width: 100%;
   z-index: 999;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.078);
+}
+
+.menuIcon {
+  color: black;
+  font-size: 3rem !important;
 }
 
 .list {

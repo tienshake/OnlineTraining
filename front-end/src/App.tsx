@@ -1,3 +1,4 @@
+import React from "react";
 import "./App.css";
 import {
   BrowserRouter as Router,
@@ -13,6 +14,7 @@ import NotFound from "./pages/NotFound";
 
 function App() {
   const isLogged = true;
+
   return (
     <GlobalStyle>
       <Router>
@@ -69,7 +71,7 @@ function App() {
           <Route
             path="*"
             element={
-              <DefaultLayout>
+              <DefaultLayout onlyNotFound>
                 <NotFound />
               </DefaultLayout>
             }

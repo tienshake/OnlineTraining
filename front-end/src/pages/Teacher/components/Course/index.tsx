@@ -40,7 +40,7 @@ const Course = ({ setFormValues, formValues }: any) => {
     <Box className={styles.container}>
       <h4>Courses Media</h4>
       <Stack paddingBottom={3} gap={3}>
-        <label>Course cover formValues.avatar</label>
+        <label>Course cover</label>
         <Box className={styles.addContain}>
           {formValues.avatar?.fileName
             ? formValues.avatar?.fileName

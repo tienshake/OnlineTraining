@@ -6,10 +6,12 @@ import styles from "./DefaultLayout.module.scss";
 type Props = {
   children: React.ReactNode;
   onlyHome?: boolean;
+  onlyNotFound?: boolean;
 };
 
-const DefaultLayout = ({ children, onlyHome = false }: Props) => {
-  const styleHome = onlyHome ? { maxWidth: "100%", background:'#fff' } : {};
+const DefaultLayout = ({ children, onlyHome = false, onlyNotFound }: Props) => {
+  const styleHome =
+    onlyNotFound || onlyHome ? { maxWidth: "100%", background: "#fff" } : {};
 
   return (
     <>
