@@ -1,0 +1,127 @@
+.card_basic-intro {
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    /* transition: transform 5s esae-in-out; */
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: #fff;
+    border: 1px solid #e9ecef;
+    cursor: pointer;
+    padding: 25px;
+    display: flex;
+    gap: 15px;
+}
+.card_basic-intro:hover {
+    transform: translateY(-5px);
+}
+.card_basic-intro .content-left {
+    width: 40%;
+}
+
+.card_basic-intro ul {
+    width: 50%;
+}
+
+
+
+/* coursesCate */
+.coursesCate {
+    background: #fff;
+    width: 90%;
+    height: 270px;
+    margin: auto;
+    border-radius: 10px;
+    border: 1px solid #e9ecef; 
+    text-aligt: center;
+    display:flex;
+    justify-content: center;
+    cursor:pointer
+}
+.coursesCate .content_box {
+    margin-top: 25px;
+}
+.coursesCate .content_box img {
+    width: 100px;
+    height: 100px;
+}
+.coursesCate .content_box h1 {
+    text-align: center;
+    max-width: 100px;
+    margin-top: 20px;
+}
+.coursesCate .content_box p {
+    margin-top: 20px;
+}
+
+.coursesCate:hover {
+    background: #413655;
+    color: #fff 
+}
+
+/* Card Main Product  */
+.wrapp_cardProduts-content {
+    display: flex;
+    width: 100%;
+    margin: auto;
+}
+.body_content-card {
+    background: #fff;
+    border-radius: 10px;
+    min-height: 300px;
+    cursor: pointer;
+    padding: 15px
+}
+.wrapp_cardProduts-content .body_content-card img {
+    border-radius: 10px;
+    width: 100%;
+}
+.wrapp_cardProduts-content .body_content-card:hover {
+    background: #413655;
+    color: #fff;
+}
+.wrapp_cardProduts-content .box-content-user {
+    display: flex;
+    gap: 3px;
+    justify-content: space-between;
+    margin-top: 8px
+}
+.wrapp_cardProduts-content .box-content-user li:first-child {
+    width: 20%;
+}
+.box-content-user li:first-child img {
+    border-radius: 50%
+}
+.wrapp_cardProduts-content .box-content-user .between-item {
+    width: 50%;
+}
+.wrapp_cardProduts-content .box-content-user li:last-child {
+    width: 20%;
+    text-align: end
+}
+.wrapp_cardProduts-content .body_content-card h2 {
+    margin-top: 10px;
+    font-size: 15px
+}
+.wrapp_cardProduts-content .body_content-card .line-style {
+    width: 100%;
+    background: #c1c1c1;
+    height: 1px;
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+.wrapp_cardProduts-content .body_content-card .group_btn-card {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    gap: 20px
+}
+.wrapp_cardProduts-content .body_content-card .group_btn-card  li{
+    width: 50%;
+    font-size: 13px;
+    align-items: center;
+    display: flex;
+
+}
+.wrapp_cardProduts-content .body_content-card .group_btn-card  li:last-child{
+    /* text-align: end */
+}

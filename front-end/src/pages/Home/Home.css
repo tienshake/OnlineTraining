@@ -85,39 +85,23 @@
 /* Body home */
 .wrapp_body_home {
     /* min-height: 700px */
+    margin-top: 82px;
 }
 /*  */
-.wrapp_body_home .box_carosel_topCate {
+/* .wrapp_body_home .box_carosel_topCate {
     width: 82%;
     margin: auto;
     margin-top: 80px;
 
-}
-/*  */
-.wrapp_cardProduts-content {
-    display: flex;
+} */
+.box_featured_courses .content-cardTopCate {
     width: 80%;
     margin: auto;
-    margin-top: 60px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 25px;
+    margin-top: 60px;
     padding-bottom: 80px;
-}
-.wrapp_cardProduts-content div {
-    background: #fff;
-    border-radius: 10px;
-    min-height: 300px;
-    cursor: pointer;
-    padding: 25px
-}
-.wrapp_cardProduts-content div img {
-    border-radius: 10px;
-    width: 100%;
-}
-.wrapp_cardProduts-content div:hover {
-    background: #413655;
-    color: #fff;
 }
 /* master skill content */
 .wrapp_body_home .master_skill_content {

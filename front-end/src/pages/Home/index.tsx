@@ -7,6 +7,7 @@ import "../../../node_modules/slick-carousel/slick/slick-theme.css";
 import './Home.css';
 import CardCoursesCate from '../../components/Card/CardCoursesCate';
 import BoxSection from '../../components/BoxSection';
+import CardMainProduct from "../../components/Card/CardMainProduct";
 
 
 const Home = () => {
@@ -200,29 +201,16 @@ const Home = () => {
         <div style={{ backgroundImage: 'url("https://dreamslms.dreamguystech.com/html/assets/img/banner.png")', marginTop: '90px', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }} className='box_featured_courses'>
           <BoxSection />
 
-          <div className='wrapp_cardProduts-content'>
-            <div><img src='https://dreamslms.dreamguystech.com/html/assets/img/course/course-01.jpg' alt='' /></div>
-
-            <div>
-              <img src='https://dreamslms.dreamguystech.com/html/assets/img/course/course-06.jpg' alt='' />
-            </div>
-
-            <div>
-              <img src='https://dreamslms.dreamguystech.com/html/assets/img/course/course-05.jpg' alt='' />
-            </div>
-
-            <div>
-              <img src='https://dreamslms.dreamguystech.com/html/assets/img/course/course-03.jpg' alt='' />
-            </div>
-
-            <div>
-              <img src='https://dreamslms.dreamguystech.com/html/assets/img/course/course-02.jpg' alt='' />
-            </div>
-
-            <div>
-              <img src='https://dreamslms.dreamguystech.com/html/assets/img/course/course-02.jpg' alt='' />
-            </div>
+          <div className="content-cardTopCate">
+            <CardMainProduct />
+            <CardMainProduct />
+            <CardMainProduct />
+            <CardMainProduct />
+            <CardMainProduct />
+            <CardMainProduct />
+            <CardMainProduct />
           </div>
+
         </div>
 
         <div>

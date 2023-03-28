@@ -1,4 +1,4 @@
-import "./CardBasicIntroduce.css";
+import "./Card.css";
 
 interface MyCoursesCateProps {
     imageItem: String,
