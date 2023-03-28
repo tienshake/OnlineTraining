@@ -239,6 +239,7 @@ const Home = () => {
           </div>
         </div>
 
+        {/*  */}
         <div className="trending_courses" style={{ backgroundImage: 'url("https://dreamslms.dreamguystech.com/html/assets/img/banner.png")', marginTop: '90px', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
           <BoxSection />
 
@@ -251,16 +252,38 @@ const Home = () => {
               ))}
             </Slider>
 
-            <BoxTitle/>
+            <BoxTitle />
 
 
             <Slider  {...settings}>
               {data2.map((data, index) => (
                 <div key={index} style={{ width: "100%", margin: 'auto' }} /* src={data.src} */>
-                  <CardUserStyle widthCard="95%" imageItem="https://dreamslms.dreamguystech.com/html/assets/img/user/user7.jpg"/>
+                  <CardUserStyle widthCard="95%" imageItem="https://dreamslms.dreamguystech.com/html/assets/img/user/user7.jpg" />
                 </div>
               ))}
             </Slider>
+          </div>
+        </div>
+
+
+        <div className="banner_advertising">
+          <p>Trusted By</p>
+          <h1>500+ Leading Universities And Companies</h1>
+        </div>
+
+        <ul className="brand_funding">
+          <li><img src="https://dreamslms.dreamguystech.com/html/assets/img/lead-01.png" alt="" /></li>
+          <li><img src="https://dreamslms.dreamguystech.com/html/assets/img/lead-02.png" alt="" /></li>
+          <li><img src="https://dreamslms.dreamguystech.com/html/assets/img/lead-03.png" alt="" /></li>
+          <li><img src="https://dreamslms.dreamguystech.com/html/assets/img/lead-04.png" alt="" /></li>
+          <li><img src="https://dreamslms.dreamguystech.com/html/assets/img/lead-05.png" alt="" /></li>
+          <li><img src="https://dreamslms.dreamguystech.com/html/assets/img/lead-06.png" alt="" /></li>
+        </ul>
+
+        <div style={{ backgroundImage: 'url("https://dreamslms.dreamguystech.com/html/assets/img/bg-banner-02.png")', marginTop: '90px', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', width: '100%' }}>
+          <div className="box-content-inform" >
+            <div><img src="https://dreamslms.dreamguystech.com/html/assets/img/share.png" style={{ width: '100%' }} alt="" /></div>
+            <div>s</div>
           </div>
         </div>
 

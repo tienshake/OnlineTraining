@@ -141,3 +141,37 @@
     margin-top: 80px;
     padding-bottom: 70px
 }
+
+/* banner advertising */
+.banner_advertising {
+    width: 100%;
+    text-align: center;
+    margin-top: 70px;
+    margin-bottom: 70px;
+}
+.banner_advertising h1 {
+    font-size: 37px;
+    color: #000;
+}
+
+/* brand funding */
+.brand_funding {
+    display: flex;
+    width: 80%;
+    margin: auto;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 70px;
+}
+
+/* box content inform */
+.box-content-inform {
+    display: flex;
+    width: 80%;
+    margin: auto;
+    justify-content: space-between;
+    align-items: center;
+}
+.box-content-inform div {
+    width: 50%;
+}
