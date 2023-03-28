@@ -1,10 +1,12 @@
 import { AiOutlineHeart } from "react-icons/ai"
-import StarGroup from "../IconGroup/StarGroup"
+import StarGroup from "../IconGroup/StarGroup";
+import { CardMainProductProps } from "../../constants/constants";
 import "./Card.css"
 
-export default function CardMainProduct() {
+
+export default function CardMainProduct(props: CardMainProductProps) {
     return (
-        <div className='wrapp_cardProduts-content'>
+        <div style={{ width: `${props.widthCard}` }} className='wrapp_cardProduts-content'>
             <div className="body_content-card">
                 <img src='https://dreamslms.dreamguystech.com/html/assets/img/course/course-01.jpg' alt='' />
 

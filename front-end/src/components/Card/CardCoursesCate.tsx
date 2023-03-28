@@ -1,10 +1,6 @@
+import { MyCoursesCateProps } from "../../constants/constants";
 import "./Card.css";
 
-interface MyCoursesCateProps {
-    imageItem: String,
-    titleItem: String,
-    contentItem: String
-}
 
 export default function CardCoursesCate(props: MyCoursesCateProps) {
     return (

@@ -42,3 +42,23 @@ export const PROGRESS = [
   { id: CURRICULUM, title: "Curriculum", status: START },
   { id: SETTING, title: "Settings", status: START },
 ];
+
+
+/* My Card Prop */
+export interface MyCardBasicIntroduceProps {
+  imageItem?: String,
+  titleItem?: String,
+  contentItem?: String,
+  widthCard?: String, 
+}
+export interface MyCoursesCateProps extends MyCardBasicIntroduceProps {
+
+}
+export interface CardMainProductProps extends MyCardBasicIntroduceProps  {
+
+}
+export interface CardUserStyleProps extends MyCardBasicIntroduceProps {
+
+}
+
+

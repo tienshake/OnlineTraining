@@ -84,22 +84,20 @@
 
 /* Body home */
 .wrapp_body_home {
-    /* min-height: 700px */
     margin-top: 82px;
 }
 /*  */
-/* .wrapp_body_home .box_carosel_topCate {
+.wrapp_body_home .box_carosel_topCate {
     width: 82%;
     margin: auto;
     margin-top: 80px;
-
-} */
+}
 .box_featured_courses .content-cardTopCate {
     width: 80%;
     margin: auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
+    gap: 20px;
     margin-top: 60px;
     padding-bottom: 80px;
 }
@@ -131,4 +129,15 @@
 }
 .master_skill_content .right-content img {
     width: 98%;
+}
+
+/* trending courses */
+.trending_courses {
+    /* background: red */
+}
+.trending_courses .box_carosel_trending {
+    width: 82%;
+    margin: auto;
+    margin-top: 80px;
+    padding-bottom: 70px
 }

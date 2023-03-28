@@ -61,7 +61,7 @@
 /* Card Main Product  */
 .wrapp_cardProduts-content {
     display: flex;
-    width: 100%;
+    /* width: 100%; */
     margin: auto;
 }
 .body_content-card {
@@ -125,3 +125,24 @@
 .wrapp_cardProduts-content .body_content-card .group_btn-card  li:last-child{
     /* text-align: end */
 }
+
+/* Card Style */
+.cardUser_Style {
+    text-align: center;
+    background: #fff;
+    min-height: 350px;
+    padding-bottom: 20px
+}
+.cardUser_Style img {
+   width: 100%;
+   border-top-left-radius: 10px; 
+   border-top-right-radius: 10px; 
+}
+.cardUser_Style h2 {
+    margin-top: 18px;
+    font-size: 19px
+}
+.cardUser_Style p {
+    margin-top: 10px;
+ }
+

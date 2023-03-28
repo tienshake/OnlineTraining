@@ -8,6 +8,8 @@ import './Home.css';
 import CardCoursesCate from '../../components/Card/CardCoursesCate';
 import BoxSection from '../../components/BoxSection';
 import CardMainProduct from "../../components/Card/CardMainProduct";
+import BoxTitle from "../../components/BoxTitle";
+import CardUserStyle from "../../components/Card/CardUserStyle";
 
 
 const Home = () => {
@@ -101,29 +103,7 @@ const Home = () => {
     ],
   };
 
-  const data = [
-    {
-      src: "https://mamuka.rest/upload/resize_cache/iblock/572/700_9999_1/572fa86f2285617fe047a6d55c310916.jpg",
-    },
-    {
-      src: "https://mamuka.rest/upload/resize_cache/iblock/85d/700_9999_1/85dbc36067a19873a842761cc5f3a8d7.jpg",
-    },
-    {
-      src: "https://mamuka.rest/upload/resize_cache/iblock/dcc/700_9999_1/dcc4459f90e0ee7a9c4a462faf6c0c4b.jpg",
-    },
-    {
-      src: "https://mamuka.rest/upload/resize_cache/iblock/572/700_9999_1/572fa86f2285617fe047a6d55c310916.jpg",
-    },
-    {
-      src: "https://mamuka.rest/upload/resize_cache/iblock/572/700_9999_1/572fa86f2285617fe047a6d55c310916.jpg",
-    },
-    {
-      src: "https://mamuka.rest/upload/resize_cache/iblock/572/700_9999_1/572fa86f2285617fe047a6d55c310916.jpg",
-    },
-    {
-      src: "https://mamuka.rest/upload/resize_cache/iblock/572/700_9999_1/572fa86f2285617fe047a6d55c310916.jpg",
-    },
-  ];
+
 
   return (
     <div className={styles.container}>
@@ -172,7 +152,7 @@ const Home = () => {
           {items1.map((items1, index) => (
             <li key={index}>
               <CardBasicIntroduce
-                imgItem={items1.img}
+                imageItem={items1.img}
                 titleItem={items1.title}
                 contentItem={items1.content}
               />
@@ -202,13 +182,13 @@ const Home = () => {
           <BoxSection />
 
           <div className="content-cardTopCate">
-            <CardMainProduct />
-            <CardMainProduct />
-            <CardMainProduct />
-            <CardMainProduct />
-            <CardMainProduct />
-            <CardMainProduct />
-            <CardMainProduct />
+            <CardMainProduct widthCard="100%" />
+            <CardMainProduct widthCard="100%" />
+            <CardMainProduct widthCard="100%" />
+            <CardMainProduct widthCard="100%" />
+            <CardMainProduct widthCard="100%" />
+            <CardMainProduct widthCard="100%" />
+            <CardMainProduct widthCard="100%" />
           </div>
 
         </div>
@@ -223,7 +203,7 @@ const Home = () => {
             <ul className="wrap_box">
               <li>
                 <CardBasicIntroduce
-                  imgItem="https://dreamslms.dreamguystech.com/html/assets/img/icon/icon-1.svg"
+                  imageItem="https://dreamslms.dreamguystech.com/html/assets/img/icon/icon-1.svg"
                   titleItem=""
                   contentItem="Keep up with in the latest in cloud"
                 />
@@ -231,7 +211,7 @@ const Home = () => {
 
               <li>
                 <CardBasicIntroduce
-                  imgItem="https://dreamslms.dreamguystech.com/html/assets/img/icon/icon-1.svg"
+                  imageItem="https://dreamslms.dreamguystech.com/html/assets/img/icon/icon-1.svg"
                   titleItem=""
                   contentItem="Keep up with in the latest in cloud"
                 />
@@ -239,7 +219,7 @@ const Home = () => {
 
               <li>
                 <CardBasicIntroduce
-                  imgItem="https://dreamslms.dreamguystech.com/html/assets/img/icon/icon-1.svg"
+                  imageItem="https://dreamslms.dreamguystech.com/html/assets/img/icon/icon-1.svg"
                   titleItem=""
                   contentItem="Keep up with in the latest in cloud"
                 />
@@ -247,7 +227,7 @@ const Home = () => {
 
               <li>
                 <CardBasicIntroduce
-                  imgItem="https://dreamslms.dreamguystech.com/html/assets/img/icon/icon-1.svg"
+                  imageItem="https://dreamslms.dreamguystech.com/html/assets/img/icon/icon-1.svg"
                   titleItem=""
                   contentItem="Keep up with in the latest in cloud"
                 />
@@ -258,6 +238,32 @@ const Home = () => {
             <img src="https://dreamslms.dreamguystech.com/html/assets/img/join.png" />
           </div>
         </div>
+
+        <div className="trending_courses" style={{ backgroundImage: 'url("https://dreamslms.dreamguystech.com/html/assets/img/banner.png")', marginTop: '90px', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+          <BoxSection />
+
+          <div style={{ backgroundColor: "" }} className='box_carosel_trending'>
+            <Slider  {...settings}>
+              {data2.map((data, index) => (
+                <div key={index} style={{ width: "100%", margin: 'auto' }} /* src={data.src} */>
+                  <CardMainProduct widthCard="95%" />
+                </div>
+              ))}
+            </Slider>
+
+            <BoxTitle/>
+
+
+            <Slider  {...settings}>
+              {data2.map((data, index) => (
+                <div key={index} style={{ width: "100%", margin: 'auto' }} /* src={data.src} */>
+                  <CardUserStyle widthCard="95%" imageItem="https://dreamslms.dreamguystech.com/html/assets/img/user/user7.jpg"/>
+                </div>
+              ))}
+            </Slider>
+          </div>
+        </div>
+
       </div>
     </div>
   );
