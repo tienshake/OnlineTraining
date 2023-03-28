@@ -11,16 +11,25 @@ interface MasterLayoutAdminProps {
   children: React.ReactNode;
 }
 
-export default function MasterLayoutAdmin({ children }: MasterLayoutAdminProps) {
-    return (
-        <>
-            <div className='layout_admin'>
-                <div className='wrapp_menu_dashboard'>
-                    <div className='menu_dashboard' style={{ background: '', color: '#fff' }}>
-                        <ul className='group_logo-name_admin'>
-                            <li><p className='logo'></p></li>
-                            <li><p className='name'>Admin</p></li>
-                        </ul>
+export default function MasterLayoutAdmin({
+  children,
+}: MasterLayoutAdminProps) {
+  return (
+    <>
+      <div className="layout_admin">
+        <div className="wrapp_menu_dashboard">
+          <div
+            className="menu_dashboard"
+            style={{ background: "", color: "#fff" }}
+          >
+            <ul className="group_logo-name_admin">
+              <li>
+                <p className="logo"></p>
+              </li>
+              <li>
+                <p className="name">Admin</p>
+              </li>
+            </ul>
 
             <ul
               className="list_nemu_dashboard"

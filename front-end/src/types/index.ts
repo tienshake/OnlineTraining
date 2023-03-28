@@ -1,8 +1,14 @@
 // Route
+
+export interface childrenRouteType {
+  component: any;
+  patch: string;
+}
 export interface RouteType {
   component: any;
   patch: string;
   defaultLayout?: boolean;
+  children?: childrenRouteType[];
 }
 
 //API type

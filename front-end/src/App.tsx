@@ -11,6 +11,7 @@ import { publicRoute, privateRoute } from "./routers";
 import { RouteType } from "./types";
 import DefaultLayout from "./layout/DefaultLayout";
 import NotFound from "./pages/NotFound";
+import EditProfile from "./components/EditProfile";
 
 function App() {
   const isLogged = true;
@@ -19,7 +20,6 @@ function App() {
     <GlobalStyle>
       <Router>
         <Routes>
-          {/* <Route path="/" element={<Navigate to="teacher/create-course" />} /> */}
           {publicRoute?.map((route: RouteType, i: number) => {
             const Component = route.component;
             return (
@@ -64,7 +64,16 @@ function App() {
                     <Navigate to="/login" />
                   )
                 }
-              />
+              >
+                {/* <Route path="edit-profile" element={<EditProfile />} /> */}
+                {route.children &&
+                  route.children?.map((item, index) => (
+                    <React.Fragment key={index}>
+                      <Route index element={<EditProfile />} />
+                      <Route path={item.patch} element={<item.component />} />
+                    </React.Fragment>
+                  ))}
+              </Route>
             );
           })}
 

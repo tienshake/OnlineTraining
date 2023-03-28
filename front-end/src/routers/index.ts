@@ -11,6 +11,8 @@ import Category from "../admin/pages/category";
 import Home from "../pages/Home";
 import CreateCourse from "../pages/Teacher/CreateCourse";
 import Profile from "../pages/Profile";
+import EditProfile from "../components/EditProfile";
+import DeleteProfile from "../components/DeleteProfile";
 
 const publicRoute: RouteType[] = [
   {
@@ -33,10 +35,20 @@ const privateRoute: RouteType[] = [
     component: Profile,
     patch: "/profile",
     defaultLayout: true,
+    children: [
+      {
+        component: EditProfile,
+        patch: "edit-profile",
+      },
+      {
+        component: DeleteProfile,
+        patch: "delete-profile",
+      },
+    ],
   },
   {
     component: CreateCourse,
-    patch: "teacher/create-course",
+    patch: "/teacher/create-course",
     defaultLayout: true,
   },
   {

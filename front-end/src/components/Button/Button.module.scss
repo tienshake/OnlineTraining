@@ -19,6 +19,7 @@
   }
 }
 
+.buttonDelete,
 .buttonNext,
 .buttonSave,
 .buttonBack {
@@ -61,5 +62,37 @@
   &:hover {
     border-color: var(--color-button-next) !important;
     color: var(--color-button-next) !important;
+  }
+}
+
+.buttonDelete {
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+
+  &:hover {
+    border-color: var(--primary) !important;
+    color: var(--primary) !important;
+  }
+}
+
+.outLineDelete {
+  background-color: var(--white) !important;
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+  &:hover {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    color: var(--white) !important;
+  }
+}
+
+.outLineSave {
+  background-color: var(--white) !important;
+  border-color: var(--color-button-save) !important;
+  color: var(--color-button-save) !important;
+  &:hover {
+    background-color: var(--color-button-save) !important;
+    border-color: var(--color-button-save) !important;
+    color: var(--white) !important;
   }
 }
