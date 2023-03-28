@@ -9,6 +9,7 @@ interface ButtonPropsType {
   path?: string;
   circle?: boolean;
   className?: string;
+  outline?: boolean;
 }
 
 const Button = (props: ButtonProps & ButtonPropsType) => {
@@ -36,7 +37,16 @@ const Button = (props: ButtonProps & ButtonPropsType) => {
 };
 
 const ButtonSave = (props: ButtonProps & ButtonPropsType) => {
-  return <Button {...props} className={styles.buttonSave} />;
+  return (
+    <Button
+      {...props}
+      className={clsx(
+        styles.buttonSave,
+        props.outline && styles.outLineSave,
+        props.className
+      )}
+    />
+  );
 };
 
 const ButtonBack = (props: ButtonProps & ButtonPropsType) => {
@@ -49,6 +59,19 @@ const ButtonNext = (props: ButtonProps & ButtonPropsType) => {
   );
 };
 
-export { ButtonSave, ButtonBack, ButtonNext };
+const ButtonDelete = (props: ButtonProps & ButtonPropsType) => {
+  return (
+    <Button
+      {...props}
+      className={clsx(
+        styles.buttonDelete,
+        props.outline && styles.outLineDelete,
+        props.className
+      )}
+    />
+  );
+};
+
+export { ButtonSave, ButtonBack, ButtonNext, ButtonDelete };
 
 export default Button;

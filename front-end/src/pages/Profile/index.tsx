@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./Profile.module.scss";
 import { Box } from "@mui/material";
 import { ButtonBack } from "../../components/Button";
+import { Link, Outlet } from "react-router-dom";
+import { MENU_PROFILE } from "../../constants/constants";
 
 const Profile = () => {
   return (
@@ -27,16 +29,17 @@ const Profile = () => {
         <Box className={styles.menu}>
           <Box className={styles.menuHeader}>DASHBOARD</Box>
           <ul className={styles.listMenu}>
-            <li className={styles.listItem}>My Course</li>
-            <li className={styles.listItem}>Reviews</li>
-            <li className={styles.listItem}>Student</li>
-            <li className={styles.listItem}>Edit Profile</li>
-            <li className={styles.listItem}>Delete Profile</li>
-            <li className={styles.listItem}>Sign Out</li>
+            {MENU_PROFILE?.map((menu, index) => (
+              <li key={index} className={styles.listItem}>
+                <Link to={menu.patch}>{menu.title}</Link>
+              </li>
+            ))}
           </ul>
         </Box>
       </Box>
-      <Box className={styles.contentRight}>Profile</Box>
+      <Box className={styles.contentRight}>
+        <Outlet />
+      </Box>
     </Box>
   );
 };

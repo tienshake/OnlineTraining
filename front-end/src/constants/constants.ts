@@ -28,6 +28,33 @@ export const navList: NavType[] = [
   },
 ];
 
+export const MENU_PROFILE = [
+  {
+    title: "My Course",
+    patch: "/profile/edit-profile",
+  },
+  {
+    title: "Reviews",
+    patch: "/profile/edit-profile",
+  },
+  {
+    title: "Student",
+    patch: "/profile/edit-profile",
+  },
+  {
+    title: "Edit Profile",
+    patch: "/profile/edit-profile",
+  },
+  {
+    title: "Delete Profile",
+    patch: "/profile/delete-profile",
+  },
+  {
+    title: "Sign Out",
+    patch: "/profile/delete-profile",
+  },
+];
+
 export const INFO = "info";
 export const COURSE = "course";
 export const CURRICULUM = "curriculum";
