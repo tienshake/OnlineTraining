@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Information.module.scss";
 import { Box, Stack } from "@mui/material";
 import Input from "../../../../components/Input";
@@ -46,11 +45,7 @@ const Information = ({ setFormValues, formValues }: any) => {
         <label>Course Category</label>
         <SelectInput
           value={formValues.courseCategory}
-          arrSelect={[
-            { id: 1, title: "Option 1" },
-            { id: 2, title: "Option 2" },
-            { id: 3, title: "Option 3" },
-          ]}
+          arrSelect={formValues.courseCategoryArray}
           onChange={handleSelectChange}
         />
       </Stack>
@@ -60,7 +55,6 @@ const Information = ({ setFormValues, formValues }: any) => {
           handleOnChange={handleOnchangeMarkdown}
           value={formValues.courseDescriptions}
         />
-        {/* <Input placeholder="Courses Level" /> */}
       </Stack>
     </Box>
   );

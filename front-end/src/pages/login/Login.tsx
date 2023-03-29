@@ -1,41 +1,52 @@
 import React, { useState } from "react";
 import axios from "axios";
-import userServices from "../../services/user";
 import style from "./Login.module.scss";
 import logologin from "../../assets/images/login-img.png";
 import dream from "../../assets/images/so-do.jpg";
 import icon1 from "../../assets/images/net-icon-01.png";
 import icon2 from "../../assets/images/net-icon-02.png";
 import { Link } from "react-router-dom";
+import { loginSuccess } from "../../redux/features/auth";
+import { useDispatch } from "react-redux";
+import checkDataApi from "../../utils/checkDataApi";
+import { useNavigate } from "react-router-dom";
+// import { Buffer } from "buffer";
+import covertB64 from "../../utils/covertB64";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  let navigate = useNavigate();
 
-  const login = async (email: string, password: string) => {
+  const handleLogin = async (e: any) => {
+    e.preventDefault();
     try {
       const response = await axios.post("http://localhost:8080/user/login", {
         email,
         password,
       });
-      console.log(response);
-      const token = response.data.user.token;
-      console.log(token);
-      localStorage.setItem("token", `Bearer ${token}`);
-      return true;
+      const result = checkDataApi(response);
+      if (result) {
+        const token = result?.data.token;
+        localStorage.setItem("token", `Bearer ${token}`);
+        console.log("result", result);
+        dispatch(
+          loginSuccess({
+            token: result?.data.token,
+            user: {
+              name: result?.data.name,
+              email: result?.data.email,
+              id: result?.data.id,
+              avatar: covertB64(result?.data?.user_details.avatar),
+            },
+          })
+        );
+        navigate("/");
+      }
     } catch (error) {
-      console.error(error);
-      return false;
+      console.log(error);
     }
-  };
-
-  const getUser = async (id: string) => {
-    const user = await userServices.getUserApi(id);
-    console.log(
-      "console.log(process.env.REACT_APP_API_URL);",
-      process.env.REACT_APP_API_URL
-    );
-    console.log("user: ", user);
   };
 
   return (
@@ -58,15 +69,25 @@ const Login = () => {
           <Link to="/">back to home</Link>
         </div>
         <h2>Sign into Your Account</h2>
-        <form action="">
+        <form onSubmit={handleLogin}>
           <label htmlFor="">Email</label>
-          <input type="text" placeholder="Enter your email address" />
+          <input
+            value={email}
+            onChange={(e: any) => setEmail(e.target.value)}
+            type="text"
+            placeholder="Enter your email address"
+          />
           <label htmlFor="">Password</label>
-          <input type="text" placeholder="Enter you password" />
+          <input
+            value={password}
+            onChange={(e: any) => setPassword(e.target.value)}
+            type="text"
+            placeholder="Enter you password"
+          />
           <label className={style.forgot} htmlFor="">
             Forgot Password ?
           </label>
-          <a href="Forgot Password?"></a>
+          {/* <a href="Forgot Password?">Forgot Password?</a> */}
           <label className={style.checkbox} htmlFor="">
             <input type="checkbox" />
             <span>Remember</span>

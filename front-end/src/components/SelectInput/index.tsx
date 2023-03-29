@@ -1,5 +1,5 @@
-import React from "react";
-import { Select, SelectProps, MenuItem } from "@mui/material";
+import React, { useEffect } from "react";
+import { Select, MenuItem } from "@mui/material";
 import styles from "./SelectInput.module.scss";
 import clsx from "clsx";
 
@@ -16,10 +16,12 @@ interface SelectInputProps {
 }
 
 const SelectInput = (props: SelectInputProps) => {
-  const { onChange, className, arrSelect, ...rest } = props;
-  const [select, setSelect] = React.useState(
-    arrSelect.length > 0 ? arrSelect[0].title : ""
-  );
+  const { onChange, className, arrSelect, value, ...rest } = props;
+  const [select, setSelect] = React.useState("");
+
+  useEffect(() => {
+    setSelect(arrSelect.length > 0 ? arrSelect[0].title : "");
+  }, [arrSelect]);
 
   const handleOnchange = (e: any) => {
     const selectedId = arrSelect.find(
@@ -38,9 +40,7 @@ const SelectInput = (props: SelectInputProps) => {
       onChange={handleOnchange}
       MenuProps={{ disableScrollLock: true }}
       value={
-        props.value
-          ? arrSelect.find((option) => option.id === props.value)?.title
-          : select
+        value ? arrSelect.find((option) => option.id === value)?.title : select
       }
     >
       {arrSelect?.map((item, i) => (

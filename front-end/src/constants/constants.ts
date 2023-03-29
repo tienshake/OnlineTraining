@@ -9,7 +9,7 @@ export const CODE_SUCCESS = 0;
 export const IMG_URL =
   "https://tudienwiki.com/wp-content/uploads/2017/07/lien-minh-huyen-thoai.png";
 
-export const navList: NavType[] = [
+export const NAV_LIST: NavType[] = [
   {
     title: "Course",
     patch: "/course",
@@ -22,25 +22,13 @@ export const navList: NavType[] = [
     title: "Profile",
     patch: "/profile",
   },
-  {
-    title: "Create",
-    patch: "/teacher/create-course",
-  },
+  // {
+  //   title: "Create",
+  //   patch: "/teacher/create-course",
+  // },
 ];
 
 export const MENU_PROFILE = [
-  {
-    title: "My Course",
-    patch: "/profile/edit-profile",
-  },
-  {
-    title: "Reviews",
-    patch: "/profile/edit-profile",
-  },
-  {
-    title: "Student",
-    patch: "/profile/edit-profile",
-  },
   {
     title: "Edit Profile",
     patch: "/profile/edit-profile",
@@ -50,8 +38,21 @@ export const MENU_PROFILE = [
     patch: "/profile/delete-profile",
   },
   {
+    title: "My Course",
+    patch: "/profile/edit-my-course",
+  },
+  {
+    title: "Reviews",
+    patch: "/profile/reviews-profile",
+  },
+  {
+    title: "Student",
+    patch: "/profile/student-profile",
+  },
+
+  {
     title: "Sign Out",
-    patch: "/profile/delete-profile",
+    patch: "/profile/logout-profile",
   },
 ];
 
@@ -70,22 +71,18 @@ export const PROGRESS = [
   { id: SETTING, title: "Settings", status: START },
 ];
 
-
 /* My Card Prop */
 export interface MyCardBasicIntroduceProps {
-  imageItem?: String,
-  titleItem?: String,
-  contentItem?: String,
-  widthCard?: String, 
+  imageItem?: String;
+  titleItem?: String;
+  contentItem?: String;
+  widthCard?: String;
 }
-export interface MyCoursesCateProps extends MyCardBasicIntroduceProps {
+export interface MyCoursesCateProps extends MyCardBasicIntroduceProps {}
+export interface CardMainProductProps extends MyCardBasicIntroduceProps {}
+export interface CardUserStyleProps extends MyCardBasicIntroduceProps {}
 
-}
-export interface CardMainProductProps extends MyCardBasicIntroduceProps  {
-
-}
-export interface CardUserStyleProps extends MyCardBasicIntroduceProps {
-
-}
-
-
+// Role
+export const ADMIN_ROUTE = "admin";
+export const TEACHER_ROUTE = "teacher";
+export const STUDENT_ROUTE = "student";

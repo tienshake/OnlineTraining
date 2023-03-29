@@ -41,6 +41,7 @@ const authRole = (role_name) => async (req, res, next) => {
     const decoded = await verifyToken(
       req.headers["authorization"].split(" ")[1]
     );
+
     const role = await db.Role.findByPk(+decoded.role_id);
     if (role.role_name !== role_name) {
       throw new Error(`You are not ${role_name}`);
@@ -58,6 +59,7 @@ const authAdminOrTeacher = async (req, res, next) => {
     const decoded = await verifyToken(
       req.headers["authorization"].split(" ")[1]
     );
+    console.log("decoded", decoded);
     const role = await db.Role.findByPk(+decoded.role_id);
     if (role.role_name !== "admin" && role.role_name !== "teacher") {
       throw new Error("You are not authorized to access this resource");

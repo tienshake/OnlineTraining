@@ -1,7 +1,8 @@
 import React from "react";
+import DefaultLayoutEdit from "../DefaultayoutEdit";
 
 const DeleteProfile = () => {
-  return <div>DeleteProfile</div>;
+  return <DefaultLayoutEdit>DeleteProfile</DefaultLayoutEdit>;
 };
 
 export default DeleteProfile;

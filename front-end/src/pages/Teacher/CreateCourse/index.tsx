@@ -25,11 +25,14 @@ import { APIType, CreateCourseType } from "../../../types";
 import { toast } from "react-toastify";
 import courseServices from "../../../services/course";
 import Complete from "../components/Complete";
+import categoryServices from "../../../services/category";
+import checkDataApi from "../../../utils/checkDataApi";
 
 function CreateCourse() {
   const [formValues, setFormValues] = React.useState<CreateCourseType>({
     courseTitle: "",
     courseCategory: "",
+    courseCategoryArray: [],
     courseDescriptions: {
       html: "",
       text: "",
@@ -50,6 +53,25 @@ function CreateCourse() {
   const [isComplete, setIsComplete] = React.useState<boolean>(false);
 
   React.useEffect(() => {
+    const fetch = async () => {
+      const data = await categoryServices.getCategoryApi();
+      const result = await checkDataApi(data);
+      if (result) {
+        const newData = result.data?.map((item: any) => {
+          return {
+            id: item.id,
+            title: item.name_category,
+          };
+        });
+        if (newData.length > 0)
+          setFormValues((prevValues: any) => ({
+            ...prevValues,
+            courseCategoryArray: newData,
+          }));
+      }
+    };
+    fetch();
+
     // reset arr when component didmount
     setPROGRESS_ARR([
       { id: INFO, title: "Basic information", status: PENDING },

@@ -2,10 +2,16 @@ import React from "react";
 import styles from "./Profile.module.scss";
 import { Box } from "@mui/material";
 import { ButtonBack } from "../../components/Button";
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { MENU_PROFILE } from "../../constants/constants";
+// import { useSelector } from "react-redux";
+// import { RootState } from "../../redux/store/store";
+import decodedToken from "../../utils/decodedToken";
 
 const Profile = () => {
+  // const user = useSelector((state: RootState) => state.auth.user);
+  const user: any = decodedToken();
+
   return (
     <Box className={styles.container}>
       <Box className={styles.contentLeft}>
@@ -23,7 +29,12 @@ const Profile = () => {
               <h4>Jenny Wilson</h4>
               <p>Instructor</p>
             </Box>
-            <ButtonBack title="Create New Course" />
+            {user?.role === "teacher" && (
+              <ButtonBack
+                title="Create New Course"
+                path="/teacher/create-course"
+              />
+            )}
           </Box>
         </Box>
         <Box className={styles.menu}>
@@ -31,7 +42,12 @@ const Profile = () => {
           <ul className={styles.listMenu}>
             {MENU_PROFILE?.map((menu, index) => (
               <li key={index} className={styles.listItem}>
-                <Link to={menu.patch}>{menu.title}</Link>
+                <NavLink
+                  to={menu.patch}
+                  className={({ isActive }) => (isActive ? styles.active : "")}
+                >
+                  {menu.title}
+                </NavLink>
               </li>
             ))}
           </ul>

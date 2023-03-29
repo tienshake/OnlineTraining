@@ -4,21 +4,20 @@ import styles from "./EditProfile.module.scss";
 import { ButtonDelete, ButtonSave } from "../Button";
 import Input from "../Input";
 import SelectInput from "../SelectInput";
-import { title } from "process";
+import DefaultLayoutEdit from "../DefaultayoutEdit";
 
 const EditProfile = () => {
   return (
-    <Box className={styles.container}>
-      <Stack className={styles.header}>
-        <h4>Profile Details</h4>
-        <p>You have full control to manage your own account setting.</p>
-      </Stack>
+    <DefaultLayoutEdit
+      titleHeader="Profile Details"
+      textHeader="You have full control to manage your own account setting."
+    >
       <Stack className={styles.info}>
         <Box className={styles.infoLeft}>
           <img
             className={styles.avatar}
             src="https://dreamslms.dreamguystech.com/html/assets/img/user/user11.jpg"
-            alt=""
+            alt="Avatar"
           />
           <Box>
             <h4>Your avatar</h4>
@@ -68,7 +67,7 @@ const EditProfile = () => {
               arrSelect={[
                 {
                   id: 1,
-                  title: "male",
+                  title: "Male",
                 },
                 {
                   id: 2,
@@ -80,7 +79,7 @@ const EditProfile = () => {
           </Box>
         </Box>
       </Stack>
-    </Box>
+    </DefaultLayoutEdit>
   );
 };
 

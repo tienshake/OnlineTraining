@@ -89,6 +89,7 @@ export interface CreateCourseType {
   price?: number;
   promotion_price?: number;
   sectionCourse?: SectionType[];
+  courseCategoryArray?: any;
 }
 
 export interface SectionType {

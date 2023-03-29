@@ -1,21 +1,16 @@
 import React from "react";
 import "./App.css";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import GlobalStyle from "./layout/GlobalStyle";
 import { publicRoute, privateRoute } from "./routers";
 import { RouteType } from "./types";
 import DefaultLayout from "./layout/DefaultLayout";
 import NotFound from "./pages/NotFound";
 import EditProfile from "./components/EditProfile";
+import PrivateRoute from "./routers/PrivateRoute";
+import { ADMIN_ROUTE, TEACHER_ROUTE } from "./constants/constants";
 
 function App() {
-  const isLogged = true;
-
   return (
     <GlobalStyle>
       <Router>
@@ -44,28 +39,26 @@ function App() {
           })}
           {privateRoute?.map((route: RouteType, i: number) => {
             const Component = route.component;
-            // const adminPath = route.patch.split("/")[1];
+            const adminPath = route.patch.split("/")[1];
+            let checkRole =
+              adminPath === TEACHER_ROUTE
+                ? ["teacher", "admin"]
+                : adminPath === ADMIN_ROUTE
+                ? ["admin"]
+                : "";
             return (
               <Route
                 key={i}
                 path={route.patch}
                 element={
-                  isLogged ? (
-                    <>
-                      {route.defaultLayout ? (
-                        <DefaultLayout>
-                          <Component />
-                        </DefaultLayout>
-                      ) : (
-                        <Component />
-                      )}
-                    </>
-                  ) : (
-                    <Navigate to="/login" />
-                  )
+                  <PrivateRoute
+                    defaultLayout={route.defaultLayout}
+                    allowedRoles={checkRole}
+                  >
+                    <Component />
+                  </PrivateRoute>
                 }
               >
-                {/* <Route path="edit-profile" element={<EditProfile />} /> */}
                 {route.children &&
                   route.children?.map((item, index) => (
                     <React.Fragment key={index}>
@@ -76,7 +69,6 @@ function App() {
               </Route>
             );
           })}
-
           <Route
             path="*"
             element={

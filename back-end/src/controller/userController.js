@@ -245,7 +245,29 @@ const login = async (req, res) => {
     let isExist = await checkUserEmail(email);
     if (isExist) {
       const user = await db.User.findOne({
-        where: { email: email },
+        include: [
+          {
+            model: db.User_detail,
+            attributes: [
+              "about_me",
+              "avatar",
+              "phone_number",
+              "address",
+              "experience",
+              "education",
+              "age",
+              "gender",
+            ],
+            as: "user_details",
+          },
+          {
+            model: db.Role,
+            attributes: ["role_name"],
+            as: "role",
+          },
+        ],
+        where: { email },
+        nest: true,
         raw: true,
       });
       if (user) {
@@ -260,12 +282,15 @@ const login = async (req, res) => {
           const refreshToken = await generateToken.generateRefreshToken(user);
           userData.token = accessToken;
           userData.refreshToken = refreshToken;
+          delete userData.role_id;
+          delete userData.role;
         } else {
           return res.status(400).json({ message: "Wrong password" });
         }
+
         return res
           .status(200)
-          .json({ user: userData, code: 0, message: "Login completed" });
+          .json({ data: userData, code: 0, message: "Login completed" });
       } else {
         return res.status(400).json({ message: "User's not found" });
       }

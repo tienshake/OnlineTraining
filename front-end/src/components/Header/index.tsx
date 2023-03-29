@@ -2,24 +2,36 @@ import React from "react";
 import { TextField } from "@mui/material";
 import styles from "./Header.module.scss";
 import Button from "../Button";
-import { Link, NavLink } from "react-router-dom";
-import { IMG_URL, navList } from "../../constants/constants";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { IMG_URL, NAV_LIST } from "../../constants/constants";
 //Material UI
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import { RootState } from "../../redux/store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutSuccess } from "../../redux/features/auth";
+import { removeUserToken } from "../../utils/userToken";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Header = () => {
+  const isLogged = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
+
+  let navigate = useNavigate();
+
+  const user = useSelector((state: RootState) => state.auth.user);
+  const dispatch = useDispatch();
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -38,7 +50,12 @@ const Header = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (setting: any) => {
+    if (setting === "Logout") {
+      removeUserToken();
+      dispatch(logoutSuccess());
+      navigate("/login");
+    }
     setAnchorElUser(null);
   };
 
@@ -103,7 +120,7 @@ const Header = () => {
               }}
               className={styles.listItem}
             >
-              {navList.map((page, i) => (
+              {NAV_LIST.map((page, i) => (
                 <MenuItem
                   key={i}
                   onClick={handleCloseNavMenu}
@@ -137,8 +154,8 @@ const Header = () => {
             sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
             className={styles.listItem}
           >
-            {navList &&
-              navList?.map((item, i) => (
+            {NAV_LIST &&
+              NAV_LIST?.map((item, i) => (
                 <NavLink
                   key={i}
                   to={item.patch}
@@ -148,20 +165,20 @@ const Header = () => {
                 </NavLink>
               ))}
           </Box>
-          <Box className={styles.controlItem}>
-            <Button variant="outlined" title="Login" path="/login" circle />
-            <Button
-              variant="outlined"
-              title="Register"
-              path="/register"
-              circle
-            />
-          </Box>
-          {false && (
+
+          {isLogged ? (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar
+                    alt="Remy Sharp"
+                    src={
+                      user.avatar && `data:image/jpeg;base64,${user?.avatar}`
+                    }
+                    style={{
+                      border: "1px solid black",
+                    }}
+                  />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -182,11 +199,24 @@ const Header = () => {
                 onClose={handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                  <MenuItem
+                    key={setting}
+                    onClick={() => handleCloseUserMenu(setting)}
+                  >
+                    {setting}
                   </MenuItem>
                 ))}
               </Menu>
+            </Box>
+          ) : (
+            <Box className={styles.controlItem}>
+              <Button variant="outlined" title="Login" path="/login" circle />
+              <Button
+                variant="outlined"
+                title="Register"
+                path="/register"
+                circle
+              />
             </Box>
           )}
         </Toolbar>
@@ -214,8 +244,8 @@ export default Header;
 //           />
 //         </li>
 //         <li className={styles.listItem}>
-//           {navList &&
-//             navList?.map((item, i) => (
+//           {NAV_LIST &&
+//             NAV_LIST?.map((item, i) => (
 //               <NavLink
 //                 key={i}
 //                 to={item.patch}
