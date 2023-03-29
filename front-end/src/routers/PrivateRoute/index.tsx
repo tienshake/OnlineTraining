@@ -18,6 +18,7 @@ const PrivateRoute = ({
   defaultLayout,
 }: Props) => {
   const user = useSelector((state: RootState) => state.auth.user);
+
   const token: any = getUserToken();
   const userToken: any = decodedToken();
 
