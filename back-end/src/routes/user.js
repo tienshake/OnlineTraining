@@ -18,7 +18,7 @@ router.get(
 );
 router.put(
   "/edit/:id",
-  middleware.authAdmin,
+  // middleware.authAdmin,
   middleware.authUser,
   userController.editUser
 );
@@ -34,6 +34,7 @@ router.get(
   middleware.authUser,
   userController.searchUser
 );
+// router.get("/get-user", middleware.authUser, userController.getUser);
 router.post("/register", userController.register);
 router.post("/login", userController.login);
 

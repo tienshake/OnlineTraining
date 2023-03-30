@@ -41,6 +41,7 @@ const createUser = async (req, res) => {
 
 const editUser = async (req, res) => {
   const { id } = req.params;
+
   const {
     name,
     phone_number,
