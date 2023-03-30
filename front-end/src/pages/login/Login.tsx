@@ -30,7 +30,6 @@ const Login = () => {
       if (result) {
         const token = result?.data.token;
         localStorage.setItem("token", `Bearer ${token}`);
-        console.log("result", result);
         dispatch(
           loginSuccess({
             // token: result?.data.token,

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Box, Stack } from "@mui/material";
 import styles from "./EditProfile.module.scss";
 import { ButtonDelete, ButtonSave } from "../Button";
@@ -12,10 +12,13 @@ import userServices from "../../services/user";
 import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
 import { loginSuccess } from "../../redux/features/auth";
+import CommonUtils from "../../utils/CommonUtils";
 
 const EditProfile = () => {
   const userRedux = useSelector((state: RootState) => state.auth.user);
   const dispatch = useDispatch();
+  const inputRef = useRef<any>(null);
+  const [image, setImage] = React.useState<any>();
 
   const phoneRegExp =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -82,6 +85,51 @@ const EditProfile = () => {
     formik.handleSubmit();
   };
 
+  const handleOnchangeImg = async (e: any) => {
+    const data = e.target.files;
+    const file = data[0];
+
+    if (file) {
+      const b64 = await CommonUtils.getBase64(file);
+      const objectUrl = URL.createObjectURL(file);
+      setImage({
+        previewImg: objectUrl,
+        thumbnail: b64,
+        fileName: file.name,
+      });
+    }
+  };
+
+  const handleClick = () => {
+    // 👇️ open file input box on click of another element
+    inputRef.current.click();
+  };
+
+  const handleUpdateImage = async () => {
+    confirmAlert({
+      title: "Confirm deletion",
+      message: "You want changes avatar",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: async () => {
+            const data = await userServices.editUserApi({
+              id: userRedux.id,
+              avatar: image.thumbnail,
+            });
+
+            if (data.data.code === 0) {
+              toast.success("🦄 Wow so easy!");
+            }
+          },
+        },
+        {
+          label: "No",
+        },
+      ],
+    });
+  };
+  console.log(userRedux);
   return (
     <DefaultLayoutEdit
       titleHeader="Profile Details"
@@ -92,20 +140,33 @@ const EditProfile = () => {
           <img
             className={styles.avatar}
             src={
-              userRedux.avatar
-                ? `data:image/jpeg;base64,${userRedux?.avatar}`
+              image?.previewImg
+                ? image?.previewImg
+                : userRedux.avatar
+                ? `${userRedux?.avatar}`
                 : "https://img.freepik.com/free-icon/user_318-159711.jpg"
             }
             alt="Avatar"
           />
-
           <Box>
             <h4>Your avatar</h4>
-            <p>PNG or JPG no bigger than 800px wide and tall.</p>
+            <input
+              type="file"
+              hidden
+              id="image"
+              ref={inputRef}
+              onChange={handleOnchangeImg}
+            />
+            <input
+              type="button"
+              value="Select a File"
+              id="image"
+              onClick={handleClick}
+            />
           </Box>
         </Box>
         <Box className={styles.infoRight}>
-          <ButtonSave title="Update" outline />
+          <ButtonSave title="Update" outline onClick={handleUpdateImage} />
           <ButtonDelete title="Delete" outline />
         </Box>
       </Stack>

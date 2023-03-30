@@ -172,9 +172,7 @@ const Header = () => {
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar
                     alt="Remy Sharp"
-                    src={
-                      user.avatar && `data:image/jpeg;base64,${user?.avatar}`
-                    }
+                    src={user.avatar && `${user?.avatar}`}
                     style={{
                       border: "1px solid black",
                     }}

@@ -11,7 +11,7 @@ interface ImgType {
 }
 
 const Course = ({ setFormValues, formValues }: any) => {
-  const [image, setImage] = React.useState<ImgType>();
+  // const [image, setImage] = React.useState<ImgType>();
 
   const handleOnchangeImg = async (e: any) => {
     const data = e.target.files;
@@ -20,11 +20,11 @@ const Course = ({ setFormValues, formValues }: any) => {
     if (file) {
       const b64 = await CommonUtils.getBase64(file);
       const objectUrl = URL.createObjectURL(file);
-      setImage({
-        previewImg: objectUrl,
-        thumbnail: b64,
-        fileName: file.name,
-      });
+      // setImage({
+      //   previewImg: objectUrl,
+      //   thumbnail: b64,
+      //   fileName: file.name,
+      // });
       setFormValues((prevValues: any) => ({
         ...prevValues,
         avatar: {

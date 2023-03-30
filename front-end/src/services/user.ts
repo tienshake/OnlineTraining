@@ -50,6 +50,7 @@ const userServices: any = {
         education,
         experience,
         about_me,
+        avatar,
       } = data;
 
       const response = await axiosClient.put(`user/edit/${id}`, {
@@ -61,6 +62,7 @@ const userServices: any = {
         education,
         experience,
         about_me,
+        avatar,
       });
 
       return response;

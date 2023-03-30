@@ -24,7 +24,7 @@ const Profile = () => {
               className={styles.avatar}
               src={
                 userRedux.avatar
-                  ? `data:image/jpeg;base64,${userRedux?.avatar}`
+                  ? `${userRedux?.avatar}`
                   : "https://img.freepik.com/free-icon/user_318-159711.jpg"
               }
               alt="Avatar"
