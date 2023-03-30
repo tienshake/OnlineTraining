@@ -1,10 +1,10 @@
 import axiosClient from "../api/axiosClient";
 
 interface dataUserTeacher {
-  name?: String,
-  email?: String,
-  password?: String,
-  role_id?: Number,
+  name?: String;
+  email?: String;
+  password?: String;
+  role_id?: Number;
 }
 
 const userServices: any = {
@@ -38,27 +38,36 @@ const userServices: any = {
     return response;
   },
 
-  editUserApi: async (dataUserDetail: any, id: any) => {
-    console.log(dataUserDetail, "---", id)
-    const { name, age, gender, Phone, Address, Education, Experience, About_Me } = dataUserDetail;
+  editUserApi: async (data: any) => {
+    try {
+      const {
+        id,
+        name,
+        age,
+        gender,
+        phone_number,
+        address,
+        education,
+        experience,
+        about_me,
+      } = data;
 
-    const response = await axiosClient.put(`user/edit/${id}`, {
-      name: name,
-      age: age,
-      gender: gender,
-      phone_number: Phone,
-      address: Address,
-      education: Education,
-      experience: Experience,
-      about_me: About_Me,
-    });
+      const response = await axiosClient.put(`user/edit/${id}`, {
+        name,
+        age,
+        gender,
+        phone_number,
+        address,
+        education,
+        experience,
+        about_me,
+      });
 
-    console.log(response, "ád")
-
-    return response;
+      return response;
+    } catch (error) {
+      throw error;
+    }
   },
 };
 
-
 export default userServices;
-

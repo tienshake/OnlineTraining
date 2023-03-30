@@ -4,12 +4,14 @@ import { Box } from "@mui/material";
 import { ButtonBack } from "../../components/Button";
 import { NavLink, Outlet } from "react-router-dom";
 import { MENU_PROFILE } from "../../constants/constants";
-// import { useSelector } from "react-redux";
-// import { RootState } from "../../redux/store/store";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store/store";
 import decodedToken from "../../utils/decodedToken";
+// import userServices from "../../services/user";
+// import checkDataApi from "../../utils/checkDataApi";
 
 const Profile = () => {
-  // const user = useSelector((state: RootState) => state.auth.user);
+  const userRedux = useSelector((state: RootState) => state.auth.user);
   const user: any = decodedToken();
 
   return (
@@ -20,14 +22,18 @@ const Profile = () => {
             <h5>Beginner</h5>
             <img
               className={styles.avatar}
-              src="https://dreamslms.dreamguystech.com/html/assets/img/user/user15.jpg"
-              alt="info"
+              src={
+                userRedux.avatar
+                  ? `data:image/jpeg;base64,${userRedux?.avatar}`
+                  : "https://img.freepik.com/free-icon/user_318-159711.jpg"
+              }
+              alt="Avatar"
             />
           </Box>
           <Box className={styles.infoContent}>
             <Box className={styles.infoName}>
-              <h4>Jenny Wilson</h4>
-              <p>Instructor</p>
+              <h4>{userRedux.name}</h4>
+              <p>{user.role}</p>
             </Box>
             {user?.role === "teacher" && (
               <ButtonBack

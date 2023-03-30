@@ -33,12 +33,13 @@ const Login = () => {
         console.log("result", result);
         dispatch(
           loginSuccess({
-            token: result?.data.token,
+            // token: result?.data.token,
             user: {
               name: result?.data.name,
               email: result?.data.email,
               id: result?.data.id,
               avatar: covertB64(result?.data?.user_details.avatar),
+              userDetails: result?.data?.user_details,
             },
           })
         );

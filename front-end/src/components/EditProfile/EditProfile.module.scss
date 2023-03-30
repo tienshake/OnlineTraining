@@ -50,6 +50,12 @@
     padding: 7px 22px !important;
   }
 }
+.control {
+  :global(.MuiButtonBase-root) {
+    width: 100px !important;
+    padding: 7px 22px !important;
+  }
+}
 
 .form {
   padding: 25px;
@@ -69,6 +75,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 30px;
+  padding-bottom: 25px;
 }
 
 .formInput {
