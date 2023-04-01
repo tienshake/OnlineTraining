@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutSuccess } from "../../redux/features/auth";
 import { removeUserToken } from "../../utils/userToken";
 
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Profile", "Logout"];
 
 const Header = () => {
   const isLogged = useSelector(
@@ -55,6 +55,9 @@ const Header = () => {
       removeUserToken();
       dispatch(logoutSuccess());
       navigate("/login");
+    }
+    if (setting === "Profile") {
+      navigate("/profile");
     }
     setAnchorElUser(null);
   };

@@ -119,6 +119,14 @@ const EditProfile = () => {
             });
 
             if (data.data.code === 0) {
+              dispatch(
+                loginSuccess({
+                  user: {
+                    ...userRedux,
+                    avatar: image.previewImg,
+                  },
+                })
+              );
               toast.success("🦄 Wow so easy!");
             }
           },
@@ -142,9 +150,7 @@ const EditProfile = () => {
             src={
               image?.previewImg
                 ? image?.previewImg
-                : userRedux.avatar
-                ? `${userRedux?.avatar}`
-                : "https://img.freepik.com/free-icon/user_318-159711.jpg"
+                : `https://img.freepik.com/free-icon/user_318-159711.jpg`
             }
             alt="Avatar"
           />

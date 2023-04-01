@@ -66,6 +66,7 @@ function CreateCourse() {
         if (newData.length > 0)
           setFormValues((prevValues: any) => ({
             ...prevValues,
+            courseCategory: newData[0].id,
             courseCategoryArray: newData,
           }));
       }
@@ -150,7 +151,7 @@ function CreateCourse() {
     let promotion_price = formValues.promotion_price;
     let user_id = 7;
     let category_id = formValues.courseCategory;
-    let sections = null;
+    let sections: any = [];
     // console.log("formValues", formValues);
 
     if (formValues) {
@@ -160,6 +161,14 @@ function CreateCourse() {
       if (formValues.sectionCourse && formValues.sectionCourse.length > 0) {
         sections = formValues.sectionCourse;
       }
+    }
+
+    const isEmpty = sections.some(
+      (item: any) => item.title === "" || item.lectures.length === 0
+    );
+
+    if (isEmpty) {
+      toast.error("Please sections and lecture  required fields");
     }
     //Check exist params
     if (
@@ -178,7 +187,7 @@ function CreateCourse() {
     }
     //isComplete save call api
     if (!isComplete) {
-      const result: APIType = await courseServices.createCategoryApi({
+      const result: APIType = await courseServices.createCourseApi({
         title,
         thumbnail,
         description,
@@ -189,6 +198,7 @@ function CreateCourse() {
         category_id,
         sections,
       });
+
       if (result && result.data?.code === CODE_SUCCESS) {
         setIsComplete(true);
         setComponent(<Complete />);

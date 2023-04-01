@@ -3,7 +3,7 @@ import styles from "./Profile.module.scss";
 import { Box } from "@mui/material";
 import { ButtonBack } from "../../components/Button";
 import { NavLink, Outlet } from "react-router-dom";
-import { MENU_PROFILE } from "../../constants/constants";
+import { MENU_PROFILE, TEACHER_ROUTE } from "../../constants/constants";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store/store";
 import decodedToken from "../../utils/decodedToken";
@@ -35,7 +35,7 @@ const Profile = () => {
               <h4>{userRedux.name}</h4>
               <p>{user.role}</p>
             </Box>
-            {user?.role === "teacher" && (
+            {user?.role === TEACHER_ROUTE && (
               <ButtonBack
                 title="Create New Course"
                 path="/teacher/create-course"

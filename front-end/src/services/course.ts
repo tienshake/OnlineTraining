@@ -14,7 +14,7 @@ interface CourseApiType {
 }
 
 const courseServices = {
-  createCategoryApi: async ({
+  createCourseApi: async ({
     category_id,
     description,
     descriptionMarkdown,
