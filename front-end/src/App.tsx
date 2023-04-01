@@ -26,6 +26,7 @@ function App() {
                     {route.defaultLayout ? (
                       <DefaultLayout
                         onlyHome={route.patch === "/" ? true : false}
+                        onlyCourseDetail={route.internBanner}
                       >
                         <Component />
                       </DefaultLayout>

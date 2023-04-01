@@ -11,14 +11,20 @@ module.exports = (sequelize, DataTypes) => {
       // define association hererrr
       Course.hasMany(models.Course_section, {
         foreignKey: "course_id",
+        as: "course_sections",
+      });
+
+      Course.hasMany(models.Course_detail, {
+        foreignKey: "course_id",
+        as: "course_detail",
       });
     }
   }
   Course.init(
     {
       title: DataTypes.STRING,
-      description: DataTypes.TEXT("long"),
-      descriptionMarkdown: DataTypes.TEXT("long"),
+      // description: DataTypes.TEXT("long"),
+      // descriptionMarkdown: DataTypes.TEXT("long"),
       thumbnail: DataTypes.STRING,
       price: DataTypes.INTEGER,
       promotion_price: DataTypes.INTEGER,

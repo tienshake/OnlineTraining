@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association hererrr
       Lecture.belongsTo(models.Course_section, {
         foreignKey: "course_section_id",
+        as: "lectures",
       });
     }
   }

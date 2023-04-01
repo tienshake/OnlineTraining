@@ -1,0 +1,101 @@
+.innerBanner {
+  margin-top: var(--default-layout-header-height);
+  padding: 45px 0;
+  background: url("https://dreamslms.dreamguystech.com/html/assets/img/inner-banner.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.76);
+  }
+}
+
+.contentBanner {
+  max-width: var(--default-layout-width);
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  position: relative;
+}
+
+.contentBannerLeft {
+  width: 70%;
+  padding-right: 24px;
+  box-sizing: border-box;
+  // display: flex;
+  // flex-direction: column;
+}
+
+.contentBannerLeft {
+  color: var(--white);
+  // border-bottom: 1px solid #c7c7c7;
+  margin-bottom: 15px;
+}
+
+.aboutInstructor {
+  display: flex;
+  margin-bottom: 15px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.aboutContent {
+  gap: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.imgFluid {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #e3e3e3;
+  border-radius: 50%;
+}
+
+.instructorDetail {
+  color: var(--white);
+  a {
+    color: var(--white);
+  }
+  p {
+    font-size: 1.4rem;
+  }
+}
+
+.rating {
+  svg {
+    color: var(--star-color);
+  }
+}
+
+.averageRating {
+  span {
+    color: var(--star-color);
+  }
+}
+
+.webBadge {
+  background: #ffb54a;
+  border-radius: 50px;
+  padding: 6px 15px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #fff;
+}
+
+.titleCourse {
+  font-size: 3rem;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.description {
+  font-size: 1.4rem;
+}

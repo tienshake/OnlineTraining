@@ -42,6 +42,22 @@ const courseServices = {
       throw error;
     }
   },
+  getCourseApi: async ({ id, limit, page }: any) => {
+    try {
+      let response = null;
+      if (limit && page) {
+        response = await axiosClient.get(
+          `courses/get?id=${id}&limit=${limit}&page${page}`
+        );
+        return response;
+      } else {
+        response = await axiosClient.get(`courses/get?id=${id}`);
+      }
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 export default courseServices;

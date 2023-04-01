@@ -13,17 +13,17 @@ module.exports = {
       },
       course_id: {
         type: Sequelize.INTEGER,
-      },      
+      },
       status: {
         type: Sequelize.STRING,
       },
       payment_id: {
         type: Sequelize.INTEGER,
       },
-      enrollment_date: {
-        allowNull: true,
-        type: Sequelize.DATE,
-      },
+      // enrollment_date: {
+      //   allowNull: true,
+      //   type: Sequelize.DATE,
+      // },
       createdAt: {
         allowNull: true,
         type: Sequelize.DATE,

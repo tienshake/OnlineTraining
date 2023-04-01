@@ -9,6 +9,7 @@ export interface RouteType {
   patch: string;
   defaultLayout?: boolean;
   children?: childrenRouteType[];
+  internBanner?: boolean;
 }
 
 //API type
