@@ -14,6 +14,7 @@ import Profile from "../pages/Profile";
 import EditProfile from "../components/EditProfile";
 import DeleteProfile from "../components/DeleteProfile";
 import Course from "../pages/Course/Course";
+import CourseDetail from "../pages/CourseDetail";
 
 const publicRoute: RouteType[] = [
   {
@@ -33,6 +34,12 @@ const publicRoute: RouteType[] = [
     component: Course,
     patch: "/course",
     defaultLayout: true,
+  },
+  {
+    component: CourseDetail,
+    patch: "/course-details/:id",
+    defaultLayout: true,
+    internBanner: true,
   },
 ];
 

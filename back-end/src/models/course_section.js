@@ -11,10 +11,12 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Course_section.belongsTo(models.Course, {
         foreignKey: "course_id",
+        as: "course_sections",
       });
 
       Course_section.hasMany(models.Lecture, {
         foreignKey: "course_section_id",
+        as: "lectures",
       });
     }
   }

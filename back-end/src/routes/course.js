@@ -7,19 +7,21 @@ const router = express.Router();
 router.get(
   "/get",
   middleware.authUser,
-  middleware.authAdminOrTeacher,
+  // middleware.authAdminOrTeacher,
   courseController.getCourse
 );
 router.post(
   "/create",
   middleware.authUser,
-  middleware.authTeacher,
+  // middleware.authTeacher,
+  middleware.authAdminOrTeacher,
   courseController.createCourse
 );
 router.put(
   "/edit/:id",
   middleware.authUser,
-  middleware.authTeacher,
+  // middleware.authTeacher,
+  middleware.authAdminOrTeacher,
   courseController.editCourse
 );
 router.delete(
@@ -30,7 +32,7 @@ router.delete(
 );
 router.get(
   "/search",
-  middleware.authAdmin,
+  // middleware.authAdmin,
   middleware.authUser,
   courseController.searchCourse
 );

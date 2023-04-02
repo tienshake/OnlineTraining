@@ -29,6 +29,12 @@ module.exports = {
       total_view: {
         type: Sequelize.INTEGER,
       },
+      description: {
+        type: Sequelize.TEXT("long"),
+      },
+      descriptionMarkdown: {
+        type: Sequelize.TEXT("long"),
+      },
       createdAt: {
         allowNull: true,
         type: Sequelize.DATE,

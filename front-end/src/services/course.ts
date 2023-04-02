@@ -14,7 +14,7 @@ interface CourseApiType {
 }
 
 const courseServices = {
-  createCategoryApi: async ({
+  createCourseApi: async ({
     category_id,
     description,
     descriptionMarkdown,
@@ -37,6 +37,22 @@ const courseServices = {
         user_id,
         sections,
       });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
+  getCourseApi: async ({ id, limit, page }: any) => {
+    try {
+      let response = null;
+      if (limit && page) {
+        response = await axiosClient.get(
+          `courses/get?id=${id}&limit=${limit}&page${page}`
+        );
+        return response;
+      } else {
+        response = await axiosClient.get(`courses/get?id=${id}`);
+      }
       return response;
     } catch (error) {
       throw error;

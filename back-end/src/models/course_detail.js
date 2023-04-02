@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Course_detail.belongsTo(models.Course, {
+        foreignKey: "course_id",
+        as: "course_detail",
+      });
     }
   }
   Course_detail.init(
@@ -20,6 +24,8 @@ module.exports = (sequelize, DataTypes) => {
       promotion_price: DataTypes.INTEGER,
       thumbnail: DataTypes.STRING,
       total_view: DataTypes.INTEGER,
+      description: DataTypes.TEXT("long"),
+      descriptionMarkdown: DataTypes.TEXT("long"),
     },
     {
       sequelize,

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./GlobalStyle.module.scss";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 type Props = {
   children?: React.ReactNode;
@@ -12,7 +12,7 @@ const GlobalStyle = ({ children }: Props) => {
       {children}
       <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

@@ -27,9 +27,14 @@ function CourseForm({ formValues, setFormValues }: any) {
     setSections((prevState: any) =>
       prevState.filter((_: any, index: any) => index !== sectionIndex)
     );
+    // setFormValues((prevValues: any) => ({
+    //   ...prevValues,
+    //   sectionCourse: sections,
+    // }));
   }
 
   function onSubmit(data: any) {
+    // console.log(sections);
     setFormValues((prevValues: any) => ({
       ...prevValues,
       sectionCourse: JSON.parse(data.sections),

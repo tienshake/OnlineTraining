@@ -4,13 +4,12 @@ import CardBasicIntroduce from "../../components/Card/CardBasicIntroduce";
 import Slider from "react-slick";
 import "../../../node_modules/slick-carousel/slick/slick.css";
 import "../../../node_modules/slick-carousel/slick/slick-theme.css";
-import './Home.css';
-import CardCoursesCate from '../../components/Card/CardCoursesCate';
-import BoxSection from '../../components/BoxSection';
+import "./Home.css";
+import CardCoursesCate from "../../components/Card/CardCoursesCate";
+import BoxSection from "../../components/BoxSection";
 import CardMainProduct from "../../components/Card/CardMainProduct";
 import BoxTitle from "../../components/BoxTitle";
 import CardUserStyle from "../../components/Card/CardUserStyle";
-
 
 const Home = () => {
   const items1 = [
@@ -39,33 +38,36 @@ const Home = () => {
   /*  */
   const data2 = [
     {
-      imageItem: "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon.png",
+      imageItem:
+        "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon.png",
       titleItem: "Angular Development",
       contentItem: "40 Instructors",
-
     },
     {
-      imageItem: "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-02.png",
+      imageItem:
+        "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-02.png",
       titleItem: "NodeJs Development",
       contentItem: "50 Instructors",
     },
     {
-      imageItem: "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-04.png",
+      imageItem:
+        "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-04.png",
       titleItem: "Python Development",
       contentItem: "50 Instructors",
     },
     {
-      imageItem: "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-03.png",
+      imageItem:
+        "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-03.png",
       titleItem: "SWift Development",
       contentItem: "23 Instructors",
     },
     {
-      imageItem: "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-01.png",
+      imageItem:
+        "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-01.png",
       titleItem: "Docker Development",
       contentItem: "45 Instructors",
     },
   ];
-
 
   /*  */
   var settings = {
@@ -102,8 +104,6 @@ const Home = () => {
       },
     ],
   };
-
-
 
   return (
     <div className={styles.container}>
@@ -161,24 +161,39 @@ const Home = () => {
         </ul>
       </div>
 
-
-      <div className='wrapp_body_home'>
+      <div className="wrapp_body_home">
         {/*  */}
         <BoxSection />
 
         {/*  */}
-        <div className='box_carosel_topCate'>
-          <Slider  {...settings}>
+        <div className="box_carosel_topCate">
+          <Slider {...settings}>
             {data2.map((data, index) => (
-              <div key={index} style={{ width: "100%", margin: 'auto' }} /* src={data.src} */>
-                <CardCoursesCate imageItem={data.imageItem} titleItem={data.titleItem} contentItem={data.contentItem} />
+              <div
+                key={index}
+                style={{ width: "100%", margin: "auto" }} /* src={data.src} */
+              >
+                <CardCoursesCate
+                  imageItem={data.imageItem}
+                  titleItem={data.titleItem}
+                  contentItem={data.contentItem}
+                />
               </div>
             ))}
           </Slider>
         </div>
 
         {/*  */}
-        <div style={{ backgroundImage: 'url("https://dreamslms.dreamguystech.com/html/assets/img/banner.png")', marginTop: '90px', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }} className='box_featured_courses'>
+        <div
+          style={{
+            backgroundImage:
+              'url("https://dreamslms.dreamguystech.com/html/assets/img/banner.png")',
+            marginTop: "90px",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+          }}
+          className="box_featured_courses"
+        >
           <BoxSection />
 
           <div className="content-cardTopCate">
@@ -190,7 +205,6 @@ const Home = () => {
             <CardMainProduct widthCard="100%" />
             <CardMainProduct widthCard="100%" />
           </div>
-
         </div>
 
         <div>
@@ -240,13 +254,25 @@ const Home = () => {
         </div>
 
         {/*  */}
-        <div className="trending_courses" style={{ backgroundImage: 'url("https://dreamslms.dreamguystech.com/html/assets/img/banner.png")', marginTop: '90px', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+        <div
+          className="trending_courses"
+          style={{
+            backgroundImage:
+              'url("https://dreamslms.dreamguystech.com/html/assets/img/banner.png")',
+            marginTop: "90px",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+          }}
+        >
           <BoxSection />
 
-          <div style={{ backgroundColor: "" }} className='box_carosel_trending'>
-            <Slider  {...settings}>
+          <div style={{ backgroundColor: "" }} className="box_carosel_trending">
+            <Slider {...settings}>
               {data2.map((data, index) => (
-                <div key={index} style={{ width: "100%", margin: 'auto' }} /* src={data.src} */>
+                <div
+                  key={index}
+                  style={{ width: "100%", margin: "auto" }} /* src={data.src} */
+                >
                   <CardMainProduct widthCard="95%" />
                 </div>
               ))}
@@ -254,17 +280,21 @@ const Home = () => {
 
             <BoxTitle />
 
-
-            <Slider  {...settings}>
+            <Slider {...settings}>
               {data2.map((data, index) => (
-                <div key={index} style={{ width: "100%", margin: 'auto' }} /* src={data.src} */>
-                  <CardUserStyle widthCard="95%" imageItem="https://dreamslms.dreamguystech.com/html/assets/img/user/user7.jpg" />
+                <div
+                  key={index}
+                  style={{ width: "100%", margin: "auto" }} /* src={data.src} */
+                >
+                  <CardUserStyle
+                    widthCard="95%"
+                    imageItem="https://dreamslms.dreamguystech.com/html/assets/img/user/user7.jpg"
+                  />
                 </div>
               ))}
             </Slider>
           </div>
         </div>
-
 
         <div className="banner_advertising">
           <p>Trusted By</p>
@@ -272,21 +302,65 @@ const Home = () => {
         </div>
 
         <ul className="brand_funding">
-          <li><img src="https://dreamslms.dreamguystech.com/html/assets/img/lead-01.png" alt="" /></li>
-          <li><img src="https://dreamslms.dreamguystech.com/html/assets/img/lead-02.png" alt="" /></li>
-          <li><img src="https://dreamslms.dreamguystech.com/html/assets/img/lead-03.png" alt="" /></li>
-          <li><img src="https://dreamslms.dreamguystech.com/html/assets/img/lead-04.png" alt="" /></li>
-          <li><img src="https://dreamslms.dreamguystech.com/html/assets/img/lead-05.png" alt="" /></li>
-          <li><img src="https://dreamslms.dreamguystech.com/html/assets/img/lead-06.png" alt="" /></li>
+          <li>
+            <img
+              src="https://dreamslms.dreamguystech.com/html/assets/img/lead-01.png"
+              alt=""
+            />
+          </li>
+          <li>
+            <img
+              src="https://dreamslms.dreamguystech.com/html/assets/img/lead-02.png"
+              alt=""
+            />
+          </li>
+          <li>
+            <img
+              src="https://dreamslms.dreamguystech.com/html/assets/img/lead-03.png"
+              alt=""
+            />
+          </li>
+          <li>
+            <img
+              src="https://dreamslms.dreamguystech.com/html/assets/img/lead-04.png"
+              alt=""
+            />
+          </li>
+          <li>
+            <img
+              src="https://dreamslms.dreamguystech.com/html/assets/img/lead-05.png"
+              alt=""
+            />
+          </li>
+          <li>
+            <img
+              src="https://dreamslms.dreamguystech.com/html/assets/img/lead-06.png"
+              alt=""
+            />
+          </li>
         </ul>
 
-        <div style={{ backgroundImage: 'url("https://dreamslms.dreamguystech.com/html/assets/img/bg-banner-02.png")', marginTop: '90px', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', width: '100%' }}>
-          <div className="box-content-inform" >
-            <div><img src="https://dreamslms.dreamguystech.com/html/assets/img/share.png" style={{ width: '100%' }} alt="" /></div>
+        <div
+          style={{
+            backgroundImage:
+              'url("https://dreamslms.dreamguystech.com/html/assets/img/bg-banner-02.png")',
+            marginTop: "90px",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            width: "100%",
+          }}
+        >
+          <div className="box-content-inform">
+            <div>
+              <img
+                src="https://dreamslms.dreamguystech.com/html/assets/img/share.png"
+                style={{ width: "100%" }}
+                alt=""
+              />
+            </div>
             <div>s</div>
           </div>
         </div>
-
       </div>
     </div>
   );
