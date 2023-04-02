@@ -4,7 +4,7 @@ require("dotenv").config();
 const sequelize = new Sequelize(process.env.NAME_DB, "root", null, {
   host: "localhost",
   dialect: "mysql",
-  // password: process.env.PASSWORD_DB,
+  password: process.env.PASSWORD_DB,
   logging: false,
 });
 
