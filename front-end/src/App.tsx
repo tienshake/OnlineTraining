@@ -25,7 +25,7 @@ function App() {
                   <>
                     {route.defaultLayout ? (
                       <DefaultLayout
-                        onlyHome={route.patch === "/" ? true : false}
+                        onlyHome={route.patch === "/" || route.patch === "/course" ? true : false}
                       >
                         <Component />
                       </DefaultLayout>

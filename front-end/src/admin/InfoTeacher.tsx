@@ -1,11 +1,8 @@
-// import HeaderDashboard from './componentsAdmin/HeaderDashboard'
 import MasterLayoutAdmin from "./MasterLayoutAdmin";
-// import { useTheme } from '@mui/material/styles';
 import { GiTrophyCup } from "react-icons/gi";
 import CardUser from "./componentsAdmin/CardUser";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
-import "./admin.css";
 import EvaluateStar from "./componentsAdmin/EvaluateStar";
 import QuantityLessons from "./componentsAdmin/QuantityLessons";
 import NumberTime from "./componentsAdmin/NumberTime";
@@ -18,6 +15,7 @@ import { RootState } from "../redux/store/store";
 import Loading from "./componentsAdmin/Loading";
 import AlertError from "./componentsAdmin/AlertError";
 import { getDataDetailUser } from "../redux/features/userTeacher/userTeacherSlice";
+import "./admin.css";
 
 export default function InfoTeacher() {
   const data2 = ["1", "2", "3", "4"];

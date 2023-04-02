@@ -78,9 +78,11 @@ export interface MyCardBasicIntroduceProps {
   contentItem?: String;
   widthCard?: String;
 }
-export interface MyCoursesCateProps extends MyCardBasicIntroduceProps {}
-export interface CardMainProductProps extends MyCardBasicIntroduceProps {}
-export interface CardUserStyleProps extends MyCardBasicIntroduceProps {}
+export interface MyCoursesCateProps extends MyCardBasicIntroduceProps { }
+export interface CardMainProductProps extends MyCardBasicIntroduceProps {
+  borderStyle?: Boolean
+}
+export interface CardUserStyleProps extends MyCardBasicIntroduceProps { }
 
 // Role
 export const ADMIN_ROUTE = "admin";

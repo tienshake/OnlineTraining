@@ -13,6 +13,7 @@ import CreateCourse from "../pages/Teacher/CreateCourse";
 import Profile from "../pages/Profile";
 import EditProfile from "../components/EditProfile";
 import DeleteProfile from "../components/DeleteProfile";
+import Course from "../pages/Course/Course";
 
 const publicRoute: RouteType[] = [
   {
@@ -27,6 +28,11 @@ const publicRoute: RouteType[] = [
   {
     component: Register,
     patch: "/register",
+  },
+  {
+    component: Course,
+    patch: "/course",
+    defaultLayout: true,
   },
 ];
 

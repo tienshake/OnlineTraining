@@ -5,8 +5,9 @@ import "./Card.css"
 
 
 export default function CardMainProduct(props: CardMainProductProps) {
+
     return (
-        <div style={{ width: `${props.widthCard}` }} className='wrapp_cardProduts-content'>
+        <div style={{ width: `${props.widthCard}`, border: `${props.borderStyle ? "1px solid #e9ecef" : "none"}`, borderRadius: `${props.borderStyle ? '10px' : 'none'}` }} className='wrapp_cardProduts-content'>
             <div className="body_content-card">
                 <img src='https://dreamslms.dreamguystech.com/html/assets/img/course/course-01.jpg' alt='' />
 
