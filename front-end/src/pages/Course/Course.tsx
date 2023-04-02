@@ -7,6 +7,8 @@ import { CiFilter } from "react-icons/ci";
 import React from 'react';
 import "./Course.css";
 import CardMainProduct from '../../components/Card/CardMainProduct';
+import CheckboxList from '../../components/ListFilters/CheckboxList';
+import Pagination from '../../components/Pagination/Pagination';
 
 export default function Course() {
     const [age, setAge] = React.useState('');
@@ -18,8 +20,6 @@ export default function Course() {
     return (
         <div className='wrapp_course'>
             <div className="content">
-                {/* <li> <CiFilter /> Showin</li>
-                    <li>Showin</li> */}
                 <div className='body_content_left'>
                     <ul className="header_screening">
                         <li>Showing 1-9 of 50 results</li>
@@ -81,12 +81,22 @@ export default function Course() {
                             <CardMainProduct borderStyle={true} widthCard="100%" />
                         </div>
                     </div>
+
+
+                    <div style={{ marginTop:'40px' }}>
+                        <Pagination />
+                    </div>
                 </div>
 
                 <div className='body_content_right'>
-                    <ul>
-
+                    <ul className='header-filterList'>
+                        <li> <CiFilter /> Showin</li>
+                        <li>Showin</li>
                     </ul>
+
+                    <div className='content_listFilters_course'>
+                        <CheckboxList />
+                    </div>
                 </div>
             </div>
         </div>

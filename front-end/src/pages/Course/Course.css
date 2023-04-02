@@ -3,7 +3,7 @@
     margin: 0;
     list-style: none;
     text-decoration: none;
-    font-family: "Inter", sans-serif;
+    font-family: "Inter", sans-serif !important;
     font-size: 16px;
 }
 .wrapp_course {
@@ -15,14 +15,14 @@
     gap: 25px;
     width: 82%;
     margin: auto;
-    padding-top: 50px
+    padding-top: 50px;
+    padding-bottom: 60px
 }
 .wrapp_course .content .body_content_left {
     width: 72%;
 }
 .wrapp_course .content .body_content_right {
     width: 26%;
-    background: red
 }
 
 .header_screening {
@@ -46,4 +46,18 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 10px; 
     margin-top: 20px
+}
+.content .body_content_right .header-filterList {
+    display: flex;
+    justify-content: space-between;
+    height: 37px;
+    align-items: center;
+}
+
+/*  wrapp list filters */
+.content_listFilters_course {
+    margin-top: 20px;
+}
+.css-et1ao3-MuiTypography-root {
+    font-size: 16px !important
 }
