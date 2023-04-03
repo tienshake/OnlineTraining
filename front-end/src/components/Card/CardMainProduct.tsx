@@ -17,7 +17,7 @@ export default function CardMainProduct(props: CardMainProductProps) {
                     <li><AiOutlineHeart style={{ fontSize: '22px', color: 'red', marginTop: '5px' }} /></li>
                 </ul>
 
-                <h2>Information About UI/UX Design Degree</h2>
+                <h2>{props.titleItem}</h2>
 
                 <ul className="group_btn-card">
                     <li>
@@ -33,8 +33,14 @@ export default function CardMainProduct(props: CardMainProductProps) {
 
                 <p className="line-style"></p>
 
+                <ul style={{ display: 'flex', gap: '10px', marginBottom:'8px' }}>
+                    <h5 className="">{props.priceItem}$</h5>
+                    <p style={{ textDecoration: 'line-through', color:'#99968c'}}>{props.promotion_price}$</p>
+                </ul>
+
+
                 <div className="group_icon-card">
-                    <StarGroup/>
+                    <StarGroup />
                 </div>
             </div>
         </div>
