@@ -30,7 +30,7 @@ export default function Course() {
                                     sx={{ fontSize: '15px' }}
                                     size="small"
                                     id="outlined-adornment-weight"
-                                    startAdornment={<InputAdornment position="start">kg</InputAdornment>}
+                                    startAdornment={<InputAdornment position="start">icons</InputAdornment>}
                                     aria-describedby="outlined-weight-helper-text"
                                     inputProps={{
                                         'aria-label': 'weight',
