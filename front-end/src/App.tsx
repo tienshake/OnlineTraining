@@ -25,7 +25,11 @@ function App() {
                   <>
                     {route.defaultLayout ? (
                       <DefaultLayout
-                        onlyHome={route.patch === "/" || route.patch === "/course" ? true : false}
+                        onlyHome={
+                          route.patch === "/" || route.patch === "/course"
+                            ? true
+                            : false
+                        }
                         onlyCourseDetail={route.internBanner}
                       >
                         <Component />
@@ -85,3 +89,20 @@ function App() {
 }
 
 export default App;
+
+// import { library } from "@fortawesome/fontawesome-svg-core";
+// import { fab } from "@fortawesome/free-brands-svg-icons";
+// import { faL } from "@fortawesome/free-solid-svg-icons";
+
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+// library.add(fab, faL);
+
+// function Category({ name }: any) {
+//   return (
+//     <div>
+//       <FontAwesomeIcon icon={["fab", name]} />
+//     </div>
+//   );
+// }
+// const categories = ["react", "nodejs", "angular"];

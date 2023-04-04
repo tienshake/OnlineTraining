@@ -1,8 +1,8 @@
 import React from "react";
 import MarkdownIt from "markdown-it";
-import MdEditor, { PluginProps } from "react-markdown-editor-lite";
+import MdEditor from "react-markdown-editor-lite";
 import "react-markdown-editor-lite/lib/index.css";
-import { values } from "markdown-it/lib/common/html_blocks";
+// import { values } from "markdown-it/lib/common/html_blocks";
 interface courseDescriptionsType {
   html: string;
   text: string;

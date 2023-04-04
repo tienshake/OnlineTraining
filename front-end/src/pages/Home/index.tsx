@@ -10,21 +10,23 @@ import BoxSection from "../../components/BoxSection";
 import CardMainProduct from "../../components/Card/CardMainProduct";
 import BoxTitle from "../../components/BoxTitle";
 import CardUserStyle from "../../components/Card/CardUserStyle";
-import courseServices from '../../services/course';
+import courseServices from "../../services/course";
 import { useEffect, useState } from "react";
 
 const Home = () => {
   const [dataCourses, setDataCourses] = useState<any>();
 
   useEffect(() => {
-    courseServices.getCourseApi({
-      id: 'ALL',
-      limit: 1,
-      page: 4,
-    }).then((data) => setDataCourses(data.data.data.rows))
+    courseServices
+      .getCourseApi({
+        id: "ALL",
+        limit: 1,
+        page: 4,
+      })
+      .then((data) => setDataCourses(data.data.data.rows));
   }, []);
 
-  console.log(dataCourses)
+  console.log(dataCourses);
 
   const items1 = [
     {
@@ -211,18 +213,22 @@ const Home = () => {
           <BoxSection />
 
           <div className="content-cardTopCate">
-            {
-              dataCourses ? <>
-                {
-                  dataCourses.map((data: any) => (
-                    <div key={data.id}>
-                      <CardMainProduct promotion_price={data.promotion_price} priceItem={data.price} titleItem={data.title} widthCard="100%" />
-                    </div>
-                  ))
-                }
-              </> : <>Loading...</>
-            }
-
+            {dataCourses ? (
+              <>
+                {dataCourses.map((data: any) => (
+                  <div key={data.id}>
+                    <CardMainProduct
+                      promotion_price={data.promotion_price}
+                      priceItem={data.price}
+                      titleItem={data.title}
+                      widthCard="100%"
+                    />
+                  </div>
+                ))}
+              </>
+            ) : (
+              <>Loading...</>
+            )}
           </div>
         </div>
 
@@ -268,7 +274,10 @@ const Home = () => {
             </ul>
           </div>
           <div className="right-content">
-            <img src="https://dreamslms.dreamguystech.com/html/assets/img/join.png" />
+            <img
+              src="https://dreamslms.dreamguystech.com/html/assets/img/join.png"
+              alt="sadsa"
+            />
           </div>
         </div>
 
