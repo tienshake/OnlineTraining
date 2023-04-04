@@ -15,6 +15,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
+import categoryServices from '../../services/category';
+import { useEffect, useState } from 'react';
 
 
 const useStyles = makeStyles({
@@ -44,9 +46,20 @@ const useStyles = makeStyles({
   }
 });
 
-export default function CheckboxList() {
+interface MyCheckboxListProps {
+  getApiCaye?: () => void
+}
+
+export default function CheckboxListCate(props: MyCheckboxListProps) {
   const classes = useStyles();
   const [checked, setChecked] = React.useState([1]);
+  const [dataCate, setDataCate] = useState<any>();
+
+  useEffect(() => {
+    categoryServices.getCategoryApi().then((data) => setDataCate(data.data.data))
+  }, []);
+
+
 
   const handleToggle = (value: number) => () => {
     const currentIndex = checked.indexOf(value);
@@ -75,43 +88,49 @@ export default function CheckboxList() {
 
         <AccordionDetails className={classes.checkList}>
           <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-            {[0, 1, 2, 3].map((value) => {
-              const labelId = `checkbox-list-label-${value}`;
+            {
+              dataCate ? <>
+                {dataCate.map((value: any) => {
+                  const labelId = `checkbox-list-label-${value.id}`;
 
-              return (
-                <ListItem
-                  key={value}
-                  secondaryAction={
-                    <IconButton edge="end" aria-label="comments">
-                      {'(20)'}
-                    </IconButton>
-                  }
-                  disablePadding
-                >
-                  <ListItemButton role={undefined} onClick={handleToggle(value)} dense>
-                    <ListItemIcon>
-                      <Checkbox
-                        className={classes.iconCheck}
-                        edge="start"
-                        checked={checked.indexOf(value) !== -1}
-                        tabIndex={-1}
-                        disableRipple
-                        inputProps={{ 'aria-labelledby': labelId }}
-                      />
-                    </ListItemIcon>
+                  return (
+                    <ListItem
+                      key={value.id}
+                      secondaryAction={
+                        <IconButton edge="end" aria-label="comments">
+                          {'(20)'}
+                        </IconButton>
+                      }
+                      disablePadding
+                    >
+                      <ListItemButton role={undefined} onClick={handleToggle(value)} dense>
+                        <ListItemIcon>
+                          <Checkbox
+                            className={classes.iconCheck}
+                            edge="start"
+                            checked={checked.indexOf(value) !== -1}
+                            tabIndex={-1}
+                            disableRipple
+                            inputProps={{ 'aria-labelledby': labelId }}
+                          />
+                        </ListItemIcon>
 
-                    <ListItemText id={labelId} primary={`Backend ${value + 1}`} />
+                        <ListItemText id={labelId} primary={`Backend ${value.name_category}`} />
 
-                  </ListItemButton>
-                </ListItem>
-              );
-            })}
+                      </ListItemButton>
+                    </ListItem>
+                  );
+                })}
+              </> : <>
+                ko có
+              </>
+            }
           </List>
         </AccordionDetails>
       </Accordion>
 
       {/*  */}
-      <Accordion sx={{ mt: 2}} className={classes.checkList}>
+      {/* <Accordion sx={{ mt: 2 }} className={classes.checkList}>
         <AccordionSummary
           className={classes.accordion}
           expandIcon={<ExpandMoreIcon />}
@@ -156,7 +175,7 @@ export default function CheckboxList() {
             })}
           </List>
         </AccordionDetails>
-      </Accordion>
+      </Accordion> */}
     </ThemeProvider>
   );
 }

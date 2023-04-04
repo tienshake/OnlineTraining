@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles';
-import { createMuiTheme } from '@mui/material';
+import { createTheme } from '@mui/material';
 
-const themeStyle = createMuiTheme({
+const themeStyle = createTheme({
   typography: {
     fontSize: 24,
     fontFamily: 'Inter, sans-serif',

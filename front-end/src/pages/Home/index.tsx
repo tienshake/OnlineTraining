@@ -4,7 +4,6 @@ import CardBasicIntroduce from "../../components/Card/CardBasicIntroduce";
 import Slider from "react-slick";
 import "../../../node_modules/slick-carousel/slick/slick.css";
 import "../../../node_modules/slick-carousel/slick/slick-theme.css";
-import "./Home.css";
 import CardCoursesCate from "../../components/Card/CardCoursesCate";
 import BoxSection from "../../components/BoxSection";
 import CardMainProduct from "../../components/Card/CardMainProduct";
@@ -12,6 +11,8 @@ import BoxTitle from "../../components/BoxTitle";
 import CardUserStyle from "../../components/Card/CardUserStyle";
 import courseServices from '../../services/course';
 import { useEffect, useState } from "react";
+import "./Home.css";
+import ButtonLoadMore from "../../components/Button/ButtonLoadMore";
 
 const Home = () => {
   const [dataCourses, setDataCourses] = useState<any>();
@@ -19,12 +20,10 @@ const Home = () => {
   useEffect(() => {
     courseServices.getCourseApi({
       id: 'ALL',
-      limit: 1,
+      limit: 8,
       page: 4,
     }).then((data) => setDataCourses(data.data.data.rows))
   }, []);
-
-  console.log(dataCourses)
 
   const items1 = [
     {
@@ -222,7 +221,10 @@ const Home = () => {
                 }
               </> : <>Loading...</>
             }
+          </div>
 
+          <div className="load_morePr-home">
+            <ButtonLoadMore />
           </div>
         </div>
 

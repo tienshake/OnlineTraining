@@ -4,11 +4,12 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { CiFilter } from "react-icons/ci";
-import React from 'react';
 import "./Course.css";
 import CardMainProduct from '../../components/Card/CardMainProduct';
-import CheckboxList from '../../components/ListFilters/CheckboxList';
+import CheckboxListCate from '../../components/ListFilters/CheckboxListCate';
 import Pagination from '../../components/Pagination/Pagination';
+import React, { useEffect, useState } from 'react';
+import courseServices from '../../services/course';
 
 export default function Course() {
     const [age, setAge] = React.useState('');
@@ -16,6 +17,21 @@ export default function Course() {
     const handleChange = (event: SelectChangeEvent) => {
         setAge(event.target.value);
     };
+
+
+    /*  */
+    const [dataCourses, setDataCourses] = useState<any>();
+
+    useEffect(() => {
+        courseServices.getCourseApi({
+            id: 'ALL',
+            limit: 6,
+            page: 4,
+        }).then((data) => setDataCourses(data.data.data.rows))
+    }, []);
+
+    console.log(dataCourses)
+
 
     return (
         <div className='wrapp_course'>
@@ -65,25 +81,21 @@ export default function Course() {
 
                     {/*  */}
                     <div className='box_content-course'>
-                        <div>
-                            <CardMainProduct borderStyle={true} widthCard="100%" />
-                        </div>
-
-                        <div>
-                            <CardMainProduct borderStyle={true} widthCard="100%" />
-                        </div>
-
-                        <div>
-                            <CardMainProduct borderStyle={true} widthCard="100%" />
-                        </div>
-
-                        <div>
-                            <CardMainProduct borderStyle={true} widthCard="100%" />
-                        </div>
+                        {
+                            dataCourses ? <>
+                                {
+                                    dataCourses.map((data:any) => (
+                                        <div key={data.id}>
+                                            <CardMainProduct borderStyle={true} promotion_price={data.promotion_price} priceItem={data.price} titleItem={data.title} widthCard="100%" />
+                                        </div>
+                                    ))
+                                }
+                            </> : <>Loading...</>
+                        }
                     </div>
 
 
-                    <div style={{ marginTop:'40px' }}>
+                    <div style={{ marginTop: '40px' }}>
                         <Pagination />
                     </div>
                 </div>
@@ -95,7 +107,7 @@ export default function Course() {
                     </ul>
 
                     <div className='content_listFilters_course'>
-                        <CheckboxList />
+                        <CheckboxListCate />
                     </div>
                 </div>
             </div>

@@ -99,7 +99,7 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     margin-top: 60px;
-    padding-bottom: 80px;
+    padding-bottom: 20px;
 }
 /* master skill content */
 .wrapp_body_home .master_skill_content {
@@ -174,4 +174,12 @@
 }
 .box-content-inform div {
     width: 50%;
+}
+
+/*  */
+.load_morePr-home {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
 }
