@@ -4,11 +4,11 @@ import { Box, Stack } from "@mui/material";
 import { ReactComponent as ImageRegular } from "../../../../assets/icons/image-regular.svg";
 import CommonUtils from "../../../../utils/CommonUtils";
 
-interface ImgType {
-  previewImg?: any;
-  thumbnail?: any;
-  fileName?: string;
-}
+// interface ImgType {
+//   previewImg?: any;
+//   thumbnail?: any;
+//   fileName?: string;
+// }
 
 const Course = ({ setFormValues, formValues }: any) => {
   // const [image, setImage] = React.useState<ImgType>();

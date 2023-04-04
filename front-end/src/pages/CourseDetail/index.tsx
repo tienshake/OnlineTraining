@@ -24,7 +24,7 @@ const CourseDetail = () => {
       }
     };
     fetch();
-  }, []);
+  }, [id]);
 
   return (
     <Box className={styles.container}>
@@ -60,6 +60,7 @@ const CourseDetail = () => {
             <img
               className={styles.image}
               src={covertB64(dataCourse?.thumbnail)}
+              alt="sdsad"
             />
             <div className={styles.courseFee}>
               <h2>${dataCourse?.promotion_price}</h2>

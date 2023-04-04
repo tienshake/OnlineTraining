@@ -9,7 +9,7 @@ import BoxSection from "../../components/BoxSection";
 import CardMainProduct from "../../components/Card/CardMainProduct";
 import BoxTitle from "../../components/BoxTitle";
 import CardUserStyle from "../../components/Card/CardUserStyle";
-import courseServices from '../../services/course';
+import courseServices from "../../services/course";
 import { useEffect, useState } from "react";
 import "./Home.css";
 import ButtonLoadMore from "../../components/Button/ButtonLoadMore";
@@ -270,7 +270,10 @@ const Home = () => {
             </ul>
           </div>
           <div className="right-content">
-            <img src="https://dreamslms.dreamguystech.com/html/assets/img/join.png" />
+            <img
+              src="https://dreamslms.dreamguystech.com/html/assets/img/join.png"
+              alt="sadsa"
+            />
           </div>
         </div>
 

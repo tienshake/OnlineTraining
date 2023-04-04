@@ -6,21 +6,21 @@ const router = express.Router();
 
 router.get(
   "/get",
-  middleware.authUser,
+  // middleware.authUser,
   // middleware.authAdminOrTeacher,
   courseController.getCourse
 );
 router.post(
   "/create",
-  middleware.authUser,
   // middleware.authTeacher,
+  middleware.authUser,
   middleware.authAdminOrTeacher,
   courseController.createCourse
 );
 router.put(
   "/edit/:id",
-  middleware.authUser,
   // middleware.authTeacher,
+  middleware.authUser,
   middleware.authAdminOrTeacher,
   courseController.editCourse
 );
