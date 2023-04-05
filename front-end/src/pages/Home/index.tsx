@@ -13,16 +13,19 @@ import courseServices from "../../services/course";
 import { useEffect, useState } from "react";
 import "./Home.css";
 import ButtonLoadMore from "../../components/Button/ButtonLoadMore";
+import covertB64 from "../../utils/covertB64";
 
 const Home = () => {
   const [dataCourses, setDataCourses] = useState<any>();
 
   useEffect(() => {
-    courseServices.getCourseApi({
-      id: 'ALL',
-      limit: 8,
-      page: 4,
-    }).then((data) => setDataCourses(data.data.data.rows))
+    courseServices
+      .getCourseApi({
+        id: "ALL",
+        limit: 8,
+        page: 4,
+      })
+      .then((data) => setDataCourses(data.data.data.rows));
   }, []);
 
   const items1 = [
@@ -210,17 +213,23 @@ const Home = () => {
           <BoxSection />
 
           <div className="content-cardTopCate">
-            {
-              dataCourses ? <>
-                {
-                  dataCourses.map((data: any) => (
-                    <div key={data.id}>
-                      <CardMainProduct promotion_price={data.promotion_price} priceItem={data.price} titleItem={data.title} widthCard="100%" />
-                    </div>
-                  ))
-                }
-              </> : <>Loading...</>
-            }
+            {dataCourses ? (
+              <>
+                {dataCourses.map((data: any) => (
+                  <div key={data.id}>
+                    <CardMainProduct
+                      imageItem={covertB64(data.thumbnail)}
+                      promotion_price={data.promotion_price}
+                      priceItem={data.price}
+                      titleItem={data.title}
+                      widthCard="100%"
+                    />
+                  </div>
+                ))}
+              </>
+            ) : (
+              <>Loading...</>
+            )}
           </div>
 
           <div className="load_morePr-home">

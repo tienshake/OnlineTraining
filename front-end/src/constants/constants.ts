@@ -73,18 +73,18 @@ export const PROGRESS = [
 
 /* My Card Prop */
 export interface MyCardBasicIntroduceProps {
-  imageItem?: String;
+  imageItem?: any;
   titleItem?: String;
   contentItem?: String;
   priceItem?: String;
   widthCard?: String;
-  promotion_price?: String
+  promotion_price?: String;
 }
-export interface MyCoursesCateProps extends MyCardBasicIntroduceProps { }
+export interface MyCoursesCateProps extends MyCardBasicIntroduceProps {}
 export interface CardMainProductProps extends MyCardBasicIntroduceProps {
-  borderStyle?: Boolean
+  borderStyle?: Boolean;
 }
-export interface CardUserStyleProps extends MyCardBasicIntroduceProps { }
+export interface CardUserStyleProps extends MyCardBasicIntroduceProps {}
 
 // Role
 export const ADMIN_ROUTE = "admin";
