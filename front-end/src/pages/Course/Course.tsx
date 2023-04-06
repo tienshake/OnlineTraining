@@ -10,6 +10,7 @@ import CheckboxListCate from '../../components/ListFilters/CheckboxListCate';
 import Pagination from '../../components/Pagination/Pagination';
 import React, { useEffect, useState } from 'react';
 import courseServices from '../../services/course';
+import covertB64 from '../../utils/covertB64';
 
 export default function Course() {
     const [age, setAge] = React.useState('');
@@ -84,9 +85,9 @@ export default function Course() {
                         {
                             dataCourses ? <>
                                 {
-                                    dataCourses.map((data:any) => (
+                                    dataCourses.map((data: any) => (
                                         <div key={data.id}>
-                                            <CardMainProduct borderStyle={true} promotion_price={data.promotion_price} priceItem={data.price} titleItem={data.title} widthCard="100%" />
+                                            <CardMainProduct idCourse={data.id} imageItem={covertB64(data.thumbnail)} borderStyle={true} promotion_price={data.promotion_price} priceItem={data.price} titleItem={data.title} widthCard="100%" />
                                         </div>
                                     ))
                                 }

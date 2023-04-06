@@ -12,7 +12,7 @@ import CardUserStyle from "../../components/Card/CardUserStyle";
 import courseServices from "../../services/course";
 import { useEffect, useState } from "react";
 import "./Home.css";
-import ButtonLoadMore from "../../components/Button/ButtonLoadMore";
+import ButtonRedirect from "../../components/Button/ButtonRedirect";
 import covertB64 from "../../utils/covertB64";
 
 const Home = () => {
@@ -218,6 +218,7 @@ const Home = () => {
                 {dataCourses.map((data: any) => (
                   <div key={data.id}>
                     <CardMainProduct
+                      idCourse={data.id}
                       imageItem={covertB64(data.thumbnail)}
                       promotion_price={data.promotion_price}
                       priceItem={data.price}
@@ -233,7 +234,7 @@ const Home = () => {
           </div>
 
           <div className="load_morePr-home">
-            <ButtonLoadMore />
+            <ButtonRedirect path={"/course"} />
           </div>
         </div>
 

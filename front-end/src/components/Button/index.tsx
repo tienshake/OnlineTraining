@@ -1,4 +1,3 @@
-import React from "react";
 import { Button as ButtonMUI, ButtonProps } from "@mui/material";
 import styles from "./Button.module.scss";
 import { Link } from "react-router-dom";
@@ -10,6 +9,7 @@ interface ButtonPropsType {
   circle?: boolean;
   className?: string;
   outline?: boolean;
+  hoverCardChangeTextColor?: boolean
 }
 
 const Button = (props: ButtonProps & ButtonPropsType) => {
@@ -25,7 +25,7 @@ const Button = (props: ButtonProps & ButtonPropsType) => {
   return (
     <Link to={path ? path : ""}>
       <ButtonMUI
-        style={{ borderRadius: circle ? "50px" : "" }}
+        style={{ color: `${props.hoverCardChangeTextColor ? '#fff' : "#392C7D"}`, borderRadius: circle ? "50px" : "" }}
         onClick={() => onClick()}
         className={clsx(styles.container, className)}
         variant={variant}

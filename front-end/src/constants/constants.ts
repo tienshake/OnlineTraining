@@ -73,12 +73,13 @@ export const PROGRESS = [
 
 /* My Card Prop */
 export interface MyCardBasicIntroduceProps {
-  imageItem?: any;
-  titleItem?: String;
-  contentItem?: String;
-  priceItem?: String;
-  widthCard?: String;
-  promotion_price?: String;
+  idCourse?: Number,
+  imageItem?: any,
+  titleItem?: String,
+  contentItem?: String,
+  priceItem?: String,
+  widthCard?: String,
+  promotion_price?: String,
 }
 export interface MyCoursesCateProps extends MyCardBasicIntroduceProps {}
 export interface CardMainProductProps extends MyCardBasicIntroduceProps {
