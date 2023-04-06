@@ -218,6 +218,7 @@ const Home = () => {
                 {dataCourses.map((data: any) => (
                   <div key={data.id}>
                     <CardMainProduct
+                      preventPath="/"
                       idCourse={data.id}
                       imageItem={covertB64(data.thumbnail)}
                       promotion_price={data.promotion_price}
@@ -307,7 +308,7 @@ const Home = () => {
                   key={index}
                   style={{ width: "100%", margin: "auto" }} /* src={data.src} */
                 >
-                  <CardMainProduct widthCard="95%" />
+                  <CardMainProduct preventPath="/" widthCard="95%" />
                 </div>
               ))}
             </Slider>

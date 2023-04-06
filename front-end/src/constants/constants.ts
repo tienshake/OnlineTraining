@@ -84,6 +84,7 @@ export interface MyCardBasicIntroduceProps {
 export interface MyCoursesCateProps extends MyCardBasicIntroduceProps {}
 export interface CardMainProductProps extends MyCardBasicIntroduceProps {
   borderStyle?: Boolean;
+  preventPath: String;
 }
 export interface CardUserStyleProps extends MyCardBasicIntroduceProps {}
 

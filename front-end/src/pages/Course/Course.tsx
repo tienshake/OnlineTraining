@@ -87,7 +87,7 @@ export default function Course() {
                                 {
                                     dataCourses.map((data: any) => (
                                         <div key={data.id}>
-                                            <CardMainProduct idCourse={data.id} imageItem={covertB64(data.thumbnail)} borderStyle={true} promotion_price={data.promotion_price} priceItem={data.price} titleItem={data.title} widthCard="100%" />
+                                            <CardMainProduct preventPath="/course" idCourse={data.id} imageItem={covertB64(data.thumbnail)} borderStyle={true} promotion_price={data.promotion_price} priceItem={data.price} titleItem={data.title} widthCard="100%" />
                                         </div>
                                     ))
                                 }

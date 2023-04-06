@@ -19,6 +19,10 @@ export default function CardMainProduct(props: CardMainProductProps) {
     setTextStateBtn(false)
   }
 
+  const handleClickLike = (e: any) => {
+    e.preventdefault();
+  }
+
   return (
     <Link to={`/course-details/${props.idCourse}`}>
       <div
@@ -35,7 +39,6 @@ export default function CardMainProduct(props: CardMainProductProps) {
 
           <img style={{ height: '180px' }} src={props.imageItem} alt="" />
 
-
           <ul className="box-content-user">
             <li>
               <img
@@ -47,13 +50,15 @@ export default function CardMainProduct(props: CardMainProductProps) {
               <b>Nicole Brown</b> <br />{" "}
               <p style={{ fontSize: "13px" }}>Instructor</p>{" "}
             </li>
-            <Link to={'/'}>
+
+            <Link to={`${props.preventPath}`}>
               <li>
                 <AiOutlineHeart
                   style={{ fontSize: "22px", color: "red", marginTop: "5px" }}
                 />
               </li>
             </Link>
+
 
           </ul>
 
