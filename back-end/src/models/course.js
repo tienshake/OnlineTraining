@@ -18,6 +18,16 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "course_id",
         as: "course_detail",
       });
+
+      Course.belongsTo(models.User, {
+        foreignKey: "user_id",
+        as: "user",
+      });
+
+      Course.hasMany(models.Rating, {
+        foreignKey: "course_id",
+        // as: "average_rating",
+      });
     }
   }
   Course.init(

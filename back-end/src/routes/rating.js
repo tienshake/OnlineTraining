@@ -4,9 +4,13 @@ import express from "express";
 
 const router = express.Router();
 
-router.post("/create", ratingController.createRating);
+router.post("/create", middleware.authUser, ratingController.createRating);
 router.get("/get-by-course-id/:id", ratingController.getAllRatingsByCourseId);
-router.put("/edit/:id", ratingController.updateRating);
-router.delete("/delete/:id", ratingController.deleteRating);
+router.put("/edit/:id", middleware.authUser, ratingController.updateRating);
+router.delete(
+  "/delete/:id",
+  middleware.authUser,
+  ratingController.deleteRating
+);
 
 export default router;

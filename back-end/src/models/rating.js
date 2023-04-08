@@ -7,6 +7,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "user_id",
         as: "users",
       });
+
+      Rating.belongsTo(models.Course, {
+        foreignKey: "course_id",
+        // as: "average_rating",
+      });
     }
   }
   Rating.init(
