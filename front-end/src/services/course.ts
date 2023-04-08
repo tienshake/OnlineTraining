@@ -47,7 +47,7 @@ const courseServices = {
       let response = null;
       if (limit && page) {
         response = await axiosClient.get(
-          `courses/get?id=${id}&limit=${limit}&page${page}`
+          `courses/get?id=${id}&limit=${limit}&page=${page}`
         );
         return response;
       } else {
