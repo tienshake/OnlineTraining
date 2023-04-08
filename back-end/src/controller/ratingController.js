@@ -4,19 +4,37 @@ import db from "../models";
 // Create rating
 const createRating = async (req, res) => {
   const { user_id, course_id, parent_id, rating_value, comment } = req.body;
+
   try {
-    const newRating = await db.Rating.create({
-      user_id,
-      course_id,
-      parent_id,
-      rating_value,
-      comment,
+    const user = await db.Rating.findOne({
+      where: { user_id: user_id, course_id: course_id },
     });
-    res.status(201).json({
-      code: 0,
-      message: "Rating created successfully",
-      rating: newRating,
-    });
+
+    if (user) {
+      res.status(200).json({
+        message: "Only One comment",
+      });
+      return;
+    }
+
+    if (!user_id || !course_id || !rating_value || !comment) {
+      res.status(400).json({
+        message: "missing required",
+      });
+    } else {
+      console.log("oke");
+      const newRating = await db.Rating.create({
+        user_id,
+        course_id,
+        rating_value,
+        comment,
+      });
+      res.status(201).json({
+        code: 0,
+        message: "Rating created successfully",
+        data: newRating,
+      });
+    }
   } catch (error) {
     console.log(error);
     res.status(500).send("Internal server error");
@@ -25,9 +43,8 @@ const createRating = async (req, res) => {
 
 // Get all ratings by course_id
 const getAllRatingsByCourseId = async (req, res) => {
-  const { id } = req.params;
-  console.log(id);
   try {
+    const { id } = req.params;
     const ratings = await db.Rating.findAll({
       where: { course_id: id },
       include: [
@@ -35,8 +52,17 @@ const getAllRatingsByCourseId = async (req, res) => {
           model: db.User,
           attributes: ["id", "name"],
           as: "users",
+          include: [
+            {
+              model: db.User_detail,
+              attributes: ["avatar"],
+              as: "user_details",
+            },
+          ],
         },
       ],
+      raw: true,
+      nest: true,
     });
     res.status(200).json({
       code: 0,

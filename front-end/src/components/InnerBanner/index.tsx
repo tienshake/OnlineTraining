@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./InnerBanner.module.scss";
 import StarIcon from "@mui/icons-material/Star";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import checkDataApi from "../../utils/checkDataApi";
+import courseServices from "../../services/course";
+import covertB64 from "../../utils/covertB64";
 
 const InnerBanner = () => {
+  const [dataCourse, setDataCourse] = useState<any>();
+  let { id } = useParams();
+
+  useEffect(() => {
+    const fetch = async () => {
+      const data = await courseServices.getCourseApi({
+        id: id,
+      });
+      const result = checkDataApi(data);
+      if (result) {
+        setDataCourse(result.data);
+      }
+    };
+    fetch();
+  }, [id]);
+
   return (
     <div className={styles.innerBanner}>
       <div className={styles.contentBanner}>
@@ -13,7 +32,7 @@ const InnerBanner = () => {
               <div className={styles.abtInstructorImg}>
                 <Link to="">
                   <img
-                    src="https://dreamslms.dreamguystech.com/html/assets/img/user/user1.jpg"
+                    src={covertB64(dataCourse?.user?.user_details.avatar)}
                     alt="img"
                     className={styles.imgFluid}
                   />
@@ -21,9 +40,9 @@ const InnerBanner = () => {
               </div>
               <div className={styles.instructorDetail}>
                 <h5>
-                  <Link to="">Nicole Brown</Link>
+                  <Link to="">{dataCourse?.user.name}</Link>
                 </h5>
-                <p>UX/UI Designer</p>
+                <p>{dataCourse?.user?.user_details.experience}</p>
               </div>
               <div className={styles.rating}>
                 <StarIcon />
@@ -38,9 +57,7 @@ const InnerBanner = () => {
             </div>
             <span className={styles.webBadge}>WEB DEVELPMENT</span>
           </div>
-          <h2 className={styles.titleCourse}>
-            The Complete Web Developer Course 2.0
-          </h2>
+          <h2 className={styles.titleCourse}>{dataCourse?.title}</h2>
           <p className={styles.description}>
             Learn Web Development by building 25 websites and mobile apps using
             HTML, CSS, Javascript, PHP, Python, MySQL &amp; more!

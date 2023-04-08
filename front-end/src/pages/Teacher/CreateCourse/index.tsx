@@ -72,7 +72,9 @@ function CreateCourse() {
       }
     };
     fetch();
+  }, []);
 
+  React.useEffect(() => {
     // reset arr when component didmount
     setPROGRESS_ARR([
       { id: INFO, title: "Basic information", status: PENDING },

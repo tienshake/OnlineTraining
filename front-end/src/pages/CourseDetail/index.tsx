@@ -7,23 +7,35 @@ import courseServices from "../../services/course";
 import checkDataApi from "../../utils/checkDataApi";
 import { useParams } from "react-router-dom";
 import covertB64 from "../../utils/covertB64";
+import Comment from "../../components/Comment";
+import CommentViews from "../../components/CommentViews";
+import ratingServices from "../../services/rating";
 
 const CourseDetail = () => {
   const [dataCourse, setDataCourse] = useState<any>();
+  const [dataComment, setDataComment] = useState<any>();
   let { id } = useParams();
 
   useEffect(() => {
-    const fetch = async () => {
+    const fetchCreateRating = async () => {
       const data = await courseServices.getCourseApi({
         id: id,
       });
       const result = checkDataApi(data);
       if (result) {
         setDataCourse(result.data);
-        console.log("result", result);
       }
     };
-    fetch();
+
+    const fetchGetRating = async () => {
+      const data: any = await ratingServices.getRatingApi(id);
+      const result = checkDataApi(data);
+      if (result) {
+        setDataComment(result.data);
+      }
+    };
+    fetchCreateRating();
+    fetchGetRating();
   }, [id]);
 
   return (
@@ -52,6 +64,16 @@ const CourseDetail = () => {
             <AccordionSection />
             <AccordionSection />
           </Box>
+        </Box>
+        <Box className={styles.comment}>
+          <Comment />
+        </Box>
+
+        <Box className={styles.commentViews}>
+          <h4>Reviews</h4>
+          {dataComment?.map((item: any, i: number) => {
+            return <CommentViews key={i} comment={item} />;
+          })}
         </Box>
       </Box>
       <Box className={styles.contentRight}>

@@ -116,6 +116,35 @@ const getCourse = async (req, res) => {
             model: db.Course_detail,
             as: "course_detail",
           },
+          {
+            model: db.Rating,
+            // as: "course_detail",
+            // attributes: [
+            //   [
+            //     sequelize.fn("avg", sequelize.col("rating_value")),
+            //     "average_rating",
+            //   ],
+            // ],
+          },
+          {
+            model: db.User,
+            as: "user",
+            attributes: ["id", "name"],
+            include: [
+              {
+                model: db.User_detail,
+                as: "user_details",
+                attributes: [
+                  "avatar",
+                  "about_me",
+                  "experience",
+                  "education",
+                  "gender",
+                  "address",
+                ],
+              },
+            ],
+          },
         ],
         raw: true,
         nest: true,

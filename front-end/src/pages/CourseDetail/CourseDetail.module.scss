@@ -14,6 +14,8 @@
   z-index: 1;
 }
 
+.commentViews,
+.comment,
 .overviewSec,
 .includes,
 .train,
@@ -129,4 +131,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.commentViews,
+.comment {
+  margin-top: 24px;
 }
