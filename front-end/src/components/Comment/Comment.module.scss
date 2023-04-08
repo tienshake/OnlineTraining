@@ -1,0 +1,26 @@
+.form {
+  flex-direction: column;
+  display: flex;
+  gap: 24px;
+  margin-top: 15px;
+  :global(.MuiInputBase-root) {
+    font-size: 1.4rem;
+  }
+}
+
+.rating {
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.star {
+  display: flex;
+  align-items: center;
+}
+
+.starIcon {
+  font-size: 3rem;
+  cursor: pointer;
+}

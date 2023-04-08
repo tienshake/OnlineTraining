@@ -1,0 +1,48 @@
+.container {
+  margin-bottom: 50px;
+}
+
+.instructorWrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #c7c7c7;
+  margin: 15px 0;
+  flex-wrap: wrap;
+
+  img {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #e3e3e3;
+    border-radius: 50%;
+  }
+}
+
+.aboutInstructor {
+  display: flex;
+  margin-bottom: 15px;
+  align-items: center;
+  gap: 10px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  margin: 0 0 7px;
+  gap: 5px;
+  padding: 0;
+  .averageRating {
+    font-size: 1.4rem;
+  }
+}
+
+.details {
+  p {
+    font-size: 1.4rem;
+  }
+}
+
+.commentContent {
+  font-style: italic;
+  font-size: 1.4rem;
+}

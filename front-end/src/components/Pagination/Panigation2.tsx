@@ -1,13 +1,13 @@
-import React from 'react'
-import ReactPaginate from 'react-paginate'
-const handlePageClick = (e:any) => {
-    console.log(e)
-}
+import React from "react";
+import ReactPaginate from "react-paginate";
+const handlePageClick = (e: any) => {
+  console.log(e);
+};
 
 export default function Panigation2() {
   return (
     <div>
-       <ReactPaginate
+      <ReactPaginate
         breakLabel="..."
         nextLabel="next >"
         onPageChange={handlePageClick}
@@ -27,5 +27,5 @@ export default function Panigation2() {
         // activeClassName="active"
       />
     </div>
-  )
+  );
 }
