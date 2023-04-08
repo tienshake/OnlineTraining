@@ -1,76 +1,69 @@
-import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import "./pagination.css"
 import { Pagination, PaginationItem } from "@mui/material";
-import { useEffect, useState } from 'react';
 import courseServices from '../../services/course';
 
-export default function PaginationRounded() {
-    const [limit, setLimit] = useState(3);
-    const [currentPage, setCurrentPage] = useState(3);
+interface MyPaginationRoundedProps {
+    limit: number,
+    pageCount: number,
+    setDataCourses: any
+}
 
-    const [pageCount, setPageCount] = useState(1);
+export default function PaginationRounded(props: MyPaginationRoundedProps) {
+    const fetchDataCourses = async (currentPage: Number) => {
+        const res = await courseServices.getCourseApi(
+            {
+                id: 'ALL',
+                limit: props.limit,
+                page: currentPage,
+            }
+        );
 
-    const [dataCourses, setDataCourses] = useState<any>();
+        const data = await res.data.data.rows;
 
-
-    const handleChangePage = (e: any, p:any) => {
-        const selectedIndex = p
-        console.log(selectedIndex)
-        getPanigateData();
-
+        console.log(data, "data");
+        return data;
     }
 
-    const getPanigateData = () => {
-
-        courseServices.getCourseApi({
-            id: 'ALL',
-            limit: limit,
-            page: currentPage,
-        }).then((data) => /* setDataCourses(data.data.data.rows) */ {
-            // console.log(data.data.data.count, "count")
-            setPageCount(data.data.data.count)
-        })
-
-        // console.log(pageCount, 'pageCount')
+    const handleChangePage = async (e: any, p: any) => {
+        const currentPage = p
+        console.log(currentPage, "sss")
+        const commentsFormServer = await fetchDataCourses(currentPage);
+        props.setDataCourses(commentsFormServer)
+        console.log(commentsFormServer, "commentsFormServer")
     }
-
-
 
     return (
         <Stack spacing={2}>
-            <Pagination
-                onChange={handleChangePage}
-                count={20}
-                sx={{
-                    '& .Mui-selected': {
-                        color: '#000',
-                        backgroundColor: 'blue',
-                        '&:hover': {
-                            backgroundColor: '',
-                        },
+        <Pagination
+            onChange={handleChangePage}
+            count={props.pageCount}
+            sx={{
+                '& .Mui-selected': {
+                    color: '#000',
+                    backgroundColor: 'blue',
+                    '&:hover': {
+                        backgroundColor: '',
                     },
-                    '& .MuiPaginationItem-root': {
-                        color: '#000',
-                        backgroundColor: '#fff',
-                        '&:hover': {
-                            backgroundColor: '#FF5364',
-                            color: '#fff'
-                        },
-                        width: '42px',
-                        height: '42px',
-                        borderRadius: '5px',
-                        border: '1px solid #f7d2d5',
-                        fontSize: '16px',
+                },
+                '& .MuiPaginationItem-root': {
+                    color: '#000',
+                    backgroundColor: '#fff',
+                    '&:hover': {
+                        backgroundColor: '#FF5364',
+                        color: '#fff'
                     },
-                }}
-                renderItem={(item) => (
-                    // <>
-                    //     {console.log(item.page)}
-                    // </>
-                    <PaginationItem {...item} sx={{ borderRadius: '0%' }} />
-                )}
-            />
-        </Stack>
+                    width: '42px',
+                    height: '42px',
+                    borderRadius: '5px',
+                    border: '1px solid #f7d2d5',
+                    fontSize: '16px',
+                },
+            }}
+            renderItem={(item) => (
+                <PaginationItem {...item} sx={{ borderRadius: '0%' }} />
+            )}
+        />
+    </Stack>
     );
 }

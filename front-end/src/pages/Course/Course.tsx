@@ -8,8 +8,7 @@ import "./Course.css";
 import CardMainProduct from '../../components/Card/CardMainProduct';
 import CheckboxListCate from '../../components/ListFilters/CheckboxListCate';
 import covertB64 from '../../utils/covertB64';
-import Stack from '@mui/material/Stack';
-import { Pagination, PaginationItem } from "@mui/material";
+import PaginationRounded from '../../components/Pagination/Pagination';
 import React, { useEffect, useState } from 'react';
 import courseServices from '../../services/course';
 
@@ -25,37 +24,12 @@ export default function Course() {
 
     /*  */
     const [dataCourses, setDataCourses] = useState<any>();
+    console.log(dataCourses, "dataCourses")
 
 
     /* Paginate */
-    const [limit, setLimit] = useState(6);
-    // const [currentPage, setCurrentPage] = useState(3);
+    const [limit, /* setLimit */] = useState(6);
     const [pageCount, setPageCount] = useState(0);
-
-    const fetchDataCourses = async (currentPage: Number) => {
-        const res = await courseServices.getCourseApi(
-            {
-                id: 'ALL',
-                limit: limit,
-                page: currentPage,
-            }
-        );
-
-        const data = await res.data.data.rows;
-
-        console.log(data, "data");
-        return data;
-    }
-
-    const handleChangePage = async (e: any, p: any) => {
-        const currentPage = p
-        console.log(currentPage, "sss")
-        const commentsFormServer = await fetchDataCourses(currentPage);
-        setDataCourses(commentsFormServer)
-        console.log(commentsFormServer, "commentsFormServer")
-    }
-
-
 
 
     useEffect(() => {
@@ -70,7 +44,7 @@ export default function Course() {
             console.log(total, "total")
             setPageCount(Math.ceil(total / limit));
         })
-    }, []);
+    }, [limit]);
 
     console.log(dataCourses)
 
@@ -126,7 +100,13 @@ export default function Course() {
                         {
                             dataCourses ? <>
                                 {
-                                    dataCourses.map((data: any) => (
+                                    dataCourses.map((data: {
+                                        id: number,
+                                        thumbnail: string,
+                                        promotion_price: string,
+                                        price: string,
+                                        title: string,
+                                    }) => (
                                         <div key={data.id}>
                                             <CardMainProduct
                                                 preventPath="/course" idCourse={data.id}
@@ -143,44 +123,8 @@ export default function Course() {
                         }
                     </div>
 
-
                     <div style={{ marginTop: '40px' }}>
-                        <Stack spacing={2}>
-                            <Pagination
-                                onChange={handleChangePage}
-                                count={pageCount}
-                                sx={{
-                                    '& .Mui-selected': {
-                                        color: '#000',
-                                        backgroundColor: 'blue',
-                                        '&:hover': {
-                                            backgroundColor: '',
-                                        },
-                                    },
-                                    '& .MuiPaginationItem-root': {
-                                        color: '#000',
-                                        backgroundColor: '#fff',
-                                        '&:hover': {
-                                            backgroundColor: '#FF5364',
-                                            color: '#fff'
-                                        },
-                                        width: '42px',
-                                        height: '42px',
-                                        borderRadius: '5px',
-                                        border: '1px solid #f7d2d5',
-                                        fontSize: '16px',
-                                    },
-                                }}
-                                renderItem={(item) => (
-                                    // <>
-                                    //     {console.log(item.page)}
-                                    // </>
-                                    <PaginationItem {...item} sx={{ borderRadius: '0%' }} />
-                                )}
-                            />
-                        </Stack>
-                        {/* <Pagination /> */}
-                        {/* <Panigation2/> */}
+                        <PaginationRounded limit={limit} pageCount={pageCount} setDataCourses={setDataCourses} />
                     </div>
                 </div>
 

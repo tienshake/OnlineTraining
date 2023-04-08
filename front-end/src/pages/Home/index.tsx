@@ -23,7 +23,7 @@ const Home = () => {
       .getCourseApi({
         id: "ALL",
         limit: 8,
-        page: 4,
+        page: 1,
       })
       .then((data) => setDataCourses(data.data.data.rows));
   }, []);
