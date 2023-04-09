@@ -1,4 +1,3 @@
-import { styled } from '@mui/material/styles';
 import { createTheme } from '@mui/material';
 
 const themeStyle = createTheme({

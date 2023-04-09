@@ -1,5 +1,5 @@
 import React from "react";
-import { TextField } from "@mui/material";
+import { Stack, TextField } from "@mui/material";
 import styles from "./Header.module.scss";
 import Button from "../Button";
 import { Link, NavLink, useNavigate } from "react-router-dom";
@@ -19,6 +19,12 @@ import { RootState } from "../../redux/store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutSuccess } from "../../redux/features/auth";
 import { removeUserToken } from "../../utils/userToken";
+import MenuIcons from "../MenuIcons/MenuIcons";
+import { IoMdNotificationsOutline } from 'react-icons/io';
+import { BsChatDots } from "react-icons/bs";
+import { FcLike } from "react-icons/fc";
+import { RiShoppingCartLine } from "react-icons/ri";
+
 
 const settings = ["Profile", "Logout"];
 
@@ -168,6 +174,15 @@ const Header = () => {
                 </NavLink>
               ))}
           </Box>
+
+
+          <Stack direction="row" spacing={1} mr={1}>
+            <li><MenuIcons typeContent="chat" iconMenu={<BsChatDots style={{ fontSize: '20px' }} />} /></li>
+            <li><MenuIcons typeContent="cart" iconMenu={<RiShoppingCartLine style={{ fontSize: '21px' }} />} /></li>
+            <li> <MenuIcons typeContent="loveProduct" iconMenu={<FcLike style={{ fontSize: '23px' }} />} /></li>
+            <li> <MenuIcons typeContent="notification" iconMenu={<IoMdNotificationsOutline style={{ fontSize: '26px' }} />} /></li>
+          </Stack>
+
 
           {isLogged ? (
             <Box sx={{ flexGrow: 0 }}>
