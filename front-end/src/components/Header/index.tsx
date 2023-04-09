@@ -175,7 +175,7 @@ const Header = () => {
               ))}
           </Box>
 
-
+          {/* menu icons */}
           <Stack direction="row" spacing={1} mr={1}>
             <li><MenuIcons typeContent="chat" iconMenu={<BsChatDots style={{ fontSize: '20px' }} />} /></li>
             <li><MenuIcons typeContent="cart" iconMenu={<RiShoppingCartLine style={{ fontSize: '21px' }} />} /></li>

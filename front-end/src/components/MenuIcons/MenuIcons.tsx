@@ -39,6 +39,7 @@ export default function MenuIcons(props: MyPropsMenuIcons) {
             </Box>
 
             <Menu
+                disableScrollLock={true}
                 anchorEl={anchorEl}
                 id="account-menu"
                 open={open}
