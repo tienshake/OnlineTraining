@@ -12,5 +12,6 @@ router.delete(
   middleware.authUser,
   ratingController.deleteRating
 );
+router.get("/get-avg", ratingController.getAvgRating);
 
 export default router;

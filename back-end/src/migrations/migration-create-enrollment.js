@@ -17,9 +17,9 @@ module.exports = {
       status: {
         type: Sequelize.STRING,
       },
-      payment_id: {
-        type: Sequelize.INTEGER,
-      },
+      // payment_id: {
+      //   type: Sequelize.INTEGER,
+      // },
       // enrollment_date: {
       //   allowNull: true,
       //   type: Sequelize.DATE,

@@ -117,9 +117,29 @@ const deleteRating = async (req, res) => {
   }
 };
 
+const getAvgRating = async (req, res) => {
+  try {
+    const courseId = req.query.id;
+    const totalRatingValue = await db.Rating.sum("rating_value", {
+      where: { course_id: courseId },
+    });
+
+    const numberOfRatings = await db.Rating.count({
+      where: { course_id: courseId },
+    }); // số lượng đánh giá
+    const averageRating = totalRatingValue / numberOfRatings; // giá
+
+    res.json({ total_rating_value: averageRating });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal server error");
+  }
+};
+
 export default {
   createRating,
   getAllRatingsByCourseId,
   updateRating,
   deleteRating,
+  getAvgRating,
 };

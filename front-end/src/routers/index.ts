@@ -15,6 +15,7 @@ import EditProfile from "../components/EditProfile";
 import DeleteProfile from "../components/DeleteProfile";
 import Course from "../pages/Course/Course";
 import CourseDetail from "../pages/CourseDetail";
+import Checkout from "../pages/Checkout";
 
 const publicRoute: RouteType[] = [
   {
@@ -58,6 +59,11 @@ const privateRoute: RouteType[] = [
         patch: "delete-profile",
       },
     ],
+  },
+  {
+    component: Checkout,
+    patch: "/checkout/:id",
+    defaultLayout: true,
   },
   {
     component: CreateCourse,

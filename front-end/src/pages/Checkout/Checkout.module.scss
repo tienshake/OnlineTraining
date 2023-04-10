@@ -1,0 +1,119 @@
+.container {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 50px;
+  margin-top: 150px;
+}
+
+.contentLeft {
+  width: 70%;
+}
+
+.contentRight {
+  width: 30%;
+  z-index: 1;
+}
+
+.commentViews,
+.comment,
+.overviewSec,
+.includes,
+.train,
+.courseContent {
+  background-color: var(--white);
+  border-radius: 10px !important;
+  border: 1px solid #e9ecef;
+  padding: 24px;
+}
+
+.overviewSec {
+  margin-bottom: 1.875rem;
+  border-radius: 0;
+}
+
+.subsTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #392c7d;
+  margin-bottom: 20px;
+}
+
+.body {
+  font-size: 1.4rem;
+  h6 {
+    font-weight: 600;
+    font-size: 1.4rem;
+    color: #0b0b0b;
+    margin-bottom: 20px;
+  }
+}
+
+.sideBar {
+}
+
+.enroll {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+  a {
+    width: 100%;
+  }
+  :global(.MuiButtonBase-root) {
+    width: 100%;
+  }
+}
+
+.includes {
+  li {
+    border-bottom: 1px solid #e7e7e7;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.4rem;
+    h4 {
+      font-size: 1.8rem;
+    }
+    span {
+      font-weight: 600;
+      font-size: 1.4rem;
+    }
+  }
+}
+
+.promotion_price {
+  font-size: 4rem;
+  color: var(--primary);
+}
+
+.price {
+  font-size: 2rem;
+  color: #777777;
+  text-decoration: line-through;
+  margin-bottom: 12px;
+}
+
+.promo {
+  display: flex;
+  padding: 20px 0;
+  gap: 20px;
+}
+
+.checkbox {
+  padding: 20px 0;
+}
+
+.code {
+  display: flex;
+  gap: 10px;
+  p {
+    color: var(--primary);
+    font-weight: 600;
+  }
+}
+
+.price_content {
+  display: flex;
+  gap: 10px;
+}

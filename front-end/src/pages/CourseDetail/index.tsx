@@ -17,7 +17,7 @@ const CourseDetail = () => {
   let { id } = useParams();
 
   useEffect(() => {
-    const fetchCreateRating = async () => {
+    const fetchGetCourse = async () => {
       const data = await courseServices.getCourseApi({
         id: id,
       });
@@ -34,7 +34,7 @@ const CourseDetail = () => {
         setDataComment(result.data);
       }
     };
-    fetchCreateRating();
+    fetchGetCourse();
     fetchGetRating();
   }, [id]);
 
@@ -95,7 +95,7 @@ const CourseDetail = () => {
               <Button circle title="Share" />
             </div>
             <div className={styles.enroll}>
-              <ButtonSave circle title="Enroll now" />
+              <ButtonSave circle title="Enroll now" href={`/checkout/${id}`} />
             </div>
           </div>
         </Box>

@@ -6,10 +6,11 @@ interface ButtonPropsType {
   title?: string;
   onClick?: () => void;
   path?: string;
+  href?: string;
   circle?: boolean;
   className?: string;
   outline?: boolean;
-  hoverCardChangeTextColor?: boolean
+  hoverCardChangeTextColor?: boolean;
 }
 
 const Button = (props: ButtonProps & ButtonPropsType) => {
@@ -18,21 +19,27 @@ const Button = (props: ButtonProps & ButtonPropsType) => {
     title,
     onClick = () => null,
     path,
+    href,
     circle = false,
     className,
   } = props;
 
+  const RenderLink = !href ? Link : "a";
+
   return (
-    <Link to={path ? path : ""}>
+    <RenderLink to={path ? path : ""} href={href ? href : ""}>
       <ButtonMUI
-        style={{ color: `${props.hoverCardChangeTextColor ? '#fff' : "#392C7D"}`, borderRadius: circle ? "50px" : "" }}
+        style={{
+          color: `${props.hoverCardChangeTextColor ? "#fff" : "#392C7D"}`,
+          borderRadius: circle ? "50px" : "",
+        }}
         onClick={() => onClick()}
         className={clsx(styles.container, className)}
         variant={variant}
       >
         {title}
       </ButtonMUI>
-    </Link>
+    </RenderLink>
   );
 };
 

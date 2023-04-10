@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         as: "course_sections",
       });
 
-      Course.hasMany(models.Course_detail, {
+      Course.hasOne(models.Course_detail, {
         foreignKey: "course_id",
         as: "course_detail",
       });
@@ -33,8 +33,6 @@ module.exports = (sequelize, DataTypes) => {
   Course.init(
     {
       title: DataTypes.STRING,
-      // description: DataTypes.TEXT("long"),
-      // descriptionMarkdown: DataTypes.TEXT("long"),
       thumbnail: DataTypes.STRING,
       price: DataTypes.INTEGER,
       promotion_price: DataTypes.INTEGER,

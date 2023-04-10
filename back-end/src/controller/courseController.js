@@ -108,6 +108,41 @@ const getCourse = async (req, res) => {
         raw: true,
         nest: true,
       });
+
+      // course = await db.Course.findAll({
+      //   attributes: { exclude: ["thumbnail"] },
+      //   include: [
+      //     {
+      //       model: db.Rating,
+      //       attributes: [
+      //         [
+      //           db.sequelize.fn("AVG", db.sequelize.col("rating_value")),
+      //           "avgRating",
+      //         ],
+      //       ],
+      //     },
+      //   ],
+      //   order: [
+      //     [
+      //       db.sequelize.fn("AVG", db.sequelize.col("Ratings.rating_value")),
+      //       "DESC",
+      //     ],
+      //   ],
+      //   group: [
+      //     "Course.id",
+      //     // "Rating.id",
+      //     // "Ratings.course_id",
+      //     // "Ratings.createdAt",
+      //     // "Ratings.updatedAt",
+      //   ],
+      //   limit: +limit,
+      //   offset: +offset,
+      //   raw: true,
+      //   nest: true,
+      // });
+
+      const count = await db.Course.count();
+      console.log(count);
     } else {
       course = await db.Course.findOne({
         where: { id: id },
@@ -115,16 +150,6 @@ const getCourse = async (req, res) => {
           {
             model: db.Course_detail,
             as: "course_detail",
-          },
-          {
-            model: db.Rating,
-            // as: "course_detail",
-            // attributes: [
-            //   [
-            //     sequelize.fn("avg", sequelize.col("rating_value")),
-            //     "average_rating",
-            //   ],
-            // ],
           },
           {
             model: db.User,
@@ -157,6 +182,10 @@ const getCourse = async (req, res) => {
         code: 0,
         message: "Get Course completed",
         data: course,
+        // data: {
+        //   course,
+        //   count: count,
+        // },
       });
     }
   } catch (error) {
