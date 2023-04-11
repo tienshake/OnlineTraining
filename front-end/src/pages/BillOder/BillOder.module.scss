@@ -1,0 +1,65 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  flex-direction: column;
+}
+
+.iconText {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.iconTask {
+  font-size: 10rem !important;
+  color: var(--color-button-save);
+}
+
+.titleIcon {
+  font-size: 3rem;
+  color: var(--primary);
+}
+
+.content {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  h1 {
+    padding: 10px 0;
+    color: var(--primary);
+  }
+  p {
+    padding: 5px 0;
+    color: var(--text-color);
+    font-weight: 500;
+  }
+  img {
+    height: 100px;
+  }
+  h2 {
+    border-bottom: 1px solid var(--border-input);
+    padding-bottom: 10px;
+  }
+}
+
+.course {
+  padding: 10px 0;
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.iconText,
+.content {
+  min-width: 500px;
+  padding: 20px;
+  background-color: var(--white);
+}

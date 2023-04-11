@@ -14,6 +14,9 @@ module.exports = {
       course_id: {
         type: Sequelize.INTEGER,
       },
+      oderId: {
+        type: Sequelize.INTEGER,
+      },
       amount: {
         type: Sequelize.INTEGER,
       },
@@ -23,8 +26,22 @@ module.exports = {
       enrollment_id: {
         type: Sequelize.INTEGER,
       },
-      payment_date: {
-        allowNull: true,
+      enrollment_id: {
+        type: Sequelize.INTEGER,
+      },
+      email_address: {
+        type: Sequelize.STRING,
+      },
+      nameOder: {
+        type: Sequelize.STRING,
+      },
+      description: {
+        type: Sequelize.STRING,
+      },
+      currency_code: {
+        type: Sequelize.STRING,
+      },
+      create_time: {
         type: Sequelize.DATE,
       },
       createdAt: {

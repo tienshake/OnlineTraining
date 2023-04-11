@@ -17,6 +17,7 @@ import Course from "../pages/Course/Course";
 import CourseDetail from "../pages/CourseDetail";
 import Checkout from "../pages/Checkout";
 import MyCourse from "../components/MyCourse/MyCourse";
+import BillOder from "../pages/BillOder";
 
 const publicRoute: RouteType[] = [
   {
@@ -68,6 +69,11 @@ const privateRoute: RouteType[] = [
   {
     component: Checkout,
     patch: "/checkout/:id",
+    defaultLayout: true,
+  },
+  {
+    component: BillOder,
+    patch: "/bill",
     defaultLayout: true,
   },
   {

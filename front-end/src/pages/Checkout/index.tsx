@@ -21,7 +21,7 @@ const Checkout = () => {
   useEffect(() => {
     const fetchGetCourse = async () => {
       const data = await courseServices.getCourseApi({
-        id: id,
+        id,
       });
       const result = checkDataApi(data);
       if (result) {
@@ -37,7 +37,7 @@ const Checkout = () => {
       }
     };
     fetchGetCourse();
-  }, [id]);
+  }, [id, user.id]);
 
   const generateOrderNumber = () => {
     // Tạo số ngẫu nhiên từ 1000 đến 9999
@@ -68,7 +68,10 @@ const Checkout = () => {
                 textAlign: "center",
               }}
             >
-              <PaypalCheckoutButton product={productOder} />
+              <PaypalCheckoutButton
+                product={productOder}
+                dataCourse={dataCourse}
+              />
             </div>
           </Box>
         </Box>

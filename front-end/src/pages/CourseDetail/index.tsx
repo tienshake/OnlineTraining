@@ -58,7 +58,7 @@ const CourseDetail = () => {
     getCourseData();
     getRatingData();
     getCourseSectionData();
-  }, [id]);
+  }, [id, user.id]);
   // console.log("dataSection", dataSection);
   return (
     <Box className={styles.container}>

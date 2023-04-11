@@ -3,10 +3,28 @@ import db from "../models";
 
 // Create rating
 const paymentEnrollment = async (req, res) => {
-  const { amount, user_id, course_id, status } = req.body;
+  const {
+    amount,
+    user_id,
+    course_id,
+    status,
+    email_address,
+    nameOder,
+    currency_code,
+    create_time,
+  } = req.body;
 
   try {
-    if (!amount || !user_id || !course_id) {
+    if (
+      !amount ||
+      !user_id ||
+      !course_id ||
+      !status ||
+      !email_address ||
+      !nameOder ||
+      !currency_code ||
+      !create_time
+    ) {
       return res
         .status(404)
         .json({ message: "Thiếu một thứ gì đó rồi bạn ơi" });
@@ -41,9 +59,17 @@ const paymentEnrollment = async (req, res) => {
           amount,
           enrollment_id: enrollment.id,
           status,
+          email_address,
+          nameOder,
+          currency_code,
+          create_time,
         });
         if (payment)
-          res.status(200).json({ code: 0, message: "Mua Khoá Học thành công" });
+          res.status(200).json({
+            code: 0,
+            message: "Mua Khoá Học thành công",
+            data: payment,
+          });
       } else {
         return res.status(404).json({ message: "Đăng ký thất bại" });
       }

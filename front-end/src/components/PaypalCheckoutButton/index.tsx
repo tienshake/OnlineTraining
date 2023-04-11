@@ -3,9 +3,12 @@ import { PayPalButtons } from "@paypal/react-paypal-js";
 import paymentServices from "../../services/payment";
 import checkDataApi from "../../utils/checkDataApi";
 import { toast } from "react-toastify";
+import { Navigate, useNavigate } from "react-router-dom";
+import covertB64 from "../../utils/covertB64";
 
 const PaypalCheckoutButton = (props: any) => {
-  const { product } = props;
+  const { product, dataCourse } = props;
+  const navigate = useNavigate();
 
   return (
     <PayPalButtons
@@ -53,9 +56,22 @@ const PaypalCheckoutButton = (props: any) => {
             amount: order?.purchase_units[0].amount.value,
             status: order.status,
             order_id: order.id,
+            email_address: order?.payer.email_address,
+            nameOder: order?.payer.name.surname + order?.payer.name.given_name,
+            currency_code: order?.purchase_units[0].amount.currency_code,
+            create_time: order.create_time,
           });
           const result = checkDataApi(dataAPI);
           if (result) {
+            navigate("/bill", {
+              state: {
+                ...result.data,
+                price: dataCourse.price,
+                title: dataCourse.title,
+                thumbnail: covertB64(dataCourse.thumbnail),
+              },
+            });
+            // <Navigate to="/bill" />;
             toast.success("Payment successful");
           } else {
             toast.error("Payment failed");
