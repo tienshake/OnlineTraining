@@ -105,6 +105,17 @@ const getCourse = async (req, res) => {
             model: db.Course_detail,
             as: "course_detail",
           },
+          {
+            model: db.Rating,
+            attributes: [
+              [
+                sequelize.literal(
+                  "(SELECT AVG(`rating_value`) FROM `Ratings` WHERE `Ratings`.`course_id` = `Course`.`id`)"
+                ),
+                "avg_rating_value",
+              ],
+            ],
+          },
         ],
         raw: true,
         nest: true,
@@ -112,13 +123,21 @@ const getCourse = async (req, res) => {
     } else {
       course = await db.Course.findOne({
         where: { id: id },
-        attributes: {
-          exclude: ["thumbnail"],
-        },
         include: [
           {
             model: db.Course_detail,
             as: "course_detail",
+          },
+          {
+            model: db.Rating,
+            attributes: [
+              [
+                sequelize.literal(
+                  "(SELECT AVG(`rating_value`) FROM `Ratings` WHERE `Ratings`.`course_id` = `Course`.`id`)"
+                ),
+                "avg_rating_value",
+              ],
+            ],
           },
           {
             model: db.User,

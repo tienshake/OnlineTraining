@@ -4,7 +4,11 @@ import express from "express";
 
 const router = express.Router();
 
-router.post("/create", paymentController.paymentEnrollment);
-router.get("/check", paymentController.checkPayment);
+router.post(
+  "/create",
+  middleware.authUser,
+  paymentController.paymentEnrollment
+);
+router.get("/check", middleware.authUser, paymentController.checkPayment);
 
 export default router;
