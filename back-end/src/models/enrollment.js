@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
       Enrollment.hasMany(models.Payment, {
         foreignKey: "enrollment_id",
       });
+
+      Enrollment.belongsTo(models.Course, {
+        foreignKey: "course_id",
+      });
     }
   }
   Enrollment.init(

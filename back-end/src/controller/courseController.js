@@ -1,6 +1,7 @@
 import db from "../models";
 import { sequelize } from "../models";
 const { Op } = require("sequelize");
+import moment from "moment";
 
 const createCourse = async (req, res) => {
   try {
@@ -108,44 +109,12 @@ const getCourse = async (req, res) => {
         raw: true,
         nest: true,
       });
-
-      // course = await db.Course.findAll({
-      //   attributes: { exclude: ["thumbnail"] },
-      //   include: [
-      //     {
-      //       model: db.Rating,
-      //       attributes: [
-      //         [
-      //           db.sequelize.fn("AVG", db.sequelize.col("rating_value")),
-      //           "avgRating",
-      //         ],
-      //       ],
-      //     },
-      //   ],
-      //   order: [
-      //     [
-      //       db.sequelize.fn("AVG", db.sequelize.col("Ratings.rating_value")),
-      //       "DESC",
-      //     ],
-      //   ],
-      //   group: [
-      //     "Course.id",
-      //     // "Rating.id",
-      //     // "Ratings.course_id",
-      //     // "Ratings.createdAt",
-      //     // "Ratings.updatedAt",
-      //   ],
-      //   limit: +limit,
-      //   offset: +offset,
-      //   raw: true,
-      //   nest: true,
-      // });
-
-      const count = await db.Course.count();
-      console.log(count);
     } else {
       course = await db.Course.findOne({
         where: { id: id },
+        attributes: {
+          exclude: ["thumbnail"],
+        },
         include: [
           {
             model: db.Course_detail,
@@ -175,6 +144,7 @@ const getCourse = async (req, res) => {
         nest: true,
       });
     }
+
     if (!course) {
       res.status(404).json({ message: "Course not found" });
     } else {
@@ -182,12 +152,62 @@ const getCourse = async (req, res) => {
         code: 0,
         message: "Get Course completed",
         data: course,
-        // data: {
-        //   course,
-        //   count: count,
-        // },
       });
     }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+const getCourseSection = async (req, res) => {
+  const { courseId, userId } = req.query;
+
+  try {
+    if (!courseId || !userId) {
+      res.status(400).json({ message: "Missing params" });
+    }
+    const course = await db.Course.findOne({
+      where: { id: courseId },
+      attributes: ["id"],
+      include: [
+        {
+          model: db.Enrollment,
+          where: { user_id: userId, course_id: courseId },
+          required: false, // JOIN bảng enroll với course
+        },
+        {
+          model: db.Course_section,
+          as: "course_sections",
+          include: [
+            {
+              model: db.Lecture,
+              as: "lectures",
+              attributes: ["id", "title", "video"],
+            },
+          ],
+        },
+      ],
+    });
+
+    // Update video field to NULL if user is not enrolled
+    if (!course.Enrollments.length) {
+      course.course_sections.forEach((section) => {
+        section.lectures.forEach((lecture) => {
+          lecture.video = null;
+        });
+      });
+    }
+
+    if (!course) {
+      res.status(400).json({ message: "Course not found" });
+    }
+
+    res.status(200).json({
+      data: course,
+      code: 0,
+      message: "Get course completed",
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
@@ -317,4 +337,5 @@ export default {
   editCourse,
   deleteCourse,
   searchCourse,
+  getCourseSection,
 };

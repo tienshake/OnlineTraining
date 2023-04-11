@@ -7,15 +7,13 @@ import Button from "../../components/Button";
 import courseServices from "../../services/course";
 import checkDataApi from "../../utils/checkDataApi";
 import { useParams } from "react-router";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store/store";
 
 const Checkout = () => {
   const [orderNumber, setOrderNumber] = useState("");
   const [productOder, setProductOder] = useState<any>({});
-
-  const product = {
-    description: "Design+Code React Hooks Course",
-    price: 1,
-  };
+  const user = useSelector((state: RootState) => state.auth.user);
 
   const [dataCourse, setDataCourse] = useState<any>();
   let { id } = useParams();
@@ -34,7 +32,7 @@ const Checkout = () => {
           description: newOrderNumber,
           price: result?.data?.promotion_price,
           course_id: result?.data?.id,
-          user_id: id,
+          user_id: user.id,
         });
       }
     };

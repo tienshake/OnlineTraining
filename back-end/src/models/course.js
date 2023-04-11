@@ -28,6 +28,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "course_id",
         // as: "average_rating",
       });
+
+      Course.hasMany(models.Enrollment, {
+        foreignKey: "course_id",
+        // as: "average_rating",
+      });
     }
   }
   Course.init(

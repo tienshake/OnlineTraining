@@ -58,6 +58,17 @@ const courseServices = {
       throw error;
     }
   },
+
+  getCourseSectionApi: async ({ userId, courseId }: any) => {
+    try {
+      const response = await axiosClient.get(
+        `courses/get-section?courseId=${courseId}&userId=${userId}`
+      );
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 export default courseServices;

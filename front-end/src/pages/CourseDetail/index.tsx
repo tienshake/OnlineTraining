@@ -10,16 +10,21 @@ import covertB64 from "../../utils/covertB64";
 import Comment from "../../components/Comment";
 import CommentViews from "../../components/CommentViews";
 import ratingServices from "../../services/rating";
+import { RootState } from "../../redux/store/store";
+import { useSelector } from "react-redux";
 
 const CourseDetail = () => {
   const [dataCourse, setDataCourse] = useState<any>();
   const [dataComment, setDataComment] = useState<any>();
+  const [dataSection, setDataSection] = useState<any>([]);
+
   let { id } = useParams();
+  const user = useSelector((state: RootState) => state.auth.user);
 
   useEffect(() => {
-    const fetchGetCourse = async () => {
+    const getCourseData = async () => {
       const data = await courseServices.getCourseApi({
-        id: id,
+        id,
       });
       const result = checkDataApi(data);
       if (result) {
@@ -27,17 +32,31 @@ const CourseDetail = () => {
       }
     };
 
-    const fetchGetRating = async () => {
+    const getRatingData = async () => {
       const data: any = await ratingServices.getRatingApi(id);
       const result = checkDataApi(data);
       if (result) {
         setDataComment(result.data);
       }
     };
-    fetchGetCourse();
-    fetchGetRating();
-  }, [id]);
 
+    const getCourseSectionData = async () => {
+      const data = await courseServices.getCourseSectionApi({
+        courseId: id,
+        userId: user.id,
+      });
+      const result = checkDataApi(data);
+      if (result) {
+        // result.data?.course_sections
+        setDataSection(result.data?.course_sections);
+      }
+    };
+
+    getCourseData();
+    getRatingData();
+    getCourseSectionData();
+  }, [id]);
+  // console.log("dataSection", dataSection);
   return (
     <Box className={styles.container}>
       <Box className={styles.contentLeft}>
@@ -59,10 +78,12 @@ const CourseDetail = () => {
             </div>
           </Box>
           <Box className={styles.body}>
-            <AccordionSection />
-            <AccordionSection />
-            <AccordionSection />
-            <AccordionSection />
+            {/* <AccordionSection /> */}
+            {dataSection &&
+              dataSection.length > 0 &&
+              dataSection.map((section: any, index: number) => {
+                return <AccordionSection key={index} section={section} />;
+              })}
           </Box>
         </Box>
         <Box className={styles.comment}>

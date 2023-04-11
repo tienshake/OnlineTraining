@@ -20,15 +20,19 @@ const persistCommonConfig = {
 const userPersistConfig = {
   ...persistCommonConfig,
   key: "auth",
-  whitelist: ["isAuthenticated", "user"],
+  whitelist: ["isAuthenticated", "user"] /*  cái này là cái muốn lấy */,
   stateReconciler: autoMergeLevel2,
 };
+
+// tạo thêm một em như trên nữa
+// const fravitePersistConfig
 
 export const rootReducer = combineReducers({
   lang: reduxReducer,
   userTeachers: userTeacherReducer,
   useSearch: searchReducer,
   auth: persistReducer(userPersistConfig, authReducer),
+  // Thêm cái features danh sách courses yêu thích vào
 });
 
 export const store = configureStore({

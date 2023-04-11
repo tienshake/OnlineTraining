@@ -18,3 +18,15 @@ const connectDB = async () => {
 };
 
 module.exports = connectDB;
+
+// {
+//   "development": {
+//     "username": "b4c4ddcb80c6ba",
+//     "password": "0f36edd8",
+//     "database": "heroku_1a359c74148c14d",
+//     "host": "us-cdbr-east-06.cleardb.net",
+//     "dialect": "mysql",
+//     "logging": false,
+//     "timezone": "+07:00"
+//   }
+// }
