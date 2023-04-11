@@ -40,13 +40,10 @@ export default function CardMainProduct(props: CardMainProductProps) {
 
           <ul className="box-content-user">
             <li>
-              <img
-                src="https://dreamslms.dreamguystech.com/html/assets/img/user/user1.jpg"
-                alt=""
-              />
+              <img src={props.userAvatar} alt="" />
             </li>
             <li className="between-item">
-              <b>Nicole Brown</b> <br />{" "}
+              <b>{props.userName}</b> <br />{" "}
               <p style={{ fontSize: "13px" }}>Instructor</p>{" "}
             </li>
 

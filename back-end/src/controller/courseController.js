@@ -122,6 +122,18 @@ const getCourse = async (req, res) => {
             as: "course_detail",
           },
           {
+            model: db.User,
+            as: "user",
+            attributes: ["name"],
+            include: [
+              {
+                model: db.User_detail,
+                as: "user_details",
+                attributes: ["avatar"],
+              },
+            ],
+          },
+          {
             model: db.Rating,
             attributes: [
               [
@@ -134,8 +146,6 @@ const getCourse = async (req, res) => {
             group: ["Course.id"],
           },
         ],
-        // group: ["Course.id"],
-        // raw: true,
         nest: true,
       });
 

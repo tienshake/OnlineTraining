@@ -229,6 +229,8 @@ const Home = () => {
                         data.Ratings.length > 0 &&
                         +data?.Ratings[0].avg_rating_value
                       }
+                      userName={data.user.name}
+                      userAvatar={covertB64(data.user?.user_details[0].avatar)}
                       widthCard="100%"
                     />
                   </div>

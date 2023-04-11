@@ -81,6 +81,8 @@ export interface MyCardBasicIntroduceProps {
   widthCard?: String;
   promotion_price?: String;
   rating?: any;
+  userName?: any;
+  userAvatar?: any;
 }
 export interface MyCoursesCateProps extends MyCardBasicIntroduceProps {}
 export interface CardMainProductProps extends MyCardBasicIntroduceProps {
