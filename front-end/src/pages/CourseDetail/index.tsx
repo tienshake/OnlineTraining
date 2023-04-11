@@ -120,7 +120,7 @@ const CourseDetail = () => {
             </div>
             <div className={styles.enroll}>
               {isEnroll ? (
-                <ButtonNext circle title="Learn Now" href={`/learning`} />
+                <ButtonNext circle title="Learn Now" path={`/learning`} />
               ) : (
                 <ButtonSave
                   circle

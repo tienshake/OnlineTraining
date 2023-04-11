@@ -94,9 +94,25 @@ const getCourse = async (req, res) => {
   const { page = 1, limit = 10, id } = req.query;
   try {
     let course = null;
+    let count = null;
     if (id === "ALL") {
       let offset = (page - 1) * limit;
-      course = await db.Course.findAndCountAll({
+      // courseTest = await db.Course.findAndCountAll({
+      //   order: [["updatedAt", "DESC"]],
+      //   limit: +limit,
+      //   offset: +offset,
+      //   attributes: { exclude: ["thumbnail"] },
+      //   include: [
+      //     {
+      //       model: db.Course_detail,
+      //       as: "course_detail",
+      //     },
+      //   ],
+      //   raw: true,
+      //   nest: true,
+      // });
+
+      course = await db.Course.findAll({
         order: [["updatedAt", "DESC"]],
         limit: +limit,
         offset: +offset,
@@ -110,16 +126,20 @@ const getCourse = async (req, res) => {
             attributes: [
               [
                 sequelize.literal(
-                  "(SELECT AVG(`rating_value`) FROM `Ratings` WHERE `Ratings`.`course_id` = `Course`.`id`)"
+                  "(SELECT DISTINCT AVG(`rating_value`) FROM `Ratings` WHERE `Ratings`.`course_id` = `Course`.`id`)"
                 ),
                 "avg_rating_value",
               ],
             ],
+            group: ["Course.id"],
           },
         ],
-        raw: true,
+        // group: ["Course.id"],
+        // raw: true,
         nest: true,
       });
+
+      count = await db.Course.count();
     } else {
       course = await db.Course.findOne({
         where: { id: id },
@@ -170,7 +190,13 @@ const getCourse = async (req, res) => {
       res.status(200).json({
         code: 0,
         message: "Get Course completed",
-        data: course,
+        data:
+          course && course?.length > 0
+            ? {
+                count: count,
+                rows: course,
+              }
+            : course,
       });
     }
   } catch (error) {

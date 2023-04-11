@@ -3,7 +3,7 @@ import styles from "./Checkout.module.scss";
 import { Box } from "@mui/system";
 import PaypalCheckoutButton from "../../components/PaypalCheckoutButton";
 import Input from "../../components/Input";
-import Button from "../../components/Button";
+// import Button from "../../components/Button";
 import courseServices from "../../services/course";
 import checkDataApi from "../../utils/checkDataApi";
 import { useParams } from "react-router";
@@ -61,9 +61,15 @@ const Checkout = () => {
             </div>
             <div className={styles.promo}>
               <Input placeholder="Enter promo code if available" />
-              <Button title="apply" />
+              {/* <Button title="apply" /> */}
             </div>
-            <PaypalCheckoutButton product={productOder} />
+            <div
+              style={{
+                textAlign: "center",
+              }}
+            >
+              <PaypalCheckoutButton product={productOder} />
+            </div>
           </Box>
         </Box>
       </Box>

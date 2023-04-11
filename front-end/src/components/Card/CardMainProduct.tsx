@@ -83,7 +83,7 @@ export default function CardMainProduct(props: CardMainProductProps) {
           </ul>
 
           <div className="group_icon-card">
-            <>{console.log("Ratings", props)}</>
+            {/* <>{console.log("Ratings", props)}</> */}
             <StarGroup rating={props.rating} />
           </div>
 

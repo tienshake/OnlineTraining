@@ -11,6 +11,7 @@ interface ButtonPropsType {
   className?: string;
   outline?: boolean;
   hoverCardChangeTextColor?: boolean;
+  to?: string;
 }
 
 const Button = (props: ButtonProps & ButtonPropsType) => {

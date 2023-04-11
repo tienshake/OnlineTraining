@@ -224,7 +224,11 @@ const Home = () => {
                       promotion_price={data.promotion_price}
                       priceItem={data.price}
                       titleItem={data.title}
-                      rating={+data?.Ratings.avg_rating_value}
+                      rating={
+                        data.Ratings &&
+                        data.Ratings.length > 0 &&
+                        +data?.Ratings[0].avg_rating_value
+                      }
                       widthCard="100%"
                     />
                   </div>
