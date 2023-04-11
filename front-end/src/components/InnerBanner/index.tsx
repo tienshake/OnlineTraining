@@ -5,13 +5,16 @@ import { Link, useParams } from "react-router-dom";
 import checkDataApi from "../../utils/checkDataApi";
 import courseServices from "../../services/course";
 import covertB64 from "../../utils/covertB64";
+import StarGroup from "../IconGroup/StarGroup";
+import ratingServices from "../../services/rating";
 
 const InnerBanner = () => {
   const [dataCourse, setDataCourse] = useState<any>();
+  const [dataRatingAVG, setDataRatingAVG] = useState<any>();
   let { id } = useParams();
 
   useEffect(() => {
-    const fetch = async () => {
+    const getDataCourse = async () => {
       const data = await courseServices.getCourseApi({
         id: id,
       });
@@ -20,7 +23,16 @@ const InnerBanner = () => {
         setDataCourse(result.data);
       }
     };
-    fetch();
+    getDataCourse();
+
+    const getDataRating = async () => {
+      const data = await ratingServices.getRatingValueAVGApi(id);
+      if (data && data.status === 200) {
+        setDataRatingAVG(data?.data.total_rating_value);
+      }
+    };
+    getDataCourse();
+    getDataRating();
   }, [id]);
 
   return (
@@ -45,13 +57,9 @@ const InnerBanner = () => {
                 <p>{dataCourse?.user?.user_details.experience}</p>
               </div>
               <div className={styles.rating}>
-                <StarIcon />
-                <StarIcon />
-                <StarIcon />
-                <StarIcon />
-                <StarIcon />
+                <StarGroup rating={dataRatingAVG} />
                 <span className={styles.averageRating}>
-                  <span>4.5</span> (15)
+                  <span>{dataRatingAVG && dataRatingAVG.toFixed(1)}</span> (15)
                 </span>
               </div>
             </div>

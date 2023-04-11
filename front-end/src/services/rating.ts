@@ -34,6 +34,14 @@ const ratingServices = {
       throw error;
     }
   },
+  getRatingValueAVGApi: async (id: any) => {
+    try {
+      const response = await axiosClient.get(`rating/get-avg?id=${id}`);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 export default ratingServices;

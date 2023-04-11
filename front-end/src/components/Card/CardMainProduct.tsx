@@ -5,23 +5,23 @@ import { Link } from "react-router-dom";
 import Button from "../Button";
 import styles from "../Header/Header.module.scss";
 import { Box } from "@material-ui/core";
-import { useState } from 'react'
+import { useState } from "react";
 import "./Card.css";
 
 export default function CardMainProduct(props: CardMainProductProps) {
   const [textStateBtn, setTextStateBtn] = useState(false);
 
   const handleHoverCardChangeTextBtn = () => {
-    setTextStateBtn(true)
-  }
+    setTextStateBtn(true);
+  };
 
   const handleRemoveHoverCardChangeTextBtn = () => {
-    setTextStateBtn(false)
-  }
+    setTextStateBtn(false);
+  };
 
   const handleClickLike = (e: any) => {
     e.preventdefault();
-  }
+  };
 
   return (
     <Link to={`/course-details/${props.idCourse}`}>
@@ -36,8 +36,7 @@ export default function CardMainProduct(props: CardMainProductProps) {
         className="wrapp_cardProduts-content"
       >
         <div className="body_content-card">
-
-          <img style={{ height: '180px' }} src={props.imageItem} alt="" />
+          <img style={{ height: "180px" }} src={props.imageItem} alt="" />
 
           <ul className="box-content-user">
             <li>
@@ -58,8 +57,6 @@ export default function CardMainProduct(props: CardMainProductProps) {
                 />
               </li>
             </Link>
-
-
           </ul>
 
           <h2>{props.titleItem}</h2>
@@ -86,15 +83,21 @@ export default function CardMainProduct(props: CardMainProductProps) {
           </ul>
 
           <div className="group_icon-card">
-            <StarGroup />
+            <>{console.log("Ratings", props)}</>
+            <StarGroup rating={props.rating} />
           </div>
 
-          <div style={{ marginTop: '10px' }}>
+          <div style={{ marginTop: "10px" }}>
             <Box className={styles.controlItem}>
-              <Button hoverCardChangeTextColor={textStateBtn} variant="outlined" title="BUY NOW" path={`/cart/${props.idCourse}`} circle />
+              <Button
+                hoverCardChangeTextColor={textStateBtn}
+                variant="outlined"
+                title="BUY NOW"
+                path={`/cart/${props.idCourse}`}
+                circle
+              />
             </Box>
           </div>
-
         </div>
       </div>
     </Link>

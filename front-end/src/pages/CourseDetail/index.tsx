@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./CourseDetail.module.scss";
 import { Box } from "@mui/material";
-import Button, { ButtonSave } from "../../components/Button";
+import Button, { ButtonNext, ButtonSave } from "../../components/Button";
 import AccordionSection from "../../components/AccordionSection";
 import courseServices from "../../services/course";
 import checkDataApi from "../../utils/checkDataApi";
@@ -17,6 +17,7 @@ const CourseDetail = () => {
   const [dataCourse, setDataCourse] = useState<any>();
   const [dataComment, setDataComment] = useState<any>();
   const [dataSection, setDataSection] = useState<any>([]);
+  const [isEnroll, setIsEnroll] = useState<any>(false);
 
   let { id } = useParams();
   const user = useSelector((state: RootState) => state.auth.user);
@@ -47,8 +48,10 @@ const CourseDetail = () => {
       });
       const result = checkDataApi(data);
       if (result) {
-        // result.data?.course_sections
         setDataSection(result.data?.course_sections);
+        if (result.data.Enrollments && result.data.Enrollments[0].id) {
+          setIsEnroll(true);
+        }
       }
     };
 
@@ -116,7 +119,15 @@ const CourseDetail = () => {
               <Button circle title="Share" />
             </div>
             <div className={styles.enroll}>
-              <ButtonSave circle title="Enroll now" href={`/checkout/${id}`} />
+              {isEnroll ? (
+                <ButtonNext circle title="Learn Now" href={`/learning`} />
+              ) : (
+                <ButtonSave
+                  circle
+                  title="Enroll now"
+                  href={`/checkout/${id}`}
+                />
+              )}
             </div>
           </div>
         </Box>
