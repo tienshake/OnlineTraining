@@ -27,8 +27,12 @@ import courseServices from "../../../services/course";
 import Complete from "../components/Complete";
 import categoryServices from "../../../services/category";
 import checkDataApi from "../../../utils/checkDataApi";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store/store";
 
 function CreateCourse() {
+  const user = useSelector((state: RootState) => state.auth.user);
+
   const [formValues, setFormValues] = React.useState<CreateCourseType>({
     courseTitle: "",
     courseCategory: "",
@@ -151,7 +155,7 @@ function CreateCourse() {
     let descriptionMarkdown = formValues.courseDescriptions?.html;
     let price = formValues.price;
     let promotion_price = formValues.promotion_price;
-    let user_id = 7;
+    let user_id = user.id;
     let category_id = formValues.courseCategory;
     let sections: any = [];
     // console.log("formValues", formValues);
