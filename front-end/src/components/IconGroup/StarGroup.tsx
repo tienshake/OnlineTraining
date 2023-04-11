@@ -5,7 +5,9 @@ export default function StarGroup({ rating }: any) {
   return (
     <div className={styles.container}>
       <StarRatings starRatedColor="#ffb800" rating={rating ? rating : 0} />
-      <p style={{ fontSize: "13px", marginLeft: "5px" }}>5.0 (15) </p>
+      <p style={{ fontSize: "13px", marginLeft: "5px" }}>
+        {rating && rating.toFixed(1)}
+      </p>
     </div>
   );
 }
