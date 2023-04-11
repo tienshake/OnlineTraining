@@ -37,7 +37,7 @@ export default function ButtonRedirect(props: MyButtonRedirectProps) {
                             size="small"
                             variant="outlined"
                         >
-                            <span>Load More</span>
+                            <span>Show More</span>
                         </LoadingButton>
                     </Box>
                 </Box>

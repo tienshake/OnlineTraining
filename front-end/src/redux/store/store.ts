@@ -12,6 +12,8 @@ import authReducer from "../features/auth";
 import storage from "redux-persist/lib/storage";
 import { persistStore, persistReducer } from "redux-persist";
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
+import coursesFavoriteSlice from "../features/coursesFavorite/coursesFavoriteSlice";
+
 
 const persistCommonConfig = {
   storage: storage,
@@ -24,15 +26,20 @@ const userPersistConfig = {
   stateReconciler: autoMergeLevel2,
 };
 
-// tạo thêm một em như trên nữa
-// const fravitePersistConfig
+/*  */
+const favoriteCouresPersistConfig = {
+  ...persistCommonConfig,
+  key: "coursesFavorite",
+  whitelist: ["listCoursesFavorite"],
+  stateReconciler: autoMergeLevel2,
+};
 
 export const rootReducer = combineReducers({
   lang: reduxReducer,
   userTeachers: userTeacherReducer,
   useSearch: searchReducer,
   auth: persistReducer(userPersistConfig, authReducer),
-  // Thêm cái features danh sách courses yêu thích vào
+  favoriteCoures: /* coursesFavoriteSlice */persistReducer(favoriteCouresPersistConfig, coursesFavoriteSlice),
 });
 
 export const store = configureStore({

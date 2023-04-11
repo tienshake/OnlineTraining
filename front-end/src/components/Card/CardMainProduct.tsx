@@ -7,8 +7,17 @@ import styles from "../Header/Header.module.scss";
 import { Box } from "@material-ui/core";
 import { useState } from "react";
 import "./Card.css";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store/store";
+import {
+  addCourseFavorite
+} from "../../redux/features/coursesFavorite/coursesFavoriteSlice";
 
 export default function CardMainProduct(props: CardMainProductProps) {
+  /* get store redux */
+  const dispatch = useDispatch();
+
   const [textStateBtn, setTextStateBtn] = useState(false);
 
   const handleHoverCardChangeTextBtn = () => {
@@ -19,9 +28,17 @@ export default function CardMainProduct(props: CardMainProductProps) {
     setTextStateBtn(false);
   };
 
-  const handleClickLike = (e: any) => {
-    e.preventdefault();
-  };
+  const handleClickFavoriteCourse = (e: any) => {
+    e.preventDefault()
+    dispatch(addCourseFavorite({
+      idCourse: `${props.idCourse}`,
+      titleItem: `${props.titleItem}`,
+      imageItem: `${props.imageItem}`,
+      price: props.priceItem,
+      promotion_price: props.promotion_price,
+    }));
+  }
+
 
   return (
     <Link to={`/course-details/${props.idCourse}`}>
@@ -48,7 +65,7 @@ export default function CardMainProduct(props: CardMainProductProps) {
             </li>
 
             <Link to={`${props.preventPath}`}>
-              <li>
+              <li onClick={handleClickFavoriteCourse}>
                 <AiOutlineHeart
                   style={{ fontSize: "22px", color: "red", marginTop: "5px" }}
                 />
