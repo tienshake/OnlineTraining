@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store/store';
 import { removeProduct } from '../../redux/features/coursesFavorite/coursesFavoriteSlice';
 import { useDispatch } from "react-redux";
+import { removeCart } from '../../redux/features/cart/cartSlice';
 
 interface MyPropsMenuIcons {
     iconMenu: React.ReactNode,
@@ -19,6 +20,9 @@ export default function MenuIcons(props: MyPropsMenuIcons) {
     /* store */
     const listFavoriteCourse = useSelector(
         (state: RootState) => state.favoriteCoures.listCoursesFavorite
+    );
+    const listItemsCart = useSelector(
+        (state: RootState) => state.cart.listItemsCarts
     );
     const đispatch = useDispatch();
 
@@ -32,9 +36,27 @@ export default function MenuIcons(props: MyPropsMenuIcons) {
         setAnchorEl(null);
     };
 
+
     /* remove favorite  */
     const handleRemoveFavorite = (id: number) => {
         đispatch(removeProduct(id));
+    }
+
+    /* remove cart  */
+    const handleRemoveCart = (id: number) => {
+        đispatch(removeCart(id));
+    }
+
+    const caculatePriceTotal = () => {
+        let total = 0;
+
+        for (let i = 0; i < listItemsCart.length; i++) {
+            total += listItemsCart[i].promotion_price
+        }
+
+        console.log("Tổng số tiền sản phẩm trong giỏ hàng của mày là:", total)
+
+        return total;
     }
 
     return (
@@ -113,29 +135,54 @@ export default function MenuIcons(props: MyPropsMenuIcons) {
                             Notificate
                         </div> : props.typeContent === "cart" ?
                             <div>
-                                <Stack className='header_modal-menuIcon' direction="row" justifyContent={'space-between'} spacing={1} mr={1}>
-                                    <p>View Cart</p>
-                                    <p>Checkout</p>
-                                </Stack>
+                                {
+                                    listItemsCart.length > 0 ? <>
+                                        <Stack className='header_modal-menuIcon' direction="row" justifyContent={'space-between'} spacing={1} mr={1}>
+                                            <p>View Cart</p>
+                                            <p>Checkout</p>
+                                        </Stack>
 
-                                <Stack className='wrapp_item_boxModal' direction="row" justifyContent={'space-between'} spacing={1} mt={2} mr={1}>
-                                    <Stack direction="row" justifyContent={'space-between'} spacing={1} >
-                                        <p className='imgItemCart'>
-                                            <img src='https://dreamslms.dreamguystech.com/html/assets/img/course/course-04.jpg' />
-                                        </p>
+                                        {listItemsCart.map((data: {
+                                            idCourse: number,
+                                            titleItem?: string,
+                                            imageItem?: string,
+                                            price?: number,
+                                            promotion_price?: number
+                                        }) => (
+                                            <>
+                                                <Stack className='wrapp_item_boxModal' direction="row" justifyContent={'space-between'} spacing={1} mt={2} mr={1}>
+                                                    <Stack direction="row" justifyContent={'space-between'} spacing={1} >
+                                                        <p className='imgItemCart'>
+                                                            <img src={`${data.imageItem}`} alt='' />
+                                                        </p>
 
-                                        <div className='content_ItemCart'>
-                                            <h1>Learn Angular...</h1>
-                                            <p>By Dave Franco</p>
-                                            <p><b style={{ color: 'red' }}>$200</b>$99.00</p>
-                                        </div>
-                                    </Stack>
-                                    <button className='btn-remove-cart'>Remove</button>
-                                </Stack>
+                                                        <div className='content_ItemCart'>
+                                                            <h1>{data.titleItem}</h1>
+                                                            <p>By Dave Franco</p>
+                                                            <p><b style={{ color: 'red' }}>${data.promotion_price}</b>${data.price}</p>
+                                                        </div>
+                                                    </Stack>
+                                                    <button onClick={() => handleRemoveCart(data.idCourse)} className='btn-remove-cart'>Remove</button>
+                                                </Stack>
+                                            </>
+                                        ))}
+
+                                        <Stack direction="row" justifyContent={'space-between'}>
+                                            <p style={{ fontSize: "13px", marginTop: "6px" }}>Total Amout: <b>{listItemsCart.length}</b></p>
+                                            <p style={{ fontSize: "13px", marginTop: "6px" }}>Total Price: <b>{caculatePriceTotal()}</b></p>
+                                        </Stack>
+                                    </> : <>
+                                        Cart is empty!
+                                    </>
+                                }
                             </div> : props.typeContent === "loveProduct" ?
                                 <div>
                                     {
                                         listFavoriteCourse.length > 0 ? <>
+                                            {/* <Stack className='header_modal-menuIcon' direction="row" justifyContent={'space-between'} spacing={1} mr={1}>
+                                                <p>View Cart</p>
+                                                <p>Checkout</p>
+                                            </Stack> */}
                                             {listFavoriteCourse.map((data: {
                                                 idCourse: number,
                                                 titleItem?: string,
@@ -144,15 +191,10 @@ export default function MenuIcons(props: MyPropsMenuIcons) {
                                                 promotion_price?: number
                                             }) => (
                                                 <>
-                                                    <Stack className='header_modal-menuIcon' direction="row" justifyContent={'space-between'} spacing={1} mr={1}>
-                                                        <p>View Cart</p>
-                                                        <p>Checkout</p>
-                                                    </Stack>
-
                                                     <Stack className='wrapp_item_boxModal' direction="row" justifyContent={'space-between'} spacing={1} mt={2} mr={1}>
                                                         <Stack direction="row" justifyContent={'space-between'} spacing={1} >
                                                             <p className='imgItemCart'>
-                                                                <img src={`${data.imageItem}`} />
+                                                                <img src={`${data.imageItem}`} alt='' />
                                                             </p>
 
                                                             <div className='content_ItemCart'>
@@ -165,11 +207,13 @@ export default function MenuIcons(props: MyPropsMenuIcons) {
                                                     </Stack>
                                                 </>
                                             ))}
+                                            <Stack direction="row" justifyContent={'space-between'}>
+                                                <p style={{ fontSize: "13px", marginTop: "6px" }}>Total Amout: <b>{listFavoriteCourse.length}</b></p>
+                                            </Stack>
                                         </> : <>
-                                            Danh sách trống!
+                                            Favorites list is empty!
                                         </>
                                     }
-
                                 </div> : props.typeContent === "chat" ? <div>chat</div> : <div>
                                     notification
                                 </div>

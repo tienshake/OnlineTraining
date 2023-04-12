@@ -13,6 +13,7 @@ import storage from "redux-persist/lib/storage";
 import { persistStore, persistReducer } from "redux-persist";
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import coursesFavoriteSlice from "../features/coursesFavorite/coursesFavoriteSlice";
+import cartSlice from "../features/cart/cartSlice";
 
 
 const persistCommonConfig = {
@@ -34,12 +35,21 @@ const favoriteCouresPersistConfig = {
   stateReconciler: autoMergeLevel2,
 };
 
+/* cart */
+const cartPersistConfig = {
+  ...persistCommonConfig,
+  key: "cart",
+  whitelist: ["listItemsCarts"],
+  stateReconciler: autoMergeLevel2,
+};
+
 export const rootReducer = combineReducers({
   lang: reduxReducer,
   userTeachers: userTeacherReducer,
   useSearch: searchReducer,
   auth: persistReducer(userPersistConfig, authReducer),
-  favoriteCoures: /* coursesFavoriteSlice */persistReducer(favoriteCouresPersistConfig, coursesFavoriteSlice),
+  favoriteCoures: persistReducer(favoriteCouresPersistConfig, coursesFavoriteSlice),
+  cart: persistReducer(cartPersistConfig, cartSlice),
 });
 
 export const store = configureStore({
