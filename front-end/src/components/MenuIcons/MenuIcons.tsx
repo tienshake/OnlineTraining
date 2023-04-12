@@ -10,6 +10,7 @@ import { RootState } from '../../redux/store/store';
 import { removeProduct } from '../../redux/features/coursesFavorite/coursesFavoriteSlice';
 import { useDispatch } from "react-redux";
 import { removeCart } from '../../redux/features/cart/cartSlice';
+import { Link } from 'react-router-dom';
 
 interface MyPropsMenuIcons {
     iconMenu: React.ReactNode,
@@ -151,17 +152,19 @@ export default function MenuIcons(props: MyPropsMenuIcons) {
                                         }) => (
                                             <>
                                                 <Stack className='wrapp_item_boxModal' direction="row" justifyContent={'space-between'} spacing={1} mt={2} mr={1}>
-                                                    <Stack direction="row" justifyContent={'space-between'} spacing={1} >
-                                                        <p className='imgItemCart'>
-                                                            <img src={`${data.imageItem}`} alt='' />
-                                                        </p>
+                                                    <Link to={`/course-details/${data.idCourse}`}>
+                                                        <Stack direction="row" justifyContent={'space-between'} spacing={1} >
+                                                            <p className='imgItemCart'>
+                                                                <img src={`${data.imageItem}`} alt='' />
+                                                            </p>
 
-                                                        <div className='content_ItemCart'>
-                                                            <h1>{data.titleItem}</h1>
-                                                            <p>By Dave Franco</p>
-                                                            <p><b style={{ color: 'red' }}>${data.promotion_price}</b>${data.price}</p>
-                                                        </div>
-                                                    </Stack>
+                                                            <div className='content_ItemCart'>
+                                                                <h1>{data.titleItem}</h1>
+                                                                <p>By Dave Franco</p>
+                                                                <p><b style={{ color: 'red' }}>${data.promotion_price}</b>${data.price}</p>
+                                                            </div>
+                                                        </Stack>
+                                                    </Link>
                                                     <button onClick={() => handleRemoveCart(data.idCourse)} className='btn-remove-cart'>Remove</button>
                                                 </Stack>
                                             </>
@@ -192,17 +195,19 @@ export default function MenuIcons(props: MyPropsMenuIcons) {
                                             }) => (
                                                 <>
                                                     <Stack className='wrapp_item_boxModal' direction="row" justifyContent={'space-between'} spacing={1} mt={2} mr={1}>
-                                                        <Stack direction="row" justifyContent={'space-between'} spacing={1} >
-                                                            <p className='imgItemCart'>
-                                                                <img src={`${data.imageItem}`} alt='' />
-                                                            </p>
+                                                        <Link to={`/course-details/${data.idCourse}`}>
+                                                            <Stack direction="row" justifyContent={'space-between'} spacing={1} >
+                                                                <p className='imgItemCart'>
+                                                                    <img src={`${data.imageItem}`} alt='' />
+                                                                </p>
 
-                                                            <div className='content_ItemCart'>
-                                                                <h1>{data.titleItem}</h1>
-                                                                <p>By Dave Franco</p>
-                                                                <p><b style={{ color: 'red' }}>${data.promotion_price}</b>${data.price}</p>
-                                                            </div>
-                                                        </Stack>
+                                                                <div className='content_ItemCart'>
+                                                                    <h1>{data.titleItem}</h1>
+                                                                    <p>By Dave Franco</p>
+                                                                    <p><b style={{ color: 'red' }}>${data.promotion_price}</b>${data.price}</p>
+                                                                </div>
+                                                            </Stack>
+                                                        </Link>
                                                         <button onClick={() => handleRemoveFavorite(data.idCourse)} className='btn-remove-cart'>Remove</button>
                                                     </Stack>
                                                 </>

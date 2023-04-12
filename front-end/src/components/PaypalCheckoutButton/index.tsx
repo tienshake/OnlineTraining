@@ -1,12 +1,14 @@
-import React, { useState } from "react";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import paymentServices from "../../services/payment";
 import checkDataApi from "../../utils/checkDataApi";
 import { toast } from "react-toastify";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import covertB64 from "../../utils/covertB64";
+import { useDispatch } from "react-redux";
+import { removeCart } from '../../redux/features/cart/cartSlice';
 
 const PaypalCheckoutButton = (props: any) => {
+  const đispatch = useDispatch();
   const { product, dataCourse } = props;
   const navigate = useNavigate();
 
@@ -32,6 +34,8 @@ const PaypalCheckoutButton = (props: any) => {
         });
       }}
       onClick={async (data, actions) => {
+        đispatch(removeCart(props.product.course_id));
+
         const dataAPI = await paymentServices.checkPayment({
           course_id: product?.course_id,
           user_id: +product?.user_id,
