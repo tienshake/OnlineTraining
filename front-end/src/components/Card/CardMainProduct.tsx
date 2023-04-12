@@ -107,7 +107,7 @@ export default function CardMainProduct(props: CardMainProductProps) {
                 hoverCardChangeTextColor={textStateBtn}
                 variant="outlined"
                 title="BUY NOW"
-                path={`/cart/${props.idCourse}`}
+                path={`/checkout/${props.idCourse}`}
                 circle
               />
             </Box>

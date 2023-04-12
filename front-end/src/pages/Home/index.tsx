@@ -22,7 +22,7 @@ const Home = () => {
     courseServices
       .getCourseApi({
         id: "ALL",
-        limit: 8,
+        limit: 20,
         page: 1,
       })
       .then((data) => setDataCourses(data.data.data.rows));
@@ -404,7 +404,7 @@ const Home = () => {
                 alt=""
               />
             </div>
-            <div>s</div>
+            {/* <div>s</div> */}
           </div>
         </div>
       </div>

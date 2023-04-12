@@ -7,6 +7,8 @@ import "./MenuIcons.css";
 import { Stack } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store/store';
+import { removeProduct } from '../../redux/features/coursesFavorite/coursesFavoriteSlice';
+import { useDispatch } from "react-redux";
 
 interface MyPropsMenuIcons {
     iconMenu: React.ReactNode,
@@ -18,8 +20,7 @@ export default function MenuIcons(props: MyPropsMenuIcons) {
     const listFavoriteCourse = useSelector(
         (state: RootState) => state.favoriteCoures.listCoursesFavorite
     );
-
-    console.log(listFavoriteCourse, "listFavoriteCourse")
+    const đispatch = useDispatch();
 
     /*  */
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -30,6 +31,11 @@ export default function MenuIcons(props: MyPropsMenuIcons) {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    /* remove favorite  */
+    const handleRemoveFavorite = (id: string) => {
+        đispatch(removeProduct(id));
+    }
 
     return (
         <>
@@ -53,14 +59,16 @@ export default function MenuIcons(props: MyPropsMenuIcons) {
                 id="account-menu"
                 open={open}
                 onClose={handleClose}
-                onClick={handleClose}
+                // onClick={handleClose}
                 PaperProps={{
                     elevation: 0,
                     sx: {
+                        maxHeight: '400px',
                         width: '29%',
                         p: 1,
+                        overflowY: "scroll",
                         paddingTop: '0px',
-                        overflow: 'visible',
+                        // overflow: 'auto',
                         filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
                         mt: 1.5,
                         '& .MuiAvatar-root': {
@@ -81,6 +89,18 @@ export default function MenuIcons(props: MyPropsMenuIcons) {
                             transform: 'translateY(-50%) rotate(45deg)',
                             zIndex: 0,
                         },
+                        /* srcoll */
+                        '&::-webkit-scrollbar': {
+                            width: '8px',
+                        },
+                        '&::-webkit-scrollbar-track': {
+                            backgroundColor: 'rgba(0,0,0,0.1)',
+                            borderRadius: '999px',
+                        },
+                        '&::-webkit-scrollbar-thumb': {
+                            backgroundColor: 'rgba(0,0,0,0.2)',
+                            borderRadius: '999px',
+                        },
                     },
                 }}
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
@@ -89,10 +109,10 @@ export default function MenuIcons(props: MyPropsMenuIcons) {
                 {/* check type */}
                 {
                     props.typeContent === "notification" ?
-                        <>
+                        <div>
                             Notificate
-                        </> : props.typeContent === "cart" ?
-                            <>
+                        </div> : props.typeContent === "cart" ?
+                            <div>
                                 <Stack className='header_modal-menuIcon' direction="row" justifyContent={'space-between'} spacing={1} mr={1}>
                                     <p>View Cart</p>
                                     <p>Checkout</p>
@@ -112,16 +132,16 @@ export default function MenuIcons(props: MyPropsMenuIcons) {
                                     </Stack>
                                     <button className='btn-remove-cart'>Remove</button>
                                 </Stack>
-                            </> : props.typeContent === "loveProduct" ?
-                                <>
+                            </div> : props.typeContent === "loveProduct" ?
+                                <div>
                                     {
                                         listFavoriteCourse.length > 0 ? <>
                                             {listFavoriteCourse.map((data: {
-                                                idCourse? : string,
-                                                titleItem? : string,
-                                                imageItem? : string,
-                                                price? : number,
-                                                promotion_price? : number
+                                                idCourse: string,
+                                                titleItem?: string,
+                                                imageItem?: string,
+                                                price?: number,
+                                                promotion_price?: number
                                             }) => (
                                                 <>
                                                     <Stack className='header_modal-menuIcon' direction="row" justifyContent={'space-between'} spacing={1} mr={1}>
@@ -141,7 +161,7 @@ export default function MenuIcons(props: MyPropsMenuIcons) {
                                                                 <p><b style={{ color: 'red' }}>${data.promotion_price}</b>${data.price}</p>
                                                             </div>
                                                         </Stack>
-                                                        <button className='btn-remove-cart'>Remove</button>
+                                                        <button onClick={() => handleRemoveFavorite(data.idCourse)} className='btn-remove-cart'>Remove</button>
                                                     </Stack>
                                                 </>
                                             ))}
@@ -150,9 +170,9 @@ export default function MenuIcons(props: MyPropsMenuIcons) {
                                         </>
                                     }
 
-                                </> : props.typeContent === "chat" ? <>chat</> : <>
+                                </div> : props.typeContent === "chat" ? <div>chat</div> : <div>
                                     notification
-                                </>
+                                </div>
                 }
 
             </Menu>
