@@ -33,7 +33,7 @@ export default function MenuIcons(props: MyPropsMenuIcons) {
     };
 
     /* remove favorite  */
-    const handleRemoveFavorite = (id: string) => {
+    const handleRemoveFavorite = (id: number) => {
         đispatch(removeProduct(id));
     }
 
@@ -137,7 +137,7 @@ export default function MenuIcons(props: MyPropsMenuIcons) {
                                     {
                                         listFavoriteCourse.length > 0 ? <>
                                             {listFavoriteCourse.map((data: {
-                                                idCourse: string,
+                                                idCourse: number,
                                                 titleItem?: string,
                                                 imageItem?: string,
                                                 price?: number,

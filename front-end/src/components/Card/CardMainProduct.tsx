@@ -31,7 +31,7 @@ export default function CardMainProduct(props: CardMainProductProps) {
   const handleClickFavoriteCourse = (e: any) => {
     e.preventDefault()
     dispatch(addCourseFavorite({
-      idCourse: `${props.idCourse}`,
+      idCourse: Number(props.idCourse),
       titleItem: `${props.titleItem}`,
       imageItem: `${props.imageItem}`,
       price: props.priceItem,
