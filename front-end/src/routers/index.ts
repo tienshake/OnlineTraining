@@ -18,6 +18,7 @@ import CourseDetail from "../pages/CourseDetail";
 import Checkout from "../pages/Checkout";
 import MyCourse from "../components/MyCourse/MyCourse";
 import BillOder from "../pages/BillOder";
+import Learning from "../pages/Learning";
 
 const publicRoute: RouteType[] = [
   {
@@ -65,6 +66,11 @@ const privateRoute: RouteType[] = [
         patch: "/profile/edit-my-course",
       },
     ],
+  },
+  {
+    component: Learning,
+    patch: "/learning/:id",
+    // defaultLayout: true,
   },
   {
     component: Checkout,

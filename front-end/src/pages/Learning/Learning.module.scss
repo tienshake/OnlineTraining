@@ -1,0 +1,53 @@
+.container {
+  height: 100vh;
+}
+
+.content {
+  display: flex;
+  height: 100%;
+}
+
+.videoPlayer {
+  flex: 3;
+}
+
+.sidebar {
+  flex: 1;
+  // background-color: red;
+}
+
+.header {
+  background-color: #29303b;
+  height: 50px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  a {
+    color: var(--white);
+  }
+}
+
+.footer {
+  height: 60px;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.control {
+  display: flex;
+  gap: 10px;
+}
+
+.back {
+  display: flex;
+  align-items: center;
+  :hover {
+    color: var(--primary);
+  }
+  svg {
+    color: var(--white);
+  }
+}

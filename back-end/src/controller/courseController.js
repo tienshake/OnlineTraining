@@ -219,10 +219,12 @@ const getCourseSection = async (req, res) => {
   const { courseId, userId } = req.query;
 
   try {
-    if (!courseId || !userId) {
+    let course = {};
+    if (!courseId) {
       res.status(400).json({ message: "Missing params" });
     }
-    const course = await db.Course.findOne({
+
+    course = await db.Course.findOne({
       where: { id: courseId },
       attributes: ["id"],
       include: [

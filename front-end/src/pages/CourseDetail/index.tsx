@@ -44,7 +44,7 @@ const CourseDetail = () => {
     const getCourseSectionData = async () => {
       const data = await courseServices.getCourseSectionApi({
         courseId: id,
-        userId: user.id,
+        userId: user && user.id,
       });
       const result = checkDataApi(data);
       if (result) {
@@ -58,7 +58,7 @@ const CourseDetail = () => {
     getCourseData();
     getRatingData();
     getCourseSectionData();
-  }, [id, user.id]);
+  }, [id, user && user.id]);
   // console.log("dataSection", dataSection);
   return (
     <Box className={styles.container}>
@@ -120,7 +120,7 @@ const CourseDetail = () => {
             </div>
             <div className={styles.enroll}>
               {isEnroll ? (
-                <ButtonNext circle title="Learn Now" path={`/learning`} />
+                <ButtonNext circle title="Learn Now" path={`/learning/${id}`} />
               ) : (
                 <ButtonSave
                   circle

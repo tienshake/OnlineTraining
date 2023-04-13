@@ -40,7 +40,7 @@ router.get(
 router.get(
   "/get-section",
   // middleware.authAdmin,
-  middleware.authUser,
+  // middleware.authUser,
   courseController.getCourseSection
 );
 export default router;

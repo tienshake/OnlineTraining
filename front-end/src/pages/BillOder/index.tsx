@@ -41,7 +41,7 @@ const BillOder = () => {
           {data.create_time && moment(data.create_time).format("DD/MM/YYYY")}
         </p>
         <div className={styles.control}>
-          <ButtonNext title="Learn now" path={`/learn/${data.course_id}`} />
+          <ButtonNext title="Learn now" path={`/learning/${data.course_id}`} />
         </div>
       </div>
     </div>
