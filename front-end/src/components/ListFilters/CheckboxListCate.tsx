@@ -53,7 +53,7 @@ interface MyCheckboxListProps {
 export default function CheckboxListCate(props: MyCheckboxListProps) {
   const classes = useStyles();
   const [checked, setChecked] = React.useState([1]);
-  const [dataCate, setDataCate] = useState<any>();
+  const [dataCate, setDataCate] = useState([]);
 
   useEffect(() => {
     categoryServices.getCategoryApi().then((data) => setDataCate(data.data.data))

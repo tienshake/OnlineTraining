@@ -22,11 +22,19 @@
     color: #F66962;
     font-weight: 600;
     font-size: 18px;
-    margin-bottom: 10px
+    margin-bottom: 10px;
 }
 .box_favourite_course ul li p:last-child {
     font-weight: 700;
     font-size: 35px;
-    margin-bottom: 10px
+    margin-bottom: 10px;
+    line-height: 35px;
+}
+.section_header li p {
+    max-width: 80%;
+}
+.box_favourite_course .content {
+    max-width: 60%;
+    color: #685F78;
 }
 /* Box Title */

@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import "./Home.css";
 import ButtonRedirect from "../../components/Button/ButtonRedirect";
 import covertB64 from "../../utils/covertB64";
+import categoryServices from "../../services/category";
 
 const Home = () => {
   const [dataCourses, setDataCourses] = useState<any>();
@@ -51,7 +52,13 @@ const Home = () => {
     },
   ];
 
-  /*  */
+  /* call api cate */
+  const [dataCate, setDataCate] = useState<any>([]);
+
+  useEffect(() => {
+    categoryServices.getCategoryApi().then((data) => setDataCate(data.data.data))
+  }, []);
+
   const data2 = [
     {
       imageItem:
@@ -84,6 +91,10 @@ const Home = () => {
       contentItem: "45 Instructors",
     },
   ];
+  const fetchImg = (nameCate: string) => {
+    return nameCate === "Reactjs" ? "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-05.png" :
+      nameCate === "Html" ? "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon.png" : "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-01.png"
+  }
 
   /*  */
   var settings = {
@@ -179,20 +190,20 @@ const Home = () => {
 
       <div className="wrapp_body_home">
         {/*  */}
-        <BoxSection />
+        <BoxSection auxiliaryTitle="Favourite Course" mainTitle="Top Category" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan bibendum <br /> gravida maecenas augue elementum et neque. Suspendisse imperdiet." />
 
         {/*  */}
         <div className="box_carosel_topCate">
           <Slider {...settings}>
-            {data2.map((data, index) => (
+            {dataCate.map((data: any) => (
               <div
-                key={index}
+                key={data.id}
                 style={{ width: "100%", margin: "auto" }} /* src={data.src} */
               >
                 <CardCoursesCate
-                  imageItem={data.imageItem}
-                  titleItem={data.titleItem}
-                  contentItem={data.contentItem}
+                  imageItem={fetchImg(data.name_category)}
+                  titleItem={data.name_category}
+                  contentItem={"30 Instructor"}
                 />
               </div>
             ))}
@@ -210,7 +221,7 @@ const Home = () => {
           }}
           className="box_featured_courses"
         >
-          <BoxSection />
+          <BoxSection auxiliaryTitle="What’s New" mainTitle="Featured Courses" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan bibendum <br /> gravida maecenas augue elementum et neque. Suspendisse imperdiet." />
 
           <div className="content-cardTopCate">
             {dataCourses ? (
@@ -251,7 +262,7 @@ const Home = () => {
         </div>
 
         <div>
-          <BoxSection />
+          <BoxSection auxiliaryTitle="Favourite Course" mainTitle="Master the skills to drive your career" content="Get certified, master modern tech skills, and level up your career — whether you’re starting out or a seasoned pro. 95% of eLearning learners report our hands-on content directly helped their careers." />
         </div>
 
         {/*  */}
@@ -310,7 +321,7 @@ const Home = () => {
             backgroundSize: "cover",
           }}
         >
-          <BoxSection />
+          <BoxSection auxiliaryTitle="Favourite Course" mainTitle="Top Category" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan bibendum <br /> gravida maecenas augue elementum et neque. Suspendisse imperdiet." />
 
           <div style={{ backgroundColor: "" }} className="box_carosel_trending">
             <Slider {...settings}>
