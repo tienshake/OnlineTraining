@@ -11,9 +11,11 @@ import covertB64 from "../../utils/covertB64";
 import PaginationRounded from "../../components/Pagination/Pagination";
 import React, { useEffect, useState } from "react";
 import courseServices from "../../services/course";
+import cache from "memory-cache";
 
 export default function Course() {
   const [age, setAge] = React.useState("");
+  const courseListCache = cache.get("courseListCache");
 
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value);
@@ -27,18 +29,25 @@ export default function Course() {
   const [pageCount, setPageCount] = useState(0);
 
   useEffect(() => {
-    courseServices
-      .getCourseApi({
-        id: "ALL",
-        limit: limit,
-        page: 1,
-      })
-      .then((data: any) => {
-        setDataCourses(data.data.data.rows);
+    if (courseListCache) {
+      // Sử dụng dữ liệu từ cache
+      setDataCourses(courseListCache);
+    } else {
+      courseServices
+        .getCourseApi({
+          id: "ALL",
+          limit: limit,
+          page: 1,
+        })
+        .then((data: any) => {
+          cache.put("courseListCache", data.data.data.rows);
 
-        const total = data.data.data.count;
-        setPageCount(Math.ceil(total / limit));
-      });
+          setDataCourses(data.data.data.rows);
+
+          const total = data.data.data.count;
+          setPageCount(Math.ceil(total / limit));
+        });
+    }
   }, [limit]);
 
   return (

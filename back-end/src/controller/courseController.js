@@ -91,48 +91,59 @@ const createCourse = async (req, res) => {
 };
 
 const getCourse = async (req, res) => {
-  const { page = 1, limit = 10, id } = req.query;
+  const { page = 1, limit = 10, id, sort_by } = req.query;
+
   try {
     let course = null;
     let count = null;
+    let order = [];
+
+    // Add order based on sort_by
+    switch (sort_by) {
+      case "top":
+        order = [
+          [
+            sequelize.literal(
+              "(SELECT DISTINCT AVG(`rating_value`) FROM `Ratings` WHERE `Ratings`.`course_id` = `Course`.`id`)"
+            ),
+            "DESC",
+          ],
+        ];
+        break;
+      case "new":
+        order = [["createdAt", "DESC"]];
+        break;
+      default:
+        order = [["updatedAt", "DESC"]];
+        break;
+    }
+
     if (id === "ALL") {
       let offset = (page - 1) * limit;
-      // courseTest = await db.Course.findAndCountAll({
-      //   order: [["updatedAt", "DESC"]],
-      //   limit: +limit,
-      //   offset: +offset,
-      //   attributes: { exclude: ["thumbnail"] },
-      //   include: [
-      //     {
-      //       model: db.Course_detail,
-      //       as: "course_detail",
-      //     },
-      //   ],
-      //   raw: true,
-      //   nest: true,
-      // });
-
       course = await db.Course.findAll({
-        order: [["updatedAt", "DESC"]],
+        order,
         limit: +limit,
         offset: +offset,
+        attributes: {
+          exclude: ["thumbnail"],
+        },
         include: [
-          {
-            model: db.Course_detail,
-            as: "course_detail",
-          },
-          {
-            model: db.User,
-            as: "user",
-            attributes: ["name"],
-            include: [
-              {
-                model: db.User_detail,
-                as: "user_details",
-                attributes: ["avatar"],
-              },
-            ],
-          },
+          // {
+          //   model: db.Course_detail,
+          //   as: "course_detail",
+          // },
+          // {
+          //   model: db.User,
+          //   as: "user",
+          //   attributes: ["name"],
+          //   include: [
+          //     {
+          //       model: db.User_detail,
+          //       as: "user_details",
+          //       attributes: ["avatar"],
+          //     },
+          //   ],
+          // },
           {
             model: db.Rating,
             attributes: [
