@@ -20,6 +20,7 @@ const Learning = () => {
   const [selectedCourse, setSelectedCourse] = useState(courses[0]);
   const [dataSection, setDataSection] = useState<any>([]);
   const [sectionData, setSectionData] = useState("");
+  const [saveCourse, setSaveCourse] = useState<any>([]);
 
   let { id } = useParams();
   const user = useSelector((state: RootState) => state.auth.user);
@@ -45,6 +46,9 @@ const Learning = () => {
 
   const handleClickLecture = (lecture: any) => {
     setSectionData(lecture);
+    setSaveCourse((prev: any) => {
+      return [...prev, lecture.video];
+    });
   };
 
   return (
@@ -60,6 +64,7 @@ const Learning = () => {
           course={selectedCourse}
           className={styles.videoPlayer}
           sectionData={sectionData}
+          saveCourse={saveCourse}
         />
         <Sidebar
           className={styles.sidebar}

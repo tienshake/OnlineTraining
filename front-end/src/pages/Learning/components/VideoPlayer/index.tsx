@@ -13,13 +13,10 @@ const opts = {
   },
 };
 
-const VideoPlayer = ({ course, className, sectionData }: any) => {
+const VideoPlayer = ({ className, sectionData }: any) => {
   const onReady = (e: any) => {
     e.target.pauseVideo();
-    // setVideoPlayer(e.target);
-    // console.log(videoPlayer && videoPlayer.getDuration());
   };
-
   return (
     <div className={clsx(className, styles.container)}>
       <div className={styles.videoContent}>

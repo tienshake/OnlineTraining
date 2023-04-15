@@ -8,9 +8,7 @@ import { Box } from "@material-ui/core";
 import { useState } from "react";
 import "./Card.css";
 import { useDispatch } from "react-redux";
-import {
-  addCourseFavorite
-} from "../../redux/features/coursesFavorite/coursesFavoriteSlice";
+import { addCourseFavorite } from "../../redux/features/coursesFavorite/coursesFavoriteSlice";
 import { addToCart } from "../../redux/features/cart/cartSlice";
 import { Stack } from "@mui/material";
 import { BsCartPlus } from "react-icons/bs";
@@ -30,28 +28,31 @@ export default function CardMainProduct(props: CardMainProductProps) {
   };
 
   const handleClickFavoriteCourse = (e: any) => {
-    e.preventDefault()
-    dispatch(addCourseFavorite({
-      idCourse: Number(props.idCourse),
-      titleItem: `${props.titleItem}`,
-      imageItem: `${props.imageItem}`,
-      price: props.priceItem,
-      promotion_price: props.promotion_price,
-    }));
-  }
+    e.preventDefault();
+    dispatch(
+      addCourseFavorite({
+        idCourse: Number(props.idCourse),
+        titleItem: `${props.titleItem}`,
+        imageItem: `${props.imageItem}`,
+        price: props.priceItem,
+        promotion_price: props.promotion_price,
+      })
+    );
+  };
 
   /* add to cart */
   const handleClickAddTocart = (e: any) => {
-    e.preventDefault()
-    dispatch(addToCart({
-      idCourse: Number(props.idCourse),
-      titleItem: `${props.titleItem}`,
-      imageItem: `${props.imageItem}`,
-      price: props.priceItem,
-      promotion_price: props.promotion_price,
-    }));
-  }
-
+    e.preventDefault();
+    dispatch(
+      addToCart({
+        idCourse: Number(props.idCourse),
+        titleItem: `${props.titleItem}`,
+        imageItem: `${props.imageItem}`,
+        price: props.priceItem,
+        promotion_price: props.promotion_price,
+      })
+    );
+  };
 
   return (
     <Link to={`/course-details/${props.idCourse}`}>
@@ -128,11 +129,14 @@ export default function CardMainProduct(props: CardMainProductProps) {
 
               <p onClick={handleClickAddTocart}>
                 <BsCartPlus
-                  style={{ fontSize: "22px", color: "#ED6535", marginTop: "10px" }}
+                  style={{
+                    fontSize: "22px",
+                    color: "#ED6535",
+                    marginTop: "10px",
+                  }}
                 />
               </p>
             </Stack>
-
           </div>
         </div>
       </div>

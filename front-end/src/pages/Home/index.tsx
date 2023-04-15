@@ -14,20 +14,30 @@ import { useEffect, useState } from "react";
 import "./Home.css";
 import ButtonRedirect from "../../components/Button/ButtonRedirect";
 import covertB64 from "../../utils/covertB64";
+import cache from "memory-cache";
 
 const Home = () => {
   const [dataCourses, setDataCourses] = useState<any>();
+  const courseCache = cache.get("courseCache");
 
   useEffect(() => {
-    courseServices
-      .getCourseApi({
-        id: "ALL",
-        limit: 20,
-        page: 1,
-      })
-      .then((data) => setDataCourses(data.data.data.rows));
+    if (courseCache) {
+      // Sử dụng dữ liệu từ cache
+      setDataCourses(courseCache);
+    } else {
+      courseServices
+        .getCourseApi({
+          id: "ALL",
+          limit: 20,
+          page: 1,
+        })
+        .then((data) => {
+          cache.put("courseCache", data.data.data.rows);
+          setDataCourses(data.data.data.rows);
+        });
+    }
   }, []);
-
+  console.log("dataCourses", dataCourses);
   const items1 = [
     {
       img: "https://dreamslms.dreamguystech.com/html/assets/img/pencil-icon.svg",

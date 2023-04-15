@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import covertB64 from "../../utils/covertB64";
 import { useDispatch } from "react-redux";
-import { removeCart } from '../../redux/features/cart/cartSlice';
+import { removeCart } from "../../redux/features/cart/cartSlice";
 
 const PaypalCheckoutButton = (props: any) => {
   const đispatch = useDispatch();
