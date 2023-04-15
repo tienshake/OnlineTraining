@@ -1,20 +1,26 @@
 import "./components.css";
 
-export default function BoxSection() {
+interface MyPropBoxSection {
+    auxiliaryTitle: string,
+    mainTitle: string,
+    content: string
+}
+
+export default function BoxSection(props:MyPropBoxSection) {
     return (
         <>
             <div className='box_favourite_course'>
                 <ul className='section_header'>
                     <li>
-                        <p>Favourite Course</p>
-                        <p>Top Category</p>
+                        <p>{props.auxiliaryTitle}</p>
+                        <p>{props.mainTitle}</p>
                     </li>
 
                     <li>
                         buutpn
                     </li>
                 </ul>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan bibendum <br /> gravida maecenas augue elementum et neque. Suspendisse imperdiet.</p>
+                <p className="content">{props.content}</p>
             </div>
 
         </>

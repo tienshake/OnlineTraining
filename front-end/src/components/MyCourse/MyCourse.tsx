@@ -17,7 +17,7 @@ export default function MyCourse() {
                         <p>COURSES</p>
                         <Stack direction="row" spacing={4} justifyContent={'space-between'}>
                             <p>STUDENT</p>
-                            <p style={{marginRight: '25px'}}>STATUS</p>
+                            <p style={{marginRight: '25px'}}>Control</p>
                         </Stack>
                     </Stack>
                 </div>
