@@ -124,26 +124,23 @@ const getCourse = async (req, res) => {
         order,
         limit: +limit,
         offset: +offset,
-        attributes: {
-          exclude: ["thumbnail"],
-        },
         include: [
-          // {
-          //   model: db.Course_detail,
-          //   as: "course_detail",
-          // },
-          // {
-          //   model: db.User,
-          //   as: "user",
-          //   attributes: ["name"],
-          //   include: [
-          //     {
-          //       model: db.User_detail,
-          //       as: "user_details",
-          //       attributes: ["avatar"],
-          //     },
-          //   ],
-          // },
+          {
+            model: db.Course_detail,
+            as: "course_detail",
+          },
+          {
+            model: db.User,
+            as: "user",
+            attributes: ["name"],
+            include: [
+              {
+                model: db.User_detail,
+                as: "user_details",
+                attributes: ["avatar"],
+              },
+            ],
+          },
           {
             model: db.Rating,
             attributes: [
