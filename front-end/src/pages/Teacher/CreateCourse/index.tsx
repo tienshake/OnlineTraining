@@ -82,37 +82,39 @@ function CreateCourse() {
   }, []);
 
   React.useEffect(() => {
-    const fetch = async () => {
-      const dataCourse = await courseServices.getCourseApi({ id });
-      const dataCourseSection = await courseServices.getCourseSectionApi({
-        userId: user.id,
-        courseId: id,
-      });
+    if (id) {
+      const fetch = async () => {
+        const dataCourse = await courseServices.getCourseApi({ id });
+        const dataCourseSection = await courseServices.getCourseSectionApi({
+          userId: user.id,
+          courseId: id,
+        });
 
-      const resultCourse = await checkDataApi(dataCourse);
-      const resultCourseSection = await checkDataApi(dataCourseSection);
+        const resultCourse = await checkDataApi(dataCourse);
+        const resultCourseSection = await checkDataApi(dataCourseSection);
 
-      if (resultCourse) {
-        setFormValues((prevValues: any) => ({
-          ...prevValues,
-          courseTitle: resultCourse.data.title,
-          courseCategory: resultCourse.data.category_id,
-          courseDescriptions: {
-            html: resultCourse?.data?.course_detail.descriptionMarkdown,
-            text: resultCourse?.data?.course_detail.description,
-          },
-          avatar: {
-            previewImg: covertB64(resultCourse.data.thumbnail),
-            thumbnail: resultCourse.data.thumbnail,
-            fileName: "",
-          },
-          sectionCourse: resultCourseSection?.data.course_sections,
-          price: resultCourse.data.price,
-          promotion_price: resultCourse.data.promotion_price,
-        }));
-      }
-    };
-    fetch();
+        if (resultCourse) {
+          setFormValues((prevValues: any) => ({
+            ...prevValues,
+            courseTitle: resultCourse.data.title,
+            courseCategory: resultCourse.data.category_id,
+            courseDescriptions: {
+              html: resultCourse?.data?.course_detail.descriptionMarkdown,
+              text: resultCourse?.data?.course_detail.description,
+            },
+            avatar: {
+              previewImg: covertB64(resultCourse.data.thumbnail),
+              thumbnail: resultCourse.data.thumbnail,
+              fileName: "",
+            },
+            sectionCourse: resultCourseSection?.data.course_sections,
+            price: resultCourse.data.price,
+            promotion_price: resultCourse.data.promotion_price,
+          }));
+        }
+      };
+      fetch();
+    }
   }, [id, user]);
 
   React.useEffect(() => {
