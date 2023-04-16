@@ -43,4 +43,12 @@ router.get(
   // middleware.authUser,
   courseController.getCourseSection
 );
+
+router.get(
+  "/get-my-course/:user_id",
+  // middleware.authAdmin,
+  // middleware.authAdminOrTeacher,
+  middleware.authUser,
+  courseController.getMyCourses
+);
 export default router;

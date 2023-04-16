@@ -34,16 +34,16 @@ export const MENU_PROFILE = [
     patch: "/profile/edit-profile",
   },
   {
-    title: "Delete Profile",
-    patch: "/profile/delete-profile",
-  },
-  {
     title: "My Course",
     patch: "/profile/edit-my-course",
   },
   {
     title: "Reviews",
     patch: "/profile/reviews-profile",
+  },
+  {
+    title: "Delete Profile",
+    patch: "/profile/delete-profile",
   },
   {
     title: "Student",

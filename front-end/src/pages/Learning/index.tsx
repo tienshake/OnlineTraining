@@ -65,6 +65,7 @@ const Learning = () => {
           className={styles.videoPlayer}
           sectionData={sectionData}
           saveCourse={saveCourse}
+          dataSection={dataSection}
         />
         <Sidebar
           className={styles.sidebar}

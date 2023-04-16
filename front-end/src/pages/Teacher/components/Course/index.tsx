@@ -20,11 +20,7 @@ const Course = ({ setFormValues, formValues }: any) => {
     if (file) {
       const b64 = await CommonUtils.getBase64(file);
       const objectUrl = URL.createObjectURL(file);
-      // setImage({
-      //   previewImg: objectUrl,
-      //   thumbnail: b64,
-      //   fileName: file.name,
-      // });
+      // console.log("b64", b64);
       setFormValues((prevValues: any) => ({
         ...prevValues,
         avatar: {

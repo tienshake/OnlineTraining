@@ -47,8 +47,8 @@ const Section = ({
     setSection((prevState) => {
       const sections = [...prevState];
       const newLecture = {
-        name: "",
-        videoLink: "",
+        title: "",
+        video: "",
       };
 
       sections[sectionIndex] = {
@@ -76,7 +76,7 @@ const Section = ({
     const value = event.target.value;
     setSection((prevState) => {
       const sections = [...prevState];
-      sections[sectionIndex].lectures[lectureIndex].name = value;
+      sections[sectionIndex].lectures[lectureIndex].title = value;
       return sections;
     });
   }
@@ -88,7 +88,7 @@ const Section = ({
     const value = event.target.value;
     setSection((prevState) => {
       const sections = [...prevState];
-      sections[sectionIndex].lectures[lectureIndex].videoLink = value;
+      sections[sectionIndex].lectures[lectureIndex].video = value;
       return sections;
     });
   }
@@ -130,6 +130,7 @@ const Section = ({
           <DeleteOutlineIcon
             onClick={() => removeSection(sectionIndex)}
             className={styles.iconDelete}
+            style={{ fontSize: "29px !important" }}
           />
         </Box>
       </AccordionSummary>
@@ -148,7 +149,7 @@ const Section = ({
               onClick={(e) => e.stopPropagation()}
               type="text"
               placeholder="Lecture name"
-              defaultValue={lecture.name}
+              defaultValue={lecture.title}
               onChange={(event: any) =>
                 onLectureNameChange(event, lectureIndex)
               }
@@ -158,14 +159,14 @@ const Section = ({
               onClick={(e) => e.stopPropagation()}
               type="text"
               placeholder="Lecture video link"
-              defaultValue={lecture.videoLink}
+              defaultValue={lecture.video}
               onChange={(event: any) =>
                 onLectureVideoLinkChange(event, lectureIndex)
               }
             />
-            {lecture.videoLink && (
+            {lecture.video && (
               <YouTube
-                videoId={lecture.videoLink.split("v=")[1]}
+                videoId={lecture.video.split("v=")[1]}
                 opts={opts}
                 onReady={onReady}
               />

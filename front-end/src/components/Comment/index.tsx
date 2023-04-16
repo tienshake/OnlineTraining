@@ -11,7 +11,7 @@ import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
 // import checkDataApi from "../../utils/checkDataApi";
 
-const Comment = (fetchGetRating: any) => {
+const Comment = ({ getRatingData }: any) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   let { id } = useParams();
@@ -21,6 +21,18 @@ const Comment = (fetchGetRating: any) => {
   const handleRating = (rate: number) => {
     setRating(rate);
   };
+
+  const handelCreateRating = async () => {
+    const data: any = await ratingServices.createRatingApi({
+      user_id: user.id,
+      comment,
+      course_id: id,
+      rating_value: rating,
+    });
+    toast.success(data?.data.message);
+    getRatingData();
+  };
+
   const handleSubmitComment = () => {
     if (!comment) {
       toast.warning("not comment");
@@ -32,14 +44,7 @@ const Comment = (fetchGetRating: any) => {
           {
             label: "Yes",
             onClick: async () => {
-              const data: any = await ratingServices.createRatingApi({
-                user_id: user.id,
-                comment,
-                course_id: id,
-                rating_value: rating,
-              });
-              toast.success(data?.data.message);
-              fetchGetRating();
+              handelCreateRating();
             },
           },
           {

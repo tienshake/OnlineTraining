@@ -38,7 +38,7 @@ const Home = () => {
         });
     }
   }, []);
-  console.log("dataCourses", dataCourses);
+  // console.log("dataCourses", dataCourses);
   const items1 = [
     {
       img: "https://dreamslms.dreamguystech.com/html/assets/img/pencil-icon.svg",

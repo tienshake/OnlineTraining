@@ -22,6 +22,14 @@ const CourseDetail = () => {
   let { id } = useParams();
   const user = useSelector((state: RootState) => state.auth.user);
 
+  const getRatingData = async () => {
+    const data: any = await ratingServices.getRatingApi(id);
+    const result = checkDataApi(data);
+    if (result) {
+      setDataComment(result.data);
+    }
+  };
+
   useEffect(() => {
     const getCourseData = async () => {
       const data = await courseServices.getCourseApi({
@@ -33,14 +41,6 @@ const CourseDetail = () => {
       }
     };
 
-    const getRatingData = async () => {
-      const data: any = await ratingServices.getRatingApi(id);
-      const result = checkDataApi(data);
-      if (result) {
-        setDataComment(result.data);
-      }
-    };
-
     const getCourseSectionData = async () => {
       const data = await courseServices.getCourseSectionApi({
         courseId: id,
@@ -49,7 +49,7 @@ const CourseDetail = () => {
       const result = checkDataApi(data);
       if (result) {
         setDataSection(result.data?.course_sections);
-        if (result.data.Enrollments && result.data.Enrollments[0].id) {
+        if (result.data.Enrollments && result.data.Enrollments[0]?.id) {
           setIsEnroll(true);
         }
       }
@@ -58,7 +58,7 @@ const CourseDetail = () => {
     getCourseData();
     getRatingData();
     getCourseSectionData();
-  }, [id, user && user.id]);
+  }, [id, user]);
   // console.log("dataSection", dataSection);
   return (
     <Box className={styles.container}>
@@ -90,7 +90,7 @@ const CourseDetail = () => {
           </Box>
         </Box>
         <Box className={styles.comment}>
-          <Comment />
+          <Comment getRatingData={getRatingData} />
         </Box>
 
         <Box className={styles.commentViews}>

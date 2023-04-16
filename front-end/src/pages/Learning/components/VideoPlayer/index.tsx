@@ -13,22 +13,32 @@ const opts = {
   },
 };
 
-const VideoPlayer = ({ className, sectionData }: any) => {
+const VideoPlayer = ({ className, sectionData, dataSection }: any) => {
+  const [currentVideo, setCurrentVideo] = useState<any>();
+
+  useEffect(() => {
+    if (dataSection && dataSection.length > 0) {
+      setCurrentVideo(dataSection[0]?.lectures[0]);
+    }
+    // setCurrentVideo()
+  }, [dataSection]);
+
   const onReady = (e: any) => {
     e.target.pauseVideo();
   };
+
   return (
     <div className={clsx(className, styles.container)}>
       <div className={styles.videoContent}>
         <YouTube
           className={styles.video}
-          videoId={sectionData && sectionData?.video.split("v=")[1]}
+          videoId={sectionData ? sectionData?.video.split("v=")[1] : ""}
           opts={opts}
           onReady={onReady}
         />
       </div>
       <div className={styles.contentTitle}>
-        <h1>{sectionData && sectionData?.title}</h1>
+        <h1>{sectionData ? sectionData?.title : currentVideo?.title}</h1>
         {/* <p>Cập nhật tháng 2 năm 2022</p> */}
         <p>
           Join the Learn programming group at on Facebook to discuss the

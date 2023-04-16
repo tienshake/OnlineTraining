@@ -29,9 +29,12 @@ import categoryServices from "../../../services/category";
 import checkDataApi from "../../../utils/checkDataApi";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store/store";
+import { useParams } from "react-router-dom";
+import covertB64 from "../../../utils/covertB64";
 
 function CreateCourse() {
   const user = useSelector((state: RootState) => state.auth.user);
+  let { id } = useParams();
 
   const [formValues, setFormValues] = React.useState<CreateCourseType>({
     courseTitle: "",
@@ -77,6 +80,40 @@ function CreateCourse() {
     };
     fetch();
   }, []);
+
+  React.useEffect(() => {
+    const fetch = async () => {
+      const dataCourse = await courseServices.getCourseApi({ id });
+      const dataCourseSection = await courseServices.getCourseSectionApi({
+        userId: user.id,
+        courseId: id,
+      });
+
+      const resultCourse = await checkDataApi(dataCourse);
+      const resultCourseSection = await checkDataApi(dataCourseSection);
+
+      if (resultCourse) {
+        setFormValues((prevValues: any) => ({
+          ...prevValues,
+          courseTitle: resultCourse.data.title,
+          courseCategory: resultCourse.data.category_id,
+          courseDescriptions: {
+            html: resultCourse?.data?.course_detail.descriptionMarkdown,
+            text: resultCourse?.data?.course_detail.description,
+          },
+          avatar: {
+            previewImg: covertB64(resultCourse.data.thumbnail),
+            thumbnail: resultCourse.data.thumbnail,
+            fileName: "",
+          },
+          sectionCourse: resultCourseSection?.data.course_sections,
+          price: resultCourse.data.price,
+          promotion_price: resultCourse.data.promotion_price,
+        }));
+      }
+    };
+    fetch();
+  }, [id, user]);
 
   React.useEffect(() => {
     // reset arr when component didmount
@@ -193,22 +230,43 @@ function CreateCourse() {
     }
     //isComplete save call api
     if (!isComplete) {
-      const result: APIType = await courseServices.createCourseApi({
-        title,
-        thumbnail,
-        description,
-        descriptionMarkdown,
-        price,
-        promotion_price,
-        user_id,
-        category_id,
-        sections,
-      });
+      if (!id) {
+        const result: APIType = await courseServices.createCourseApi({
+          title,
+          thumbnail,
+          description,
+          descriptionMarkdown,
+          price,
+          promotion_price,
+          user_id,
+          category_id,
+          sections,
+        });
 
-      if (result && result.data?.code === CODE_SUCCESS) {
-        setIsComplete(true);
-        setComponent(<Complete />);
-        toast.success("🦄 Wow so easy!");
+        if (result && result.data?.code === CODE_SUCCESS) {
+          setIsComplete(true);
+          setComponent(<Complete />);
+          toast.success("🦄 Create so easy!");
+        }
+      } else {
+        console.log("formValues?.avatar?.thumbnail", typeof thumbnail);
+        const result: APIType = await courseServices.editCourseApi({
+          id,
+          title,
+          thumbnail:
+            typeof thumbnail === "object" ? covertB64(thumbnail) : thumbnail,
+          description,
+          descriptionMarkdown,
+          price,
+          promotion_price,
+          user_id,
+          category_id,
+          sections: formValues.sectionCourse,
+        });
+
+        if (result && result.data?.code === CODE_SUCCESS) {
+          toast.success("🦄 Edit so easy!");
+        }
       }
     } else {
       toast.warning("🦄 You was add course!");
@@ -225,7 +283,11 @@ function CreateCourse() {
         <h1 className={styles.title}>Add New Course</h1>
         <Stack direction="row" gap={2}>
           <ButtonBack title="Back To Course" />
-          <ButtonSave title="Add Course" onClick={handleCreateCourseApi} />
+          {id ? (
+            <ButtonSave title="Update" onClick={handleCreateCourseApi} />
+          ) : (
+            <ButtonSave title="Add Course" onClick={handleCreateCourseApi} />
+          )}
         </Stack>
       </Stack>
       <Box className={styles.content}>

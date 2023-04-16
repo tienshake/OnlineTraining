@@ -3,12 +3,7 @@ import clsx from "clsx";
 import AccordionSection from "../../../../components/AccordionSection";
 import styles from "./Sidebar.module.scss";
 
-const Sidebar = ({
-  dataSection,
-  onCourseSelect,
-  className,
-  handleClickLecture,
-}: any) => {
+const Sidebar = ({ dataSection, className, handleClickLecture }: any) => {
   return (
     <div className={clsx(className, styles.container)}>
       <div>

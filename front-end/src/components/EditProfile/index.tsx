@@ -137,7 +137,7 @@ const EditProfile = () => {
       ],
     });
   };
-  console.log(userRedux);
+  // console.log(userRedux);
   return (
     <DefaultLayoutEdit
       titleHeader="Profile Details"

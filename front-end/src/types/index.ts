@@ -96,8 +96,8 @@ export interface CreateCourseType {
 export interface SectionType {
   title: string;
   lectures: {
-    name: string;
-    videoLink: string;
+    title: string;
+    video: string;
   }[];
 }
 

@@ -1,7 +1,7 @@
 import db from "../models";
 import { sequelize } from "../models";
 const { Op } = require("sequelize");
-import moment from "moment";
+// import moment from "moment";
 
 const createCourse = async (req, res) => {
   try {
@@ -234,7 +234,7 @@ const getCourseSection = async (req, res) => {
 
     course = await db.Course.findOne({
       where: { id: courseId },
-      attributes: ["id"],
+      attributes: ["id", "user_id"],
       include: [
         {
           model: db.Enrollment,
@@ -253,19 +253,28 @@ const getCourseSection = async (req, res) => {
           ],
         },
       ],
+      // nest: true,
     });
 
+    if (!course) {
+      res.status(400).json({ message: "Course not found" });
+    }
+
+    let enrolled = false;
+
+    if (course.user_id === +userId) {
+      enrolled = true;
+    } else {
+      enrolled = course.Enrollments.length > 0;
+    }
+
     // Update video field to NULL if user is not enrolled
-    if (!course.Enrollments.length) {
+    if (!enrolled) {
       course.course_sections.forEach((section) => {
         section.lectures.forEach((lecture) => {
           lecture.video = null;
         });
       });
-    }
-
-    if (!course) {
-      res.status(400).json({ message: "Course not found" });
     }
 
     res.status(200).json({
@@ -283,73 +292,56 @@ const editCourse = async (req, res) => {
   const { id } = req.params;
   const {
     title,
-    description,
-    price,
     category_id,
-    total_chapter,
-    total_lectures,
-    total_time,
-    promotion_price,
     thumbnail,
-    total_view,
+    price,
+    promotion_price,
+    description,
+    descriptionMarkdown,
+    sections,
   } = req.body;
 
   const t = await sequelize.transaction();
+
   try {
     // Update Course
     await db.Course.update(
-      { title, description, price, category_id },
-      { where: { id }, transaction: t }
+      { title, price, category_id, promotion_price, thumbnail },
+      { where: { id } }
     );
 
-    // Update Course_detail
-    if (
-      total_chapter ||
-      total_lectures ||
-      total_time ||
-      promotion_price ||
-      thumbnail ||
-      total_view
-    ) {
-      const [courseDetail, created] = await db.Course_detail.findOrCreate({
-        where: { course_id: id },
-        defaults: {
-          course_id: id,
-          total_chapter,
-          total_lectures,
-          total_time,
-          promotion_price,
-          thumbnail,
-          total_view,
-        },
-        transaction: t,
-      });
-      if (!created) {
-        await courseDetail.update(
-          {
-            total_chapter,
-            total_lectures,
-            total_time,
-            promotion_price,
-            thumbnail,
-            total_view,
-          },
-          { transaction: t }
+    // Update Course
+    await db.Course_detail.update(
+      { description, descriptionMarkdown },
+      { where: { course_id: id } }
+    );
+    // console.log("JSON.parse(dataSection)", sections);
+
+    for (const section of sections) {
+      await db.Course_section.update(
+        { title: section.title },
+        { where: { id: section.id } }
+      );
+
+      for (const lecture of section.lectures) {
+        await db.Lecture.update(
+          { title: lecture.title, video: lecture.video },
+          { where: { id: lecture.id } }
         );
       }
     }
-
     // Commit transaction
     await t.commit();
 
-    res.status(200).send({ message: "Update successfully" });
+    res.status(200).send({ code: 0, message: "Update successfully" });
   } catch (error) {
     // Rollback transaction if there is any error
-    console.log(error);
     await t.rollback();
+    console.log(error);
     res.status(500).send({ message: "Update failed" });
   }
 };
+
 const deleteCourse = async (req, res) => {
   const { id } = req.params;
   try {
@@ -396,6 +388,52 @@ const searchCourse = async (req, res) => {
   }
 };
 
+const getMyCourses = async (req, res) => {
+  const { user_id } = req.params;
+
+  try {
+    if (!user_id) {
+      return res.status(404).json({ message: "Missing params" });
+    }
+    const user = await db.User.findOne({ where: { id: user_id } });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const userCourses = await db.Course.findAll({
+      where: { user_id },
+      include: [
+        // {
+        //   model: db.Course_detail,
+        //   as: "course_detail",
+        // },
+        // {
+        //   model: db.Rating,
+        //   attributes: [
+        //     [
+        //       sequelize.literal(
+        //         "(SELECT AVG(`rating_value`) FROM `Ratings` WHERE `Ratings`.`course_id` = `Course`.`id`)"
+        //       ),
+        //       "avg_rating_value",
+        //     ],
+        //   ],
+        // },
+      ],
+      nest: true,
+    });
+
+    res.status(200).json({
+      code: 0,
+      message: "Get User Courses completed",
+      data: userCourses,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 export default {
   createCourse,
   getCourse,
@@ -403,4 +441,5 @@ export default {
   deleteCourse,
   searchCourse,
   getCourseSection,
+  getMyCourses,
 };

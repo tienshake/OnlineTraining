@@ -2,6 +2,7 @@ import axiosClient from "../api/axiosClient";
 import { SectionType } from "../types";
 
 interface CourseApiType {
+  id?: any;
   title?: string;
   description?: string;
   descriptionMarkdown?: string;
@@ -42,6 +43,37 @@ const courseServices = {
       throw error;
     }
   },
+
+  editCourseApi: async ({
+    category_id,
+    description,
+    descriptionMarkdown,
+    price,
+    promotion_price,
+    thumbnail,
+    title,
+    user_id,
+    sections,
+    id,
+  }: CourseApiType) => {
+    try {
+      const response = await axiosClient.put(`courses/edit/${id}`, {
+        title,
+        description,
+        descriptionMarkdown,
+        thumbnail,
+        price,
+        promotion_price,
+        category_id,
+        user_id,
+        sections,
+      });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   getCourseApi: async ({ id, limit, page }: any) => {
     try {
       let response = null;

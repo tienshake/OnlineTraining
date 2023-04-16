@@ -70,7 +70,6 @@ const privateRoute: RouteType[] = [
   {
     component: Learning,
     patch: "/learning/:id",
-    // defaultLayout: true,
   },
   {
     component: Checkout,
@@ -85,6 +84,11 @@ const privateRoute: RouteType[] = [
   {
     component: CreateCourse,
     patch: "/teacher/create-course",
+    defaultLayout: true,
+  },
+  {
+    component: CreateCourse,
+    patch: "/teacher/edit-course/:id",
     defaultLayout: true,
   },
   {

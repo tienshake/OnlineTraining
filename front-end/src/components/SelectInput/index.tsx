@@ -20,7 +20,7 @@ const SelectInput = (props: SelectInputProps) => {
   const [select, setSelect] = React.useState("");
 
   useEffect(() => {
-    setSelect(arrSelect.length > 0 ? arrSelect[0].title : "");
+    setSelect(arrSelect?.length > 0 ? arrSelect[0].title : "");
   }, [arrSelect]);
 
   const handleOnchange = (e: any) => {
