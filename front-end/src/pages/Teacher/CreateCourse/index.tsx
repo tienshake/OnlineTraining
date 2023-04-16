@@ -246,8 +246,8 @@ function CreateCourse() {
         });
 
         if (result && result.data?.code === CODE_SUCCESS) {
-          setIsComplete(true);
-          setComponent(<Complete />);
+          // setIsComplete(true);
+          // setComponent(<Complete />);
           toast.success("🦄 Create so easy!");
         }
       } else {

@@ -15,17 +15,13 @@ export const NAV_LIST: NavType[] = [
     patch: "/course",
   },
   {
+    title: "MyCourse",
+    patch: "/profile/edit-my-course",
+  },
+  {
     title: "Blog",
     patch: "/blog",
   },
-  {
-    title: "Profile",
-    patch: "/profile",
-  },
-  // {
-  //   title: "Create",
-  //   patch: "/teacher/create-course",
-  // },
 ];
 
 export const MENU_PROFILE = [

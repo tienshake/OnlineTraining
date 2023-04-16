@@ -16,6 +16,7 @@ const createCourse = async (req, res) => {
       promotion_price,
       sections,
     } = req.body;
+    console.log("sections", sections);
     if (
       !title ||
       !description ||
@@ -63,12 +64,12 @@ const createCourse = async (req, res) => {
 
           if (lectures && lectures.length > 0) {
             for (const lecture of lectures) {
-              const { name, videoLink } = lecture;
+              const { title, video } = lecture;
 
               const lecture_data = await db.Lecture.create({
                 course_section_id: courseSection.id,
-                title: name,
-                video: videoLink,
+                title,
+                video,
               });
               if (!lecture_data) {
                 res.status(400).json({ message: "Create lecture_data failed" });
