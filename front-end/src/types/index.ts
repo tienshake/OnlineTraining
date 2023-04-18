@@ -98,6 +98,8 @@ export interface SectionType {
   lectures: {
     title: string;
     video: string;
+    videoFile?: any;
+    videoFileArr?: any;
   }[];
 }
 

@@ -118,6 +118,24 @@ const courseServices = {
       throw error;
     }
   },
+
+  getMyCourseApi: async (id: any) => {
+    try {
+      const response = await axiosClient.get(`courses/get-my-course/${id}`);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  deleteCourseApi: async (id: any) => {
+    try {
+      const response = await axiosClient.delete(`courses/delete/${id}`);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 export default courseServices;

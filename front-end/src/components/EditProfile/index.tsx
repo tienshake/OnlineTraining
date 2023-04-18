@@ -181,6 +181,16 @@ const EditProfile = () => {
         <p>Edit your personal information and address.</p>
         <form onSubmit={formik.handleSubmit} className={styles.formControl}>
           <Box className={styles.formInput}>
+            <label>Email</label>
+            <Input
+              placeholder="Enter Your Email"
+              type="Email"
+              name="Email"
+              value={userRedux?.email}
+              disabled
+            />
+          </Box>
+          <Box className={styles.formInput}>
             <label>Name</label>
             <Input
               placeholder="Enter Your Name"
