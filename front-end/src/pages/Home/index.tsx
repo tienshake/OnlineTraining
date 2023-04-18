@@ -24,31 +24,31 @@ const Home = () => {
   const [dataNewCourses, setDataNewCourses] = useState<any>();
   const courseCache = cache.get("courseCache");
 
-    /* get courses top */
-    useEffect(() => {
-      courseServices.getCourseApiSortType({
-        id: "ALL",
-        limit: 8,
-        page: 1,
-        type: 'top'
-      }).then((data) => {
-        cache.put("courseCache", data.data.data.rows);
-        setDataTopCourses(data.data.data.rows);
-      });
-    }, []);
-  
-    /* get courses news */
-    useEffect(() => {
-      courseServices.getCourseApiSortType({
-        id: "ALL",
-        limit: 8,
-        page: 1,
-        type: 'new'
-      }).then((data) => {
-        cache.put("courseCache", data.data.data.rows);
-        setDataNewCourses(data.data.data.rows);
-      });
-    }, []);
+  /* get courses top */
+  useEffect(() => {
+    courseServices.getCourseApiSortType({
+      id: "ALL",
+      limit: 8,
+      page: 1,
+      type: 'top'
+    }).then((data) => {
+      cache.put("courseCache", data.data.data.rows);
+      setDataTopCourses(data.data.data.rows);
+    });
+  }, []);
+
+  /* get courses news */
+  useEffect(() => {
+    courseServices.getCourseApiSortType({
+      id: "ALL",
+      limit: 8,
+      page: 1,
+      type: 'new'
+    }).then((data) => {
+      cache.put("courseCache", data.data.data.rows);
+      setDataNewCourses(data.data.data.rows);
+    });
+  }, []);
 
   useEffect(() => {
     if (courseCache) {
@@ -209,7 +209,7 @@ const Home = () => {
             </ul>
           </div>
 
-          <div className="right_content" style={{ width: "40%" }}>
+          <div className="right_content">
             <img
               style={{ width: "100%" }}
               src="https://dreamslms.dreamguystech.com/html/assets/img/object.png"

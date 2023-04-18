@@ -15,3 +15,7 @@ code {
 .react-confirm-alert-overlay {
   background: rgb(255 255 255 / 20%) !important;
 }
+
+@media only screen and (max-width: 983px) {
+
+}
