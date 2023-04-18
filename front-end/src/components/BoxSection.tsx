@@ -1,3 +1,4 @@
+import Button from "./Button";
 import "./components.css";
 
 interface MyPropBoxSection {
@@ -6,7 +7,7 @@ interface MyPropBoxSection {
     content: string
 }
 
-export default function BoxSection(props:MyPropBoxSection) {
+export default function BoxSection(props: MyPropBoxSection) {
     return (
         <>
             <div className='box_favourite_course'>
@@ -17,7 +18,12 @@ export default function BoxSection(props:MyPropBoxSection) {
                     </li>
 
                     <li>
-                        buutpn
+                        <Button
+                            variant="outlined"
+                            title="All Courses"
+                            path={`/course`}
+                            circle
+                        />
                     </li>
                 </ul>
                 <p className="content">{props.content}</p>

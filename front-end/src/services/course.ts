@@ -91,6 +91,23 @@ const courseServices = {
     }
   },
 
+  getCourseApiSortType: async ({ id, limit, page, type }: any) => {
+    try {
+      let response = null;
+      if (limit && page) {
+        response = await axiosClient.get(
+          `courses/get?limit=${limit}&page=${page}&id=${id}&sort_by=${type}`
+        );
+        return response;
+      } else {
+        response = await axiosClient.get(`courses/get?id=${id}`);
+      }
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   getCourseSectionApi: async ({ userId, courseId }: any) => {
     try {
       const response = await axiosClient.get(

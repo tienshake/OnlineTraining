@@ -20,7 +20,35 @@ import Loading from "../../components/Loading/Loading";
 
 const Home = () => {
   const [dataCourses, setDataCourses] = useState<any>();
+  const [dataTopCourses, setDataTopCourses] = useState<any>();
+  const [dataNewCourses, setDataNewCourses] = useState<any>();
   const courseCache = cache.get("courseCache");
+
+    /* get courses top */
+    useEffect(() => {
+      courseServices.getCourseApiSortType({
+        id: "ALL",
+        limit: 8,
+        page: 1,
+        type: 'top'
+      }).then((data) => {
+        cache.put("courseCache", data.data.data.rows);
+        setDataTopCourses(data.data.data.rows);
+      });
+    }, []);
+  
+    /* get courses news */
+    useEffect(() => {
+      courseServices.getCourseApiSortType({
+        id: "ALL",
+        limit: 8,
+        page: 1,
+        type: 'new'
+      }).then((data) => {
+        cache.put("courseCache", data.data.data.rows);
+        setDataNewCourses(data.data.data.rows);
+      });
+    }, []);
 
   useEffect(() => {
     if (courseCache) {
@@ -30,7 +58,7 @@ const Home = () => {
       courseServices
         .getCourseApi({
           id: "ALL",
-          limit: 20,
+          limit: 8,
           page: 1,
         })
         .then((data) => {
@@ -38,8 +66,8 @@ const Home = () => {
           setDataCourses(data.data.data.rows);
         });
     }
-  }, []);
-  // console.log("dataCourses", dataCourses);
+  }, [courseCache]);
+
   const items1 = [
     {
       img: "https://dreamslms.dreamguystech.com/html/assets/img/pencil-icon.svg",
@@ -67,10 +95,9 @@ const Home = () => {
   const [dataCate, setDataCate] = useState<any>([]);
 
   useEffect(() => {
-    categoryServices
-      .getCategoryApi()
-      .then((data) => setDataCate(data.data.data));
+    categoryServices.getCategoryApi().then((data) => setDataCate(data.data.data));
   }, []);
+
 
   const data2 = [
     {
@@ -108,8 +135,8 @@ const Home = () => {
     return nameCate === "Reactjs"
       ? "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-05.png"
       : nameCate === "Html"
-      ? "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon.png"
-      : "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-01.png";
+        ? "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon.png"
+        : "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-01.png";
   };
 
   /*  */
@@ -212,7 +239,7 @@ const Home = () => {
           content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan bibendum <br /> gravida maecenas augue elementum et neque. Suspendisse imperdiet."
         />
 
-        {/*  */}
+        {/* Category  */}
         <div className="box_carosel_topCate">
           <Slider {...settings}>
             {dataCate.map((data: any) => (
@@ -230,7 +257,59 @@ const Home = () => {
           </Slider>
         </div>
 
-        {/*  */}
+        {/* Top courses */}
+        <div
+          className="trending_courses"
+          style={{
+            backgroundImage:
+              'url("https://dreamslms.dreamguystech.com/html/assets/img/banner.png")',
+            marginTop: "90px",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+          }}
+        >
+          <BoxSection
+            auxiliaryTitle="Favourite Course"
+            mainTitle="Featured Courses"
+            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan bibendum <br /> gravida maecenas augue elementum et neque. Suspendisse imperdiet."
+          />
+
+          <div style={{ backgroundColor: "" }} className="box_carosel_trending">
+            {
+              dataTopCourses ? <>
+                <Slider {...settings}>
+                  {dataTopCourses.map((data: any) => (
+                    <div key={data.id}>
+                      <CardMainProduct
+                        preventPath="/"
+                        idCourse={data.id}
+                        imageItem={covertB64(data.thumbnail)}
+                        promotion_price={data.promotion_price}
+                        priceItem={data.price}
+                        titleItem={data.title}
+                        rating={
+                          data.Ratings &&
+                          data.Ratings.length > 0 &&
+                          +data?.Ratings[0].avg_rating_value
+                        }
+                        userName={data.user.name}
+                        userAvatar={
+                          data.user?.user_details &&
+                          data.user?.user_details.length > 0 &&
+                          covertB64(data.user?.user_details[0].avatar)
+                        }
+                        widthCard="95%"
+                      />
+                    </div>
+                  ))}
+                </Slider>
+              </> : <Loading />
+            }
+          </div>
+        </div>
+        <BoxTitle />
+
+        {/* ALL courses */}
         <div
           style={{
             backgroundImage:
@@ -242,8 +321,8 @@ const Home = () => {
           className="box_featured_courses"
         >
           <BoxSection
-            auxiliaryTitle="What’s New"
-            mainTitle="Featured Courses"
+            auxiliaryTitle="All Courses"
+            mainTitle="ALL Courses"
             content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan bibendum <br /> gravida maecenas augue elementum et neque. Suspendisse imperdiet."
           />
 
@@ -338,7 +417,7 @@ const Home = () => {
           </div>
         </div>
 
-        {/*  */}
+        {/* News Courses */}
         <div
           className="trending_courses"
           style={{
@@ -350,22 +429,43 @@ const Home = () => {
           }}
         >
           <BoxSection
-            auxiliaryTitle="Favourite Course"
-            mainTitle="Top Category"
+            auxiliaryTitle="What’s New"
+            mainTitle="New Courses"
             content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan bibendum <br /> gravida maecenas augue elementum et neque. Suspendisse imperdiet."
           />
 
           <div style={{ backgroundColor: "" }} className="box_carosel_trending">
-            <Slider {...settings}>
-              {data2.map((data, index) => (
-                <div
-                  key={index}
-                  style={{ width: "100%", margin: "auto" }} /* src={data.src} */
-                >
-                  <CardMainProduct preventPath="/" widthCard="95%" />
-                </div>
-              ))}
-            </Slider>
+            {
+              dataNewCourses ? <>
+                <Slider {...settings}>
+                  {dataNewCourses.map((data: any) => (
+                    <div key={data.id}>
+                      <CardMainProduct
+                        preventPath="/"
+                        idCourse={data.id}
+                        imageItem={covertB64(data.thumbnail)}
+                        promotion_price={data.promotion_price}
+                        priceItem={data.price}
+                        titleItem={data.title}
+                        rating={
+                          data.Ratings &&
+                          data.Ratings.length > 0 &&
+                          +data?.Ratings[0].avg_rating_value
+                        }
+                        userName={data.user.name}
+                        userAvatar={
+                          data.user?.user_details &&
+                          data.user?.user_details.length > 0 &&
+                          covertB64(data.user?.user_details[0].avatar)
+                        }
+                        widthCard="95%"
+                      />
+                    </div>
+                  ))}
+                </Slider>
+              </> : <Loading />
+            }
+
 
             <BoxTitle />
 
