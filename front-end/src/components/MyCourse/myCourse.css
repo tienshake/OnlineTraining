@@ -1,11 +1,12 @@
 .wrapper_mycourse {
     /* background: pink; */
-    height: 500px;
     padding: 25px
 }
+
 .title_header-myCourse {
     padding: 7px;
 }
+
 .title_header-myCourse p {
     font-size: 15px;
 }

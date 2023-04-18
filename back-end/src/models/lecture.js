@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       course_section_id: DataTypes.INTEGER,
       title: DataTypes.STRING,
       video: DataTypes.TEXT("long"),
+      videoFile: DataTypes.TEXT("long"),
       document: DataTypes.STRING,
     },
     {

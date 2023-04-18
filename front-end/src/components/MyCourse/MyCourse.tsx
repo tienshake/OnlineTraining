@@ -1,34 +1,61 @@
-import DefaultLayoutEdit from '../DefaultayoutEdit';
-import { Stack } from '@mui/material';
-import "./myCourse.css"
-import CardMainProduct from '../Card/CardMainProduct';
-import CardMyCourse from '../Card/CardMyCourse';
+import DefaultLayoutEdit from "../DefaultayoutEdit";
+import { Stack } from "@mui/material";
+import "./myCourse.css";
+// import CardMainProduct from "../Card/CardMainProduct";
+import CardMyCourse from "../Card/CardMyCourse";
+import { useEffect, useState } from "react";
+import courseServices from "../../services/course";
+import checkDataApi from "../../utils/checkDataApi";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store/store";
 
 export default function MyCourse() {
-    return (
-        <DefaultLayoutEdit>
-            <div className='wrapper_mycourse'>
-                <div className='header_myCourse'>
-                    <ul>
+  const [dataMyCourse, setDataMyCourse] = useState([]);
+  const user = useSelector((state: RootState) => state.auth.user);
 
-                    </ul>
+  const getCourseMyData = async () => {
+    const data = await courseServices.getMyCourseApi(user.id);
+    const result = checkDataApi(data);
+    if (result) {
+      setDataMyCourse(result.data);
+    }
+  };
 
-                    <Stack className='title_header-myCourse' direction="row" justifyContent={'space-between'} spacing={1} bgcolor={"#F0F0F0"}>
-                        <p>COURSES</p>
-                        <Stack direction="row" spacing={4} justifyContent={'space-between'}>
-                            <p>STUDENT</p>
-                            <p style={{marginRight: '25px'}}>Control</p>
-                        </Stack>
-                    </Stack>
-                </div>
+  useEffect(() => {
+    if (user.id) {
+      getCourseMyData();
+    }
+  }, []);
 
-                <div className='body-myCourse'>
-                    <CardMyCourse />
-                    <CardMyCourse />
-                    <CardMyCourse />
-                    <CardMyCourse />
-                </div>
-            </div>
-        </DefaultLayoutEdit>
-    )
+  return (
+    <DefaultLayoutEdit>
+      <div className="wrapper_mycourse">
+        <div className="header_myCourse">
+          <ul></ul>
+
+          <Stack
+            className="title_header-myCourse"
+            direction="row"
+            justifyContent={"space-between"}
+            spacing={1}
+            bgcolor={"#F0F0F0"}
+          >
+            <p>COURSES</p>
+          </Stack>
+        </div>
+
+        <div className="body-myCourse">
+          {dataMyCourse &&
+            dataMyCourse.length > 0 &&
+            dataMyCourse.map((course, index) => (
+              <CardMyCourse
+                course={course}
+                key={index}
+                getCourseMyData={getCourseMyData}
+              />
+            ))}
+        </div>
+      </div>
+    </DefaultLayoutEdit>
+  );
 }
