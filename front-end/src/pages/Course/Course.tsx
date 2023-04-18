@@ -12,6 +12,7 @@ import PaginationRounded from "../../components/Pagination/Pagination";
 import React, { useEffect, useState } from "react";
 import courseServices from "../../services/course";
 import cache from "memory-cache";
+import Loading from "../../components/Loading/Loading";
 
 export default function Course() {
   const [age, setAge] = React.useState("");
@@ -105,13 +106,7 @@ export default function Course() {
             {dataCourses ? (
               <>
                 {dataCourses.map(
-                  (data: {
-                    id: number;
-                    thumbnail: string;
-                    promotion_price: string;
-                    price: string;
-                    title: string;
-                  }) => (
+                  (data: any) => (
                     <div key={data.id}>
                       <CardMainProduct
                         preventPath="/course"
@@ -122,13 +117,18 @@ export default function Course() {
                         priceItem={data.price}
                         titleItem={data.title}
                         widthCard="100%"
+                        rating={
+                          data.Ratings &&
+                          data.Ratings.length > 0 &&
+                          +data?.Ratings[0].avg_rating_value
+                        }
                       />
                     </div>
                   )
                 )}
               </>
             ) : (
-              <>Loading...</>
+              <Loading />
             )}
           </div>
 

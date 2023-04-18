@@ -76,7 +76,8 @@
     border-radius: 10px;
     min-height: 300px;
     cursor: pointer;
-    padding: 12px
+    padding: 12px;
+    width: 100%;
 }
 
 .wrapp_cardProduts-content .body_content-card img {

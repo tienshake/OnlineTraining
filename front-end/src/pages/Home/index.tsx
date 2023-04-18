@@ -16,6 +16,7 @@ import ButtonRedirect from "../../components/Button/ButtonRedirect";
 import covertB64 from "../../utils/covertB64";
 import categoryServices from "../../services/category";
 import cache from "memory-cache";
+import Loading from "../../components/Loading/Loading";
 
 const Home = () => {
   const [dataCourses, setDataCourses] = useState<any>();
@@ -275,7 +276,7 @@ const Home = () => {
                 ))}
               </>
             ) : (
-              <>Loading...</>
+              <Loading />
             )}
           </div>
 
