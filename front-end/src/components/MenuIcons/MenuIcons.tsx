@@ -54,8 +54,6 @@ export default function MenuIcons(props: MyPropsMenuIcons) {
       total += listItemsCart[i].promotion_price;
     }
 
-    // console.log("Tổng số tiền sản phẩm trong giỏ hàng của mày là:", total)
-
     return total;
   };
 
@@ -154,8 +152,8 @@ export default function MenuIcons(props: MyPropsMenuIcons) {
                     price?: number;
                     promotion_price?: number;
                   }) => (
-                    <>
                       <Stack
+                        key={data.idCourse}
                         className="wrapp_item_boxModal"
                         direction="row"
                         justifyContent={"space-between"}
@@ -192,7 +190,6 @@ export default function MenuIcons(props: MyPropsMenuIcons) {
                           Remove
                         </button>
                       </Stack>
-                    </>
                   )
                 )}
 
@@ -225,8 +222,8 @@ export default function MenuIcons(props: MyPropsMenuIcons) {
                     price?: number;
                     promotion_price?: number;
                   }) => (
-                    <>
                       <Stack
+                        key={data.idCourse}
                         className="wrapp_item_boxModal"
                         direction="row"
                         justifyContent={"space-between"}
@@ -263,7 +260,6 @@ export default function MenuIcons(props: MyPropsMenuIcons) {
                           Remove
                         </button>
                       </Stack>
-                    </>
                   )
                 )}
                 <Stack direction="row" justifyContent={"space-between"}>

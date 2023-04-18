@@ -20,50 +20,48 @@ export default function PaginationRounded(props: MyPaginationRoundedProps) {
         );
 
         const data = await res.data.data.rows;
-
-        console.log(data, "data");
         return data;
     }
 
     const handleChangePage = async (e: any, p: any) => {
         const currentPage = p
-        console.log(currentPage, "sss")
         const commentsFormServer = await fetchDataCourses(currentPage);
         props.setDataCourses(commentsFormServer)
-        console.log(commentsFormServer, "commentsFormServer")
     }
 
     return (
-        <Stack spacing={2}>
-        <Pagination
-            onChange={handleChangePage}
-            count={props.pageCount}
-            sx={{
-                '& .Mui-selected': {
-                    color: '#000',
-                    backgroundColor: 'blue',
-                    '&:hover': {
-                        backgroundColor: '',
-                    },
-                },
-                '& .MuiPaginationItem-root': {
-                    color: '#000',
-                    backgroundColor: '#fff',
-                    '&:hover': {
-                        backgroundColor: '#FF5364',
-                        color: '#fff'
-                    },
-                    width: '42px',
-                    height: '42px',
-                    borderRadius: '5px',
-                    border: '1px solid #f7d2d5',
-                    fontSize: '16px',
-                },
-            }}
-            renderItem={(item) => (
-                <PaginationItem {...item} sx={{ borderRadius: '0%' }} />
-            )}
-        />
-    </Stack>
+        <>
+            <Stack spacing={2}>
+                <Pagination
+                    onChange={handleChangePage}
+                    count={props.pageCount}
+                    sx={{
+                        '& .Mui-selected': {
+                            color: '#000',
+                            backgroundColor: 'blue',
+                            '&:hover': {
+                                backgroundColor: '',
+                            },
+                        },
+                        '& .MuiPaginationItem-root': {
+                            color: '#000',
+                            backgroundColor: '#fff',
+                            '&:hover': {
+                                backgroundColor: '#FF5364',
+                                color: '#fff'
+                            },
+                            width: '42px',
+                            height: '42px',
+                            borderRadius: '5px',
+                            border: '1px solid #f7d2d5',
+                            fontSize: '16px',
+                        },
+                    }}
+                    renderItem={(item) => (
+                        <PaginationItem {...item} sx={{ borderRadius: '0%' }} />
+                    )}
+                />
+            </Stack>
+        </>
     );
 }

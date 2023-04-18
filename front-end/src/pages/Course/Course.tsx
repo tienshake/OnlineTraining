@@ -16,7 +16,7 @@ import Loading from "../../components/Loading/Loading";
 
 export default function Course() {
   const [age, setAge] = React.useState("");
-  const courseListCache = cache.get("courseListCache");
+  // const courseListCache = cache.get("courseListCache");
 
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value);
@@ -30,25 +30,40 @@ export default function Course() {
   const [pageCount, setPageCount] = useState(0);
 
   useEffect(() => {
-    if (courseListCache) {
-      // Sử dụng dữ liệu từ cache
-      setDataCourses(courseListCache);
-    } else {
-      courseServices
-        .getCourseApi({
-          id: "ALL",
-          limit: limit,
-          page: 1,
-        })
-        .then((data: any) => {
-          cache.put("courseListCache", data.data.data.rows);
+    // if (courseListCache) {
+    //   // Sử dụng dữ liệu từ cache
+    //   setDataCourses(courseListCache);
+    // } else {
+    //   courseServices
+    //     .getCourseApi({
+    //       id: "ALL",
+    //       limit: limit,
+    //       page: 1,
+    //     })
+    //     .then((data: any) => {
+    //       cache.put("courseListCache", data.data.data.rows);
 
-          setDataCourses(data.data.data.rows);
+    //       setDataCourses(data.data.data.rows);
 
-          const total = data.data.data.count;
-          setPageCount(Math.ceil(total / limit));
-        });
-    }
+    //       const total = data.data.data.count;
+    //       setPageCount(Math.ceil(total / limit));
+    //     });
+    // }
+
+    courseServices
+      .getCourseApi({
+        id: "ALL",
+        limit: limit,
+        page: 1,
+      })
+      .then((data: any) => {
+        cache.put("courseListCache", data.data.data.rows);
+
+        setDataCourses(data.data.data.rows);
+
+        const total = data.data.data.count;
+        setPageCount(Math.ceil(total / limit));
+      });
   }, [limit]);
 
   return (
