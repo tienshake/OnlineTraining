@@ -12,8 +12,8 @@ const GlobalStyle = ({ children }: Props) => {
       {children}
       <ToastContainer
         position="top-right"
-        autoClose={2000}
-        hideProgressBar={false}
+        autoClose={100}
+        hideProgressBar={true}
         newestOnTop={false}
         closeOnClick
         rtl={false}

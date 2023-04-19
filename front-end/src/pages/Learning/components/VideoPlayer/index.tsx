@@ -1,44 +1,30 @@
 import clsx from "clsx";
 import React, { useEffect, useState } from "react";
-import YouTube from "react-youtube";
 import styles from "./VideoPlayer.module.scss";
 
-const opts = {
-  // height: "80%",
-  // width: "80%",
-  playerVars: {
-    enablejsapi: 1,
-    origin: window.location.origin,
-    loop: 1,
-  },
-};
-
-const VideoPlayer = ({ className, sectionData, dataSection }: any) => {
-  const [currentVideo, setCurrentVideo] = useState<any>();
+const VideoPlayer = ({ className, sectionData }: any) => {
+  const [key, setKey] = useState(0);
 
   useEffect(() => {
-    if (dataSection && dataSection.length > 0) {
-      setCurrentVideo(dataSection[0]?.lectures[0]);
-    }
-    // setCurrentVideo()
-  }, [dataSection]);
-
-  const onReady = (e: any) => {
-    e.target.pauseVideo();
-  };
+    setKey((prevKey) => prevKey + 1);
+  }, [sectionData]);
 
   return (
     <div className={clsx(className, styles.container)}>
       <div className={styles.videoContent}>
-        <YouTube
-          className={styles.video}
-          videoId={sectionData ? sectionData?.video.split("v=")[1] : ""}
-          opts={opts}
-          onReady={onReady}
-        />
+        {sectionData ? (
+          <video key={key} controls autoPlay width={"100%"} muted>
+            <source
+              src={`http://localhost:8080/courses/video/${sectionData?.filename}`}
+              type="video/mp4"
+            ></source>
+          </video>
+        ) : (
+          <div>Chao Mung Den Voi Khoa Hoc</div>
+        )}
       </div>
       <div className={styles.contentTitle}>
-        <h1>{sectionData ? sectionData?.title : currentVideo?.title}</h1>
+        <h1>{sectionData && sectionData?.title}</h1>
         {/* <p>Cập nhật tháng 2 năm 2022</p> */}
         <p>
           Join the Learn programming group at on Facebook to discuss the

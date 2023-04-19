@@ -11,18 +11,7 @@ import { Box, Stack } from "@mui/material";
 import Button from "../../../../components/Button";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import Input from "../../../../components/Input";
-import YouTube from "react-youtube";
 import { SectionType } from "../../../../types";
-
-const opts = {
-  height: "200",
-  width: "300",
-  playerVars: {
-    enablejsapi: 1,
-    origin: window.location.origin,
-    loop: 1,
-  },
-};
 
 export interface SectionProps {
   sectionIndex: number;
@@ -93,100 +82,101 @@ const Section = ({
     });
   }
 
-  const onReady = (e: any) => {
-    e.target.pauseVideo();
-    setVideoPlayer(e.target);
-    console.log(videoPlayer && videoPlayer.getDuration());
+  const handleVideoChange = (event: any, lectureIndex: any) => {
+    const { files } = event.target;
+    // list[sectionIndex].lectures[lectureIndex]["video"] = files[0];
+    setSection((prevState) => {
+      const sections = [...prevState];
+      sections[sectionIndex].lectures[lectureIndex].video = files[0];
+      return sections;
+    });
   };
 
   return (
-    <Accordion
-      className={styles.accordion}
-      style={{
-        marginBottom: "10px",
-      }}
-    >
-      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-        <Box
+    <div className={styles.section}>
+      <div className={styles.sectionTitle}>
+        <Input
+          // style={{ width: "100%" }}
+          onClick={(e) => e.stopPropagation()}
+          type="text"
+          placeholder="Section title"
+          defaultValue={section.title}
+          onChange={(e: any) => {
+            const value = e.target.value;
+            setSection((prevState) => {
+              const sections = [...prevState];
+              sections[sectionIndex].title = value;
+              return sections;
+            });
+          }}
+        />
+        <DeleteOutlineIcon
+          onClick={() => removeSection(sectionIndex)}
+          className={styles.iconDelete}
+          style={{ fontSize: "29px !important" }}
+        />
+      </div>
+
+      {section.lectures?.map((lecture, lectureIndex) => (
+        <Accordion
+          className={styles.accordion}
           style={{
-            width: "30%",
+            marginBottom: "10px",
           }}
         >
-          <Input
-            // style={{ width: "100%" }}
-            onClick={(e) => e.stopPropagation()}
-            type="text"
-            placeholder="Section title"
-            defaultValue={section.title}
-            onChange={(e: any) => {
-              const value = e.target.value;
-              setSection((prevState) => {
-                const sections = [...prevState];
-                sections[sectionIndex].title = value;
-                return sections;
-              });
-            }}
-          />
-          <DeleteOutlineIcon
-            onClick={() => removeSection(sectionIndex)}
-            className={styles.iconDelete}
-            style={{ fontSize: "29px !important" }}
-          />
-        </Box>
-      </AccordionSummary>
-      <AccordionDetails className={styles.accordionDetails}>
-        {section.lectures?.map((lecture, lectureIndex) => (
-          <Stack
-            key={lectureIndex}
-            direction={"row"}
-            paddingBottom={3}
-            paddingTop={3}
-            gap={3}
-            borderBottom="1px solid gray"
-          >
-            <Input
-              style={{ width: "20%" }}
-              onClick={(e) => e.stopPropagation()}
-              type="text"
-              placeholder="Lecture name"
-              defaultValue={lecture.title}
-              onChange={(event: any) =>
-                onLectureNameChange(event, lectureIndex)
-              }
-            />
-            <Input
-              style={{ width: "20%" }}
-              onClick={(e) => e.stopPropagation()}
-              type="text"
-              placeholder="Lecture video link"
-              defaultValue={lecture.video}
-              onChange={(event: any) =>
-                onLectureVideoLinkChange(event, lectureIndex)
-              }
-            />
-            {lecture.video && (
-              <YouTube
-                videoId={lecture.video.split("v=")[1]}
-                opts={opts}
-                onReady={onReady}
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Box
+              style={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "space-between",
+              }}
+            >
+              <Input
+                style={{ width: "60%" }}
+                onClick={(e) => e.stopPropagation()}
+                type="text"
+                placeholder="Lecture name"
+                defaultValue={lecture.title}
+                onChange={(event: any) =>
+                  onLectureNameChange(event, lectureIndex)
+                }
               />
-            )}
-            <DeleteOutlineIcon
-              onClick={() => removeLecture(lectureIndex)}
-              className={styles.iconDeleteLecture}
-            />
-          </Stack>
-        ))}
-
-        <Stack marginTop={3}>
-          <Button
-            onClick={addLecture}
-            title="  Add Lecture"
-            className={styles.btn}
-          />
-        </Stack>
-      </AccordionDetails>
-    </Accordion>
+              <DeleteOutlineIcon
+                onClick={() => removeLecture(lectureIndex)}
+                className={styles.iconDeleteLecture}
+              />
+            </Box>
+          </AccordionSummary>
+          <AccordionDetails className={styles.accordionDetails}>
+            <Stack
+              key={lectureIndex}
+              direction={"row"}
+              paddingBottom={3}
+              paddingTop={3}
+              gap={3}
+              borderBottom="1px solid gray"
+            >
+              <Input
+                name="file"
+                onClick={(e) => e.stopPropagation()}
+                type="file"
+                onChange={(event: any) =>
+                  handleVideoChange(event, lectureIndex)
+                }
+              />
+            </Stack>
+          </AccordionDetails>
+        </Accordion>
+      ))}
+      <Stack marginTop={3}>
+        <Button
+          onClick={addLecture}
+          title="  Add Lecture"
+          className={styles.btn}
+        />
+      </Stack>
+    </div>
   );
 };
 

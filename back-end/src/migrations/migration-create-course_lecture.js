@@ -17,7 +17,7 @@ module.exports = {
       video: {
         type: Sequelize.TEXT("long"),
       },
-      videoFile: {
+      filename: {
         type: Sequelize.TEXT("long"),
       },
       document: {

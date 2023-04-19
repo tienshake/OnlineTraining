@@ -17,10 +17,8 @@ const courses = [
 ];
 
 const Learning = () => {
-  const [selectedCourse, setSelectedCourse] = useState(courses[0]);
   const [dataSection, setDataSection] = useState<any>([]);
   const [sectionData, setSectionData] = useState("");
-  const [saveCourse, setSaveCourse] = useState<any>([]);
 
   let { id } = useParams();
   const user = useSelector((state: RootState) => state.auth.user);
@@ -38,17 +36,11 @@ const Learning = () => {
     };
 
     getCourseSectionData();
-  }, [id, user.id]);
-
-  const handleCourseSelect = (course: any) => {
-    setSelectedCourse(course);
-  };
+  }, []);
 
   const handleClickLecture = (lecture: any) => {
     setSectionData(lecture);
-    setSaveCourse((prev: any) => {
-      return [...prev, lecture.video];
-    });
+    console.log("lecture", lecture);
   };
 
   return (
@@ -59,18 +51,12 @@ const Learning = () => {
           <Link to={`/course-details/${id}`}>Back to course</Link>
         </div>
       </div>
+
       <div className={styles.content}>
-        <VideoPlayer
-          course={selectedCourse}
-          className={styles.videoPlayer}
-          sectionData={sectionData}
-          saveCourse={saveCourse}
-          dataSection={dataSection}
-        />
+        <VideoPlayer className={styles.videoPlayer} sectionData={sectionData} />
         <Sidebar
           className={styles.sidebar}
           dataSection={dataSection}
-          onCourseSelect={handleCourseSelect}
           handleClickLecture={handleClickLecture}
         />
       </div>

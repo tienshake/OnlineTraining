@@ -7,7 +7,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import PanoramaFishEyeIcon from "@mui/icons-material/PanoramaFishEye";
 import clsx from "clsx";
 import Information from "../components/Information";
-import Course from "../components/Course";
+import Course from "../components/CourseImg";
 import Setting from "../components/Setting";
 import {
   INFO,
@@ -31,6 +31,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store/store";
 import { useParams } from "react-router-dom";
 import covertB64 from "../../../utils/covertB64";
+import CreateLectures from "../components/CreateLecture";
+import axios from "axios";
 
 function CreateCourse() {
   const user = useSelector((state: RootState) => state.auth.user);
@@ -50,8 +52,8 @@ function CreateCourse() {
       fileName: "",
     },
     sectionCourse: [{ title: "", lectures: [] }],
-    price: 0,
-    promotion_price: 0,
+    price: 1,
+    promotion_price: 1,
   });
 
   const [PROGRESS_ARR, setPROGRESS_ARR] = React.useState(PROGRESS);
@@ -122,8 +124,8 @@ function CreateCourse() {
     setPROGRESS_ARR([
       { id: INFO, title: "Basic information", status: PENDING },
       { id: COURSE, title: "Course Media", status: START },
-      { id: CURRICULUM, title: "Curriculum", status: START },
       { id: SETTING, title: "Settings", status: START },
+      { id: CURRICULUM, title: "Curriculum", status: START },
     ]);
   }, []);
 
@@ -197,7 +199,7 @@ function CreateCourse() {
     let user_id = user.id;
     let category_id = formValues.courseCategory;
     let sections: any = [];
-    // console.log("formValues", formValues);
+    console.log("formValues", formValues);
 
     if (formValues) {
       if (formValues.avatar && formValues.avatar.thumbnail) {
@@ -233,23 +235,55 @@ function CreateCourse() {
     //isComplete save call api
     if (!isComplete) {
       if (!id) {
-        const result: APIType = await courseServices.createCourseApi({
-          title,
-          thumbnail,
-          description,
-          descriptionMarkdown,
-          price,
-          promotion_price,
-          user_id,
-          category_id,
-          sections,
+        const formData = new FormData();
+
+        formData.append("sections", JSON.stringify(sections));
+        formData.append(
+          "dataCourse",
+          JSON.stringify({
+            title,
+            thumbnail,
+            description,
+            descriptionMarkdown,
+            price,
+            promotion_price,
+            user_id,
+            category_id,
+          })
+        );
+
+        sections.forEach((section: any) => {
+          section.lectures.forEach((lecture: any) => {
+            formData.append(`video`, lecture.video);
+          });
         });
 
-        if (result && result.data?.code === CODE_SUCCESS) {
-          // setIsComplete(true);
-          // setComponent(<Complete />);
-          toast.success("🦄 Create so easy!");
-        }
+        const response = await axios.post(
+          `http://localhost:8080/courses/create-lecture`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+
+        // const result: APIType = await courseServices.createCourseApi({
+        //   title,
+        //   thumbnail,
+        //   description,
+        //   descriptionMarkdown,
+        //   price,
+        //   promotion_price,
+        //   user_id,
+        //   category_id,
+        //   sections,
+        // });
+        // if (result && result.data?.code === CODE_SUCCESS) {
+        //   // setIsComplete(true);
+        //   // setComponent(<Complete />);
+        //   toast.success("🦄 Create so easy!");
+        // }
       } else {
         console.log("formValues?.avatar?.thumbnail", typeof thumbnail);
         const result: APIType = await courseServices.editCourseApi({

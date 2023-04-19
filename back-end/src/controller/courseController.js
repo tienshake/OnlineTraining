@@ -1,7 +1,119 @@
 import db from "../models";
 import { sequelize } from "../models";
 const { Op } = require("sequelize");
-// import moment from "moment";
+const multer = require("multer");
+const path = require("path");
+const fs = require("fs");
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/");
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}_${file.originalname}`);
+  },
+  fileFilter: (req, file, cb) => {
+    const ext = path.extname(file.originalname);
+    if (ext !== ".mp4") {
+      return cb(res.status(400).end("only jpg, png, mp4 is allowed"), false);
+    }
+    cb(null, true);
+  },
+});
+
+var upload = multer({ storage }).array("video", 10); // 10 is the maximum number of files
+
+const createLectureCourse = async (req, res) => {
+  try {
+    upload(req, res, async (err) => {
+      const sections = JSON.parse(req.body.sections);
+      const {
+        title,
+        description,
+        descriptionMarkdown,
+        price,
+        user_id,
+        category_id,
+        thumbnail,
+        promotion_price,
+      } = JSON.parse(req.body.dataCourse);
+
+      if (err) {
+        return res.status(400).json({
+          message: err.message, // Use err.message instead of err
+        });
+      }
+
+      const course = await db.Course.create({
+        title,
+        description,
+        descriptionMarkdown,
+        price,
+        user_id,
+        category_id,
+        thumbnail,
+        promotion_price,
+      });
+
+      if (course) {
+        await db.Course_detail.create({
+          course_id: course.id,
+          description,
+          descriptionMarkdown,
+        });
+      }
+
+      if (!course) {
+        res.status(400).json({ message: "Create course failed" });
+      }
+
+      if (
+        !title ||
+        !description ||
+        !price ||
+        !user_id ||
+        !category_id ||
+        !descriptionMarkdown
+      ) {
+        res.status(400).json({ message: "Missing params" });
+      } else {
+        if (sections && sections.length > 0) {
+          for (let i = 0; i < sections.length; i++) {
+            const courseSection = await db.Course_section.create({
+              course_id: course.id,
+              title: sections[i].title,
+            });
+
+            if (sections[i].lectures) {
+              sections[i].lectures.forEach(async (lecture, index) => {
+                const filename = req.files[index].filename; // Use req.files instead of req.file
+                const filePath = req.files[index].path;
+                await db.Lecture.create({
+                  course_section_id: courseSection.id,
+                  title: lecture.title,
+                  filename,
+                });
+              });
+            }
+          }
+        }
+      }
+
+      return res.status(200).json({
+        data: {
+          success: true,
+          fileName: req.files[0].filename, // Use req.files instead of res.req.file
+          filePath: req.files[0].path,
+        },
+        code: 0,
+        message: "Create course completed",
+      });
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
 
 const createCourse = async (req, res) => {
   try {
@@ -225,7 +337,7 @@ const getCourse = async (req, res) => {
 };
 
 const getCourseSection = async (req, res) => {
-  const { courseId, userId } = req.query;
+  const { courseId, userId = -1 } = req.query;
 
   try {
     let course = {};
@@ -249,14 +361,14 @@ const getCourseSection = async (req, res) => {
             {
               model: db.Lecture,
               as: "lectures",
-              attributes: ["id", "title", "video"],
+              attributes: ["id", "title", "video", "filename"],
             },
           ],
         },
       ],
       // nest: true,
     });
-
+    // console.log("course", course);
     if (!course) {
       res.status(400).json({ message: "Course not found" });
     }
@@ -273,7 +385,7 @@ const getCourseSection = async (req, res) => {
     if (!enrolled) {
       course.course_sections.forEach((section) => {
         section.lectures.forEach((lecture) => {
-          lecture.video = null;
+          lecture.filename = null;
         });
       });
     }
@@ -316,7 +428,6 @@ const editCourse = async (req, res) => {
       { description, descriptionMarkdown },
       { where: { course_id: id } }
     );
-    // console.log("JSON.parse(dataSection)", sections);
 
     for (const section of sections) {
       await db.Course_section.update(
@@ -435,6 +546,43 @@ const getMyCourses = async (req, res) => {
   }
 };
 
+const getVideoByFilename = async (req, res) => {
+  const { filename } = req.params;
+  const filePath = `uploads/${filename}`;
+
+  if (!filePath) {
+    return res.status(404).send("File not found");
+  }
+
+  const stat = fs.statSync(filePath);
+  const fileSize = stat.size;
+  const range = req.headers.range;
+
+  if (range) {
+    const parts = range.replace(/bytes=/, "").split("-");
+    const start = parseInt(parts[0], 10);
+    const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
+
+    const chunksize = end - start + 1;
+    const file = fs.createReadStream(filePath, { start, end });
+    const head = {
+      "Content-Range": `bytes ${start}-${end}/${fileSize}`,
+      "Accept-Ranges": "bytes",
+      "Content-Length": chunksize,
+      "Content-Type": "video/mp4",
+    };
+    res.writeHead(206, head);
+    file.pipe(res);
+  } else {
+    const head = {
+      "Content-Length": fileSize,
+      "Content-Type": "video/mp4",
+    };
+    res.writeHead(200, head);
+    fs.createReadStream(filePath).pipe(res);
+  }
+};
+
 export default {
   createCourse,
   getCourse,
@@ -443,4 +591,6 @@ export default {
   searchCourse,
   getCourseSection,
   getMyCourses,
+  createLectureCourse,
+  getVideoByFilename,
 };

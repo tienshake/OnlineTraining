@@ -17,6 +17,15 @@ router.post(
   middleware.authAdminOrTeacher,
   courseController.createCourse
 );
+
+router.post(
+  "/create-lecture",
+  // middleware.authTeacher,
+  // middleware.authUser,
+  // middleware.authAdminOrTeacher,
+  courseController.createLectureCourse
+);
+
 router.put(
   "/edit/:id",
   // middleware.authTeacher,
@@ -51,4 +60,12 @@ router.get(
   middleware.authUser,
   courseController.getMyCourses
 );
+
+router.get(
+  "/video/:filename",
+  // middleware.authAdmin,
+  // middleware.authUser,
+  courseController.getVideoByFilename
+);
+
 export default router;

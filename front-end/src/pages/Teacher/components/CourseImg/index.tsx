@@ -10,7 +10,7 @@ import CommonUtils from "../../../../utils/CommonUtils";
 //   fileName?: string;
 // }
 
-const Course = ({ setFormValues, formValues }: any) => {
+const CourseImg = ({ setFormValues, formValues }: any) => {
   // const [image, setImage] = React.useState<ImgType>();
 
   const handleOnchangeImg = async (e: any) => {
@@ -64,4 +64,4 @@ const Course = ({ setFormValues, formValues }: any) => {
   );
 };
 
-export default Course;
+export default CourseImg;

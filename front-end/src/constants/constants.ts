@@ -63,8 +63,8 @@ export const ACTIVE = "active";
 export const PROGRESS = [
   { id: INFO, title: "Basic information", status: PENDING },
   { id: COURSE, title: "Course Media", status: START },
-  { id: CURRICULUM, title: "Curriculum", status: START },
   { id: SETTING, title: "Settings", status: START },
+  { id: CURRICULUM, title: "Curriculum", status: START },
 ];
 
 /* My Card Prop */

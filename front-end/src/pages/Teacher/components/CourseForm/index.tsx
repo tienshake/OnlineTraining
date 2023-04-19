@@ -34,10 +34,10 @@ function CourseForm({ formValues, setFormValues }: any) {
   }
 
   function onSubmit(data: any) {
-    // console.log(sections);
+    console.log("sections", sections);
     setFormValues((prevValues: any) => ({
       ...prevValues,
-      sectionCourse: JSON.parse(data.sections),
+      sectionCourse: sections,
     }));
     toast.success("🦄 Wow so easy!");
   }
@@ -47,19 +47,22 @@ function CourseForm({ formValues, setFormValues }: any) {
   }, [setValue, sections]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      {sections &&
-        sections?.map((section: SectionType, sectionIndex: number) => (
-          <Section
-            key={sectionIndex}
-            sectionIndex={sectionIndex}
-            section={section}
-            setSection={setSections}
-            removeSection={removeSection}
-            register={register}
-            watch={watch}
-          />
-        ))}
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className={styles.form}>
+        {sections &&
+          sections?.map((section: SectionType, sectionIndex: number) => (
+            <Section
+              key={sectionIndex}
+              sectionIndex={sectionIndex}
+              section={section}
+              setSection={setSections}
+              removeSection={removeSection}
+              register={register}
+              watch={watch}
+            />
+          ))}
+      </div>
+
       <div className={styles.control}>
         <button type="button" onClick={addSection} className={styles.btnAdd}>
           <FaPlusCircle />

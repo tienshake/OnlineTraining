@@ -15,7 +15,8 @@ const AccordionSection = ({
 }: any) => {
   const [idSelect, setIdSelect] = useState("");
 
-  const handleLecture = (lecture: any) => {
+  const handleLecture = (lecture: any, e: any) => {
+    e.preventDefault();
     setIdSelect(lecture && lecture?.title);
   };
 
@@ -39,8 +40,8 @@ const AccordionSection = ({
               }
             >
               <span
-                onClick={() => {
-                  handleLecture(lecture);
+                onClick={(e: any) => {
+                  handleLecture(lecture, e);
                   onClickLecture(lecture);
                 }}
               >
