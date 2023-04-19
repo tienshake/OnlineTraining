@@ -17,6 +17,9 @@ module.exports = {
       video: {
         type: Sequelize.TEXT("long"),
       },
+      totalTime: {
+        type: Sequelize.INTEGER,
+      },
       filename: {
         type: Sequelize.TEXT("long"),
       },

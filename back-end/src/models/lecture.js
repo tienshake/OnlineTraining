@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       title: DataTypes.STRING,
       video: DataTypes.TEXT("long"),
       filename: DataTypes.TEXT("long"),
+      totalTime: DataTypes.INTEGER,
       document: DataTypes.STRING,
     },
     {

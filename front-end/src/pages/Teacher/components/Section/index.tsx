@@ -30,8 +30,6 @@ const Section = ({
   register,
   watch,
 }: SectionProps) => {
-  const [videoPlayer, setVideoPlayer] = React.useState<any>();
-
   function addLecture() {
     setSection((prevState) => {
       const sections = [...prevState];
@@ -70,21 +68,8 @@ const Section = ({
     });
   }
 
-  function onLectureVideoLinkChange(
-    event: React.ChangeEvent<HTMLInputElement>,
-    lectureIndex: number
-  ) {
-    const value = event.target.value;
-    setSection((prevState) => {
-      const sections = [...prevState];
-      sections[sectionIndex].lectures[lectureIndex].video = value;
-      return sections;
-    });
-  }
-
   const handleVideoChange = (event: any, lectureIndex: any) => {
     const { files } = event.target;
-    // list[sectionIndex].lectures[lectureIndex]["video"] = files[0];
     setSection((prevState) => {
       const sections = [...prevState];
       sections[sectionIndex].lectures[lectureIndex].video = files[0];
@@ -119,6 +104,7 @@ const Section = ({
 
       {section.lectures?.map((lecture, lectureIndex) => (
         <Accordion
+          key={lectureIndex}
           className={styles.accordion}
           style={{
             marginBottom: "10px",

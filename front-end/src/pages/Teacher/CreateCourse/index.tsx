@@ -31,11 +31,13 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store/store";
 import { useParams } from "react-router-dom";
 import covertB64 from "../../../utils/covertB64";
-import CreateLectures from "../components/CreateLecture";
+// import CreateLectures from "../components/CreateLecture";
 import axios from "axios";
+import LoadingModal from "../../../components/LoadingModal";
 
 function CreateCourse() {
   const user = useSelector((state: RootState) => state.auth.user);
+
   let { id } = useParams();
 
   const [formValues, setFormValues] = React.useState<CreateCourseType>({
@@ -56,6 +58,7 @@ function CreateCourse() {
     promotion_price: 1,
   });
 
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [PROGRESS_ARR, setPROGRESS_ARR] = React.useState(PROGRESS);
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [component, setComponent] = React.useState<any>();
@@ -190,6 +193,7 @@ function CreateCourse() {
   };
 
   const handleCreateCourseApi = async () => {
+    setIsLoading(true);
     let title = formValues.courseTitle;
     let thumbnail = "";
     let description = formValues.courseDescriptions?.text;
@@ -199,7 +203,6 @@ function CreateCourse() {
     let user_id = user.id;
     let category_id = formValues.courseCategory;
     let sections: any = [];
-    console.log("formValues", formValues);
 
     if (formValues) {
       if (formValues.avatar && formValues.avatar.thumbnail) {
@@ -267,23 +270,12 @@ function CreateCourse() {
             },
           }
         );
-
-        // const result: APIType = await courseServices.createCourseApi({
-        //   title,
-        //   thumbnail,
-        //   description,
-        //   descriptionMarkdown,
-        //   price,
-        //   promotion_price,
-        //   user_id,
-        //   category_id,
-        //   sections,
-        // });
-        // if (result && result.data?.code === CODE_SUCCESS) {
-        //   // setIsComplete(true);
-        //   // setComponent(<Complete />);
-        //   toast.success("🦄 Create so easy!");
-        // }
+        if (response && response.status === 200) {
+          setIsLoading(false);
+          // setIsComplete(true);
+          // setComponent(<Complete />);
+          toast.success("🦄 Create so easy!");
+        }
       } else {
         console.log("formValues?.avatar?.thumbnail", typeof thumbnail);
         const result: APIType = await courseServices.editCourseApi({
@@ -302,6 +294,7 @@ function CreateCourse() {
 
         if (result && result.data?.code === CODE_SUCCESS) {
           toast.success("🦄 Edit so easy!");
+          setIsLoading(false);
         }
       }
     } else {
@@ -311,6 +304,7 @@ function CreateCourse() {
 
   return (
     <Box className={styles.container}>
+      <LoadingModal isLoading={isLoading} />
       <Stack
         className={styles.headerControl}
         direction="row"

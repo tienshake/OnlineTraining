@@ -6,6 +6,7 @@ import {
 } from "@reduxjs/toolkit";
 import reduxReducer from "../features/language/languageSlice";
 import userTeacherReducer from "../../redux/features/userTeacher/userTeacherSlice";
+import loadingReducer from "../../redux/features/loading/loadingSlice";
 import searchReducer from "../../redux/features/search/searchSlice";
 import authReducer from "../features/auth";
 // import localStorageMiddleware from "../../middleware/auth";
@@ -14,7 +15,6 @@ import { persistStore, persistReducer } from "redux-persist";
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import coursesFavoriteSlice from "../features/coursesFavorite/coursesFavoriteSlice";
 import cartSlice from "../features/cart/cartSlice";
-
 
 const persistCommonConfig = {
   storage: storage,
@@ -44,11 +44,15 @@ const cartPersistConfig = {
 };
 
 export const rootReducer = combineReducers({
+  loading: loadingReducer,
   lang: reduxReducer,
   userTeachers: userTeacherReducer,
   useSearch: searchReducer,
   auth: persistReducer(userPersistConfig, authReducer),
-  favoriteCoures: persistReducer(favoriteCouresPersistConfig, coursesFavoriteSlice),
+  favoriteCoures: persistReducer(
+    favoriteCouresPersistConfig,
+    coursesFavoriteSlice
+  ),
   cart: persistReducer(cartPersistConfig, cartSlice),
 });
 

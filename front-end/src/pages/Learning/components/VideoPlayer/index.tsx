@@ -12,15 +12,23 @@ const VideoPlayer = ({ className, sectionData }: any) => {
   return (
     <div className={clsx(className, styles.container)}>
       <div className={styles.videoContent}>
-        {sectionData ? (
-          <video key={key} controls autoPlay width={"100%"} muted>
+        {sectionData && sectionData.filename ? (
+          <video key={key} controls autoPlay width={"100%"}>
             <source
               src={`http://localhost:8080/courses/video/${sectionData?.filename}`}
               type="video/mp4"
             ></source>
           </video>
         ) : (
-          <div>Chao Mung Den Voi Khoa Hoc</div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: " center",
+              color: "white",
+            }}
+          >
+            <h1>Welcome to Course ❤️</h1>
+          </div>
         )}
       </div>
       <div className={styles.contentTitle}>

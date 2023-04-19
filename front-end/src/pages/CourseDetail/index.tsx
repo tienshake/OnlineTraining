@@ -12,11 +12,13 @@ import CommentViews from "../../components/CommentViews";
 import ratingServices from "../../services/rating";
 import { RootState } from "../../redux/store/store";
 import { useSelector } from "react-redux";
+import convertSecondsToMinutes from "../../utils/convertSecondsToMinutes";
 
 const CourseDetail = () => {
   const [dataCourse, setDataCourse] = useState<any>();
   const [dataComment, setDataComment] = useState<any>();
   const [dataSection, setDataSection] = useState<any>([]);
+  const [totalTime, setTotalTime] = useState<any>(0);
   const [isEnroll, setIsEnroll] = useState<any>(false);
 
   let { id } = useParams();
@@ -46,8 +48,10 @@ const CourseDetail = () => {
         courseId: id,
         userId: user && user.id,
       });
+
       const result = checkDataApi(data);
       if (result) {
+        setTotalTime(data.data.totalTime);
         setDataSection(result.data?.course_sections);
         if (result.data.Enrollments && result.data.Enrollments[0]?.id) {
           setIsEnroll(true);
@@ -77,7 +81,8 @@ const CourseDetail = () => {
           <Box className={styles.contentHeader}>
             <h4>Course Content</h4>
             <div>
-              <span>92 Lectures</span> <span>10:56:11</span>
+              <span>{dataSection && dataSection.length} Lectures</span>{" "}
+              <span>{totalTime && convertSecondsToMinutes(totalTime)}m</span>
             </div>
           </Box>
           <Box className={styles.body}>
@@ -141,21 +146,27 @@ const CourseDetail = () => {
               src="	https://dreamslms.dreamguystech.com/html/assets/img/icon/users.svg"
               alt="icon"
             />
-            Enrolled: <span>32 students</span>
+            Enrolled:
+            <span>
+              {dataCourse?.Enrollments &&
+                dataCourse?.Enrollments.enrollment_count}{" "}
+              students
+            </span>
           </li>
           <li>
             <img
               src="	https://dreamslms.dreamguystech.com/html/assets/img/icon/timer.svg"
               alt="icon"
             />
-            Duration: <span>20 hours</span>
+            Duration:
+            <span>{totalTime && convertSecondsToMinutes(totalTime)}m</span>
           </li>
           <li>
             <img
               src="https://dreamslms.dreamguystech.com/html/assets/img/icon/chapter.svg"
               alt="icon"
             />
-            Chapters: <span>15</span>
+            Sections: <span>{dataSection && dataSection.length}</span>
           </li>
           <li>
             <img

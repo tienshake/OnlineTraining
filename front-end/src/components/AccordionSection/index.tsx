@@ -6,13 +6,10 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import styles from "./Accordion.module.scss";
 import { Box, Stack } from "@mui/material";
+import convertSecondsToMinutes from "../../utils/convertSecondsToMinutes";
 // import moment from "moment";
 
-const AccordionSection = ({
-  section,
-  isWatching,
-  onClickLecture = () => {},
-}: any) => {
+const AccordionSection = ({ section, onClickLecture = () => {} }: any) => {
   const [idSelect, setIdSelect] = useState("");
 
   const handleLecture = (lecture: any, e: any) => {
@@ -52,7 +49,10 @@ const AccordionSection = ({
                 <span>Lecture {index + 1}</span>
                 <span>{lecture?.title}</span>
               </span>
-              <span>02:53</span>
+              <span>
+                {lecture?.totalTime &&
+                  convertSecondsToMinutes(lecture?.totalTime)}
+              </span>
             </Box>
           ))}
         </Stack>

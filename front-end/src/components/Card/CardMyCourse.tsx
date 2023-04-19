@@ -9,8 +9,12 @@ import courseServices from "../../services/course";
 import { confirmAlert } from "react-confirm-alert";
 import checkDataApi from "../../utils/checkDataApi";
 import { toast } from "react-toastify";
+import LoadingModal from "../LoadingModal";
+import { useState } from "react";
 
 export default function CardMyCourse({ course, getCourseMyData }: any) {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const handleDeleteCourse = async (id: any) => {
     confirmAlert({
       title: "Confirm deletion",
@@ -19,9 +23,11 @@ export default function CardMyCourse({ course, getCourseMyData }: any) {
         {
           label: "Yes",
           onClick: async () => {
+            setIsLoading(true);
             const data = await courseServices.deleteCourseApi(id);
-            const result = checkDataApi(data);
+            const result = await checkDataApi(data);
             if (result) {
+              setIsLoading(false);
               getCourseMyData();
               toast.success("Delete Success");
             }
@@ -36,6 +42,7 @@ export default function CardMyCourse({ course, getCourseMyData }: any) {
 
   return (
     <div className="wrapp_cardMyCourse">
+      <LoadingModal isLoading={isLoading} />
       <img src={covertB64(course?.thumbnail)} alt="thumbnail" />
 
       <ul className="box_content">

@@ -1,5 +1,6 @@
 import db from "../models";
 import { sequelize } from "../models";
+import getVideoDuration from "../utils/getTime";
 const { Op } = require("sequelize");
 const multer = require("multer");
 const path = require("path");
@@ -86,12 +87,14 @@ const createLectureCourse = async (req, res) => {
 
             if (sections[i].lectures) {
               sections[i].lectures.forEach(async (lecture, index) => {
-                const filename = req.files[index].filename; // Use req.files instead of req.file
-                const filePath = req.files[index].path;
+                const filename = req.files && req.files[index]?.filename;
+                const totalTime = await getVideoDuration(`uploads/${filename}`);
+                // const filePath = req.files[index].path;
                 await db.Lecture.create({
                   course_section_id: courseSection.id,
                   title: lecture.title,
                   filename,
+                  totalTime,
                 });
               });
             }
@@ -309,6 +312,17 @@ const getCourse = async (req, res) => {
               },
             ],
           },
+          {
+            model: db.Enrollment,
+            attributes: [
+              [
+                sequelize.literal(
+                  "(SELECT COUNT(DISTINCT `user_id`) FROM `Enrollments` WHERE `course_id` = `Course`.`id`)"
+                ),
+                "enrollment_count",
+              ],
+            ],
+          },
         ],
         raw: true,
         nest: true,
@@ -361,13 +375,25 @@ const getCourseSection = async (req, res) => {
             {
               model: db.Lecture,
               as: "lectures",
-              attributes: ["id", "title", "video", "filename"],
+              attributes: ["id", "title", "totalTime", "filename"],
             },
           ],
         },
       ],
       // nest: true,
     });
+
+    let totalTime = 0;
+
+    if (course && course.course_sections) {
+      course.course_sections.forEach((section) => {
+        if (section.lectures) {
+          section.lectures.forEach((lecture) => {
+            totalTime += lecture.totalTime;
+          });
+        }
+      });
+    }
     // console.log("course", course);
     if (!course) {
       res.status(400).json({ message: "Course not found" });
@@ -392,6 +418,7 @@ const getCourseSection = async (req, res) => {
 
     res.status(200).json({
       data: course,
+      totalTime: totalTime,
       code: 0,
       message: "Get course completed",
     });
@@ -403,6 +430,9 @@ const getCourseSection = async (req, res) => {
 
 const editCourse = async (req, res) => {
   const { id } = req.params;
+
+  const t = await sequelize.transaction();
+
   const {
     title,
     category_id,
@@ -414,9 +444,40 @@ const editCourse = async (req, res) => {
     sections,
   } = req.body;
 
-  const t = await sequelize.transaction();
-
   try {
+    // upload(req, res, async (err) => {
+
+    //   const sections = JSON.parse(req.body.sections);
+    //   if(sections) {
+
+    //   }
+    //   const {
+    //     title,
+    //     category_id,
+    //     thumbnail,
+    //     price,
+    //     promotion_price,
+    //     description,
+    //     descriptionMarkdown,
+    //   } = JSON.parse(req.body.dataCourse);
+
+    //   if (err) {
+    //     return res.status(400).json({
+    //       message: err.message, // Use err.message instead of err
+    //     });
+    //   }
+
+    //   return res.status(200).json({
+    //     data: {
+    //       success: true,
+    //       fileName: req.files[0].filename, // Use req.files instead of res.req.file
+    //       filePath: req.files[0].path,
+    //     },
+    //     code: 0,
+    //     message: "Create course completed",
+    //   });
+    // });
+
     // Update Course
     await db.Course.update(
       { title, price, category_id, promotion_price, thumbnail },
