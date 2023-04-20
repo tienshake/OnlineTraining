@@ -116,37 +116,69 @@ const editUser = async (req, res) => {
 };
 
 const getUser = async (req, res) => {
-  const { page = 1, limit = 10, id } = req.query;
+  const { page = 1, limit = 10, id, role } = req.query;
+
   try {
     let user = null;
     if (id === "ALL") {
       let offset = (page - 1) * limit;
-      user = await db.User.findAndCountAll({
-        attributes: {
-          exclude: ["password"],
-        },
-        include: [
-          {
-            model: db.User_detail,
-            attributes: [
-              "about_me",
-              "avatar",
-              // "phone_number",
-              // "address",
-              // "experience",
-              // "education",
-              // "age",
-              // "gender",
-            ],
-            as: "user_details",
+
+      if (role) {
+        user = await db.User.findAndCountAll({
+          where: { role_id: role },
+          attributes: {
+            exclude: ["password"],
           },
-        ],
-        order: [["updatedAt", "DESC"]],
-        limit: +limit,
-        offset: +offset,
-        raw: true,
-        nest: true,
-      });
+          include: [
+            {
+              model: db.User_detail,
+              attributes: [
+                "about_me",
+                "avatar",
+                // "phone_number",
+                // "address",
+                // "experience",
+                // "education",
+                // "age",
+                // "gender",
+              ],
+              as: "user_details",
+            },
+          ],
+          order: [["updatedAt", "DESC"]],
+          limit: +limit,
+          offset: +offset,
+          raw: true,
+          nest: true,
+        });
+      } else {
+        user = await db.User.findAndCountAll({
+          attributes: {
+            exclude: ["password"],
+          },
+          include: [
+            {
+              model: db.User_detail,
+              attributes: [
+                "about_me",
+                "avatar",
+                // "phone_number",
+                // "address",
+                // "experience",
+                // "education",
+                // "age",
+                // "gender",
+              ],
+              as: "user_details",
+            },
+          ],
+          order: [["updatedAt", "DESC"]],
+          limit: +limit,
+          offset: +offset,
+          raw: true,
+          nest: true,
+        });
+      }
     } else {
       user = await db.User.findByPk(id, {
         include: [
