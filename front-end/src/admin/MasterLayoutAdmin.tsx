@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { AiTwotoneHome } from "react-icons/ai";
-import { RiUser2Fill } from "react-icons/ri";
 import { ImUserTie } from "react-icons/im";
 import { MdVideoLabel } from "react-icons/md";
 import "./admin.css";
@@ -49,7 +48,7 @@ export default function MasterLayoutAdmin({
                 </li>
               </Link> */}
 
-              <Link to="/admin/teacher">
+              <Link to="/admin/users">
                 <li>
                   <ImUserTie />
                   <p>Users</p>

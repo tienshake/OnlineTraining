@@ -84,7 +84,8 @@ export default function TeacherManager() {
                           <CardUser
                             id={data.id}
                             name={data.name}
-                            decription="ss"
+                            decription={data.role_id}
+                            email={data.email}
                           />
                         </div>
                       ))}

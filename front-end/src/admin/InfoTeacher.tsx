@@ -51,7 +51,7 @@ export default function InfoTeacher() {
                 ) : (
                   <>
                     {data && dataUserStore ? (
-                      <CardUser id={data.id} name={data.name} decription="" />
+                      <CardUser email={data.email ? data.email : "" } id={data.id} name={data.name} decription="" />
                     ) : null}
                   </>
                 )}

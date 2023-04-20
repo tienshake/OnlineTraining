@@ -21,9 +21,10 @@ const Img = styled('img')({
 });
 
 interface MyCardUserProps {
-  decription: String;
+  decription: any;
   name: String,
-  id: any
+  id: any,
+  email: String
 }
 
 
@@ -88,12 +89,13 @@ export default function CardUser(props: MyCardUserProps) {
                   </b>
                 </Typography>
 
-                <Typography style={{ fontSize:'13px' }} className='class_compress_basic' variant="body2" gutterBottom>
-                  ENVIRONMENTAL ENGINEERING
+                <Typography style={{ fontSize: '13px', }} className='class_compress_basic' variant="body2" gutterBottom>
+                  {/* {props.email} */}
+                  email : {props.email.length > 18 ? props.email.slice(0, 18) + "..." :  props.email}
                 </Typography>
 
                 <p>
-                  {props.decription}
+                  role: <b>{props.decription === 1 ? "admin" : props.decription === 2 ? "student" : props.decription === 3 ? "teacher" : ""}</b>
                 </p>
 
                 <p style={{ background: 'rgb(209, 207, 207)', height: '1px', width: '100%', marginTop: '20px' }}></p>

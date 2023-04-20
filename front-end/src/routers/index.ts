@@ -101,7 +101,7 @@ const privateRoute: RouteType[] = [
   },
   {
     component: TeacherManager,
-    patch: "/admin/teacher",
+    patch: "/admin/users",
   },
   {
     component: CoursesManager,
