@@ -42,9 +42,9 @@ const initialState: userTeacherState = {
 
 /* Actions */
 export const getDataUser: any = createAsyncThunk("userTeacher/getDataUser",
-  async (params: String, { rejectWithValue }) => {
+  async ({ /* params, */ role }:any, { rejectWithValue }) => {
     try {
-      const { data } = await userServices.getUserApi("ALL");
+      const { data } = await userServices.getUserApi("ALL", role );
       return data;
     } catch (error: any) {
       return rejectWithValue(error.response.data);

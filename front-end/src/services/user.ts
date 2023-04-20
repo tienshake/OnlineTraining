@@ -8,8 +8,8 @@ interface dataUserTeacher {
 }
 
 const userServices: any = {
-  getUserApi: async (id: string) => {
-    const response = await axiosClient.get(`user/get?id=${id}&limit=${9}`);
+  getUserApi: async (id: string, role: any) => {
+    const response = await axiosClient.get(`user/get?id=${id}&limit=${9}&${role === 0 ? null : `role=${role}`}`);
     return response;
   },
 

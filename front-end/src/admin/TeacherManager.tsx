@@ -6,7 +6,7 @@ import ShowModalForm from "./componentsAdmin/Modal/ShowModalForm";
 import type { RootState } from "../redux/store/store";
 import { useSelector, useDispatch } from "react-redux";
 import { getDataUser } from "../redux/features/userTeacher/userTeacherSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AlertError from "./componentsAdmin/AlertError";
 import Loading from "./componentsAdmin/Loading";
 
@@ -28,13 +28,16 @@ export default function TeacherManager() {
   const dispatch = useDispatch();
   const { data } = dataUserStore;
   const { isLoading, error, messageError } = userStore;
+  const [indexRole, setIndexRole] = useState(0);
 
   useEffect(() => {
     // const actionResult = dispatch(getDataUser());
     // const current = unwrapResult(actionResult);
-    dispatch(getDataUser());
+    dispatch(getDataUser({
+      role: indexRole,
+    }));
     // setAllUserTeacher(dataUserTeacher.user)
-  }, [dispatch]);
+  }, [dispatch, indexRole]);
 
   return (
     <div>
@@ -51,8 +54,8 @@ export default function TeacherManager() {
           <div style={{ display: "flex", flexWrap: "wrap" }}>
             <ShowModalForm />
 
-            <ButtonGroupSelect />
-            <ButtonGroupSelect />
+            <ButtonGroupSelect indexRole={indexRole} setIndexRole={setIndexRole} />
+            {/* <ButtonGroupSelect /> */}
           </div>
         </div>
 

@@ -42,17 +42,17 @@ export default function MasterLayoutAdmin({
                 </li>
               </Link>
 
-              <Link to="/admin/student">
+              {/* <Link to="/admin/student">
                 <li>
                   <RiUser2Fill />
                   <p>Students</p>
                 </li>
-              </Link>
+              </Link> */}
 
               <Link to="/admin/teacher">
                 <li>
                   <ImUserTie />
-                  <p>Teachers</p>
+                  <p>Users</p>
                 </li>
               </Link>
 

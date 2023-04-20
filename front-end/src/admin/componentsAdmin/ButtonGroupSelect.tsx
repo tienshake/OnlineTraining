@@ -9,22 +9,28 @@ import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 
-const options = ['Create a merge commit', 'Category', 'Rebase and merge'];
 
-export default function ButtonGroupSelect() {
+interface MyButtonGroupSelectProps {
+    setIndexRole: any;
+    indexRole: any;
+}
+const options = ['All', 'Admin', 'Student', 'Teacher'];
+
+export default function ButtonGroupSelect(props: MyButtonGroupSelectProps) {
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef<HTMLDivElement>(null);
-    const [selectedIndex, setSelectedIndex] = React.useState(1);
+    // const [selectedIndex, setSelectedIndex] = React.useState(0);
+    // console.log(selectedIndex)
 
     const handleClick = () => {
-        console.info(`You clicked ${options[selectedIndex]}`);
+        // console.info(`You clicked ${options[selectedIndex]}`);
     };
 
     const handleMenuItemClick = (
         event: React.MouseEvent<HTMLLIElement, MouseEvent>,
         index: number,
     ) => {
-        setSelectedIndex(index);
+        props.setIndexRole(index);
         setOpen(false);
     };
 
@@ -46,7 +52,7 @@ export default function ButtonGroupSelect() {
     return (
         <div style={{ marginRight: '10px' }}>
             <ButtonGroup variant="contained" ref={anchorRef} aria-label="split button">
-                <Button onClick={handleClick}>{options[selectedIndex]}</Button>
+                <Button onClick={handleClick}>{options[props.indexRole]}</Button>
                 <Button
                     size="small"
                     aria-controls={open ? 'split-button-menu' : undefined}
@@ -83,8 +89,8 @@ export default function ButtonGroupSelect() {
                                     {options.map((option, index) => (
                                         <MenuItem
                                             key={option}
-                                            disabled={index === 2}
-                                            selected={index === selectedIndex}
+                                            // disabled={index === 2}
+                                            selected={index === props.indexRole}
                                             onClick={(event) => handleMenuItemClick(event, index)}
                                         >
                                             {option}
