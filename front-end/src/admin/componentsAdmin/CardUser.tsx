@@ -24,7 +24,8 @@ interface MyCardUserProps {
   decription: any;
   name: String,
   id: any,
-  email: String
+  email: String,
+  img: any
 }
 
 
@@ -61,7 +62,7 @@ export default function CardUser(props: MyCardUserProps) {
         <Grid container spacing={4}>
           <Grid className='wrapp_main_imgUser' item>
             <ButtonBase sx={{ height: 120, border: '5px solid rgb(211, 207, 207)', borderRadius: '50%' }}>
-              <Img style={{ borderRadius: '50%' }} alt="complex" src="https://www.pixelwibes.com/template/e-learn/html/dist/assets/images/lg/avatar3.jpg" />
+              <Img style={{ borderRadius: '50%' }} alt="complex" src={`${props.img}`} />
             </ButtonBase>
 
             <ul className='group_btn_interact'>

@@ -16,6 +16,7 @@ import Loading from "./componentsAdmin/Loading";
 import AlertError from "./componentsAdmin/AlertError";
 import { getDataDetailUser } from "../redux/features/userTeacher/userTeacherSlice";
 import "./admin.css";
+import covertB64 from "../utils/covertB64";
 
 export default function InfoTeacher() {
   const data2 = ["1", "2", "3", "4"];
@@ -51,7 +52,8 @@ export default function InfoTeacher() {
                 ) : (
                   <>
                     {data && dataUserStore ? (
-                      <CardUser email={data.email ? data.email : "" } id={data.id} name={data.name} decription="" />
+                      <CardUser img={data.user_details && data.user_details.avatar.data ? covertB64(data.user_details.avatar.data) : "https://png.pngtree.com/png-vector/20190728/ourlarge/pngtree-avatar-user-profile-flat-color-icon-vector-icon-banner-png-image_1619399.jpg"} email={data.email ? data.email : ""} id={data.id} name={data.name} decription="" />
+
                     ) : null}
                   </>
                 )}

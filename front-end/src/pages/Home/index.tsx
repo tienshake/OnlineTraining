@@ -134,9 +134,9 @@ const Home = () => {
   const fetchImg = (nameCate: string) => {
     return nameCate === "Reactjs"
       ? "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-05.png"
-      : nameCate === "Html"
+      : nameCate === "HTML/CSS"
         ? "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon.png"
-        : "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-01.png";
+        : nameCate === "Nodejs" ? "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-02.png" : "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-01.png";
   };
 
   /*  */
@@ -236,7 +236,7 @@ const Home = () => {
         <BoxSection
           auxiliaryTitle="Favourite Course"
           mainTitle="Top Category"
-          content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan bibendum <br /> gravida maecenas augue elementum et neque. Suspendisse imperdiet."
+          content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan bibendum."
         />
 
         {/* Category  */}
@@ -271,7 +271,7 @@ const Home = () => {
           <BoxSection
             auxiliaryTitle="Favourite Course"
             mainTitle="Featured Courses"
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan bibendum <br /> gravida maecenas augue elementum et neque. Suspendisse imperdiet."
+            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan bibendum."
           />
 
           <div style={{ backgroundColor: "" }} className="box_carosel_trending">
@@ -323,7 +323,7 @@ const Home = () => {
           <BoxSection
             auxiliaryTitle="All Courses"
             mainTitle="ALL Courses"
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan bibendum <br /> gravida maecenas augue elementum et neque. Suspendisse imperdiet."
+            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan bibendum."
           />
 
           <div className="content-cardTopCate">
@@ -431,7 +431,7 @@ const Home = () => {
           <BoxSection
             auxiliaryTitle="What’s New"
             mainTitle="New Courses"
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan bibendum <br /> gravida maecenas augue elementum et neque. Suspendisse imperdiet."
+            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan bibendum."
           />
 
           <div style={{ backgroundColor: "" }} className="box_carosel_trending">

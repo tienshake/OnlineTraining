@@ -122,11 +122,12 @@ export default function Course() {
               <>
                 {dataCourses.map(
                   (data: any) => (
+                   
                     <div key={data.id}>
                       <CardMainProduct
                         preventPath="/course"
                         idCourse={data.id}
-                        imageItem={covertB64(data.thumbnail)}
+                        imageItem={covertB64(data.thumbnail.data)}
                         borderStyle={true}
                         promotion_price={data.promotion_price}
                         priceItem={data.price}
@@ -136,6 +137,11 @@ export default function Course() {
                           data.Ratings &&
                           data.Ratings.length > 0 &&
                           +data?.Ratings[0].avg_rating_value
+                        }
+                        userAvatar={
+                          data.user?.user_details &&
+                          data.user?.user_details.length > 0 &&
+                          covertB64(data.user?.user_details[0].avatar)
                         }
                       />
                     </div>

@@ -9,6 +9,7 @@ import { getDataUser } from "../redux/features/userTeacher/userTeacherSlice";
 import { useEffect, useState } from "react";
 import AlertError from "./componentsAdmin/AlertError";
 import Loading from "./componentsAdmin/Loading";
+import covertB64 from "../utils/covertB64";
 
 // const Item = styled(Paper)(({ theme }) => ({
 //   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -55,7 +56,6 @@ export default function TeacherManager() {
             <ShowModalForm />
 
             <ButtonGroupSelect indexRole={indexRole} setIndexRole={setIndexRole} />
-            {/* <ButtonGroupSelect /> */}
           </div>
         </div>
 
@@ -82,6 +82,7 @@ export default function TeacherManager() {
                       {data?.rows.map((data: any) => (
                         <div key={data.id}>
                           <CardUser
+                            img={data.user_details.avatar ? covertB64(data.user_details.avatar.data) : "https://png.pngtree.com/png-vector/20190728/ourlarge/pngtree-avatar-user-profile-flat-color-icon-vector-icon-banner-png-image_1619399.jpg"}
                             id={data.id}
                             name={data.name}
                             decription={data.role_id}
