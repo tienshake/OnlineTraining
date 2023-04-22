@@ -47,7 +47,6 @@ router.delete(
 router.get(
   "/search",
   // middleware.authAdmin,
-  middleware.authUser,
   courseController.searchCourse
 );
 

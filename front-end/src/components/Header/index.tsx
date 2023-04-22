@@ -1,5 +1,5 @@
-import React from "react";
-import { Stack, TextField } from "@mui/material";
+import React, { useState } from "react";
+import { Stack, TextField, IconButton, InputAdornment } from "@mui/material";
 import styles from "./Header.module.scss";
 import Button from "../Button";
 import { Link, NavLink, useNavigate } from "react-router-dom";
@@ -8,7 +8,6 @@ import { IMG_URL, NAV_LIST } from "../../constants/constants";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
@@ -20,15 +19,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutSuccess } from "../../redux/features/auth";
 import { removeUserToken } from "../../utils/userToken";
 import MenuIcons from "../MenuIcons/MenuIcons";
-import { IoMdNotificationsOutline } from 'react-icons/io';
+import { IoMdNotificationsOutline } from "react-icons/io";
 import { BsChatDots } from "react-icons/bs";
 import { FcLike } from "react-icons/fc";
 import { RiShoppingCartLine } from "react-icons/ri";
-
+import axios from "axios";
+import SearchIcon from "@mui/icons-material/Search";
+import { Autocomplete } from "@mui/lab";
+import checkDataApi from "../../utils/checkDataApi";
+import covertB64 from "../../utils/covertB64";
 
 const settings = ["Profile", "Logout"];
 
 const Header = () => {
+  const [keyword, setKeyword] = useState("");
+  const [courses, setCourses] = useState<any>([]);
+  const [showSearchList, setShowSearchList] = useState<any>(false);
+
   const isLogged = useSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
@@ -68,6 +75,22 @@ const Header = () => {
     setAnchorElUser(null);
   };
 
+  const handleSearch = async () => {
+    setShowSearchList(true);
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/courses/search?keyword=${keyword}`
+      );
+      const result = checkDataApi(response);
+      console.log("result", result);
+      if (result) {
+        setCourses(result.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <AppBar position="static">
       <Container className={styles.container}>
@@ -96,7 +119,46 @@ const Header = () => {
               size="small"
               className={styles.textField}
               placeholder="Search..."
+              value={keyword}
+              onChange={(e: any) => {
+                setKeyword(e.target.value);
+                if (!e.target.value) {
+                  setShowSearchList(false);
+                }
+              }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleSearch}>
+                      <SearchIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
+            {showSearchList && (
+              <div className={styles.listOptionSearch}>
+                {courses &&
+                  courses.length > 0 &&
+                  courses.map((course: any) => (
+                    <Link
+                      onClick={() => {
+                        setShowSearchList(false);
+                        setKeyword("");
+                      }}
+                      to={`/course-details/${course.id}`}
+                      key={course.id}
+                      className={styles.listSearch}
+                    >
+                      <img
+                        src={covertB64(course.thumbnail)}
+                        alt={course.title}
+                      />
+                      <h3>{course.title}</h3>
+                    </Link>
+                  ))}
+              </div>
+            )}
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -177,12 +239,35 @@ const Header = () => {
 
           {/* menu icons */}
           <Stack direction="row" spacing={1} mr={1}>
-            <li><MenuIcons typeContent="chat" iconMenu={<BsChatDots style={{ fontSize: '20px' }} />} /></li>
-            <li><MenuIcons typeContent="cart" iconMenu={<RiShoppingCartLine style={{ fontSize: '21px' }} />} /></li>
-            <li> <MenuIcons typeContent="loveProduct" iconMenu={<FcLike style={{ fontSize: '23px' }} />} /></li>
-            <li> <MenuIcons typeContent="notification" iconMenu={<IoMdNotificationsOutline style={{ fontSize: '26px' }} />} /></li>
+            <li>
+              <MenuIcons
+                typeContent="chat"
+                iconMenu={<BsChatDots style={{ fontSize: "20px" }} />}
+              />
+            </li>
+            <li>
+              <MenuIcons
+                typeContent="cart"
+                iconMenu={<RiShoppingCartLine style={{ fontSize: "21px" }} />}
+              />
+            </li>
+            <li>
+              {" "}
+              <MenuIcons
+                typeContent="loveProduct"
+                iconMenu={<FcLike style={{ fontSize: "23px" }} />}
+              />
+            </li>
+            <li>
+              {" "}
+              <MenuIcons
+                typeContent="notification"
+                iconMenu={
+                  <IoMdNotificationsOutline style={{ fontSize: "26px" }} />
+                }
+              />
+            </li>
           </Stack>
-
 
           {isLogged ? (
             <Box sx={{ flexGrow: 0 }}>

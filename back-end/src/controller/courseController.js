@@ -537,17 +537,14 @@ const deleteCourse = async (req, res) => {
 };
 
 const searchCourse = async (req, res) => {
-  const { search } = req.query;
+  const { keyword } = req.query;
   try {
-    if (!search) {
+    if (!keyword) {
       res.status(400).send("Missing params");
     } else {
       const results = await db.Course.findAll({
         where: {
-          [Op.or]: [
-            { title: { [Op.like]: `%${search}%` } },
-            { description: { [Op.like]: `%${search}%` } },
-          ],
+          [Op.or]: [{ title: { [Op.like]: `%${keyword}%` } }],
         },
       });
 
