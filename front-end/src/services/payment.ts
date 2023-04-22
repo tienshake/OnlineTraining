@@ -2,6 +2,7 @@ import axiosClient from "../api/axiosClient";
 
 const paymentServices = {
   createPayment: async ({
+    create_user_id,
     user_id,
     course_id,
     amount,
@@ -14,6 +15,7 @@ const paymentServices = {
   }: any) => {
     try {
       const response = await axiosClient.post(`payment/create`, {
+        create_user_id,
         amount,
         user_id,
         course_id,
@@ -35,6 +37,14 @@ const paymentServices = {
       const response = await axiosClient.get(
         `payment/check?course_id=${course_id}&user_id=${user_id}`
       );
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
+  getPayment: async (create_user_id: any) => {
+    try {
+      const response = await axiosClient.get(`payment/get/${create_user_id}`);
       return response;
     } catch (error) {
       throw error;

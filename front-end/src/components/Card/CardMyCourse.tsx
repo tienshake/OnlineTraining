@@ -89,7 +89,10 @@ export default function CardMyCourse({
       >
         {userDecoded?.role !== STUDENT_ROUTE ? (
           <div className="box_amountStu-status">
-            <Link to={`/teacher/edit-course/${course?.id}`}>
+            <Link
+              to={`/teacher/edit-course/${course?.id}`}
+              onClick={handleLinkClick}
+            >
               <button>Edit</button>
             </Link>
           </div>

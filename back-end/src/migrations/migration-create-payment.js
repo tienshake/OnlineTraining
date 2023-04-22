@@ -14,6 +14,9 @@ module.exports = {
       course_id: {
         type: Sequelize.INTEGER,
       },
+      create_user_id: {
+        type: Sequelize.INTEGER,
+      },
       oderId: {
         type: Sequelize.INTEGER,
       },

@@ -33,6 +33,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "course_id",
         // as: "average_rating",
       });
+
+      Course.hasMany(models.Payment, {
+        foreignKey: "course_id",
+      });
     }
   }
   Course.init(

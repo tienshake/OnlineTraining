@@ -55,6 +55,7 @@ const PaypalCheckoutButton = (props: any) => {
         if (order.status === "COMPLETED") {
           console.log(order);
           const dataAPI = await paymentServices.createPayment({
+            create_user_id: dataCourse?.user.id,
             course_id: product?.course_id,
             user_id: +product?.user_id,
             amount: order?.purchase_units[0].amount.value,

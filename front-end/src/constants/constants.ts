@@ -34,6 +34,10 @@ export const MENU_PROFILE = [
     patch: "/profile/edit-my-course",
   },
   {
+    title: "Orders",
+    patch: "/profile/orders",
+  },
+  {
     title: "Reviews",
     patch: "/profile/reviews-profile",
   },

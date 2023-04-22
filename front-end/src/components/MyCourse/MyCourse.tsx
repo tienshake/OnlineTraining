@@ -29,7 +29,7 @@ export default function MyCourse() {
     if (user.id) {
       getCourseMyData();
     }
-  }, []);
+  }, [user]);
 
   const handleClickCardCourse = (id: any) => {
     console.log("id", id);
@@ -37,7 +37,10 @@ export default function MyCourse() {
   };
 
   return (
-    <DefaultLayoutEdit>
+    <DefaultLayoutEdit
+      titleHeader="My Course"
+      textHeader="Manage your courses and its update like live, draft and insight"
+    >
       <div className="wrapper_mycourse">
         <div className="header_myCourse">
           <ul></ul>
