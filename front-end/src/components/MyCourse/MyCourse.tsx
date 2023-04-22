@@ -8,10 +8,14 @@ import courseServices from "../../services/course";
 import checkDataApi from "../../utils/checkDataApi";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store/store";
+import decodedToken from "../../utils/decodedToken";
+import { useNavigate } from "react-router-dom";
 
 export default function MyCourse() {
+  const userDecoded: any = decodedToken();
   const [dataMyCourse, setDataMyCourse] = useState([]);
   const user = useSelector((state: RootState) => state.auth.user);
+  let navigate = useNavigate();
 
   const getCourseMyData = async () => {
     const data = await courseServices.getMyCourseApi(user.id);
@@ -26,6 +30,11 @@ export default function MyCourse() {
       getCourseMyData();
     }
   }, []);
+
+  const handleClickCardCourse = (id: any) => {
+    console.log("id", id);
+    navigate("/course-details/" + id);
+  };
 
   return (
     <DefaultLayoutEdit>
@@ -52,6 +61,8 @@ export default function MyCourse() {
                 course={course}
                 key={index}
                 getCourseMyData={getCourseMyData}
+                userDecoded={userDecoded}
+                handleClick={handleClickCardCourse}
               />
             ))}
         </div>

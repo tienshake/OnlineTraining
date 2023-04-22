@@ -568,33 +568,35 @@ const getMyCourses = async (req, res) => {
     if (!user_id) {
       return res.status(404).json({ message: "Missing params" });
     }
-    const user = await db.User.findOne({ where: { id: user_id } });
 
+    const user = await db.User.findOne({ where: { id: user_id } });
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const userCourses = await db.Course.findAll({
-      where: { user_id },
-      include: [
-        // {
-        //   model: db.Course_detail,
-        //   as: "course_detail",
-        // },
-        // {
-        //   model: db.Rating,
-        //   attributes: [
-        //     [
-        //       sequelize.literal(
-        //         "(SELECT AVG(`rating_value`) FROM `Ratings` WHERE `Ratings`.`course_id` = `Course`.`id`)"
-        //       ),
-        //       "avg_rating_value",
-        //     ],
-        //   ],
-        // },
-      ],
-      nest: true,
-    });
+    const role = await db.Role.findByPk(user.role_id);
+
+    let userCourses = [];
+    console.log("role", role);
+    if (role.role_name === "teacher") {
+      // Lấy tất cả khoá học của giảng viên đó
+      userCourses = await db.Course.findAll({
+        where: { user_id },
+        nest: true,
+      });
+    } else if (role.role_name === "student") {
+      // Lấy khoá học mà học sinh đã đăng ký
+      const enrollments = await db.Enrollment.findAll({
+        where: { user_id },
+        attributes: ["course_id"],
+        nest: true,
+      });
+      const courseIds = enrollments.map((enrollment) => enrollment.course_id);
+      userCourses = await db.Course.findAll({
+        where: { id: courseIds },
+        nest: true,
+      });
+    }
 
     res.status(200).json({
       code: 0,
@@ -644,6 +646,36 @@ const getVideoByFilename = async (req, res) => {
   }
 };
 
+const deleteEnrollment = async (req, res) => {
+  const { user_id, course_id } = req.query;
+
+  try {
+    if (!user_id || !course_id) {
+      return res.status(400).json({ message: "Missing params" });
+    }
+
+    // Kiểm tra xem student đã đăng ký khoá học chưa
+    const enrollment = await db.Enrollment.findOne({
+      where: { user_id, course_id },
+    });
+
+    if (!enrollment) {
+      return res.status(404).json({ message: "Enrollment not found" });
+    }
+
+    // Xoá enrollment
+    await db.Enrollment.destroy({ where: { user_id, course_id } });
+
+    res.status(200).json({
+      code: 0,
+      message: "Delete enrollment successfully",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 export default {
   createCourse,
   getCourse,
@@ -654,4 +686,5 @@ export default {
   getMyCourses,
   createLectureCourse,
   getVideoByFilename,
+  deleteEnrollment,
 };
