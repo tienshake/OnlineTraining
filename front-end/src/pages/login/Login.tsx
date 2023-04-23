@@ -3,8 +3,6 @@ import axios from "axios";
 import style from "./Login.module.scss";
 import logologin from "../../assets/images/login-img.png";
 import dream from "../../assets/images/so-do.jpg";
-import icon1 from "../../assets/images/net-icon-01.png";
-import icon2 from "../../assets/images/net-icon-02.png";
 import { Link } from "react-router-dom";
 import { loginSuccess } from "../../redux/features/auth";
 import { useDispatch } from "react-redux";
@@ -75,6 +73,10 @@ const Login = () => {
     },
   });
 
+  const handleClickRegisterOption = (role: number) => {
+    navigate("/register", { state: { roleId: role } });
+  };
+
   return (
     <div className={style.body}>
       <div className={style.left}>
@@ -131,14 +133,28 @@ const Login = () => {
           <button className={style.button}>Sign in</button>
         </form>
         <div className={style.botteam}>
-          <Link to="/">Or sign in with</Link>
-          <div className={style.icon}>
-            <Link to="">
-              <img src={icon1} alt="logo" /> Sign in using Google
-            </Link>
-            <Link to="">
-              <img src={icon2} alt="logo" /> in usin Facebook
-            </Link>
+          <div
+            className={style.icon}
+            onClick={() => handleClickRegisterOption(3)}
+          >
+            <div>
+              <img
+                src={
+                  "https://thumbs.dreamstime.com/b/teacher-logo-white-background-vector-illustration-182250708.jpg"
+                }
+                alt="logo"
+              />
+              Register Teacher
+            </div>
+            <div onClick={() => handleClickRegisterOption(2)}>
+              <img
+                src={
+                  "https://www.vhv.rs/dpng/d/156-1566120_png-logo-for-student-transparent-png.png"
+                }
+                alt="logo"
+              />
+              Register student
+            </div>
           </div>
         </div>
       </div>

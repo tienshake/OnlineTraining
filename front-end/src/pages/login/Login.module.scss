@@ -110,17 +110,27 @@
       }
 
       .icon {
+        margin-top: 50px;
         display: flex;
         text-align: center;
-        padding: 0 17%;
-
+        align-items: center;
+        justify-content: space-evenly;
+        div {
+          cursor: pointer;
+          display: flex;
+          text-align: center;
+          align-items: center;
+          gap: 10px;
+          &:hover {
+            color: var(--primary);
+          }
+        }
         a {
           padding: 10px;
           margin-top: 20px;
         }
         img {
           width: 30px;
-          margin-top: 20px;
         }
       }
     }

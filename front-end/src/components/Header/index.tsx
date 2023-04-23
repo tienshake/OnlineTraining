@@ -126,6 +126,11 @@ const Header = () => {
                   setShowSearchList(false);
                 }
               }}
+              onKeyDown={(e: any) => {
+                if (e.key === "Enter") {
+                  handleSearch();
+                }
+              }}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -157,6 +162,13 @@ const Header = () => {
                       <h3>{course.title}</h3>
                     </Link>
                   ))}
+                <Link
+                  className={styles.moreCourse}
+                  to="/course"
+                  onClick={() => setShowSearchList(false)}
+                >
+                  Views More
+                </Link>
               </div>
             )}
           </Box>

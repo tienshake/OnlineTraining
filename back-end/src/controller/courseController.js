@@ -622,6 +622,38 @@ const getMyCourses = async (req, res) => {
       const courseIds = enrollments.map((enrollment) => enrollment.course_id);
       userCourses = await db.Course.findAll({
         where: { id: courseIds },
+        attributes: {
+          include: [
+            [
+              sequelize.fn("COUNT", sequelize.col("Enrollments.user_id")),
+              "enrollment_count",
+            ],
+            [
+              sequelize.fn("AVG", sequelize.col("Ratings.rating_value")),
+              "rating",
+            ],
+            [
+              sequelize.literal(`(
+                SELECT SUM(lectures.totalTime)
+                FROM Course_sections
+                INNER JOIN Lectures AS lectures ON course_sections.id = lectures.course_section_id
+                WHERE course_sections.course_id = Course.id
+              )`),
+              "totalTime",
+            ],
+          ],
+        },
+        include: [
+          {
+            model: db.Enrollment,
+            attributes: [],
+          },
+          {
+            model: db.Rating,
+            attributes: [],
+          },
+        ],
+        group: ["Course.id"],
         nest: true,
       });
     }

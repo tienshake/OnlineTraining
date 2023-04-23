@@ -54,7 +54,6 @@
 
 .listOptionSearch {
   background-color: white;
-  height: 100px;
   position: absolute;
   top: 50px;
   width: 90%;
@@ -65,6 +64,18 @@
   h3 {
     color: var(--text-color);
     font-size: 1.4rem;
+  }
+  .moreCourse {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    color: var(--text-color);
+    font-size: 1.4rem;
+    cursor: pointer;
+    font-weight: 500;
+    &:hover {
+      color: var(--primary);
+    }
   }
 }
 

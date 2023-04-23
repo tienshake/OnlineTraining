@@ -5,6 +5,11 @@ export const EN = "EN";
 export const VI = "VI";
 export const CODE_SUCCESS = 0;
 
+// Role
+export const ADMIN_ROUTE = "admin";
+export const TEACHER_ROUTE = "teacher";
+export const STUDENT_ROUTE = "student";
+
 //header
 export const IMG_URL =
   "https://tudienwiki.com/wp-content/uploads/2017/07/lien-minh-huyen-thoai.png";
@@ -36,10 +41,12 @@ export const MENU_PROFILE = [
   {
     title: "Orders",
     patch: "/profile/orders",
+    role: TEACHER_ROUTE,
   },
   {
     title: "Student",
     patch: "/profile/student-profile",
+    role: TEACHER_ROUTE,
   },
 
   {
@@ -82,8 +89,3 @@ export interface CardMainProductProps extends MyCardBasicIntroduceProps {
   preventPath?: String;
 }
 export interface CardUserStyleProps extends MyCardBasicIntroduceProps {}
-
-// Role
-export const ADMIN_ROUTE = "admin";
-export const TEACHER_ROUTE = "teacher";
-export const STUDENT_ROUTE = "student";

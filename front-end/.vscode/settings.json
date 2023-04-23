@@ -6,5 +6,6 @@
   },
   "[scss]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "vue.features.codeActions.enable": false
 }

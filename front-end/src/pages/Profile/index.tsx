@@ -7,12 +7,19 @@ import { MENU_PROFILE, TEACHER_ROUTE } from "../../constants/constants";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store/store";
 import decodedToken from "../../utils/decodedToken";
-// import userServices from "../../services/user";
-// import checkDataApi from "../../utils/checkDataApi";
 
 const Profile = () => {
   const userRedux = useSelector((state: RootState) => state.auth.user);
   const user: any = decodedToken();
+
+  const visibleMenu = MENU_PROFILE?.filter((menu) => {
+    if (!menu.role) {
+      return true; // always show menus with null role
+    } else if (user?.role === TEACHER_ROUTE) {
+      return true; // show all menus if user is a teacher
+    }
+    return menu.role === user?.role; // only show menus that match the user's role
+  });
 
   return (
     <Box className={styles.container}>
@@ -46,7 +53,7 @@ const Profile = () => {
         <Box className={styles.menu}>
           <Box className={styles.menuHeader}>DASHBOARD</Box>
           <ul className={styles.listMenu}>
-            {MENU_PROFILE?.map((menu, index) => (
+            {visibleMenu?.map((menu, index) => (
               <li key={index} className={styles.listItem}>
                 <NavLink
                   to={menu.patch}

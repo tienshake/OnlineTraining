@@ -1,6 +1,5 @@
 import { Stack } from "@mui/material";
 // import Range from "../Range/Range";
-import { FiBookOpen } from "react-icons/fi";
 import { AiOutlineFieldTime } from "react-icons/ai";
 import "./Card.css";
 import { Link } from "react-router-dom";

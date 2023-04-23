@@ -1,6 +1,6 @@
 import { RouteType } from "../types";
 import Login from "../pages/login/Login";
-import Register from "../pages/register";
+import Register from "../pages/Register";
 import DoashBoard from "../admin/DoashBoard";
 import StudentManager from "../admin/StudentManager";
 import TeacherManager from "../admin/TeacherManager";
