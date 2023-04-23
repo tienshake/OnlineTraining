@@ -12,6 +12,8 @@ import { toast } from "react-toastify";
 import LoadingModal from "../LoadingModal";
 import { useState } from "react";
 import { STUDENT_ROUTE } from "../../constants/constants";
+import StarGroup from "../IconGroup/StarGroup";
+import convertSecondsToMinutes from "../../utils/convertSecondsToMinutes";
 
 export default function CardMyCourse({
   course,
@@ -72,15 +74,15 @@ export default function CardMyCourse({
         <h4>{course?.title}</h4>
         <li className="group_ifo">
           <Stack alignItems={"center"} gap={"5px"} direction={"row"}>
-            <FiBookOpen /> 10 + Lesson
+            <StarGroup rating={course && +course?.rating} />
           </Stack>
           <Stack alignItems={"center"} gap={"5px"} direction={"row"}>
-            <AiOutlineFieldTime /> 7hr 20min
+            <AiOutlineFieldTime /> {convertSecondsToMinutes(course?.totalTime)}
           </Stack>
         </li>
       </ul>
 
-      <p className="box_amountStu-status">3200</p>
+      <p className="box_amountStu-status">{course?.enrollment_count} student</p>
       <Stack
         direction={"column"}
         justifyContent={"center"}

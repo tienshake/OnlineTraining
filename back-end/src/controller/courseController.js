@@ -574,11 +574,42 @@ const getMyCourses = async (req, res) => {
     const role = await db.Role.findByPk(user.role_id);
 
     let userCourses = [];
-    console.log("role", role);
     if (role.role_name === "teacher") {
       // Lấy tất cả khoá học của giảng viên đó
       userCourses = await db.Course.findAll({
         where: { user_id },
+        attributes: {
+          include: [
+            [
+              sequelize.fn("COUNT", sequelize.col("Enrollments.user_id")),
+              "enrollment_count",
+            ],
+            [
+              sequelize.fn("AVG", sequelize.col("Ratings.rating_value")),
+              "rating",
+            ],
+            [
+              sequelize.literal(`(
+                SELECT SUM(lectures.totalTime)
+                FROM Course_sections
+                INNER JOIN Lectures AS lectures ON course_sections.id = lectures.course_section_id
+                WHERE course_sections.course_id = Course.id
+              )`),
+              "totalTime",
+            ],
+          ],
+        },
+        include: [
+          {
+            model: db.Enrollment,
+            attributes: [],
+          },
+          {
+            model: db.Rating,
+            attributes: [],
+          },
+        ],
+        group: ["Course.id"],
         nest: true,
       });
     } else if (role.role_name === "student") {

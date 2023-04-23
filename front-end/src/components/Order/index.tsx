@@ -5,18 +5,11 @@ import { RootState } from "../../redux/store/store";
 import styles from "./Order.module.scss";
 import paymentServices from "../../services/payment";
 import checkDataApi from "../../utils/checkDataApi";
+import moment from "moment";
 
 const Order = () => {
   const userRedux = useSelector((state: RootState) => state.auth.user);
   const [dataPayment, setDataPayment] = useState([]);
-
-  const fakeData = Array.from({ length: 5 }, (_, index) => ({
-    id: index + 1,
-    name: `Item ${index + 1}`,
-    quantity: Math.floor(Math.random() * 10) + 1,
-    date: 11,
-    method: "Paypal",
-  }));
 
   useEffect(() => {
     const getPaymentData = async () => {
@@ -28,7 +21,7 @@ const Order = () => {
     };
     getPaymentData();
   }, [userRedux]);
-  console.log("dataPayment", dataPayment);
+
   return (
     <DefaultLayoutEdit
       titleHeader="Order"
@@ -55,7 +48,10 @@ const Order = () => {
                     {item?.amount} {item?.currency_code}
                   </td>
                   <td>{item?.User.name}</td>
-                  <td>{item?.createdAt}</td>
+                  <td>
+                    {item?.createdAt &&
+                      moment(item?.createdAt).format("DD/MM/YYYY HH:mm:ss")}
+                  </td>
                   <td>Paypal</td>
                 </tr>
               ))}

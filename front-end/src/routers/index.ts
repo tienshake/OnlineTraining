@@ -12,7 +12,6 @@ import Home from "../pages/Home";
 import CreateCourse from "../pages/Teacher/CreateCourse";
 import Profile from "../pages/Profile";
 import EditProfile from "../components/EditProfile";
-import DeleteProfile from "../components/DeleteProfile";
 import Course from "../pages/Course/Course";
 import CourseDetail from "../pages/CourseDetail";
 import Checkout from "../pages/Checkout";
@@ -57,10 +56,6 @@ const privateRoute: RouteType[] = [
       {
         component: EditProfile,
         patch: "edit-profile",
-      },
-      {
-        component: DeleteProfile,
-        patch: "delete-profile",
       },
       {
         component: MyCourse,
