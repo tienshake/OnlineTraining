@@ -130,7 +130,7 @@ const CourseDetail = () => {
                 <ButtonSave
                   circle
                   title="Enroll now"
-                  href={`/checkout/${id}`}
+                  path={`/checkout/${id}`}
                 />
               )}
             </div>
