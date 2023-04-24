@@ -537,17 +537,14 @@ const deleteCourse = async (req, res) => {
 };
 
 const searchCourse = async (req, res) => {
-  const { search } = req.query;
+  const { keyword } = req.query;
   try {
-    if (!search) {
+    if (!keyword) {
       res.status(400).send("Missing params");
     } else {
       const results = await db.Course.findAll({
         where: {
-          [Op.or]: [
-            { title: { [Op.like]: `%${search}%` } },
-            { description: { [Op.like]: `%${search}%` } },
-          ],
+          [Op.or]: [{ title: { [Op.like]: `%${keyword}%` } }],
         },
       });
 
@@ -568,33 +565,98 @@ const getMyCourses = async (req, res) => {
     if (!user_id) {
       return res.status(404).json({ message: "Missing params" });
     }
-    const user = await db.User.findOne({ where: { id: user_id } });
 
+    const user = await db.User.findOne({ where: { id: user_id } });
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const userCourses = await db.Course.findAll({
-      where: { user_id },
-      include: [
-        // {
-        //   model: db.Course_detail,
-        //   as: "course_detail",
-        // },
-        // {
-        //   model: db.Rating,
-        //   attributes: [
-        //     [
-        //       sequelize.literal(
-        //         "(SELECT AVG(`rating_value`) FROM `Ratings` WHERE `Ratings`.`course_id` = `Course`.`id`)"
-        //       ),
-        //       "avg_rating_value",
-        //     ],
-        //   ],
-        // },
-      ],
-      nest: true,
-    });
+    const role = await db.Role.findByPk(user.role_id);
+
+    let userCourses = [];
+    if (role.role_name === "teacher") {
+      // Lấy tất cả khoá học của giảng viên đó
+      userCourses = await db.Course.findAll({
+        where: { user_id },
+        attributes: {
+          include: [
+            [
+              sequelize.fn("COUNT", sequelize.col("Enrollments.user_id")),
+              "enrollment_count",
+            ],
+            [
+              sequelize.fn("AVG", sequelize.col("Ratings.rating_value")),
+              "rating",
+            ],
+            [
+              sequelize.literal(`(
+                SELECT SUM(lectures.totalTime)
+                FROM Course_sections
+                INNER JOIN Lectures AS lectures ON course_sections.id = lectures.course_section_id
+                WHERE course_sections.course_id = Course.id
+              )`),
+              "totalTime",
+            ],
+          ],
+        },
+        include: [
+          {
+            model: db.Enrollment,
+            attributes: [],
+          },
+          {
+            model: db.Rating,
+            attributes: [],
+          },
+        ],
+        group: ["Course.id"],
+        nest: true,
+      });
+    } else if (role.role_name === "student") {
+      // Lấy khoá học mà học sinh đã đăng ký
+      const enrollments = await db.Enrollment.findAll({
+        where: { user_id },
+        attributes: ["course_id"],
+        nest: true,
+      });
+      const courseIds = enrollments.map((enrollment) => enrollment.course_id);
+      userCourses = await db.Course.findAll({
+        where: { id: courseIds },
+        attributes: {
+          include: [
+            [
+              sequelize.fn("COUNT", sequelize.col("Enrollments.user_id")),
+              "enrollment_count",
+            ],
+            [
+              sequelize.fn("AVG", sequelize.col("Ratings.rating_value")),
+              "rating",
+            ],
+            [
+              sequelize.literal(`(
+                SELECT SUM(lectures.totalTime)
+                FROM Course_sections
+                INNER JOIN Lectures AS lectures ON course_sections.id = lectures.course_section_id
+                WHERE course_sections.course_id = Course.id
+              )`),
+              "totalTime",
+            ],
+          ],
+        },
+        include: [
+          {
+            model: db.Enrollment,
+            attributes: [],
+          },
+          {
+            model: db.Rating,
+            attributes: [],
+          },
+        ],
+        group: ["Course.id"],
+        nest: true,
+      });
+    }
 
     res.status(200).json({
       code: 0,
@@ -644,6 +706,36 @@ const getVideoByFilename = async (req, res) => {
   }
 };
 
+const deleteEnrollment = async (req, res) => {
+  const { user_id, course_id } = req.query;
+
+  try {
+    if (!user_id || !course_id) {
+      return res.status(400).json({ message: "Missing params" });
+    }
+
+    // Kiểm tra xem student đã đăng ký khoá học chưa
+    const enrollment = await db.Enrollment.findOne({
+      where: { user_id, course_id },
+    });
+
+    if (!enrollment) {
+      return res.status(404).json({ message: "Enrollment not found" });
+    }
+
+    // Xoá enrollment
+    await db.Enrollment.destroy({ where: { user_id, course_id } });
+
+    res.status(200).json({
+      code: 0,
+      message: "Delete enrollment successfully",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 export default {
   createCourse,
   getCourse,
@@ -654,4 +746,5 @@ export default {
   getMyCourses,
   createLectureCourse,
   getVideoByFilename,
+  deleteEnrollment,
 };

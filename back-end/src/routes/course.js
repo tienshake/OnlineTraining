@@ -39,10 +39,14 @@ router.delete(
   middleware.authAdminOrTeacher,
   courseController.deleteCourse
 );
+router.delete(
+  "/delete-enrollment",
+  middleware.authUser,
+  courseController.deleteEnrollment
+);
 router.get(
   "/search",
   // middleware.authAdmin,
-  middleware.authUser,
   courseController.searchCourse
 );
 

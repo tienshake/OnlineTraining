@@ -136,6 +136,16 @@ const courseServices = {
       throw error;
     }
   },
+  deleteEnrollmentCourseApi: async ({ course_id, user_id }: any) => {
+    try {
+      const response = await axiosClient.delete(
+        `courses/delete-enrollment?course_id=${course_id}&user_id=${user_id}`
+      );
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 export default courseServices;

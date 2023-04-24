@@ -1,0 +1,15 @@
+.container {
+  padding: 25px;
+  table {
+    width: 100%;
+  }
+  tr {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    border-bottom: 1px solid #000;
+  }
+  td {
+    padding: 25px 0;
+  }
+}

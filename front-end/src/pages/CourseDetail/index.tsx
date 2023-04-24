@@ -82,7 +82,7 @@ const CourseDetail = () => {
             <h4>Course Content</h4>
             <div>
               <span>{dataSection && dataSection.length} Lectures</span>{" "}
-              <span>{totalTime && convertSecondsToMinutes(totalTime)}m</span>
+              <span>{totalTime && convertSecondsToMinutes(totalTime)}</span>
             </div>
           </Box>
           <Box className={styles.body}>
@@ -130,7 +130,7 @@ const CourseDetail = () => {
                 <ButtonSave
                   circle
                   title="Enroll now"
-                  href={`/checkout/${id}`}
+                  path={`/checkout/${id}`}
                 />
               )}
             </div>
@@ -159,7 +159,7 @@ const CourseDetail = () => {
               alt="icon"
             />
             Duration:
-            <span>{totalTime && convertSecondsToMinutes(totalTime)}m</span>
+            <span>{totalTime && convertSecondsToMinutes(totalTime)}</span>
           </li>
           <li>
             <img

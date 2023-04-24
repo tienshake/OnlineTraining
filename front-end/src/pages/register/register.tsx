@@ -1,67 +1,68 @@
 import React from "react";
 import axios from "axios";
-import style from "./Login.module.scss";
+import style from "./Register.module.scss";
 import logologin from "../../assets/images/login-img.png";
 import dream from "../../assets/images/so-do.jpg";
 import { Link } from "react-router-dom";
-import { loginSuccess } from "../../redux/features/auth";
-import { useDispatch } from "react-redux";
 import checkDataApi from "../../utils/checkDataApi";
 import { useNavigate } from "react-router-dom";
 // import { Buffer } from "buffer";
-import covertB64 from "../../utils/covertB64";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Input from "../../components/Input";
+import { useLocation } from "react-router-dom";
 
-const Login = () => {
-  const dispatch = useDispatch();
+const Register = () => {
   let navigate = useNavigate();
+  const location = useLocation();
+  const roleId = location?.state?.roleId;
 
   const validationSchema = Yup.object({
+    name: Yup.string()
+      .matches(/^[A-Za-z ]*$/, "Please enter valid name")
+      .max(40)
+      .required(),
     email: Yup.string().email().required("Please Enter your Email"),
-    password: Yup.string().required("Please Enter your password"),
+    password: Yup.string()
+      .required("No password provided.")
+      .min(8, "Password is too short - should be 8 chars minimum.")
+      .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
+    confirm_password: Yup.string().oneOf(
+      [Yup.ref("password"), undefined],
+      "Passwords must match"
+    ),
   });
 
   const formik = useFormik({
     initialValues: {
+      name: "", // add name to the initial values
       email: "",
       password: "",
+      confirm_password: "",
     },
     validationSchema: validationSchema,
     onSubmit: async (values: any, { setSubmitting, setErrors }) => {
+      console.log("values", values);
       try {
-        const response = await axios.post("http://localhost:8080/user/login", {
-          email: values.email,
-          password: values.password,
-        });
+        const response = await axios.post(
+          "http://localhost:8080/user/register",
+          {
+            role_id: roleId,
+            name: values.name,
+            email: values.email,
+            password: values.password,
+          }
+        );
         const result = checkDataApi(response);
         if (result) {
-          const token = result?.data.token;
-          localStorage.setItem("token", `Bearer ${token}`);
-          dispatch(
-            loginSuccess({
-              // token: result?.data.token,
-              user: {
-                name: result?.data.name,
-                email: result?.data.email,
-                id: result?.data.id,
-                avatar: covertB64(result?.data?.user_details.avatar),
-                userDetails: result?.data?.user_details,
-              },
-            })
-          );
-          navigate("/");
+          navigate("/login");
         }
       } catch (error: any) {
-        console.log(error);
+        console.log("error", error);
         if (error.response) {
           console.log(error.response.data);
           const errorType = error.response.data.message;
-          if (
-            errorType ===
-            "Your's email isn't exist in your system. Please try other email"
-          ) {
+          if (errorType === "Email already exists") {
             setErrors({
               email: errorType,
             });
@@ -72,11 +73,7 @@ const Login = () => {
       }
     },
   });
-
-  const handleClickRegisterOption = (role: number) => {
-    navigate("/register", { state: { roleId: role } });
-  };
-
+  console.log("roleId", roleId);
   return (
     <div className={style.body}>
       <div className={style.left}>
@@ -94,10 +91,26 @@ const Login = () => {
       <div className={style.right}>
         <div className={style.dream}>
           <img src={dream} alt="logo" />
-          <Link to="/">back to home</Link>
+          <Link to="/" className={style.texthover}>
+            back to home
+          </Link>
         </div>
-        <h2>Sign into Your Account</h2>
+        <h2>Register Account</h2>
         <form onSubmit={formik.handleSubmit}>
+          <label htmlFor="name">Name</label>
+          <Input
+            placeholder="Enter Your name"
+            type="name"
+            name="name"
+            value={formik.values.name}
+            onChange={formik.handleChange}
+            error={formik.touched.name && Boolean(formik.errors.name)}
+            helperText={
+              formik.touched.name && typeof formik.errors.name === "string"
+                ? formik.errors.name
+                : null
+            }
+          />
           <label htmlFor="email">Email</label>
           <Input
             placeholder="Enter Your email"
@@ -127,39 +140,37 @@ const Login = () => {
                 : null
             }
           />
+          <label htmlFor="password">Confirm Password</label>
+          <Input
+            placeholder="Enter Your password"
+            type="password"
+            name="confirm_password"
+            value={formik.values.confirm_password}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.confirm_password &&
+              Boolean(formik.errors.confirm_password)
+            }
+            helperText={
+              formik.touched.confirm_password &&
+              typeof formik.errors.confirm_password === "string"
+                ? formik.errors.confirm_password
+                : null
+            }
+          />
           <label className={style.forgot} htmlFor="">
             Forgot Password ?
           </label>
-          <button className={style.button}>Sign in</button>
+          <button className={style.button}>Register</button>
         </form>
         <div className={style.botteam}>
-          <div
-            className={style.icon}
-            onClick={() => handleClickRegisterOption(3)}
-          >
-            <div>
-              <img
-                src={
-                  "https://thumbs.dreamstime.com/b/teacher-logo-white-background-vector-illustration-182250708.jpg"
-                }
-                alt="logo"
-              />
-              Register Teacher
-            </div>
-            <div onClick={() => handleClickRegisterOption(2)}>
-              <img
-                src={
-                  "https://www.vhv.rs/dpng/d/156-1566120_png-logo-for-student-transparent-png.png"
-                }
-                alt="logo"
-              />
-              Register student
-            </div>
-          </div>
+          <Link to="/login" className={style.texthover}>
+            Login with account
+          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Register;

@@ -49,6 +49,44 @@
       font-size: 1.4rem;
     }
   }
+  position: relative;
+}
+
+.listOptionSearch {
+  background-color: white;
+  position: absolute;
+  top: 50px;
+  width: 90%;
+  border: 1px solid #d1d7dc;
+  img {
+    width: 40px;
+  }
+  h3 {
+    color: var(--text-color);
+    font-size: 1.4rem;
+  }
+  .moreCourse {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    color: var(--text-color);
+    font-size: 1.4rem;
+    cursor: pointer;
+    font-weight: 500;
+    &:hover {
+      color: var(--primary);
+    }
+  }
+}
+
+.listSearch {
+  cursor: pointer;
+  padding: 10px;
+  gap: 10px;
+  display: flex;
+  &:hover {
+    background-color: #f7f9fa;
+  }
 }
 
 .listItem {

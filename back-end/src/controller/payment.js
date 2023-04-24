@@ -12,6 +12,7 @@ const paymentEnrollment = async (req, res) => {
     nameOder,
     currency_code,
     create_time,
+    create_user_id,
   } = req.body;
 
   try {
@@ -23,7 +24,8 @@ const paymentEnrollment = async (req, res) => {
       !email_address ||
       !nameOder ||
       !currency_code ||
-      !create_time
+      !create_time ||
+      !create_user_id
     ) {
       return res
         .status(404)
@@ -54,6 +56,7 @@ const paymentEnrollment = async (req, res) => {
       // Thực hiện thanh toán cho khóa học (enrollment)
       if (enrollment) {
         const payment = await db.Payment.create({
+          create_user_id,
           course_id,
           user_id,
           amount,
@@ -115,7 +118,41 @@ const checkPayment = async (req, res) => {
   }
 };
 
+const getPayment = async (req, res) => {
+  const { create_user_id } = req.params;
+
+  try {
+    if (!create_user_id) {
+      return res.status(404).json({ message: "Missing params" });
+    }
+
+    const payments = await db.Payment.findAll({
+      where: { create_user_id },
+      include: [
+        {
+          model: db.Course,
+          attributes: ["title", "thumbnail"],
+        },
+        {
+          model: db.User,
+          attributes: ["name", "email"],
+        },
+      ],
+    });
+
+    res.status(200).json({
+      code: 0,
+      message: "Get Payment completed",
+      data: payments,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 export default {
   paymentEnrollment,
   checkPayment,
+  getPayment,
 };

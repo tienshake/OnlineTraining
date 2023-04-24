@@ -2,15 +2,39 @@ import { PayPalButtons } from "@paypal/react-paypal-js";
 import paymentServices from "../../services/payment";
 import checkDataApi from "../../utils/checkDataApi";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import covertB64 from "../../utils/covertB64";
 import { useDispatch } from "react-redux";
 import { removeCart } from "../../redux/features/cart/cartSlice";
+import { useEffect, useState } from "react";
+import courseServices from "../../services/course";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store/store";
 
 const PaypalCheckoutButton = (props: any) => {
   const đispatch = useDispatch();
   const { product, dataCourse } = props;
+  let { id } = useParams();
   const navigate = useNavigate();
+  const user = useSelector((state: RootState) => state.auth.user);
+  const [loadedProduct, setLoadedProduct] = useState<any>(null);
+
+  useEffect(() => {
+    const getCourseData = async () => {
+      const data = await courseServices.getCourseApi({
+        id,
+      });
+      const result = checkDataApi(data);
+      if (result) {
+        setLoadedProduct(result.data);
+      }
+    };
+    getCourseData();
+  }, []);
+
+  if (!loadedProduct) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <PayPalButtons
@@ -25,29 +49,31 @@ const PaypalCheckoutButton = (props: any) => {
         return actions.order.create({
           purchase_units: [
             {
-              description: product.description,
+              description: "ORD-6431",
               amount: {
-                value: product.price,
+                value: loadedProduct.price,
               },
             },
           ],
         });
       }}
       onClick={async (data, actions) => {
-        đispatch(removeCart(props.product.course_id));
+        if (loadedProduct) {
+          đispatch(removeCart(props.product.course_id));
 
-        const dataAPI = await paymentServices.checkPayment({
-          course_id: product?.course_id,
-          user_id: +product?.user_id,
-        });
-        const result = checkDataApi(dataAPI);
-        if (result) {
-          return actions.resolve();
-        } else {
-          toast.error(
-            "You already bought this course. Go to your account to view your list of courses."
-          );
-          return actions.reject();
+          const dataAPI = await paymentServices.checkPayment({
+            course_id: loadedProduct?.id,
+            user_id: +loadedProduct?.user.id,
+          });
+          const result = checkDataApi(dataAPI);
+          if (result) {
+            return actions.resolve();
+          } else {
+            toast.error(
+              "You already bought this course. Go to your account to view your list of courses."
+            );
+            return actions.reject();
+          }
         }
       }}
       onApprove={async (data, actions: any) => {
@@ -55,8 +81,9 @@ const PaypalCheckoutButton = (props: any) => {
         if (order.status === "COMPLETED") {
           console.log(order);
           const dataAPI = await paymentServices.createPayment({
-            course_id: product?.course_id,
-            user_id: +product?.user_id,
+            create_user_id: loadedProduct?.user.id,
+            course_id: loadedProduct?.id,
+            user_id: user?.id,
             amount: order?.purchase_units[0].amount.value,
             status: order.status,
             order_id: order.id,
@@ -70,9 +97,9 @@ const PaypalCheckoutButton = (props: any) => {
             navigate("/bill", {
               state: {
                 ...result.data,
-                price: dataCourse.price,
-                title: dataCourse.title,
-                thumbnail: covertB64(dataCourse.thumbnail),
+                price: loadedProduct.price,
+                title: loadedProduct.title,
+                thumbnail: covertB64(loadedProduct.thumbnail),
               },
             });
             // <Navigate to="/bill" />;

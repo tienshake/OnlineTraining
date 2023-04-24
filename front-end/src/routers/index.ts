@@ -1,6 +1,6 @@
 import { RouteType } from "../types";
 import Login from "../pages/login/Login";
-import Register from "../pages/register";
+import Register from "../pages/register/register";
 import DoashBoard from "../admin/DoashBoard";
 import StudentManager from "../admin/StudentManager";
 import TeacherManager from "../admin/TeacherManager";
@@ -12,7 +12,6 @@ import Home from "../pages/Home";
 import CreateCourse from "../pages/Teacher/CreateCourse";
 import Profile from "../pages/Profile";
 import EditProfile from "../components/EditProfile";
-import DeleteProfile from "../components/DeleteProfile";
 import Course from "../pages/Course/Course";
 import CourseDetail from "../pages/CourseDetail";
 import Checkout from "../pages/Checkout";
@@ -20,6 +19,7 @@ import MyCourse from "../components/MyCourse/MyCourse";
 import BillOder from "../pages/BillOder";
 import Learning from "../pages/Learning";
 import Earnings from "../components/Earnings/Earnings";
+import Order from "../components/Order";
 
 const publicRoute: RouteType[] = [
   {
@@ -59,16 +59,16 @@ const privateRoute: RouteType[] = [
         patch: "edit-profile",
       },
       {
-        component: DeleteProfile,
-        patch: "delete-profile",
-      },
-      {
         component: MyCourse,
         patch: "/profile/edit-my-course",
       },
       {
         component: Earnings,
         patch: "/profile/earnings-profile",
+      },
+      {
+        component: Order,
+        patch: "/profile/orders",
       },
     ],
   },

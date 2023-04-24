@@ -10,5 +10,10 @@ router.post(
   paymentController.paymentEnrollment
 );
 router.get("/check", middleware.authUser, paymentController.checkPayment);
+router.get(
+  "/get/:create_user_id",
+  middleware.authUser,
+  paymentController.getPayment
+);
 
 export default router;

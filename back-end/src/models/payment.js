@@ -12,11 +12,18 @@ module.exports = (sequelize, DataTypes) => {
       Payment.belongsTo(models.Enrollment, {
         foreignKey: "enrollment_id",
       });
+
+      Payment.belongsTo(models.Course, {
+        foreignKey: "course_id",
+      });
+
+      Payment.belongsTo(models.User, { foreignKey: "user_id" });
     }
   }
   Payment.init(
     {
       user_id: DataTypes.INTEGER,
+      create_user_id: DataTypes.INTEGER,
       course_id: DataTypes.INTEGER,
       oderId: DataTypes.INTEGER,
       amount: DataTypes.INTEGER,
