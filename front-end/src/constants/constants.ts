@@ -38,6 +38,10 @@ export const MENU_PROFILE = [
     patch: "/profile/reviews-profile",
   },
   {
+    title: "Earnings",
+    patch: "/profile/earnings-profile",
+  },
+  {
     title: "Delete Profile",
     patch: "/profile/delete-profile",
   },

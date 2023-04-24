@@ -19,6 +19,7 @@ import Checkout from "../pages/Checkout";
 import MyCourse from "../components/MyCourse/MyCourse";
 import BillOder from "../pages/BillOder";
 import Learning from "../pages/Learning";
+import Earnings from "../components/Earnings/Earnings";
 
 const publicRoute: RouteType[] = [
   {
@@ -64,6 +65,10 @@ const privateRoute: RouteType[] = [
       {
         component: MyCourse,
         patch: "/profile/edit-my-course",
+      },
+      {
+        component: Earnings,
+        patch: "/profile/earnings-profile",
       },
     ],
   },
