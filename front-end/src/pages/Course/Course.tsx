@@ -105,7 +105,7 @@ export default function Course() {
                   inputProps={{ "aria-label": "Without label" }}
                 >
                   <MenuItem value="">
-                    <p style={{ fontSize: "14px" }}>Newly published</p>
+                    <p style={{ fontSize: "14px" }}>ALL</p>
                   </MenuItem>
                   <MenuItem value={10}>Ten</MenuItem>
                   <MenuItem value={20}>Twenty</MenuItem>
