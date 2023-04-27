@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Setting.module.scss";
 import Input from "../../../../components/Input";
 import { Box, Stack } from "@mui/material";
@@ -11,6 +11,7 @@ const Settings = ({ setFormValues, formValues }: any) => {
       [name]: value,
     }));
   };
+
   return (
     <Box className={styles.container}>
       <h4>Requirements</h4>

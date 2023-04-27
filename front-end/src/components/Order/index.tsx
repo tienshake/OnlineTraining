@@ -43,7 +43,7 @@ const Order = () => {
               dataPayment.length > 0 &&
               dataPayment.map((item: any) => (
                 <tr key={item.id}>
-                  <td>{item?.Course.title}</td>
+                  <td>{item?.Course?.title}</td>
                   <td>
                     {item?.amount} {item?.currency_code}
                   </td>

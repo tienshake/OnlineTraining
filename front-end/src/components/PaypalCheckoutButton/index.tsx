@@ -13,7 +13,6 @@ import { RootState } from "../../redux/store/store";
 
 const PaypalCheckoutButton = (props: any) => {
   const đispatch = useDispatch();
-  const { product, dataCourse } = props;
   let { id } = useParams();
   const navigate = useNavigate();
   const user = useSelector((state: RootState) => state.auth.user);
@@ -51,7 +50,7 @@ const PaypalCheckoutButton = (props: any) => {
             {
               description: "ORD-6431",
               amount: {
-                value: loadedProduct.price,
+                value: loadedProduct.promotion_price,
               },
             },
           ],

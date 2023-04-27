@@ -31,6 +31,11 @@ export const NAV_LIST: NavType[] = [
 
 export const MENU_PROFILE = [
   {
+    title: "Earnings",
+    patch: "/profile/earnings-profile",
+    role: TEACHER_ROUTE,
+  },
+  {
     title: "Edit Profile",
     patch: "/profile/edit-profile",
   },
@@ -39,20 +44,13 @@ export const MENU_PROFILE = [
     patch: "/profile/edit-my-course",
   },
   {
-    title: "Reviews",
-    patch: "/profile/reviews-profile",
-  },
-  {
-    title: "Earnings",
-    patch: "/profile/earnings-profile",
-  },
-  {
-    title: "Delete Profile",
-    patch: "/profile/delete-profile",
-  },
-  {
     title: "Orders",
     patch: "/profile/orders",
+    role: TEACHER_ROUTE,
+  },
+  {
+    title: "Reviews",
+    patch: "/profile/reviews-profile",
     role: TEACHER_ROUTE,
   },
   {
