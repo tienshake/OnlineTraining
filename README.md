@@ -28,6 +28,6 @@
 
 ### 4. `Create .env variable and add data`
 
-### 5. `cd ./back-end run cmd create table sequelize: npx sequelize-cli db:migrate`
+### 5. `cd ./back-end ==> run cmd create table: npx sequelize-cli db:migrate`
 
 ### 6. `npm start`
