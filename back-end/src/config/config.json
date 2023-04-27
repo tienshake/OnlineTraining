@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": "root",
-    "database": "onlineTraining",
-    "host": "127.0.0.1",
+    "username": "ulinanaouynqevsc",
+    "database": "bxxqvff9auldsfddeo0a",
+    "password": "Oxkz9ABZu3EczfiLmWMf",
+    "host": "bxxqvff9auldsfddeo0a-mysql.services.clever-cloud.com",
     "dialect": "mysql",
     "logging": false,
     "timezone": "+07:00"
