@@ -262,7 +262,7 @@ function CreateCourse() {
         });
 
         const response = await axios.post(
-          `http://localhost:8080/courses/create-lecture`,
+          `https://nodejs-deploy-n9mo.onrender.com/courses/create-lecture`,
           formData,
           {
             headers: {

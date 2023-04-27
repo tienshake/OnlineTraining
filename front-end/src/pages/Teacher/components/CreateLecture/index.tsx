@@ -85,7 +85,7 @@ const CreateLectures = () => {
       });
 
       const response = await axios.post(
-        `http://localhost:8080/courses/create-lecture`,
+        `https://nodejs-deploy-n9mo.onrender.com/create-lecture`,
         formData,
         {
           headers: {
