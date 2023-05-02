@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import styles from "./DefaultLayout.module.scss";
 import InnerBanner from "../../components/InnerBanner";
+import "./DefaultLayout.css"
+import ChatBox from "../../components/chatBox/ChatBox";
+import { ChatBotContext } from '../../context/Context';
 
 type Props = {
   children: React.ReactNode;
@@ -20,9 +23,23 @@ const DefaultLayout = ({
   const styleHome =
     onlyNotFound || onlyHome ? { maxWidth: "100%", background: "#fff" } : {};
 
+
+  const { showChatBox, handleShowChatBot } = useContext(ChatBotContext);
+
+
+
+
   return (
     <>
       <Header />
+      {
+        !showChatBox ? <div style={{ marginRight:'50px', position: "fixed", bottom: 0, right: 0, width: '300px', height:'', background: '#fff', zIndex: 10, cursor: 'pointer' }} onClick={handleShowChatBot}>show</div> : null
+      }
+
+      {
+        showChatBox ? <ChatBox /> : null
+      }
+
       {onlyCourseDetail && <InnerBanner />}
       <div className={styles.content} style={styleHome}>
         {children}

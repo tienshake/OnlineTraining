@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor } from "./redux/store/store";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import ChatBoxState from "./context/chatbot/ChatBotState";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -17,14 +18,17 @@ root.render(
   // <React.StrictMode>
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <PayPalScriptProvider
-        options={{
-          "client-id":
-            "AX5NzE6nfdlpQfU5wPDtdwfldh6pKntibm1CM4X6fFqu7AYWTCNIODvFIE7swvMQBtjSHu7crjJdRhf8",
-        }}
-      >
-        <App />
-      </PayPalScriptProvider>
+      <ChatBoxState>
+        <PayPalScriptProvider
+          options={{
+            "client-id":
+              "AX5NzE6nfdlpQfU5wPDtdwfldh6pKntibm1CM4X6fFqu7AYWTCNIODvFIE7swvMQBtjSHu7crjJdRhf8",
+          }}
+        >
+          <App />
+        </PayPalScriptProvider>
+      </ChatBoxState>
+
     </PersistGate>
   </Provider>
   // </React.StrictMode>
