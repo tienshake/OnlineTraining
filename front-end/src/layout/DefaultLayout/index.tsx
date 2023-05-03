@@ -4,7 +4,7 @@ import Footer from "../../components/Footer";
 import styles from "./DefaultLayout.module.scss";
 import InnerBanner from "../../components/InnerBanner";
 import "./DefaultLayout.css"
-import ChatBox from "../../components/chatBox/ChatBox";
+import ChatBot from "../../components/chatBot/ChatBot";
 import { ChatBotContext } from '../../context/Context';
 
 type Props = {
@@ -37,7 +37,7 @@ const DefaultLayout = ({
       }
 
       {
-        showChatBox ? <ChatBox /> : null
+        showChatBox ? <ChatBot /> : null
       }
 
       {onlyCourseDetail && <InnerBanner />}
