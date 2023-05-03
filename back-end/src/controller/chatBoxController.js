@@ -84,13 +84,13 @@ const askBot = async (req, res) => {
   };
 
   if (user && parserNormalString("ten cua ban")) {
-    console.log("1")
+    console.log("1");
     return res.status(200).send({
       message: "Submit request successfully!",
       respone: `${responseData.response}, ${user.name}`,
     });
   } else if (keyword && parserNormalString("khoa hoc ban đang tim")) {
-    console.log("2")
+    console.log("2");
     const results = await db.Course.findAll({
       where: {
         [Op.or]: [{ title: { [Op.like]: `%${keyword}%` } }],
@@ -103,14 +103,13 @@ const askBot = async (req, res) => {
       data: results,
     });
   } else if (user && parserNormalString("email cua ban la")) {
-    console.log("cí")
+    console.log("cí");
     return res.status(200).send({
       message: "Submit request successfully!",
       respone: `${responseData.response} ${user.email}`,
     });
-
   } else {
-    console.log("3")
+    console.log("3");
     res.status(200).send({
       message: "Submit request successfully!",
       respone: `${responseData.response}`,

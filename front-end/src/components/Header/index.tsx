@@ -79,7 +79,7 @@ const Header = () => {
     setShowSearchList(true);
     try {
       const response = await axios.get(
-        `https://nodejs-deploy-n9mo.onrender.com/courses/search?keyword=${keyword}`
+        `http://localhost:8080/courses/search?keyword=${keyword}`
       );
       const result = checkDataApi(response);
       console.log("result", result);

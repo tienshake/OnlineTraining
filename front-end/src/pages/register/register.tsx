@@ -45,7 +45,7 @@ const Register = () => {
       console.log("values", values);
       try {
         const response = await axios.post(
-          "https://nodejs-deploy-n9mo.onrender.com/user/register",
+          "http://localhost:8080/user/register",
           {
             role_id: roleId,
             name: values.name,

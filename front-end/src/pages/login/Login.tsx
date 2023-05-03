@@ -31,7 +31,7 @@ const Login = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any, { setSubmitting, setErrors }) => {
       try {
-        const response = await axios.post("https://nodejs-deploy-n9mo.onrender.com/user/login", {
+        const response = await axios.post("http://localhost:8080/user/login", {
           email: values.email,
           password: values.password,
         });

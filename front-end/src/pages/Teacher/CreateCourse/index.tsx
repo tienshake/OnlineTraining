@@ -193,7 +193,7 @@ function CreateCourse() {
   };
 
   const handleCreateCourseApi = async () => {
-    setIsLoading(true);
+    // setIsLoading(true);
     let title = formValues.courseTitle;
     let thumbnail = "";
     let description = formValues.courseDescriptions?.text;
@@ -260,9 +260,9 @@ function CreateCourse() {
             formData.append(`video`, lecture.video);
           });
         });
-
+        console.log("formValues", formValues);
         const response = await axios.post(
-          `https://nodejs-deploy-n9mo.onrender.com/courses/create-lecture`,
+          `http://localhost:8080/video/uploads`,
           formData,
           {
             headers: {

@@ -8,7 +8,7 @@ const SearchCourse = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `https://nodejs-deploy-n9mo.onrender.com/courses/search?keyword=${keyword}`
+        `http://localhost:8080/courses/search?keyword=${keyword}`
       );
       setCourses(response.data);
     } catch (error) {
