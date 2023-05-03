@@ -69,9 +69,9 @@ const askBot = async (req, res) => {
 
   const idUser = req.query.idUser;
   const user = await db.User.findOne({ where: { id: `${idUser}` } });
-  let languageCode = req.body.languageCode;
+  let languageCode = /* req.body.languageCode */ "vi";
   let queryText = req.body.queryText;
-  let sessionId = req.body.sessionId;
+  let sessionId = /* req.body.sessionId; */ "abc12345";
   let responseData = await detectIntent(languageCode, queryText, sessionId);
 
   const parserNormalString = (string) => {
@@ -84,11 +84,13 @@ const askBot = async (req, res) => {
   };
 
   if (user && parserNormalString("ten cua ban")) {
+    console.log("1")
     return res.status(200).send({
       message: "Submit request successfully!",
       respone: `${responseData.response}, ${user.name}`,
     });
-  } else if (keyword && parserNormalString("san pham ban đang tim")) {
+  } else if (keyword && parserNormalString("khoa hoc ban đang tim")) {
+    console.log("2")
     const results = await db.Course.findAll({
       where: {
         [Op.or]: [{ title: { [Op.like]: `%${keyword}%` } }],
@@ -97,10 +99,18 @@ const askBot = async (req, res) => {
     res.status(200).json({
       code: 0,
       message: "Search completed",
-      respone: `${responseData.response}`,
+      respone: `${responseData.response}(react)`,
       data: results,
     });
+  } else if (user && parserNormalString("email cua ban la")) {
+    console.log("cí")
+    return res.status(200).send({
+      message: "Submit request successfully!",
+      respone: `${responseData.response} ${user.email}`,
+    });
+
   } else {
+    console.log("3")
     res.status(200).send({
       message: "Submit request successfully!",
       respone: `${responseData.response}`,
