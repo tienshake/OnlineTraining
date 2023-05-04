@@ -736,6 +736,23 @@ const deleteEnrollment = async (req, res) => {
   }
 };
 
+const getCourseByCategory = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    if (!id) {
+      res.start(400).json({ message: "Invalid id" });
+    }
+    const courses = await db.Course.findAll({
+      where: { category_id: id },
+    });
+    res.json(courses);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
+};
+
 export default {
   createCourse,
   getCourse,
@@ -747,4 +764,5 @@ export default {
   createLectureCourse,
   getVideoByFilename,
   deleteEnrollment,
+  getCourseByCategory,
 };

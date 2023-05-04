@@ -72,4 +72,11 @@ router.get(
   courseController.getVideoByFilename
 );
 
+router.get(
+  "/get-by-category/:id",
+  // middleware.authAdmin,
+  // middleware.authUser,
+  courseController.getCourseByCategory
+);
+
 export default router;
