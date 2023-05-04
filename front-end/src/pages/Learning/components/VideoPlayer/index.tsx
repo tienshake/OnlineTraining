@@ -15,7 +15,7 @@ const VideoPlayer = ({ className, sectionData }: any) => {
         {sectionData && sectionData.filename ? (
           <video key={key} controls autoPlay width={"100%"}>
             <source
-              src={`http://localhost:8080/video/get/${sectionData?.filename}`}
+              src={`https://nodejs-deploy-n9mo.onrender.comvideo/get/${sectionData?.filename}`}
               type="video/mp4"
             ></source>
           </video>

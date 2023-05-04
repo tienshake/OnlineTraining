@@ -2,7 +2,7 @@ import axios from "axios";
 import { getUserToken } from "../utils/userToken";
 
 const axiosClient = axios.create({
-  baseURL: "http://localhost:8080/",
+  baseURL: "https://nodejs-deploy-n9mo.onrender.com",
 });
 
 //config header axios

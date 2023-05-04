@@ -592,8 +592,8 @@ const getMyCourses = async (req, res) => {
               sequelize.literal(`(
                 SELECT SUM(lectures.totalTime)
                 FROM Course_sections
-                INNER JOIN Lectures AS lectures ON course_sections.id = lectures.course_section_id
-                WHERE course_sections.course_id = Course.id
+                INNER JOIN Lectures AS lectures ON Course_sections.id = lectures.course_section_id
+                WHERE Course_sections.course_id = Course.id
               )`),
               "totalTime",
             ],

@@ -1,8 +1,9 @@
 {
   "development": {
     "username": "root",
+    "password": "48026",
     "database": "onlineTraining",
-    "host": "127.0.0.1",
+    "host": "34.28.3.45",
     "dialect": "mysql",
     "logging": false,
     "timezone": "+07:00"

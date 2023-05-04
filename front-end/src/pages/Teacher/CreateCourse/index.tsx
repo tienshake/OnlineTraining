@@ -262,7 +262,7 @@ function CreateCourse() {
         });
         console.log("formValues", formValues);
         const response = await axios.post(
-          `http://localhost:8080/video/uploads`,
+          `https://nodejs-deploy-n9mo.onrender.comvideo/uploads`,
           formData,
           {
             headers: {
