@@ -6,17 +6,21 @@ import styles from "./Order.module.scss";
 import paymentServices from "../../services/payment";
 import checkDataApi from "../../utils/checkDataApi";
 import moment from "moment";
+import LoadingModal from "../LoadingModal";
 
 const Order = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const userRedux = useSelector((state: RootState) => state.auth.user);
   const [dataPayment, setDataPayment] = useState([]);
 
   useEffect(() => {
     const getPaymentData = async () => {
+      setIsLoading(true);
       const data = await paymentServices.getPayment(userRedux.id);
       const result = checkDataApi(data);
       if (result) {
         setDataPayment(result.data);
+        setIsLoading(false);
       }
     };
     getPaymentData();
@@ -27,6 +31,7 @@ const Order = () => {
       titleHeader="Order"
       textHeader="Order Dashboard is a quick overview of all current orders."
     >
+      <LoadingModal isLoading={isLoading} />
       <div className={styles.container}>
         <table>
           <thead>

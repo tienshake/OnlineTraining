@@ -13,8 +13,10 @@ import covertB64 from "../../utils/covertB64";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Input from "../../components/Input";
+import LoadingModal from "../../components/LoadingModal";
 
 const Login = () => {
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
@@ -31,6 +33,7 @@ const Login = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any, { setSubmitting, setErrors }) => {
       try {
+        setIsLoading(true);
         const response = await axios.post(
           "https://nodejs-deploy-n9mo.onrender.com/user/login",
           {
@@ -55,6 +58,7 @@ const Login = () => {
             })
           );
           navigate("/");
+          setIsLoading(false);
         }
       } catch (error: any) {
         console.log(error);
@@ -82,6 +86,7 @@ const Login = () => {
 
   return (
     <div className={style.body}>
+      <LoadingModal isLoading={isLoading} />
       <div className={style.left}>
         <img src={logologin} alt="logo" />
         <h2>

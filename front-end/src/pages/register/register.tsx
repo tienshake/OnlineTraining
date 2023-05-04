@@ -11,8 +11,10 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Input from "../../components/Input";
 import { useLocation } from "react-router-dom";
+import LoadingModal from "../../components/LoadingModal";
 
 const Register = () => {
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   let navigate = useNavigate();
   const location = useLocation();
   const roleId = location?.state?.roleId;
@@ -42,8 +44,8 @@ const Register = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values: any, { setSubmitting, setErrors }) => {
-      console.log("values", values);
       try {
+        setIsLoading(true);
         const response = await axios.post(
           "https://nodejs-deploy-n9mo.onrender.com/user/register",
           {
@@ -56,6 +58,7 @@ const Register = () => {
         const result = checkDataApi(response);
         if (result) {
           navigate("/login");
+          setIsLoading(false);
         }
       } catch (error: any) {
         console.log("error", error);
@@ -76,6 +79,7 @@ const Register = () => {
   console.log("roleId", roleId);
   return (
     <div className={style.body}>
+      <LoadingModal isLoading={isLoading} />
       <div className={style.left}>
         <img src={logologin} alt="logo" />
         <h2>

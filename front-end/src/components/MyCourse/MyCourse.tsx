@@ -10,18 +10,22 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store/store";
 import decodedToken from "../../utils/decodedToken";
 import { useNavigate } from "react-router-dom";
+import LoadingModal from "../LoadingModal";
 
 export default function MyCourse() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const userDecoded: any = decodedToken();
   const [dataMyCourse, setDataMyCourse] = useState([]);
   const user = useSelector((state: RootState) => state.auth.user);
   let navigate = useNavigate();
 
   const getCourseMyData = async () => {
+    setIsLoading(true);
     const data = await courseServices.getMyCourseApi(user.id);
     const result = checkDataApi(data);
     if (result) {
       setDataMyCourse(result.data);
+      setIsLoading(false);
     }
   };
 
@@ -41,6 +45,7 @@ export default function MyCourse() {
       titleHeader="My Course"
       textHeader="Manage your courses and its update like live, draft and insight"
     >
+      <LoadingModal isLoading={isLoading} />
       <div className="wrapper_mycourse">
         <div className="header_myCourse">
           <ul></ul>

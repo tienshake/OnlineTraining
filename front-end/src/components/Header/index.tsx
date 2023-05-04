@@ -3,7 +3,8 @@ import { Stack, TextField, IconButton, InputAdornment } from "@mui/material";
 import styles from "./Header.module.scss";
 import Button from "../Button";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { IMG_URL, NAV_LIST } from "../../constants/constants";
+import { NAV_LIST } from "../../constants/constants";
+import Logo from "../../assets/images/logo.png";
 //Material UI
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -103,7 +104,7 @@ const Header = () => {
             }}
           >
             <Link to="/">
-              <img src={IMG_URL} alt="logo" />
+              <img src={Logo} alt="logo" />
             </Link>
           </Box>
           <Box
@@ -221,17 +222,6 @@ const Header = () => {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
-          <Box
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-            }}
-          >
-            <Link to="/" className={styles.logoItem}>
-              <img src={IMG_URL} alt="logo" />
-            </Link>
           </Box>
           <Box
             sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
