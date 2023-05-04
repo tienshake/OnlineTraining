@@ -1,19 +1,13 @@
 import db from "../models";
+import { parserAndCheckString } from "../utils/parserAndCheckString";
 // Import the packages we need
 const dialogflow = require("@google-cloud/dialogflow");
-const mysql = require("mysql2/promise");
-// const {WebhookClient, WebhookResponse} = require('dialogflow-fulfillment');
 const { Op } = require("sequelize");
 
 require("dotenv").config();
 
-// Your credentials
 const CREDENTIALS = JSON.parse(process.env.CREDENTIALS);
-// console.log(CREDENTIALS)
-
 // Other way to read the credentials
-// const fs = require('fs');
-// const CREDENTIALS = JSON.parse(fs.readFileSync('File path'));
 
 // Your google dialogflow project-id
 const PROJECID = CREDENTIALS.project_id;
@@ -46,15 +40,14 @@ const detectIntent = async (languageCode, queryText, sessionId) => {
 
   // Send request and log result
   const responses = await sessionClient.detectIntent(request);
-  // console.log(responses);
   const result = responses[0].queryResult;
-  // console.log(result);
 
   return {
     response: result.fulfillmentText,
   };
 };
 
+/* welcomUser */
 const welcomeUser = async (req, res) => {
   const languageCode = "vi"; // Ngôn ngữ của trò chuyện
   const sessionId = Math.random().toString(36).substring(7); // Tạo sessionId ngẫu nhiên
@@ -64,52 +57,57 @@ const welcomeUser = async (req, res) => {
   res.send(responseData.response); // Trả về phản hồi cho khách hàng
 };
 
+/* Ask bot */
 const askBot = async (req, res) => {
-  const { keyword } = req.query;
-
+  const { keyWordCourse } = req.query;
+  console.log(keyWordCourse);
   const idUser = req.query.idUser;
   const user = await db.User.findOne({ where: { id: `${idUser}` } });
-  let languageCode = /* req.body.languageCode */ "vi";
-  let queryText = req.body.queryText;
-  let sessionId = /* req.body.sessionId; */ "abc12345";
+
+  let languageCode = "vi";
+  let sessionId = "abc12345";
+  let queryText = keyWordCourse ? "@course" : req.body.queryText;
   let responseData = await detectIntent(languageCode, queryText, sessionId);
 
-  const parserNormalString = (string) => {
-    const lowerCaseString = responseData.response.toLowerCase(); // Chuyển đổi chuỗi thành dạng viết thường
-    const normalizedString = lowerCaseString
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "");
-    const newString = normalizedString.includes(string);
-    return newString;
-  };
-
-  if (user && parserNormalString("ten cua ban")) {
+  if (user && parserAndCheckString("ten cua ban", responseData)) {
     console.log("1");
     return res.status(200).send({
       message: "Submit request successfully!",
       respone: `${responseData.response}, ${user.name}`,
     });
-  } else if (keyword && parserNormalString("khoa hoc ban đang tim")) {
-    console.log("2");
+  } else if (
+    keyWordCourse &&
+    parserAndCheckString("khoa hoc ban can tim", responseData)
+  ) {
     const results = await db.Course.findAll({
       where: {
-        [Op.or]: [{ title: { [Op.like]: `%${keyword}%` } }],
+        [Op.or]: [{ title: { [Op.like]: `%${keyWordCourse}%` } }],
       },
     });
-    res.status(200).json({
-      code: 0,
-      message: "Search completed",
-      respone: `${responseData.response}(react)`,
-      data: results,
-    });
-  } else if (user && parserNormalString("email cua ban la")) {
-    console.log("cí");
+
+    if (results.length > 0) {
+      res.status(200).json({
+        code: 0,
+        message: "Search completed",
+        respone: `${responseData.response}: ${results[0].title}. Bạn có thể thể truy cập để xem chi tiết về nó: http://localhost:3000/course-details/${results[0].id}`,
+        data: results,
+      });
+    } else {
+      res.status(200).json({
+        code: 0,
+        message: "Search completed",
+        respone: `Chúng tôi không tìm thấy khoá học nào có gợi ý là "${keyWordCourse}" `,
+      });
+    }
+    
+  } else if (user && parserAndCheckString("email cua ban la", responseData)) {
+    console.log("3");
     return res.status(200).send({
       message: "Submit request successfully!",
       respone: `${responseData.response} ${user.email}`,
     });
   } else {
-    console.log("3");
+    console.log("4");
     res.status(200).send({
       message: "Submit request successfully!",
       respone: `${responseData.response}`,
