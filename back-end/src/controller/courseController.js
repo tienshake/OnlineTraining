@@ -737,14 +737,11 @@ const deleteEnrollment = async (req, res) => {
 };
 
 const getCourseByCategory = async (req, res) => {
-  const id = req.params.id;
+  const categoryIds = req.query.id.split(",").map(Number);
 
   try {
-    if (!id) {
-      res.start(400).json({ message: "Invalid id" });
-    }
     const courses = await db.Course.findAll({
-      where: { category_id: id },
+      where: { category_id: { [Op.or]: categoryIds } },
     });
     res.json(courses);
   } catch (error) {

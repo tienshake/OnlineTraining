@@ -73,7 +73,7 @@ router.get(
 );
 
 router.get(
-  "/get-by-category/:id",
+  "/get-by-category",
   // middleware.authAdmin,
   // middleware.authUser,
   courseController.getCourseByCategory
