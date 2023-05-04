@@ -12,7 +12,6 @@ export default function ChatBotState({ children }: any) {
         talkContent: [
 
         ],
-
         botWelcome: '',
     }
 

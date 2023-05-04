@@ -3,8 +3,11 @@ import "./chatBot.css";
 import { ChatBotContext } from "../../context/Context";
 import { USER_ASK_BOT, BOT_REPLY_USER } from "../../context/Types";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store/store";
 
 export default function ChatBot() {
+    const userRedux = useSelector((state: RootState) => state.auth.user);
     const { handleCloseChatBot, welcome, talkContent, dispatch } = useContext(ChatBotContext);
     const [valueInputMessage, setValueInputMessage] = useState('');
     const [loading, setLoading] = useState(false);
@@ -18,9 +21,17 @@ export default function ChatBot() {
     const handleSubmitMessage = async () => {
         setValueInputMessage('')
 
-        const stringEmpty = valueInputMessage.replace(/\s/g, "")
+        const stringEmpty = valueInputMessage.replace(/\s/g, "");
+        console.log(stringEmpty, "stringEmpty");
+
+        const regex = /@([^!]+)/;
+        const match = valueInputMessage.match(regex);
+        const resultKeyCourse = match ? match[1] : null;
+
+        console.log(resultKeyCourse, "result");
+
         if (stringEmpty.length > 0) {
-            const data = await axios.post(`http://localhost:8080/chat-bot/ask?idUser=2&keyword=`, { queryText: valueInputMessage });
+            const data = await axios.post(`http://localhost:8080/chat-bot/ask?idUser=${userRedux.id}&keyWordCourse=${resultKeyCourse ? resultKeyCourse : ''}`, { queryText: valueInputMessage });
 
             dispatch({
                 type: USER_ASK_BOT,
@@ -28,7 +39,7 @@ export default function ChatBot() {
             });
 
             if (data) {
-                setLoading(false)
+                setLoading(false);
                 dispatch({
                     type: BOT_REPLY_USER,
                     payload: data.data.respone
@@ -47,7 +58,6 @@ export default function ChatBot() {
                             <header className="card-header header-title" /* @click="toggleChat()" */>
                                 <p onClick={handleCloseChatBot} style={{ cursor: 'pointer' }} className="card-header-title">
                                     X
-                                    {/* <i className="fa fa-circle is-online"></i><img src="" style={{ width: '30px' }} />&nbsp;{{ headUser }} */}
                                 </p>
                                 {/* <a href="" className="card-header-icon"> */}
                                 <span className="icon">
@@ -63,7 +73,7 @@ export default function ChatBot() {
                                         <div className="chat-message-group">
                                             <div className="chat-thumb">
                                                 <figure className="image is-32x32">
-                                                    <img style={{ width: '50px' }} src="https://media.istockphoto.com/id/1250000899/vector/chat-bot-robot-avatar-in-circle-round-shape-isolated-on-white-background-stock-vector.jpg?s=612x612&w=0&k=20&c=xj8GkmfFYH_Frho_pJ0HL2dkDwbZAI0Of6KwKdVsh1s=" />
+                                                    <img style={{ width: '50px' }} src="https://media.istockphoto.com/id/1250000899/vector/chat-bot-robot-avatar-in-circle-round-shape-isolated-on-white-background-stock-vector.jpg?s=612x612&w=0&k=20&c=xj8GkmfFYH_Frho_pJ0HL2dkDwbZAI0Of6KwKdVsh1s=" alt="" />
                                                 </figure>
                                             </div>
                                             <div className="chat-messages">
@@ -78,7 +88,7 @@ export default function ChatBot() {
                                                     content.role === 'user' ? (
                                                         <div className="chat-message-group writer-user">
                                                             <div className="chat-messages">
-                                                                <div className="message"><>{content.message}</></div>
+                                                                <div className="message">{content.message}</div>
                                                                 <div className="from">Đã xem</div>
                                                             </div>
                                                         </div>
