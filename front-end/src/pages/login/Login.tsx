@@ -62,6 +62,7 @@ const Login = () => {
         }
       } catch (error: any) {
         console.log(error);
+        setIsLoading(false);
         if (error.response) {
           console.log(error.response.data);
           const errorType = error.response.data.message;

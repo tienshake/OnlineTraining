@@ -193,7 +193,7 @@ function CreateCourse() {
   };
 
   const handleCreateCourseApi = async () => {
-    // setIsLoading(true);
+    setIsLoading(true);
     let title = formValues.courseTitle;
     let thumbnail = "";
     let description = formValues.courseDescriptions?.text;
@@ -270,11 +270,12 @@ function CreateCourse() {
             },
           }
         );
-        if (response && response.status === 200) {
+        if (response) {
+          console.log("complete");
+          toast.success("🦄 Create so easy!");
           setIsLoading(false);
           // setIsComplete(true);
           // setComponent(<Complete />);
-          toast.success("🦄 Create so easy!");
         }
       } else {
         console.log("formValues?.avatar?.thumbnail", typeof thumbnail);

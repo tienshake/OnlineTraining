@@ -61,6 +61,7 @@ const Register = () => {
           setIsLoading(false);
         }
       } catch (error: any) {
+        setIsLoading(false);
         console.log("error", error);
         if (error.response) {
           console.log(error.response.data);
