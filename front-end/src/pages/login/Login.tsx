@@ -142,11 +142,8 @@ const Login = () => {
           <button className={style.button}>Sign in</button>
         </form>
         <div className={style.botteam}>
-          <div
-            className={style.icon}
-            onClick={() => handleClickRegisterOption(3)}
-          >
-            <div>
+          <div className={style.icon}>
+            <div onClick={() => handleClickRegisterOption(3)}>
               <img
                 src={
                   "https://thumbs.dreamstime.com/b/teacher-logo-white-background-vector-illustration-182250708.jpg"
