@@ -239,7 +239,7 @@ const deleteUser = async (req, res) => {
 };
 
 const register = async (req, res) => {
-  const { name, email, password, role_id = 1 } = req.body;
+  const { name, email, password, role_id = 2 } = req.body;
   try {
     if (!name || !email || !password || !role_id) {
       res.status(400).json({ message: "Missing params" });

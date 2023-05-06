@@ -159,6 +159,10 @@ const createLectureCourse = async (req, res) => {
                   });
                 } else {
                   console.error("Video file not found");
+                  await db.Lecture.create({
+                    course_section_id: courseSection.id,
+                    title: lecture.title,
+                  });
                 }
               } catch (err) {
                 console.log(err);

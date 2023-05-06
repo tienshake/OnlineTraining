@@ -213,13 +213,13 @@ function CreateCourse() {
       }
     }
 
-    const isEmpty = sections.some(
-      (item: any) => item.title === "" || item.lectures.length === 0
-    );
+    // const isEmpty = sections.some(
+    //   (item: any) => item.title === "" || item.lectures.length === 0
+    // );
 
-    if (isEmpty) {
-      toast.error("Please sections and lecture  required fields");
-    }
+    // if (isEmpty) {
+    //   toast.error("Please sections and lecture  required fields");
+    // }
     //Check exist params
     if (
       !title ||

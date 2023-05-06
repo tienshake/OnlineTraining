@@ -89,7 +89,7 @@ const CourseDetail = () => {
             {/* <AccordionSection /> */}
             {dataSection &&
               dataSection.length > 0 &&
-              dataSection.map((section: any, index: number) => {
+              dataSection.reverse().map((section: any, index: number) => {
                 return <AccordionSection key={index} section={section} />;
               })}
           </Box>
