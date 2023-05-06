@@ -52,7 +52,7 @@ const CourseDetail = () => {
       const result = checkDataApi(data);
       if (result) {
         setTotalTime(data.data.totalTime);
-        setDataSection(result.data?.course_sections);
+        setDataSection(result.data?.course_sections.reverse());
         if (result.data.Enrollments && result.data.Enrollments[0]?.id) {
           setIsEnroll(true);
         }
@@ -89,7 +89,7 @@ const CourseDetail = () => {
             {/* <AccordionSection /> */}
             {dataSection &&
               dataSection.length > 0 &&
-              dataSection.reverse().map((section: any, index: number) => {
+              dataSection.map((section: any, index: number) => {
                 return <AccordionSection key={index} section={section} />;
               })}
           </Box>
