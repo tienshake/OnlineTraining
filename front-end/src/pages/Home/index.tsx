@@ -17,37 +17,52 @@ import covertB64 from "../../utils/covertB64";
 import categoryServices from "../../services/category";
 import cache from "memory-cache";
 import Loading from "../../components/Loading/Loading";
+import axios from "axios";
 
 const Home = () => {
   const [dataCourses, setDataCourses] = useState<any>();
   const [dataTopCourses, setDataTopCourses] = useState<any>();
   const [dataNewCourses, setDataNewCourses] = useState<any>();
+  const [dataTeacher, setDataDataTeacher] = useState<any>();
   const courseCache = cache.get("courseCache");
+
+  useEffect(() => {
+    const fetch = async () => {
+      await axios.get("http://localhost:8080/user/get-teacher").then((data) => {
+        console.log("setDataDataTeacher", data.data.data);
+        setDataDataTeacher(data.data.data);
+      });
+    };
+    fetch();
+  }, []);
 
   /* get courses top */
   useEffect(() => {
-    courseServices.getCourseApiSortType({
-      id: "ALL",
-      limit: 8,
-      page: 1,
-      type: 'top'
-    }).then((data) => {
-      cache.put("courseCache", data.data.data.rows);
-      setDataTopCourses(data.data.data.rows);
-    });
+    courseServices
+      .getCourseApiSortType({
+        id: "ALL",
+        limit: 8,
+        page: 1,
+        type: "top",
+      })
+      .then((data) => {
+        cache.put("courseCache", data.data.data.rows);
+        setDataTopCourses(data.data.data.rows);
+      });
   }, []);
-
   /* get courses news */
   useEffect(() => {
-    courseServices.getCourseApiSortType({
-      id: "ALL",
-      limit: 8,
-      page: 1,
-      type: 'new'
-    }).then((data) => {
-      cache.put("courseCache", data.data.data.rows);
-      setDataNewCourses(data.data.data.rows);
-    });
+    courseServices
+      .getCourseApiSortType({
+        id: "ALL",
+        limit: 8,
+        page: 1,
+        type: "new",
+      })
+      .then((data) => {
+        cache.put("courseCache", data.data.data.rows);
+        setDataNewCourses(data.data.data.rows);
+      });
   }, []);
 
   useEffect(() => {
@@ -95,9 +110,10 @@ const Home = () => {
   const [dataCate, setDataCate] = useState<any>([]);
 
   useEffect(() => {
-    categoryServices.getCategoryApi().then((data) => setDataCate(data.data.data));
+    categoryServices
+      .getCategoryApi()
+      .then((data) => setDataCate(data.data.data));
   }, []);
-
 
   const data2 = [
     {
@@ -135,8 +151,10 @@ const Home = () => {
     return nameCate === "Reactjs"
       ? "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-05.png"
       : nameCate === "HTML/CSS"
-        ? "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon.png"
-        : nameCate === "Nodejs" ? "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-02.png" : "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-01.png";
+      ? "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon.png"
+      : nameCate === "Nodejs"
+      ? "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-02.png"
+      : "https://dreamslms.dreamguystech.com/html/assets/img/categories-icon-01.png";
   };
 
   /*  */
@@ -275,8 +293,8 @@ const Home = () => {
           />
 
           <div style={{ backgroundColor: "" }} className="box_carosel_trending">
-            {
-              dataTopCourses ? <>
+            {dataTopCourses ? (
+              <>
                 <Slider {...settings}>
                   {dataTopCourses.map((data: any) => (
                     <div key={data.id}>
@@ -303,8 +321,10 @@ const Home = () => {
                     </div>
                   ))}
                 </Slider>
-              </> : <Loading />
-            }
+              </>
+            ) : (
+              <Loading />
+            )}
           </div>
         </div>
         <BoxTitle />
@@ -435,8 +455,8 @@ const Home = () => {
           />
 
           <div style={{ backgroundColor: "" }} className="box_carosel_trending">
-            {
-              dataNewCourses ? <>
+            {dataNewCourses ? (
+              <>
                 <Slider {...settings}>
                   {dataNewCourses.map((data: any) => (
                     <div key={data.id}>
@@ -463,24 +483,31 @@ const Home = () => {
                     </div>
                   ))}
                 </Slider>
-              </> : <Loading />
-            }
-
+              </>
+            ) : (
+              <Loading />
+            )}
 
             <BoxTitle />
 
             <Slider {...settings}>
-              {data2.map((data, index) => (
-                <div
-                  key={index}
-                  style={{ width: "100%", margin: "auto" }} /* src={data.src} */
-                >
-                  <CardUserStyle
-                    widthCard="95%"
-                    imageItem="https://dreamslms.dreamguystech.com/html/assets/img/user/user7.jpg"
-                  />
-                </div>
-              ))}
+              {dataTeacher &&
+                dataTeacher.length > 0 &&
+                dataTeacher.map((data: any, index: any) => (
+                  <div
+                    key={index}
+                    style={{
+                      width: "100%",
+                      margin: "auto",
+                    }} /* src={data.src} */
+                  >
+                    <CardUserStyle
+                      data={data}
+                      widthCard="95%"
+                      imageItem="https://dreamslms.dreamguystech.com/html/assets/img/user/user7.jpg"
+                    />
+                  </div>
+                ))}
             </Slider>
           </div>
         </div>
