@@ -49,13 +49,13 @@ export const MENU_PROFILE = [
     role: TEACHER_ROUTE,
   },
   {
-    title: "Reviews",
-    patch: "/profile/reviews-profile",
+    title: "Student",
+    patch: "/profile/student",
     role: TEACHER_ROUTE,
   },
   {
-    title: "Student",
-    patch: "/profile/student-profile",
+    title: "Reviews",
+    patch: "/profile/reviews-profile",
     role: TEACHER_ROUTE,
   },
 

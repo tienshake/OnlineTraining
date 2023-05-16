@@ -15,7 +15,7 @@ export default function ChatBotState({ children }: any) {
   useEffect(() => {
     const welcomeUser = async () => {
       const response = await axios.get(
-        `https://nodejs-deploy-n9mo.onrender.com/chat-bot/welcome`
+        `http://localhost:8080/chat-bot/welcome`
       );
 
       setWelcome(response.data);

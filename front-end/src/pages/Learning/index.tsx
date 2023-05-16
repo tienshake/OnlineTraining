@@ -31,7 +31,7 @@ const Learning = () => {
       });
       const result = checkDataApi(data);
       if (result) {
-        setDataSection(result.data?.course_sections);
+        setDataSection(result.data?.course_sections.reverse());
       }
     };
 

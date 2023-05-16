@@ -20,6 +20,7 @@ import BillOder from "../pages/BillOder";
 import Learning from "../pages/Learning";
 import Earnings from "../components/Earnings/Earnings";
 import Order from "../components/Order";
+import Student from "../components/Student";
 
 const publicRoute: RouteType[] = [
   {
@@ -69,6 +70,10 @@ const privateRoute: RouteType[] = [
       {
         component: Order,
         patch: "/profile/orders",
+      },
+      {
+        component: Student,
+        patch: "/profile/student",
       },
     ],
   },

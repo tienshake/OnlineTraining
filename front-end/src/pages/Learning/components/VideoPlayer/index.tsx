@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import React, { useEffect, useState } from "react";
 import styles from "./VideoPlayer.module.scss";
+import ReactPlayer from "react-player";
 
 const VideoPlayer = ({ className, sectionData }: any) => {
   const [key, setKey] = useState(0);
@@ -15,7 +16,7 @@ const VideoPlayer = ({ className, sectionData }: any) => {
         {sectionData && sectionData.filename ? (
           <video key={key} controls autoPlay width={"100%"}>
             <source
-              src={`https://nodejs-deploy-n9mo.onrender.com/video/get/${sectionData?.filename}`}
+              src={`http://localhost:8080/video/get/${sectionData?.filename}`}
               type="video/mp4"
             ></source>
           </video>

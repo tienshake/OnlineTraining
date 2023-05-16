@@ -34,13 +34,10 @@ const Login = () => {
     onSubmit: async (values: any, { setSubmitting, setErrors }) => {
       try {
         setIsLoading(true);
-        const response = await axios.post(
-          "https://nodejs-deploy-n9mo.onrender.com/user/login",
-          {
-            email: values.email,
-            password: values.password,
-          }
-        );
+        const response = await axios.post("http://localhost:8080/user/login", {
+          email: values.email,
+          password: values.password,
+        });
         const result = checkDataApi(response);
         if (result) {
           const token = result?.data.token;

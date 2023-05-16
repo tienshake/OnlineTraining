@@ -33,7 +33,7 @@ export default function ChatBot() {
 
     if (stringEmpty.length > 0) {
       const data = await axios.post(
-        `https://nodejs-deploy-n9mo.onrender.com/chat-bot/ask?idUser=${
+        `http://localhost:8080/chat-bot/ask?idUser=${
           userRedux.id
         }&keyWordCourse=${resultKeyCourse ? resultKeyCourse : ""}`,
         { queryText: valueInputMessage }
